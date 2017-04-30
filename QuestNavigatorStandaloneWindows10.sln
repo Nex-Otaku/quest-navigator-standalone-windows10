@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "QuestNavigatorStandaloneWindows10", "QuestNavigatorStandaloneWindows10\QuestNavigatorStandaloneWindows10.jsproj", "{DB175E36-21E4-4228-B0DC-D0420B753531}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QspLibWinRT", "QspLibWinRT\QspLibWinRT.vcxproj", "{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,20 @@ Global
 		{DB175E36-21E4-4228-B0DC-D0420B753531}.Release|x86.ActiveCfg = Release|x86
 		{DB175E36-21E4-4228-B0DC-D0420B753531}.Release|x86.Build.0 = Release|x86
 		{DB175E36-21E4-4228-B0DC-D0420B753531}.Release|x86.Deploy.0 = Release|x86
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|ARM.Build.0 = Debug|ARM
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|x64.ActiveCfg = Debug|x64
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|x64.Build.0 = Debug|x64
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Debug|x86.Build.0 = Debug|Win32
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|ARM.ActiveCfg = Release|ARM
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|ARM.Build.0 = Release|ARM
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|x64.ActiveCfg = Release|x64
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|x64.Build.0 = Release|x64
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|x86.ActiveCfg = Release|Win32
+		{6506CBCD-7FEA-4766-BD51-35C9E2A57A2C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
