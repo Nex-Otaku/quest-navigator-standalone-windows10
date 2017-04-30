@@ -6,5 +6,7 @@ namespace QspLibWinRT
     {
     public:
         Hello();
-    };
+		Platform::String^ GetMessage();
+		Platform::String^ GetModifiedMessage(Platform::String^ message);
+	};
 }
