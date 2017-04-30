@@ -3,3 +3,13 @@
   действие касания: операция;
   */
 }
+
+#LogResultDiv {
+    color: #fff;
+    background: black;
+    border: red solid 1px;
+}
+
+#logResult {
+    color: #fff;
+}
