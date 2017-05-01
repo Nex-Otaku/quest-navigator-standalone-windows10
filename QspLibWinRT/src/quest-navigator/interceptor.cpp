@@ -1,6 +1,6 @@
 #include "interceptor.h"
 #include <string>
-#include <Awesomium/STLHelpers.h>
+//#include <Awesomium/STLHelpers.h>
 #include "utils.h"
 #include "listener.h"
 
@@ -22,23 +22,23 @@ using namespace QuestNavigator;
 /// @note WARNING: This method is called on the IO Thread, you should not
 ///       make any calls to WebView or WebCore (they are not threadsafe).
 ///
-ResourceResponse* QnInterceptor::OnRequest(ResourceRequest* request) 
-{
-	WebURL url = request->url();
-	string sUrl = ToString(url.spec());
-	string scheme = ToString(url.scheme());
-	// Ссылки на сайты должны открываться
-	// в браузере по умолчанию.
-	if ((scheme == "http") || (scheme == "https")) {
-		// Блокируем запросы, оканчивающиеся на "wpad.dat":
-		// это системные запросы для автоопределения прокси.
-		if (!endsWith(sUrl, "wpad.dat")) {
-			app_->openUrlInSystemBrowser(sUrl);
-		}
-		request->Cancel();
-	}
-	return 0;
-}
+//ResourceResponse* QnInterceptor::OnRequest(ResourceRequest* request) 
+//{
+//	WebURL url = request->url();
+//	string sUrl = ToString(url.spec());
+//	string scheme = ToString(url.scheme());
+//	// Ссылки на сайты должны открываться
+//	// в браузере по умолчанию.
+//	if ((scheme == "http") || (scheme == "https")) {
+//		// Блокируем запросы, оканчивающиеся на "wpad.dat":
+//		// это системные запросы для автоопределения прокси.
+//		if (!endsWith(sUrl, "wpad.dat")) {
+//			app_->openUrlInSystemBrowser(sUrl);
+//		}
+//		request->Cancel();
+//	}
+//	return 0;
+//}
 
 ///
 /// Override this method to intercept frame navigations. You can use this to
@@ -62,26 +62,26 @@ ResourceResponse* QnInterceptor::OnRequest(ResourceRequest* request)
 /// @note WARNING: This method is called on the IO Thread, you should not
 ///       make any calls to WebView or WebCore (they are not threadsafe).
 ///
-bool QnInterceptor::OnFilterNavigation(int origin_process_id,
-									   int origin_routing_id,
-									   const WebString& method,
-									   const WebURL& url,
-									   bool is_main_frame)
-{
-	string sUrl = ToString(url.spec());
-	string sUrlUpper = toUpper(sUrl);
-	if (startsWith(sUrlUpper, "EXEC:")) {
-		// К сожалению, Awesomium вырезает символы перевода строки из запроса.
-		// Без костылей с этим ничего сделать нельзя.
-		// Поэтому многострочный код "EXEC:" нельзя использовать в Навигаторе.
-
-		// Выполняем код EXEC
-		string code = unescapeHtml(decodeUrl(sUrl.substr(5)));
-		app_->listener()->executeCode(code);
-		return true;
-	}
-	return false;
-}
+//bool QnInterceptor::OnFilterNavigation(int origin_process_id,
+//									   int origin_routing_id,
+//									   const WebString& method,
+//									   const WebURL& url,
+//									   bool is_main_frame)
+//{
+//	string sUrl = ToString(url.spec());
+//	string sUrlUpper = toUpper(sUrl);
+//	if (startsWith(sUrlUpper, "EXEC:")) {
+//		// К сожалению, Awesomium вырезает символы перевода строки из запроса.
+//		// Без костылей с этим ничего сделать нельзя.
+//		// Поэтому многострочный код "EXEC:" нельзя использовать в Навигаторе.
+//
+//		// Выполняем код EXEC
+//		string code = unescapeHtml(decodeUrl(sUrl.substr(5)));
+//		app_->listener()->executeCode(code);
+//		return true;
+//	}
+//	return false;
+//}
 
 ///
 /// Override this method to intercept download events (usually triggered
@@ -100,15 +100,15 @@ bool QnInterceptor::OnFilterNavigation(int origin_process_id,
 /// @note WARNING: This method is called on the IO Thread, you should not
 ///       make any calls to WebView or WebCore (they are not threadsafe).
 ///
-void QnInterceptor::OnWillDownload(int origin_process_id,
-								   int origin_routing_id,
-								   const WebURL& url)
-{
-}
+//void QnInterceptor::OnWillDownload(int origin_process_id,
+//								   int origin_routing_id,
+//								   const WebURL& url)
+//{
+//}
 
-QnInterceptor::QnInterceptor() : app_(NULL) {}
+//QnInterceptor::QnInterceptor() : app_(NULL) {}
 
-void QnInterceptor::setApp(Application* app)
-{
-	app_ = app;
-}
+//void QnInterceptor::setApp(Application* app)
+//{
+//	app_ = app;
+//}
