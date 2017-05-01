@@ -5,13 +5,88 @@
       <UniqueIdentifier>871e166b-d21a-4618-a418-a94cdf9def09</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="quest-navigator">
+      <UniqueIdentifier>{6c0b1a10-2d0a-4985-8549-0a228fc8545a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml">
+      <UniqueIdentifier>{95bebfbf-ec4f-4fd0-9a97-5799578d92b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Hello.cpp" />
+    <ClCompile Include="src\deps\tinyxml\tinystr.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\tinyxml\tinyxml.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\tinyxml\tinyxmlerror.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\tinyxml\tinyxmlparser.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\tinyxml\xmltest.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\configuration.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\gamestock.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\interceptor.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\listener.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\midi.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\skin.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\sound.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\utils.cpp">
+      <Filter>quest-navigator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Hello.h" />
+    <ClInclude Include="src\deps\tinyxml\tinystr.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\tinyxml\tinyxml.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\configuration.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\gamestock.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\interceptor.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\listener.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\midi.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\utils.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\skin.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\sound.h">
+      <Filter>quest-navigator</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
