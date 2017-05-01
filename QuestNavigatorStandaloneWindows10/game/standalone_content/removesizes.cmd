@@ -1,0 +1,1 @@
+"c:\Users\Nex\Dropbox\Public\Quest Navigator\utils\retina\addsizes.exe" -removeonly "%~d0%~p0\"

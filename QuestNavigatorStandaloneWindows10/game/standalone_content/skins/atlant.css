@@ -1,0 +1,336 @@
+/*
+ * Настройки скина QSP для игры "Подземелье Атланта"
+ *
+ * Скин растягиваемый!
+ * 
+ */
+ 
+/* Запрещаем выделять текст и перетаскивать картинки */
+div,p,span {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+    /* Без этого флага на iOS текст масштабируется при повороте экрана */
+    -webkit-text-size-adjust: none;
+}
+
+div {
+	/* Отключаем "сглаживание" для бэкграундных картинок, чтобы не было артефактов,
+	   когда при использовании border-image или repeat-x браузер делает интерполяцию по внешним краям */
+	image-rendering: optimizeSpeed;             /* FUCK SMOOTHING, GIVE ME SPEED  */
+ 	image-rendering: -moz-crisp-edges;          /* Firefox                        */
+ 	image-rendering: -o-crisp-edges;            /* Opera                          */
+ 	image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+ 	image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+ 	-ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */	
+}
+
+img { -webkit-user-drag: none; }
+ 
+
+#qsp-back-image { position:absolute; left:0px; top:0px; width:100%; height:100%; overflow:hidden; }
+#qsp-back-image{ background-image:url(gfx/steel_tile-300x300.png); }
+
+
+#qsp-wrapper-main { position:absolute; left:0px; bottom:0px; width:100%; overflow:hidden; word-wrap: break-word; }
+body.cover #qsp-wrapper-main { max-height:480px; margin-top:auto; margin-bottom:auto; }
+
+
+
+
+
+
+#qsp-wrapper-acts { position:absolute; left:0px; top:80%; width:70%; height:20%; overflow:hidden; }
+#qsp-wrapper-vars { position:absolute; left:0px; top:0px; width:0px; height:0px; overflow:hidden; }
+#qsp-wrapper-msg { position:absolute; overflow:hidden; }
+#qsp-system-menu-button { position:absolute; left:0px; top:0px; }
+#qsp-system-menu-button img { float:left; }
+
+a, .qsp-button, .qsp-action, .qsp-save-slot-enabled { -webkit-tap-highlight-color: rgba(0,0,0,0); cursor:pointer; }
+
+.qsp-overlay { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: #202020; opacity: .80;filter:Alpha(Opacity=80); -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+.qsp-skin-action-overlay { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+.qsp-skin-dialog { position: absolute; }
+
+
+/* MSG */
+#qsp-dialog-msg-content { text-align:justify; padding-right:12px; }
+#qsp-dialog-msg-container { position: absolute; left:50%; top:50%; width:205px; height:215px; margin-top:-107px; margin-left:-103px; background-image:url("gfx/system_menu_back-205x215.png"); }
+#qsp-button-msg-ok { position:static; clear:both; }
+#qsp-wrapper-msg { float:left; width:auto; height:110px; margin-left:20px; margin-right:20px; margin-top:20px;}
+#qsp-dialog-msg-content { /*padding-left:20px; padding-right:20px; padding-top:20px;*/ }
+#qsp-dialog-msg-bottom-block { position:absolute; bottom:0; width:100%; overflow:hidden; }
+#qsp-dialog-msg-bottom-wrapper { float:left;
+	position:relative;
+	left:50%;
+	top:0px;
+	height:100%;
+ }
+#qsp-dialog-msg-bottom-container { float:left;
+	position:relative;
+	left:-50%;
+	top:0px;
+	width:auto;
+	height:100%;
+	padding:10px;
+}
+
+
+/* ERROR */
+#qsp-dialog-error-content { position: absolute; overflow: visible; }
+#qsp-dialog-error-background, #qsp-button-error-ok { position: absolute; }
+
+/* SYSTEM MENU */
+#qsp-dialog-system-menu-background, #qsp-dialog-system-menu-container { position: absolute;  left:50%; top:50%; width:205px; height:215px; margin-top:-107px; margin-left:-103px; }
+
+#qsp-dialog-system-menu-container { padding:0px; }
+#qsp-dialog-system-menu-container .qsp-button { width:50%; height:50%; float:left; font-size:12px; }
+#qsp-dialog-system-menu-container .qsp-button a { text-decoration:none; color:#000; line-height:100%; }
+.qsp-dialog-system-menu-top-row { padding-top:15px; }
+.qsp-dialog-system-menu-bottom-row { padding-top:0px; }
+.qsp-dialog-system-menu-left-column { width:90%; float:right; }
+.qsp-dialog-system-menu-right-column { width:90%; float:left; }
+
+/* VIEW */
+#qsp-view { position:static; overflow:auto; text-align:center; padding-top:20px; }
+#qsp-view img { margin-bottom:15px; }
+/* Отключаем на обложке */
+body.cover #qsp-view { display:none; }
+
+/* SAVE SLOTS */
+/* 
+ * выравниваем по центру вертикально и горизонтально, отнимая половину фиксированной ширины и высоты в margin
+ * высота и ширина самого диалога нам известны заранее, а размеры экрана могут быть любыми
+ */
+#qsp-dialog-save-slots-wrapper1 { 
+position: absolute; left:50%; top:50%; width:205px; height:215px; margin-top:-107px; margin-left:-103px; overflow:hidden;
+background-image:url("gfx/system_menu_back-205x215.png");
+background-size:205px 215px;
+-webkit-background-size:205px 215px;
+}
+body.retina #qsp-dialog-save-slots-wrapper1 { 
+	background-image:url("gfx/system_menu_back-205x215@2x.png") !important;
+}
+
+/*
+ * выравниваем список слотов горизонтально по центру, учитывая что ширина списка может варьироваться
+ * http://www.tightcss.com/centering/center_variable_width.htm
+ */
+#qsp-dialog-save-slots-wrapper2 { float:left;
+	position:relative;
+	left:50%;
+	top:0px;
+	margin-top:13px;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	padding:0px;
+ }
+#qsp-dialog-save-slots-container { float:left;
+	position:relative;
+	left:-50%;
+	top:2px;
+	width:auto;
+	margin:0px;
+	padding:0px;
+	white-space: nowrap;
+}
+
+.qsp-save-slot-enabled, .qsp-save-slot-disabled { float:left; clear:both; margin-top:14px; font-size:17px; width:100%; padding:0px; }
+.qsp-save-slot-enabled div, .qsp-save-slot-disabled div { padding-left:30px; padding-right:30px; padding-top:0px; padding-bottom:0px; margin:0px; }
+
+.qsp-save-slot-disabled { color:#333; }
+.pressed.qsp-save-slot-enabled div { color:#DCB900; }
+
+/* INPUT DIALOG */
+/* Этот диалог растягивается, и зависит от размеров картинки бэкграунда, указанных в qsp-dialog-input-container */
+#qsp-dialog-input-container { position: absolute; left:50%; top:50%; width:205px; height:215px; margin-top:-107px; margin-left:-103px; background-image:url("gfx/system_menu_back-205x215.png"); }
+#qsp-dialog-input-content, #qsp-dialog-input-text, #qsp-button-input-ok { position:static; clear:both; }
+#qsp-dialog-input-content { padding-left:20px; padding-right:20px; padding-top:15px;}
+#qsp-dialog-input-bottom-block { position:absolute; bottom:0; width:100%; overflow:hidden; }
+#qsp-dialog-input-bottom-wrapper { float:left;
+	position:relative;
+	left:50%;
+	top:0px;
+	height:100%;
+ }
+#qsp-dialog-input-bottom-container { float:left;
+	position:relative;
+	left:-50%;
+	top:0px;
+	width:auto;
+	height:100%;
+	padding-top:5px;
+	padding-bottom:10px;
+}
+
+/* TWEAK FOR MAIN DESC */
+body:not(.cover) #qsp-main { padding-left:12px; padding-right:12px; text-align:justify; }
+/* TWEAK FOR ACTS */
+#qsp-acts { padding-left:8px; padding-right:8px;  padding-top:25px; padding-bottom:8px; max-width:600px; }
+/* TWEAK FOR DEFAULT TEXT COLOR */
+/*body { color:#FFF; background-color:#000; font-size:30px; font-family:sans-serif; }*/
+body { color:#000; background-color:#5a5a5a; font-size:16px; font-family:sans-serif; }
+
+body * { font-family:sans-serif; }
+
+/* Панель инвентаря */
+#qsp-wrapper-objs { position:absolute; left:0px; top:-18px; width:100%; height:75px; overflow:hidden; }
+#qsp-inv { position:absolute; left:4px; top:1px; right:0px; bottom:0px; }
+#qsp-inv-background-center { position:absolute; left:0px; right:0px; height:100%; }
+#qsp-inv-background-left{
+	display:block;
+	background:url('gfx/inv_panel-320x75.png');
+	height:71px;
+	width:74px;overflow:hidden;
+	position:absolute;left:0px;
+	background-size:320px 75px;
+	-webkit-background-size:320px 75px;
+	}
+body.retina #qsp-inv-background-left{
+	background-image:url('gfx/inv_panel-320x75@2x.png') !important;
+	}
+#qsp-inv-background-right{
+	display:block;
+	/* full_width - right_width = 320 - 242 = 78 */
+	background:url('gfx/inv_panel-320x75.png') -78px 0px no-repeat;
+	height:71px;
+	width:242px;
+	overflow:hidden;
+	position:absolute;right:0px;
+	background-size:320px 75px;
+	-webkit-background-size:320px 75px;
+	}
+body.retina #qsp-inv-background-right{
+	background-image:url('gfx/inv_panel-320x75@2x.png') !important;
+	}
+#qsp-inv-background-center {
+	border:none;
+	background:url('gfx/inv_panel_filler-4x75.png') no-repeat transparent; 
+	background-size:100% 75px;
+	-webkit-background-size:100% 75px;
+}
+body.retina #qsp-inv-background-center{
+	background-image:url('gfx/inv_panel_filler-4x75@2x.png') !important; 
+}
+#qsp-wrapper-objs-link { text-decoration: none; color:#FFF; }
+
+.qsp-object { float:left; }
+
+.qsp-button:not(.pressed) .np-action-outer {
+/* top right bottom left */
+border-style: solid;
+color:#00B3CE; 
+border-width: 12px 130px 14px 130px;
+-moz-border-image: url("gfx/action-303x50.png") 12 130 14 130 repeat;
+-webkit-border-image: url("gfx/action-303x50.png") 12 130 14 130 repeat;
+-o-border-image: url("gfx/action-303x50.png") 12 130 14 130 repeat;
+border-image: url("gfx/action-303x50.png") 12 130 14 130 fill repeat;
+}
+.pressed .np-action-outer {
+border-style: solid;
+color:#DCB900; 
+border-width: 12px 130px 14px 130px;
+-moz-border-image: url("gfx/action-selected-303x50.png") 12 130 14 130 repeat;
+-webkit-border-image: url("gfx/action-selected-303x50.png") 12 130 14 130 repeat;
+-o-border-image: url("gfx/action-selected-303x50.png") 12 130 14 130 repeat;
+border-image: url("gfx/action-selected-303x50.png") 12 130 14 130 fill repeat;
+}
+
+.np-action-inner {
+text-align:justify;
+word-wrap: break-word; 
+margin-left:-100px;
+margin-right:-100px;
+margin-bottom:2px;
+margin-top:0px;
+}
+
+#qsp-user1 { position:absolute; right:6px; top:29px; width:26px; color:#00B3CE; text-align:center; }
+#qsp-user2 { position:absolute; left:12px; top:30px; color:#00B3CE; font-size:14px; }
+
+/* Верхняя панель */
+#qsp-user3 { position:absolute; left:0px; top:0px; width:100%; height:62px; }
+#qsp-user3-background-center { position:absolute; left:0px; right:0px; height:100%; }
+#qsp-user3-background-left{
+	display:block;
+	background:url('gfx/top_panel-320x62.png');
+	height:58px;
+	width:177px;overflow:hidden;
+	position:absolute;left:0px;
+	background-size:320px 62px;
+	-webkit-background-size:320px 62px;
+	}
+body.retina #qsp-user3-background-left{
+	background-image:url('gfx/top_panel-320x62@2x.png') !important;
+	}
+#qsp-user3-background-right{
+	display:block;
+	/* full_width - right_width = 320 - 138 = 182 */
+	background:url('gfx/top_panel-320x62.png') -182px 0px no-repeat;
+	height:58px;
+	width:138px;
+	overflow:hidden;
+	position:absolute;right:0px;
+	background-size:320px 62px;
+	-webkit-background-size:320px 62px;
+	}
+body.retina #qsp-user3-background-right{
+	background-image:url('gfx/top_panel-320x62@2x.png') !important;
+	}
+#qsp-user3-background-center {
+	border:none;
+	background:url('gfx/top_panel_filler-5x62.png') no-repeat transparent; 
+	background-size:100% 62px;
+	-webkit-background-size:100% 62px;
+}
+body.retina #qsp-user3-background-center{
+	background-image:url('gfx/top_panel_filler-5x62@2x.png') !important; 
+}
+#qsp-user3-content {position:absolute; left:0px; top:0px; width:100%; height:100%;}
+#qsp-user-system img { float:left;margin-left:36px;margin-top:13px; }
+#qsp-user-music img { float:left; margin-left:5px; margin-top:13px; }
+#qsp-user-inv img { float:right; margin-right:36px; margin-top:8px; }
+body:not(.main)  #qsp-user1,
+body:not(.main)  #qsp-user2,
+body:not(.main)  #qsp-user3 { display:none; }
+
+/* Если в основном экране или в концовке, то делаем верхний край основного описания ниже, чтобы оставить место для верхней панели */
+body.main #qsp-wrapper-main  { top:57px; }
+body:not(.main) #qsp-wrapper-main { top:0px; }
+
+#qsp-wrapper-objs { background-image:url("gfx/inv_panel-320x75.png"); display:none; }
+
+
+
+
+/* Обложка */
+#qsp-cover-wrapper { text-align:center; width:320px; height:480px; position:relative; left:50%; margin-left:-160px; }
+#qsp-cover-wrapper { 
+	background:url('gfx/cover-border-320x480.png') no-repeat; 
+	background-size: 100% 100%;
+	-webkit-background-size: 100% 100%; /* Android 2.1 doesn't appear to honor background-size, only -webkit-background-size, which requires both width and height to be specified. */
+}
+body.retina #qsp-cover-wrapper {
+	background-image:url('gfx/cover-border-320x480@2x.png') !important;
+}
+#qsp-cover-buttons { padding-top:355px; }
+
+
+
+#qsp-cover-wrapper a img{ margin-top:-8px; }
+
+/* Эмуляция border-image */
+.border-emu{ position:absolute; z-index:-1; }
+
+/* Кнопка на первой странице - в IE почему-то показывается рамка */
+.qsp-button img{ border:none; }
+
+/* Используется для борьбы с багом инвентаря на Андроиде */
+#qsp-android-refresh-bugfix { display:none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; -webkit-tap-highlight-color: rgba(0,0,0,0); }
