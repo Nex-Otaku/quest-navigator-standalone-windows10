@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "../deps/sqlite/sqlite3.h"
+//#include "../deps/sqlite/sqlite3.h"
 
 using namespace std;
 
@@ -39,13 +39,13 @@ namespace QuestNavigator {
 
 	class Gamestock {
 	private:
-		static sqlite3* pDb;
+		//static sqlite3* pDb;
 		static vector<GamestockEntry> vecLocalGames;
 		static map<string, GamestockEntry> mapLocalGames;
 		
 		static bool openDb();
 		static void closeDb();
-		static bool execSql(string sql, sqlite3_callback callback);
+		//static bool execSql(string sql, sqlite3_callback callback);
 
 		static bool readLocalGames();
 		static bool prepareGamesTable();

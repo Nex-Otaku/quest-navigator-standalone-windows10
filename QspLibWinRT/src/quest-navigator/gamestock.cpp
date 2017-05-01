@@ -3,7 +3,7 @@
 #include "utils.h"
 
 namespace QuestNavigator {
-	sqlite3* Gamestock::pDb = 0;
+	//sqlite3* Gamestock::pDb = 0;
 	vector<GamestockEntry> Gamestock::vecLocalGames;
 	map<string, GamestockEntry> Gamestock::mapLocalGames;
 
@@ -248,15 +248,15 @@ namespace QuestNavigator {
 	{
 		// Открываем соединение.
 		string dbPath = Configuration::getString(ecpAppDataDir) + PATH_DELIMITER + "qn.db";
-		if (sqlite3_open(dbPath.c_str(), &pDb)) {
-			string sqliteErr = sqlite3_errmsg(pDb);
-			showError("Ошибка открытия/создания БД: " + sqliteErr);
-			return false;
-		}
+		//if (sqlite3_open(dbPath.c_str(), &pDb)) {
+		//	string sqliteErr = sqlite3_errmsg(pDb);
+		//	showError("Ошибка открытия/создания БД: " + sqliteErr);
+		//	return false;
+		//}
 
-		// Готовим табличку к чтению и записи.
-		if (!prepareGamesTable())
-			return false;
+		//// Готовим табличку к чтению и записи.
+		//if (!prepareGamesTable())
+		//	return false;
 
 		return true;
 	}
@@ -264,8 +264,8 @@ namespace QuestNavigator {
 	void Gamestock::closeDb()
 	{
 		// Закрываем соединение.
-		sqlite3_close(pDb);
-		pDb = 0;
+		//sqlite3_close(pDb);
+		//pDb = 0;
 	}
 
 	bool Gamestock::prepareGamesTable()
@@ -285,27 +285,27 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	bool Gamestock::execSql(string sql, sqlite3_callback callback)
-	{
-		// БД должна быть открыта.
-		if (pDb == 0) {
-			showError("Не установлено соединение с БД");
-			return false;
-		}
-		// Выполняем SQL-запрос.
-		char *err = 0;
-		if (sqlite3_exec(pDb, sql.c_str(), callback, 0, &err))
-		{
-			string sqliteErr = err;
-			sqlite3_free(err);
-			showError("Ошибка SQL: " + sqliteErr);
+	//bool Gamestock::execSql(string sql, sqlite3_callback callback)
+	//{
+	//	// БД должна быть открыта.
+	//	if (pDb == 0) {
+	//		showError("Не установлено соединение с БД");
+	//		return false;
+	//	}
+	//	// Выполняем SQL-запрос.
+	//	char *err = 0;
+	//	if (sqlite3_exec(pDb, sql.c_str(), callback, 0, &err))
+	//	{
+	//		string sqliteErr = err;
+	//		sqlite3_free(err);
+	//		showError("Ошибка SQL: " + sqliteErr);
 
-			// Закрываем соединение.
-			closeDb();
-			return false;
-		}
-		return true;
-	}
+	//		// Закрываем соединение.
+	//		closeDb();
+	//		return false;
+	//	}
+	//	return true;
+	//}
 
 	bool Gamestock::getLocalGame(string hash, GamestockEntry &game)
 	{
