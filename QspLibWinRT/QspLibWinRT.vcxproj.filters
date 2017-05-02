@@ -11,6 +11,9 @@
     <Filter Include="tinyxml">
       <UniqueIdentifier>{95bebfbf-ec4f-4fd0-9a97-5799578d92b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="qsplib">
+      <UniqueIdentifier>{9906b3ed-d79f-4c99-a6b5-1d5b423f5716}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -54,6 +57,156 @@
     <ClCompile Include="src\quest-navigator\utils.cpp">
       <Filter>quest-navigator</Filter>
     </ClCompile>
+    <ClCompile Include="src\deps\qsp\actions.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_control.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\ascii.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\codetools.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\common.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\cp1251.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\default\default_callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\default\default_coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\default\default_control.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\errors.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\flash\flash_callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\flash\flash_coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\flash\flash_control.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\game.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\java\java_callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\java\java_coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\java\java_control.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\koi8_r.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\locations.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\mathops.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\memwatch.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\menu.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\objects.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\playlist.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regcomp.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regenc.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regerror.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regexec.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\regexp.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regparse.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regsyntax.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regtrav.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\regversion.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\st.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\statements.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\text.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\time.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\towlower.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\towupper.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\unicode.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\utf16_be.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\utf16_le.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\utf32_be.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\utf32_le.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\variables.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\variant.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -87,6 +240,102 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\sound.h">
       <Filter>quest-navigator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\actions.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\bindings\android\android.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\bindings\bindings_config.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\callbacks.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\codetools.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\coding.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\common.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\config.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\declarations.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\errors.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\bindings\flash\flash.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\game.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\bindings\java\java.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\locations.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\mathops.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\memwatch.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\menu.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\objects.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\oniguruma.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\playlist.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\qsp.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\bindings\default\qsp_default.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\regenc.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\regexp.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\regint.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\regparse.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\onig\st.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\statements.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\text.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\time.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\variables.h">
+      <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deps\qsp\variant.h">
+      <Filter>qsplib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
