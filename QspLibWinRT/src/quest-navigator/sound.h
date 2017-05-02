@@ -3,32 +3,32 @@
 
 #include <string>
 #include <vector>
-#include "audiere.h"
+//#include "audiere.h"
 #include <Windows.h>
 #include "midi.h"
 
 using namespace std;
-using namespace audiere;
+//using namespace audiere;
 
 // Класс для работы со звуком
 namespace QuestNavigator {
 
-	class AudiereStopCallbackHolder : public RefImplementation<StopCallback> {
-	public:
-		// Колбэк Audiere, вызывается при остановке трека
-		ADR_METHOD(void) streamStopped(StopEvent* event);
-	};
+	//class AudiereStopCallbackHolder : public RefImplementation<StopCallback> {
+	//public:
+	//	// Колбэк Audiere, вызывается при остановке трека
+	//	ADR_METHOD(void) streamStopped(StopEvent* event);
+	//};
 
 	class SoundManager {
 		struct ContainerMusic {
 			string name; // Путь к файлу - такой, как задан в игре
 			int volume;
 			bool isMidi;
-			OutputStreamPtr sound;
+			//OutputStreamPtr sound;
 		};
 	private:
 		static vector<ContainerMusic> vecMusic;
-		static AudioDevicePtr audioDevice;
+		//static AudioDevicePtr audioDevice;
 		static bool muted;
 		static bool cacheEnabled;
 
@@ -45,7 +45,7 @@ namespace QuestNavigator {
 		static void unlockMusicData();
 	public:
 		// Вызывается при остановке трека
-		static void clearBySoundPtr(OutputStreamPtr sound);
+		//static void clearBySoundPtr(OutputStreamPtr sound);
 
 		static bool init();
 		static void deinit();
