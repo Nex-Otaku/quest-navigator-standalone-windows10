@@ -42,24 +42,6 @@
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp">
       <Filter>tinyxml</Filter>
     </ClCompile>
-    <ClCompile Include="src\deps\qsp\actions.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\bindings\android\android_callbacks.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\bindings\android\android_coding.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\bindings\android\android_control.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\onig\enc\ascii.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\callbacks.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
     <ClCompile Include="src\deps\qsp\codetools.c">
       <Filter>qsplib</Filter>
     </ClCompile>
@@ -224,6 +206,24 @@
     </ClCompile>
     <ClCompile Include="src\common\view_win.cc">
       <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\onig\enc\ascii.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_control.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_coding.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\bindings\android\android_callbacks.c">
+      <Filter>qsplib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deps\qsp\actions.c">
+      <Filter>qsplib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
