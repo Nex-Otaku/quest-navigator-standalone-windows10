@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <Windows.h>
 //#include <Awesomium/WebString.h>
 #include "../deps/qsp/qsp.h"
 #include "../deps/qsp/bindings/default/qsp_default.h"
