@@ -209,6 +209,11 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Hello.h" />
     <ClInclude Include="platform.h" />
+    <ClInclude Include="src\common\application.h" />
+    <ClInclude Include="src\common\js_delegate.h" />
+    <ClInclude Include="src\common\method_dispatcher.h" />
+    <ClInclude Include="src\common\view.h" />
+    <ClInclude Include="src\common\view_win.h" />
     <ClInclude Include="src\deps\qsp\actions.h" />
     <ClInclude Include="src\deps\qsp\bindings\android\android.h" />
     <ClInclude Include="src\deps\qsp\bindings\bindings_config.h" />
@@ -262,6 +267,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Hello.cpp" />
+    <ClCompile Include="src\common\application_win.cc" />
+    <ClCompile Include="src\common\method_dispatcher.cc" />
+    <ClCompile Include="src\common\view_win.cc" />
     <ClCompile Include="src\deps\qsp\actions.c" />
     <ClCompile Include="src\deps\qsp\bindings\android\android_callbacks.c" />
     <ClCompile Include="src\deps\qsp\bindings\android\android_coding.c" />

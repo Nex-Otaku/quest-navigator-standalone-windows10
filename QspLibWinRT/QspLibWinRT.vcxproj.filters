@@ -216,6 +216,15 @@
     <ClCompile Include="src\quest-navigator\utils.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\common\application_win.cc">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\method_dispatcher.cc">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\view_win.cc">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -348,6 +357,21 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\utils.h">
       <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\application.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\js_delegate.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\method_dispatcher.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\view.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common\view_win.h">
+      <Filter>quest-navigator\awesomium</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
