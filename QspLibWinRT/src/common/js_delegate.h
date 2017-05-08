@@ -2104,10 +2104,10 @@ FastDelegate8<Param1, Param2, Param3, Param4, Param5, Param6, Param7, Param8, FA
 
 } // namespace fastdelegate
 
-#include <Awesomium/WebCore.h>
-
-typedef fastdelegate::FastDelegate2<Awesomium::WebView*, const Awesomium::JSArray&> JSDelegate;
-typedef fastdelegate::FastDelegate2<Awesomium::WebView*, const Awesomium::JSArray&, Awesomium::JSValue> JSDelegateWithRetval;
+//#include <Awesomium/WebCore.h>
+//
+//typedef fastdelegate::FastDelegate2<Awesomium::WebView*, const Awesomium::JSArray&> JSDelegate;
+//typedef fastdelegate::FastDelegate2<Awesomium::WebView*, const Awesomium::JSArray&, Awesomium::JSValue> JSDelegateWithRetval;
 
 #endif // !defined(FASTDELEGATE_H)
 
