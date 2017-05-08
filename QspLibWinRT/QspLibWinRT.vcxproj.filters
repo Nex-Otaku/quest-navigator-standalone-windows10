@@ -20,6 +20,9 @@
     <Filter Include="quest-navigator\universal">
       <UniqueIdentifier>{57865d7f-4ee4-4740-8470-55552bab0d0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\core">
+      <UniqueIdentifier>{880433ae-a636-43dd-aee2-808bb6e10215}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -38,21 +41,6 @@
     </ClCompile>
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp">
       <Filter>tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\configuration.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\midi.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\skin.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\sound.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\utils.cpp">
-      <Filter>quest-navigator</Filter>
     </ClCompile>
     <ClCompile Include="src\deps\qsp\actions.c">
       <Filter>qsplib</Filter>
@@ -213,6 +201,21 @@
     <ClCompile Include="src\quest-navigator\gamestock.cpp">
       <Filter>quest-navigator\universal</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\configuration.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\midi.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\skin.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\sound.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\utils.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -222,21 +225,6 @@
     </ClInclude>
     <ClInclude Include="src\deps\tinyxml\tinyxml.h">
       <Filter>tinyxml</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\configuration.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\midi.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\utils.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\skin.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\sound.h">
-      <Filter>quest-navigator</Filter>
     </ClInclude>
     <ClInclude Include="src\deps\qsp\actions.h">
       <Filter>qsplib</Filter>
@@ -342,6 +330,24 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\gamestock.h">
       <Filter>quest-navigator\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\configuration.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\midi.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\skin.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\sound.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\utils.h">
+      <Filter>quest-navigator\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
