@@ -14,6 +14,12 @@
     <Filter Include="qsplib">
       <UniqueIdentifier>{9906b3ed-d79f-4c99-a6b5-1d5b423f5716}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\awesomium">
+      <UniqueIdentifier>{0499d09b-7438-4f1a-aa77-ff68469f7db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="quest-navigator\universal">
+      <UniqueIdentifier>{57865d7f-4ee4-4740-8470-55552bab0d0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -34,15 +40,6 @@
       <Filter>tinyxml</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\configuration.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\gamestock.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\interceptor.cpp">
-      <Filter>quest-navigator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\listener.cpp">
       <Filter>quest-navigator</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\midi.cpp">
@@ -207,6 +204,15 @@
     <ClCompile Include="src\deps\qsp\variant.c">
       <Filter>qsplib</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\interceptor.cpp">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\listener.cpp">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\gamestock.cpp">
+      <Filter>quest-navigator\universal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -218,15 +224,6 @@
       <Filter>tinyxml</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\configuration.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\gamestock.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\interceptor.h">
-      <Filter>quest-navigator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\listener.h">
       <Filter>quest-navigator</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\midi.h">
@@ -336,6 +333,15 @@
     </ClInclude>
     <ClInclude Include="src\deps\qsp\variant.h">
       <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\interceptor.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\listener.h">
+      <Filter>quest-navigator\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\gamestock.h">
+      <Filter>quest-navigator\universal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
