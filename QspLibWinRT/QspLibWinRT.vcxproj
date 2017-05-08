@@ -208,6 +208,7 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Hello.h" />
+    <ClInclude Include="platform.h" />
     <ClInclude Include="src\deps\qsp\actions.h" />
     <ClInclude Include="src\deps\qsp\bindings\android\android.h" />
     <ClInclude Include="src\deps\qsp\bindings\bindings_config.h" />
