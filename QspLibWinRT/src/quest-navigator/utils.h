@@ -3,13 +3,13 @@
 
 #include <string>
 #include <vector>
-#include <Awesomium/WebString.h>
+//#include <Awesomium/WebString.h>
 #include "../deps/qsp/qsp.h"
 #include "../deps/qsp/bindings/default/qsp_default.h"
 #include "../deps/tinyxml/tinyxml.h"
 
 using namespace std;
-using namespace Awesomium;
+//using namespace Awesomium;
 
 namespace QuestNavigator {
 
@@ -67,7 +67,7 @@ namespace QuestNavigator {
 	// Утилиты для преобразования строк
 
 	// UTF-16 wstring -> UTF-16 WebString
-	WebString WideToWebString(wstring str);
+	//WebString WideToWebString(wstring str);
 	// UTF-16 wstring -> UTF-8 string
 	string narrow(wstring str);
 	string fromQsp(QSP_CHAR* str);
@@ -108,7 +108,7 @@ namespace QuestNavigator {
 	// Утилиты для работы с файловой системой
 
 	// Получаем URL из полного пути к файлу
-	string getUriFromFilePath(string filePath);
+	string getUrlFromFilePath(string filePath);
 	// URL к содержимому
 	string getContentUrl();
 	// Проверяем файл на существование и читаемость
