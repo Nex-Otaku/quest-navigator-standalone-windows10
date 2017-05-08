@@ -100,25 +100,25 @@ namespace QuestNavigator {
 
 	bool Gamestock::readLocalGames()
 	{
-		// Открываем соединение.
-		if (!openDb())
-			return false;
+		//// Открываем соединение.
+		//if (!openDb())
+		//	return false;
 
-		// Очищаем контейнеры.
-		vecLocalGames.clear();
-		mapLocalGames.clear();
+		//// Очищаем контейнеры.
+		//vecLocalGames.clear();
+		//mapLocalGames.clear();
 
-		// Читаем список локальных игр.
-		string sql = "SELECT id, web, local_file, title, hash, cache, saves, last_run";
-		sql += " FROM games";
-		sql += " WHERE web = " + escape(0) + " ORDER BY last_run DESC;";
-		// Обработка результатов SELECT идёт в cbSelectLocalGames.
-		if (!execSql(sql, cbSelectLocalGames))
-			return false;
+		//// Читаем список локальных игр.
+		//string sql = "SELECT id, web, local_file, title, hash, cache, saves, last_run";
+		//sql += " FROM games";
+		//sql += " WHERE web = " + escape(0) + " ORDER BY last_run DESC;";
+		//// Обработка результатов SELECT идёт в cbSelectLocalGames.
+		//if (!execSql(sql, cbSelectLocalGames))
+		//	return false;
 
-		// Закрываем соединение.
-		closeDb();
-		return true;
+		//// Закрываем соединение.
+		//closeDb();
+		//return true;
 	}
 
 	bool Gamestock::getLocalGames(vector<GamestockEntry> &vec)
@@ -172,76 +172,76 @@ namespace QuestNavigator {
 	
 	bool Gamestock::addGame(GamestockEntry game)
 	{
-		// Открываем соединение.
-		if (!openDb())
-			return false;
+		//// Открываем соединение.
+		//if (!openDb())
+		//	return false;
 
-		// Добавляем игру в список.
-		string sql = "INSERT INTO games (web, local_file, title, hash, cache, saves, last_run) ";
-		sql += "VALUES " + game.sqlInsertValues() + ";";
-		if (!execSql(sql, 0))
-			return false;
+		//// Добавляем игру в список.
+		//string sql = "INSERT INTO games (web, local_file, title, hash, cache, saves, last_run) ";
+		//sql += "VALUES " + game.sqlInsertValues() + ";";
+		//if (!execSql(sql, 0))
+		//	return false;
 
-		// Закрываем соединение.
-		closeDb();
-		return true;
+		//// Закрываем соединение.
+		//closeDb();
+		//return true;
 	}
 
 	bool Gamestock::updateGame(GamestockEntry game)
 	{
-		GamestockEntry test;
-		// Если игра есть в списке, обновляем поля.
-		// Если нет, добавляем в список.
-		bool gameExists = getLocalGame(game.hash, test);
-		if (gameExists) {
-			// Открываем соединение.
-			if (!openDb())
-				return false;
+		//GamestockEntry test;
+		//// Если игра есть в списке, обновляем поля.
+		//// Если нет, добавляем в список.
+		//bool gameExists = getLocalGame(game.hash, test);
+		//if (gameExists) {
+		//	// Открываем соединение.
+		//	if (!openDb())
+		//		return false;
 
-			// Обновляем игру.
-			string sql = "UPDATE games ";
-			sql += game.sqlUpdateValues() + " WHERE id = " + test.idVal() + ";";
-			if (!execSql(sql, 0))
-				return false;
+		//	// Обновляем игру.
+		//	string sql = "UPDATE games ";
+		//	sql += game.sqlUpdateValues() + " WHERE id = " + test.idVal() + ";";
+		//	if (!execSql(sql, 0))
+		//		return false;
 
-			// Закрываем соединение.
-			closeDb();
-			return true;
-		} else {
-			if (!addGame(game))
-				return false;
-		}
-		return true;
+		//	// Закрываем соединение.
+		//	closeDb();
+		//	return true;
+		//} else {
+		//	if (!addGame(game))
+		//		return false;
+		//}
+		//return true;
 	}
 
 	bool Gamestock::deleteGame(GamestockEntry game)
 	{
-		GamestockEntry test;
-		// Если игра есть в БД, удаляем её.
-		// Также очищаем папку кэша игры.
-		// При этом сейвы остаются на прежнем месте.
-		// Если игра вернётся в своё расположение,
-		// сохранения будут снова доступны.
-		bool gameExists = getLocalGame(game.hash, test);
-		if (gameExists) {
-			// Открываем соединение.
-			if (!openDb())
-				return false;
+		//GamestockEntry test;
+		//// Если игра есть в БД, удаляем её.
+		//// Также очищаем папку кэша игры.
+		//// При этом сейвы остаются на прежнем месте.
+		//// Если игра вернётся в своё расположение,
+		//// сохранения будут снова доступны.
+		//bool gameExists = getLocalGame(game.hash, test);
+		//if (gameExists) {
+		//	// Открываем соединение.
+		//	if (!openDb())
+		//		return false;
 
-			// Удаляем запись игры в БД.
-			string sql = "DELETE FROM games WHERE id = " + test.idVal() + ";";
-			if (!execSql(sql, 0)) {
-				return false;
-			}
+		//	// Удаляем запись игры в БД.
+		//	string sql = "DELETE FROM games WHERE id = " + test.idVal() + ";";
+		//	if (!execSql(sql, 0)) {
+		//		return false;
+		//	}
 
-			// Закрываем соединение.
-			closeDb();
+		//	// Закрываем соединение.
+		//	closeDb();
 
-			// Очищаем папку кэша игры.
-			if (!deleteDirectory(game.cache))
-				return false;
-		}
-		return true;
+		//	// Очищаем папку кэша игры.
+		//	if (!deleteDirectory(game.cache))
+		//		return false;
+		//}
+		//return true;
 	}
 
 	bool Gamestock::openDb()
@@ -270,19 +270,19 @@ namespace QuestNavigator {
 
 	bool Gamestock::prepareGamesTable()
 	{
-		// Если таблицы нет, создаём её.
-		string sql = "CREATE TABLE IF NOT EXISTS games ("; 
-		sql += "\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,";
-		sql += "\"web\" INTEGER NOT NULL DEFAULT (0),";
-		sql += "\"local_file\" TEXT,";
-		sql += "\"title\" TEXT,";
-		sql += "\"hash\" TEXT UNIQUE,";
-		sql += "\"cache\" TEXT,";
-		sql += "\"saves\" TEXT,";
-		sql += "\"last_run\" INTEGER);";
-		if (!execSql(sql, 0))
-			return false;
-		return true;
+		//// Если таблицы нет, создаём её.
+		//string sql = "CREATE TABLE IF NOT EXISTS games ("; 
+		//sql += "\"id\" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,";
+		//sql += "\"web\" INTEGER NOT NULL DEFAULT (0),";
+		//sql += "\"local_file\" TEXT,";
+		//sql += "\"title\" TEXT,";
+		//sql += "\"hash\" TEXT UNIQUE,";
+		//sql += "\"cache\" TEXT,";
+		//sql += "\"saves\" TEXT,";
+		//sql += "\"last_run\" INTEGER);";
+		//if (!execSql(sql, 0))
+		//	return false;
+		//return true;
 	}
 
 	//bool Gamestock::execSql(string sql, sqlite3_callback callback)
