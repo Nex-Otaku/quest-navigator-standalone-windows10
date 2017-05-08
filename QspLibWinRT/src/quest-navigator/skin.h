@@ -3,10 +3,10 @@
 
 #include <string>
 #include "configuration.h"
-#include <Awesomium/WebCore.h>
+//#include <Awesomium/WebCore.h>
 
 using namespace std;
-using namespace Awesomium;
+//using namespace Awesomium;
 
 namespace QuestNavigator {
 
@@ -114,7 +114,7 @@ namespace QuestNavigator {
 		static void updateMainScreen();
 		static void updateInputDialog();
 		static void updateMsgDialog();
-		static JSObject getJsSkin();
+		//static JSObject getJsSkin();
 		static bool isSomethingChanged();
 		static void showWindow(int type, int isShow);
 		static string applyHtmlFixes(string text, bool forceHtml = false);
