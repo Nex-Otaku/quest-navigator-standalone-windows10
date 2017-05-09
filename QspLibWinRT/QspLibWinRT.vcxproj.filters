@@ -240,6 +240,12 @@
     <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp">
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\files.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\dialogs.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -381,6 +387,12 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\awesomium\listener.h">
       <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\files.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\dialogs.h">
+      <Filter>quest-navigator\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -243,6 +243,8 @@
     <ClInclude Include="src\deps\tinyxml\tinyxml.h" />
     <ClInclude Include="src\quest-navigator\app\universal\gamestock.h" />
     <ClInclude Include="src\quest-navigator\core\configuration.h" />
+    <ClInclude Include="src\quest-navigator\core\dialogs.h" />
+    <ClInclude Include="src\quest-navigator\core\files.h" />
     <ClInclude Include="src\quest-navigator\core\midi.h" />
     <ClInclude Include="src\quest-navigator\core\skin.h" />
     <ClInclude Include="src\quest-navigator\core\sound.h" />
@@ -419,6 +421,8 @@
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp" />
     <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp" />
     <ClCompile Include="src\quest-navigator\core\configuration.cpp" />
+    <ClCompile Include="src\quest-navigator\core\dialogs.cpp" />
+    <ClCompile Include="src\quest-navigator\core\files.cpp" />
     <ClCompile Include="src\quest-navigator\core\midi.cpp" />
     <ClCompile Include="src\quest-navigator\core\skin.cpp" />
     <ClCompile Include="src\quest-navigator\core\sound.cpp" />

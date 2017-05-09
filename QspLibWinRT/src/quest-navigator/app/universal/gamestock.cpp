@@ -1,6 +1,7 @@
 #include "gamestock.h"
 #include "../../core/configuration.h"
 #include "../../core/utils.h"
+#include "../../core/files.h"
 
 namespace QuestNavigator {
 	//sqlite3* Gamestock::pDb = 0;
