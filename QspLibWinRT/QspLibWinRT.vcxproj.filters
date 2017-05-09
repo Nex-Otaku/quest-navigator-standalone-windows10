@@ -252,6 +252,9 @@
     <ClCompile Include="src\quest-navigator\core\strings.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\app\universal\update.cpp">
+      <Filter>quest-navigator\app\universal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -405,6 +408,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\core\strings.h">
       <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\app\universal\update.h">
+      <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

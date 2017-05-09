@@ -242,6 +242,7 @@
     <ClInclude Include="src\deps\tinyxml\tinystr.h" />
     <ClInclude Include="src\deps\tinyxml\tinyxml.h" />
     <ClInclude Include="src\quest-navigator\app\universal\gamestock.h" />
+    <ClInclude Include="src\quest-navigator\app\universal\update.h" />
     <ClInclude Include="src\quest-navigator\core\configuration.h" />
     <ClInclude Include="src\quest-navigator\core\dialogs.h" />
     <ClInclude Include="src\quest-navigator\core\encoding.h" />
@@ -422,6 +423,7 @@
     <ClCompile Include="src\deps\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp" />
     <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp" />
+    <ClCompile Include="src\quest-navigator\app\universal\update.cpp" />
     <ClCompile Include="src\quest-navigator\core\configuration.cpp" />
     <ClCompile Include="src\quest-navigator\core\dialogs.cpp" />
     <ClCompile Include="src\quest-navigator\core\encoding.cpp" />

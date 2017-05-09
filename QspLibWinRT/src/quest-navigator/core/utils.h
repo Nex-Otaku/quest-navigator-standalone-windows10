@@ -77,11 +77,6 @@ namespace QuestNavigator {
 	// Выводим текст в консоль.
 	void writeConsole(HWND hWnd, string text);
 
-	// Проверяем наличие апдейта при старте
-	void checkUpdate();
-	// Завершаем работу апдейтера по выходу из приложения
-	void finishUpdate();
-
 	// Стиль для окна согласно настройкам игры
 	DWORD getWindowStyle();
 	// Переключение полноэкранного режима
