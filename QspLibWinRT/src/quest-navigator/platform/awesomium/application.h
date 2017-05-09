@@ -1,5 +1,4 @@
-#ifndef COMMON_APPLICATION_H_
-#define COMMON_APPLICATION_H_
+#pragma once
 
 #include <string>
 #include <Windows.h>
@@ -83,5 +82,3 @@
 //	Listener* listener_;
 //	Awesomium::WebCore* web_core_;
 //};
-
-#endif  // COMMON_APPLICATION_H_

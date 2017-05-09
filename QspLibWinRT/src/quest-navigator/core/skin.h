@@ -1,5 +1,4 @@
-#ifndef SKIN_H_
-#define SKIN_H_
+#pragma once
 
 #include <string>
 #include "configuration.h"
@@ -122,9 +121,3 @@ namespace QuestNavigator {
 
 
 }
-
-
-
-
-
-#endif

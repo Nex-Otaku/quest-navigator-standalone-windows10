@@ -1,5 +1,4 @@
-#ifndef SOUND_H_
-#define SOUND_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -56,9 +55,3 @@ namespace QuestNavigator {
 	};
 
 }
-
-
-
-
-
-#endif

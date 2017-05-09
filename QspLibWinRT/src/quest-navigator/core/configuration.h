@@ -1,5 +1,4 @@
-#ifndef CONFIGURATION_H_
-#define CONFIGURATION_H_
+#pragma once
 
 #include <string>
 #include <Windows.h>
@@ -107,5 +106,3 @@ namespace QuestNavigator {
 		static void deinit();
 	};
 }
-
-#endif

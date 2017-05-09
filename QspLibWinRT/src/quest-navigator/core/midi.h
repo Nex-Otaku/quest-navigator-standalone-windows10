@@ -1,5 +1,4 @@
-#ifndef MIDI_H_
-#define MIDI_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -42,9 +41,3 @@ namespace QuestNavigator {
 	};
 
 }
-
-
-
-
-
-#endif

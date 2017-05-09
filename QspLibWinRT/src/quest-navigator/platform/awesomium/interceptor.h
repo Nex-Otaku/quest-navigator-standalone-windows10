@@ -1,5 +1,4 @@
-#ifndef INTERCEPTOR_H_
-#define INTERCEPTOR_H_
+#pragma once
 
 //#include <Awesomium/WebCore.h>
 //#include "../common/application.h"
@@ -24,5 +23,3 @@
 //	QnInterceptor();
 //	void setApp(Application* app);
 //};
-
-#endif

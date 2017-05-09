@@ -1,5 +1,4 @@
-#ifndef COMMON_VIEW_H_
-#define COMMON_VIEW_H_
+#pragma once
 
 //namespace Awesomium {
 //class WebView;
@@ -25,5 +24,3 @@
 //
 //  Awesomium::WebView* web_view_;
 //};
-
-#endif  // COMMON_VIEW_H_

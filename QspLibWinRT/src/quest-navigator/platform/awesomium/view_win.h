@@ -1,5 +1,4 @@
-#ifndef VIEW_WIN_H_
-#define VIEW_WIN_H_
+#pragma once
 
 #include "view.h"
 //#include <Awesomium/WebCore.h>
@@ -75,7 +74,3 @@
 //	int fixedBorderWidth;
 //	int fixedBorderHeight;
 //};
-
-
-
-#endif

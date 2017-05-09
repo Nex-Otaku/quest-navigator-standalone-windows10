@@ -1,5 +1,4 @@
-#ifndef __METHOD_DISPATCHER_H__
-#define __METHOD_DISPATCHER_H__
+#pragma once
 
 //#include <Awesomium/WebCore.h>
 #include "js_delegate.h"
@@ -47,5 +46,3 @@
 //  BoundMethodMap bound_methods_;
 //  BoundMethodWithRetvalMap bound_methods_with_retval_;
 //};
-
-#endif  // __METHOD_DISPATCHER_H__

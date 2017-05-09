@@ -1,5 +1,4 @@
-#ifndef GAMESTOCK_H_
-#define GAMESTOCK_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -67,5 +66,3 @@ namespace QuestNavigator {
 		static int cbSelectLocalGames(void *data, int argc, char **argv, char **azColName);
 	};
 }
-
-#endif

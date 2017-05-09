@@ -1,5 +1,4 @@
-#ifndef LISTENER_H_
-#define LISTENER_H_
+#pragma once
 
 //#include "../common/application.h"
 //#include "../common/view.h"
@@ -287,7 +286,3 @@
 //	bool checkForSingle(eSyncEvent ev);
 //
 //}
-
-
-
-#endif

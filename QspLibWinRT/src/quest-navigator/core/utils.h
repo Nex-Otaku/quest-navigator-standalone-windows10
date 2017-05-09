@@ -1,5 +1,4 @@
-#ifndef UTILS_H_
-#define UTILS_H_
+#pragma once
 
 #include <string>
 #include <vector>
@@ -175,9 +174,3 @@ namespace QuestNavigator {
 	// Установка полноэкранного режима.
 	void setFullscreenByHwnd(HWND hWnd, bool fullscreen);
 }
-
-
-
-
-
-#endif
