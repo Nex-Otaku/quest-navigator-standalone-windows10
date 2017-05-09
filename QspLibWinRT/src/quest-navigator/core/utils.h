@@ -123,10 +123,6 @@ namespace QuestNavigator {
 	// Завершаем работу апдейтера по выходу из приложения
 	void finishUpdate();
 
-	// Показываем системный диалог MessageBox
-	void showMessage(string msg, string title);
-	void showError(string msg);
-
 	// Стиль для окна согласно настройкам игры
 	DWORD getWindowStyle();
 	// Переключение полноэкранного режима

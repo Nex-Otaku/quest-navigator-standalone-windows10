@@ -1,6 +1,7 @@
 #include "utils.h"
 #include "files.h"
 #include "configuration.h"
+#include "dialogs.h"
 #ifdef _WIN32
 //#include <shlwapi.h>
 #include <Shlobj.h>
@@ -637,18 +638,6 @@ namespace QuestNavigator {
 	void finishUpdate()
 	{
 		//win_sparkle_cleanup();
-	}
-
-	// Показываем системный диалог MessageBox
-	void showMessage(string msg, string title)
-	{
-		//wstring wMsg = widen(msg);
-		//wstring wTitle = widen(title);
-		//MessageBox(0, wMsg.c_str(), wTitle.c_str(), MB_OK);
-	}
-	void showError(string msg)
-	{
-		showMessage(msg, "Ошибка");
 	}
 
 	// Отсекаем пробелы в начале и конце строки

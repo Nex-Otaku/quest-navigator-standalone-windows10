@@ -2,10 +2,9 @@
 #include <Windows.h>
 #include "configuration.h"
 #include "utils.h"
-
+#include "dialogs.h"
 
 namespace QuestNavigator {
-
 
 	// Получаем URL из полного пути к файлу
 	string getUrlFromFilePath(string filePath)

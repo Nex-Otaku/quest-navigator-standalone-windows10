@@ -1,6 +1,7 @@
 #include "sound.h"
 #include "utils.h"
 #include "configuration.h"
+#include "dialogs.h"
 
 namespace QuestNavigator {
 
