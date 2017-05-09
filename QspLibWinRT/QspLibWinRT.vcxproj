@@ -208,12 +208,6 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Hello.h" />
-    <ClInclude Include="platform.h" />
-    <ClInclude Include="src\common\application.h" />
-    <ClInclude Include="src\common\js_delegate.h" />
-    <ClInclude Include="src\common\method_dispatcher.h" />
-    <ClInclude Include="src\common\view.h" />
-    <ClInclude Include="src\common\view_win.h" />
     <ClInclude Include="src\deps\qsp\actions.h" />
     <ClInclude Include="src\deps\qsp\bindings\android\android.h" />
     <ClInclude Include="src\deps\qsp\bindings\bindings_config.h" />
@@ -247,14 +241,6 @@
     <ClInclude Include="src\deps\qsp\variant.h" />
     <ClInclude Include="src\deps\tinyxml\tinystr.h" />
     <ClInclude Include="src\deps\tinyxml\tinyxml.h" />
-    <ClInclude Include="src\quest-navigator\configuration.h" />
-    <ClInclude Include="src\quest-navigator\gamestock.h" />
-    <ClInclude Include="src\quest-navigator\interceptor.h" />
-    <ClInclude Include="src\quest-navigator\listener.h" />
-    <ClInclude Include="src\quest-navigator\midi.h" />
-    <ClInclude Include="src\quest-navigator\skin.h" />
-    <ClInclude Include="src\quest-navigator\sound.h" />
-    <ClInclude Include="src\quest-navigator\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -266,9 +252,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Hello.cpp" />
-    <ClCompile Include="src\common\application_win.cc" />
-    <ClCompile Include="src\common\method_dispatcher.cc" />
-    <ClCompile Include="src\common\view_win.cc" />
     <ClCompile Include="src\deps\qsp\actions.c">
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
     </ClCompile>
@@ -421,14 +404,6 @@
     <ClCompile Include="src\deps\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="src\deps\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp" />
-    <ClCompile Include="src\quest-navigator\configuration.cpp" />
-    <ClCompile Include="src\quest-navigator\gamestock.cpp" />
-    <ClCompile Include="src\quest-navigator\interceptor.cpp" />
-    <ClCompile Include="src\quest-navigator\listener.cpp" />
-    <ClCompile Include="src\quest-navigator\midi.cpp" />
-    <ClCompile Include="src\quest-navigator\skin.cpp" />
-    <ClCompile Include="src\quest-navigator\sound.cpp" />
-    <ClCompile Include="src\quest-navigator\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
