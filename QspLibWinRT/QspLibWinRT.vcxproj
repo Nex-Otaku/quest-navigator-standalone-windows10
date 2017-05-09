@@ -241,6 +241,19 @@
     <ClInclude Include="src\deps\qsp\variant.h" />
     <ClInclude Include="src\deps\tinyxml\tinystr.h" />
     <ClInclude Include="src\deps\tinyxml\tinyxml.h" />
+    <ClInclude Include="src\quest-navigator\app\universal\gamestock.h" />
+    <ClInclude Include="src\quest-navigator\core\configuration.h" />
+    <ClInclude Include="src\quest-navigator\core\listener.h" />
+    <ClInclude Include="src\quest-navigator\core\midi.h" />
+    <ClInclude Include="src\quest-navigator\core\skin.h" />
+    <ClInclude Include="src\quest-navigator\core\sound.h" />
+    <ClInclude Include="src\quest-navigator\core\utils.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\application.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\interceptor.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\js_delegate.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\method_dispatcher.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\view.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -404,6 +417,17 @@
     <ClCompile Include="src\deps\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="src\deps\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="src\deps\tinyxml\xmltest.cpp" />
+    <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp" />
+    <ClCompile Include="src\quest-navigator\core\configuration.cpp" />
+    <ClCompile Include="src\quest-navigator\core\listener.cpp" />
+    <ClCompile Include="src\quest-navigator\core\midi.cpp" />
+    <ClCompile Include="src\quest-navigator\core\skin.cpp" />
+    <ClCompile Include="src\quest-navigator\core\sound.cpp" />
+    <ClCompile Include="src\quest-navigator\core\utils.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc" />
+    <ClCompile Include="src\quest-navigator\platform\awesomium\interceptor.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc" />
+    <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

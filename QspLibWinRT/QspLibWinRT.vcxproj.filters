@@ -207,6 +207,39 @@
     <ClCompile Include="src\deps\qsp\actions.c">
       <Filter>qsplib</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp">
+      <Filter>quest-navigator\app\universal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\configuration.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\listener.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\midi.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\skin.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\sound.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\utils.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\interceptor.cpp">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -309,6 +342,45 @@
     </ClInclude>
     <ClInclude Include="src\deps\qsp\variant.h">
       <Filter>qsplib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\app\universal\gamestock.h">
+      <Filter>quest-navigator\app\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\configuration.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\listener.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\midi.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\skin.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\sound.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\utils.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\application.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\interceptor.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\js_delegate.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\method_dispatcher.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\view.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
