@@ -96,9 +96,6 @@
     <ClCompile Include="src\deps\qsp\mathops.c">
       <Filter>qsplib</Filter>
     </ClCompile>
-    <ClCompile Include="src\deps\qsp\memwatch.c">
-      <Filter>qsplib</Filter>
-    </ClCompile>
     <ClCompile Include="src\deps\qsp\menu.c">
       <Filter>qsplib</Filter>
     </ClCompile>
@@ -278,9 +275,6 @@
       <Filter>qsplib</Filter>
     </ClInclude>
     <ClInclude Include="src\deps\qsp\mathops.h">
-      <Filter>qsplib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\deps\qsp\memwatch.h">
       <Filter>qsplib</Filter>
     </ClInclude>
     <ClInclude Include="src\deps\qsp\menu.h">

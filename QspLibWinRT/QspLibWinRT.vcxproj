@@ -229,7 +229,6 @@
     <ClInclude Include="src\deps\qsp\game.h" />
     <ClInclude Include="src\deps\qsp\locations.h" />
     <ClInclude Include="src\deps\qsp\mathops.h" />
-    <ClInclude Include="src\deps\qsp\memwatch.h" />
     <ClInclude Include="src\deps\qsp\menu.h" />
     <ClInclude Include="src\deps\qsp\objects.h" />
     <ClInclude Include="src\deps\qsp\onig\config.h" />
@@ -331,9 +330,6 @@
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
     </ClCompile>
     <ClCompile Include="src\deps\qsp\mathops.c">
-      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
-    </ClCompile>
-    <ClCompile Include="src\deps\qsp\memwatch.c">
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
     </ClCompile>
     <ClCompile Include="src\deps\qsp\menu.c">
