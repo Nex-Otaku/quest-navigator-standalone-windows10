@@ -249,6 +249,7 @@
     <ClInclude Include="src\quest-navigator\core\midi.h" />
     <ClInclude Include="src\quest-navigator\core\skin.h" />
     <ClInclude Include="src\quest-navigator\core\sound.h" />
+    <ClInclude Include="src\quest-navigator\core\strings.h" />
     <ClInclude Include="src\quest-navigator\core\utils.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\application.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\interceptor.h" />
@@ -428,6 +429,7 @@
     <ClCompile Include="src\quest-navigator\core\midi.cpp" />
     <ClCompile Include="src\quest-navigator\core\skin.cpp" />
     <ClCompile Include="src\quest-navigator\core\sound.cpp" />
+    <ClCompile Include="src\quest-navigator\core\strings.cpp" />
     <ClCompile Include="src\quest-navigator\core\utils.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\interceptor.cpp" />
