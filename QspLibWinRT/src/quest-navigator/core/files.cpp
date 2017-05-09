@@ -3,6 +3,7 @@
 #include "configuration.h"
 #include "utils.h"
 #include "dialogs.h"
+#include "encoding.h"
 
 namespace QuestNavigator {
 

@@ -246,6 +246,9 @@
     <ClCompile Include="src\quest-navigator\core\dialogs.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\encoding.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -392,6 +395,9 @@
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\core\dialogs.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\encoding.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "../../deps/qsp/bindings/default/qsp_default.h"
 #include "utils.h"
 #include "dialogs.h"
+#include "encoding.h"
 //#include <Awesomium/STLHelpers.h>
 
 namespace QuestNavigator {
