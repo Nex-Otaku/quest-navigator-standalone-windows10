@@ -213,9 +213,6 @@
     <ClCompile Include="src\quest-navigator\core\configuration.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\listener.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\core\midi.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
@@ -238,6 +235,9 @@
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp">
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClCompile>
   </ItemGroup>
@@ -349,9 +349,6 @@
     <ClInclude Include="src\quest-navigator\core\configuration.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\listener.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\core\midi.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
@@ -380,6 +377,9 @@
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\listener.h">
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClInclude>
   </ItemGroup>

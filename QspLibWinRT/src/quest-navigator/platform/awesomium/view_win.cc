@@ -2,10 +2,10 @@
 //#include <Awesomium/STLHelpers.h>
 #include <vector>
 #include <Windows.h>
-#include "../quest-navigator/utils.h"
-#include "../quest-navigator/configuration.h"
+#include "../../core/utils.h"
+#include "../../core/configuration.h"
 //#include "../quest-navigator/resource.h"
-#include "../quest-navigator/listener.h"
+#include "listener.h"
 
 //class ViewWin;
 //

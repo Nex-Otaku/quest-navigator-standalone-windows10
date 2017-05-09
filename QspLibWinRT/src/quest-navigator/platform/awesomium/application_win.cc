@@ -2,9 +2,9 @@
 #include "view.h"
 //#include <Awesomium/WebCore.h>
 #include <string>
-#include "../quest-navigator/utils.h"
-#include "../quest-navigator/configuration.h"
-#include "../quest-navigator/listener.h"
+#include "../../core/utils.h"
+#include "../../core/configuration.h"
+#include "listener.h"
 
 //using namespace Awesomium;
 //using namespace std;

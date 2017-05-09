@@ -1,6 +1,6 @@
 #include "skin.h"
-#include "../deps/qsp/qsp.h"
-#include "../deps/qsp/bindings/default/qsp_default.h"
+#include "../../deps/qsp/qsp.h"
+#include "../../deps/qsp/bindings/default/qsp_default.h"
 #include "utils.h"
 //#include <Awesomium/STLHelpers.h>
 

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <Windows.h>
-#include "../deps/tinyxml/tinyxml.h"
+#include "../../deps/tinyxml/tinyxml.h"
 
 using namespace std;
 
