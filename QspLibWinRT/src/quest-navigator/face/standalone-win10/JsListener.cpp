@@ -12,6 +12,11 @@ namespace QuestNavigator
 	{
 	}
 
+	void JsListener::inject(EventManager * eventManager)
+	{
+		this->eventManager = eventManager;
+	}
+
 	// Обращение к API плеера из яваскрипта.
 
 	void JsListener::restartGame()

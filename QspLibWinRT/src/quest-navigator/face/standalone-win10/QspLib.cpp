@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "QspLib.h"
+#include "EventManager.h"
 
 using namespace QuestNavigator;
 
@@ -15,6 +16,12 @@ namespace QspLibWinRT
 
 		// Создаём объект, который будет "слушать" вызовы яваскриптового API.
 		this->jsListener = new JsListener();
+		// Создаём обработчик событий.
+		// События используются для синхронизации и передачи данных между потоками.
+		EventManager* eventManager = new EventManager();
+
+		// Делаем инъекцию зависимостей.
+		this->jsListener->inject(eventManager);
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "EventManager.h"
 
 using namespace std;
 
@@ -11,6 +12,8 @@ namespace QuestNavigator
 	public:
 		JsListener();
 		~JsListener();
+
+		void inject(EventManager* eventManager);
 
 		void restartGame();
 		void executeAction(int pos);
@@ -26,5 +29,8 @@ namespace QuestNavigator
 		void setInputString(string text);
 		void runInputString();
 		void runDefaultGame();
+
+	private:
+		EventManager* eventManager;
 	};
 }
