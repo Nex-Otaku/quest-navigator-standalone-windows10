@@ -27,71 +27,73 @@ namespace QspLibWinRT
 
 	void QspLib::restartGame()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->restartGame();
 	}
 
 	void QspLib::executeAction(int32 pos)
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->executeAction((int)pos);
 	}
 
 	void QspLib::selectObject(int32 pos)
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->selectObject((int)pos);
 	}
 
 	void QspLib::loadGame()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->loadGame();
 	}
 
 	void QspLib::saveGame()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->saveGame();
 	}
 
 	void QspLib::saveSlotSelected(int32 index, int32 mode)
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->saveSlotSelected((int)index, (int)mode);
 	}
 
 	void QspLib::msgResult()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->msgResult();
 	}
 
 	void QspLib::errorResult()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->errorResult();
 	}
 
 	void QspLib::userMenuResult(int32 pos)
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->userMenuResult((int)pos);
 	}
 
 	void QspLib::inputResult(Platform::String ^ text)
 	{
 		throw ref new Platform::NotImplementedException();
+		//this->jsListener->inputResult((string)text);
 	}
 
 	void QspLib::setMute(Platform::Boolean flag)
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->setMute((bool)flag);
 	}
 
 	void QspLib::setInputString(Platform::String ^ text)
 	{
 		throw ref new Platform::NotImplementedException();
+		//this->jsListener->setInputString((string)text);
 	}
 
 	void QspLib::runInputString()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->runInputString();
 	}
 
 	void QspLib::runDefaultGame()
 	{
-		throw ref new Platform::NotImplementedException();
+		this->jsListener->runDefaultGame();
 	}
 }

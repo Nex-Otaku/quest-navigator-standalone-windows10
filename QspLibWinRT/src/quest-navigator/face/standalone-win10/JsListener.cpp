@@ -8,7 +8,6 @@ namespace QuestNavigator
 	{
 	}
 
-
 	JsListener::~JsListener()
 	{
 	}
