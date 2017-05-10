@@ -261,6 +261,21 @@
     <ClCompile Include="src\quest-navigator\app\universal\openGameFile.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\JsExecutor.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\LibraryListener.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -423,6 +438,21 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\app\universal\openGameFile.h">
       <Filter>quest-navigator\app\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\JsExecutor.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\LibraryListener.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
