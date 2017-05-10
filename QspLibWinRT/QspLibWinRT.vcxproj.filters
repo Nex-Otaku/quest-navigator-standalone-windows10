@@ -258,6 +258,9 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\QspLib.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\app\universal\openGameFile.cpp">
+      <Filter>quest-navigator\app\universal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -417,6 +420,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\QspLib.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\app\universal\openGameFile.h">
+      <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
