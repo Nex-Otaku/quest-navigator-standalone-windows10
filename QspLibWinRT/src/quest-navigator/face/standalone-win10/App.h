@@ -1,8 +1,11 @@
 #pragma once
-class App
-{
-public:
-	App();
-	~App();
-};
 
+namespace QuestNavigator
+{
+	class App
+	{
+	public:
+		App();
+		~App();
+	};
+}

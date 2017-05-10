@@ -1,8 +1,11 @@
 #pragma once
-class JsExecutor
-{
-public:
-	JsExecutor();
-	~JsExecutor();
-};
 
+namespace QuestNavigator
+{
+	class JsExecutor
+	{
+	public:
+		JsExecutor();
+		~JsExecutor();
+	};
+}

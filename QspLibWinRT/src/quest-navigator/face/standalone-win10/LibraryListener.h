@@ -1,8 +1,11 @@
 #pragma once
-class LibraryListener
-{
-public:
-	LibraryListener();
-	~LibraryListener();
-};
 
+namespace QuestNavigator
+{
+	class LibraryListener
+	{
+	public:
+		LibraryListener();
+		~LibraryListener();
+	};
+}

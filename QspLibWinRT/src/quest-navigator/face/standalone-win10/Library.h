@@ -1,8 +1,11 @@
 #pragma once
-class Library
-{
-public:
-	Library();
-	~Library();
-};
 
+namespace QuestNavigator
+{
+	class Library
+	{
+	public:
+		Library();
+		~Library();
+	};
+}

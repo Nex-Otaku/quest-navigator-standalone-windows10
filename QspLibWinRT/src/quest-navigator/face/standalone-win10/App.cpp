@@ -1,12 +1,15 @@
 #include "pch.h"
 #include "App.h"
 
-
-App::App()
+namespace QuestNavigator
 {
-}
+
+	App::App()
+	{
+	}
 
 
-App::~App()
-{
+	App::~App()
+	{
+	}
 }

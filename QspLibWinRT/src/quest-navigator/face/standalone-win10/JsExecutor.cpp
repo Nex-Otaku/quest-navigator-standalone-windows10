@@ -1,12 +1,15 @@
 #include "pch.h"
 #include "JsExecutor.h"
 
-
-JsExecutor::JsExecutor()
+namespace QuestNavigator
 {
-}
+
+	JsExecutor::JsExecutor()
+	{
+	}
 
 
-JsExecutor::~JsExecutor()
-{
+	JsExecutor::~JsExecutor()
+	{
+	}
 }

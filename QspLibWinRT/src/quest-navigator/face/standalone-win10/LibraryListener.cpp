@@ -1,12 +1,15 @@
 #include "pch.h"
 #include "LibraryListener.h"
 
-
-LibraryListener::LibraryListener()
+namespace QuestNavigator
 {
-}
+
+	LibraryListener::LibraryListener()
+	{
+	}
 
 
-LibraryListener::~LibraryListener()
-{
+	LibraryListener::~LibraryListener()
+	{
+	}
 }

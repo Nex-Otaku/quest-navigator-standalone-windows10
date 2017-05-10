@@ -1,5 +1,9 @@
 #pragma once
 
+#include "JsListener.h"
+
+using namespace QuestNavigator;
+
 namespace QspLibWinRT
 {
 	public ref class QspLib sealed
@@ -21,5 +25,8 @@ namespace QspLibWinRT
 		void setInputString(Platform::String^ text);
 		void runInputString();
 		void runDefaultGame();
+
+	private:
+		JsListener* jsListener;
 	};
 }
