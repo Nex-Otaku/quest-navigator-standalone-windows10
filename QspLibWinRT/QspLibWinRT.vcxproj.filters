@@ -255,6 +255,9 @@
     <ClCompile Include="src\quest-navigator\app\universal\update.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\QspLib.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -411,6 +414,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\app\universal\update.h">
       <Filter>quest-navigator\app\universal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\QspLib.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

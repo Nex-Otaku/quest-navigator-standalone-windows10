@@ -252,6 +252,7 @@
     <ClInclude Include="src\quest-navigator\core\sound.h" />
     <ClInclude Include="src\quest-navigator\core\strings.h" />
     <ClInclude Include="src\quest-navigator\core\utils.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\QspLib.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\application.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\interceptor.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\js_delegate.h" />
@@ -433,6 +434,7 @@
     <ClCompile Include="src\quest-navigator\core\sound.cpp" />
     <ClCompile Include="src\quest-navigator\core\strings.cpp" />
     <ClCompile Include="src\quest-navigator\core\utils.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\QspLib.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\interceptor.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp" />

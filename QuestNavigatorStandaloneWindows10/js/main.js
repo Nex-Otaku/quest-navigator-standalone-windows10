@@ -4,6 +4,8 @@ document.getElementById('logResult').innerHTML = 'log log';
 
 var helloPlugin = new QspLibWinRT.Hello();
 
+var qspLib = new QspLibWinRT.QspLib();
+
 jQuery(function () {
     $('#logResult').html('document is ready');
 
