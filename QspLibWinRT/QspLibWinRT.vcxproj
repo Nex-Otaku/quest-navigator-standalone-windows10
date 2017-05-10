@@ -254,6 +254,7 @@
     <ClInclude Include="src\quest-navigator\core\strings.h" />
     <ClInclude Include="src\quest-navigator\core\utils.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsExecutor.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h" />
@@ -442,6 +443,7 @@
     <ClCompile Include="src\quest-navigator\core\strings.cpp" />
     <ClCompile Include="src\quest-navigator\core\utils.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsExecutor.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp" />

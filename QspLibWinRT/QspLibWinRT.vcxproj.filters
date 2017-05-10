@@ -276,6 +276,9 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\LibraryListener.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -452,6 +455,9 @@
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\LibraryListener.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
   </ItemGroup>
