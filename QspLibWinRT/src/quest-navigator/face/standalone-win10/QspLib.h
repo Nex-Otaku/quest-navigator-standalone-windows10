@@ -186,24 +186,3 @@ namespace QspLibWinRT
 //		// Остановка таймера
 //		static void stopTimer();
 //	};
-//
-//	// Создаём объект ядра для синхронизации потоков,
-//	// событие с автосбросом, инициализированное в занятом состоянии.
-//	HANDLE CreateSyncEvent();
-//	// Создаём таймер.
-//	HANDLE CreateTimer();
-//	// Получаем HANDLE события по его индексу
-//	HANDLE getEventHandle(eSyncEvent ev);
-//	// Запускаем событие
-//	void runSyncEvent(eSyncEvent ev);
-//	// Высвобождаем описатель и ругаемся если что не так.
-//	void freeHandle(HANDLE handle);
-//	// Входим в критическую секцию
-//	void lockData();
-//	// Выходим из критической секции
-//	void unlockData();
-//	// Ожидаем события
-//	bool waitForSingle(HANDLE handle);
-//	bool waitForSingle(eSyncEvent ev);
-//	bool waitForSingleLib(eSyncEvent ev);
-//	bool checkForSingle(eSyncEvent ev);

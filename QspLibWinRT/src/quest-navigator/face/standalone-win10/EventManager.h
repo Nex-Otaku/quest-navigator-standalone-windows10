@@ -9,6 +9,7 @@ namespace QuestNavigator
 		~EventManager();
 
 		void executeAction(int pos);
+		void selectObject(int pos);
 
 		// Работа с потоками и синхронизацией.
 

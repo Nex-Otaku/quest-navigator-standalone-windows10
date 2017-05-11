@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "EventManager.h"
+#include <string>
+
+using namespace std;
 
 namespace QuestNavigator
 {
-
 	EventManager::EventManager()
 	{
 	}
@@ -15,26 +17,50 @@ namespace QuestNavigator
 	void EventManager::executeAction(int pos)
 	{
 		// Контекст UI
-
-
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для executeAction!");
-		//			return;
-		//		}
-		//
-		//		if (!checkForSingle(evLibIsReady))
-		//			return;
-		//
-		//		JSValue jsPos = args[0];
-		//		int pos = jsPos.ToInteger();
-		//		lockData();
-		//		g_sharedData[evExecuteAction].num = pos;
-		//		runSyncEvent(evExecuteAction);
-		//		unlockData();
+		if (!checkForSingle(evLibIsReady)) {
+			return;
+		}
+		
+		lockData();
+		g_sharedData[evExecuteAction].num = pos;
+		runSyncEvent(evExecuteAction);
+		unlockData();
 	}
 
+	void EventManager::selectObject(int pos)
+	{
+		// Контекст UI
+		if (!checkForSingle(evLibIsReady)) {
+			return;
+		}
+		
+		lockData();
+		g_sharedData[evSelectObject].num = pos;
+		runSyncEvent(evSelectObject);
+		unlockData();
+	}
+
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	// Глобальные переменные для работы с потоками
+	
+	// Структура для критических секций
+	CRITICAL_SECTION g_csSharedData;
+	
+	// Разделяемые данные
+	struct SharedData
+	{
+		string str;
+		int num;
+		//JSValue jsValue; Данные для передачи вызова из библиотеки (из кода игры) в яваскрипт.
+		bool flag;
+	};
+	SharedData g_sharedData[evLast];
+	
+	// События для синхронизации потоков
+	HANDLE g_eventList[evLast];
 
 	// Создаём объект ядра для синхронизации потоков,
 	// событие с автосбросом, инициализированное в занятом состоянии.

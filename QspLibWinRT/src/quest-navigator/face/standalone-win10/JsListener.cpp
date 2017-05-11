@@ -27,54 +27,18 @@ namespace QuestNavigator
 		string gameFile = Configuration::getString(ecpGameFilePath);
 		app->StopGame(true);
 		app->runGame(gameFile);
-
-		// STUB
-		//		// Контекст UI
-		//		string gameFile = Configuration::getString(ecpGameFilePath);
-		//		StopGame(true);
-		//		runGame(gameFile);
 	}
 
 	void JsListener::executeAction(int pos)
 	{
 		// Контекст UI
 		this->eventManager->executeAction(pos);
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для executeAction!");
-		//			return;
-		//		}
-		//
-		//		if (!checkForSingle(evLibIsReady))
-		//			return;
-		//
-		//		JSValue jsPos = args[0];
-		//		int pos = jsPos.ToInteger();
-		//		lockData();
-		//		g_sharedData[evExecuteAction].num = pos;
-		//		runSyncEvent(evExecuteAction);
-		//		unlockData();
 	}
 
 	void JsListener::selectObject(int pos)
 	{
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для selectObject!");
-		//			return;
-		//		}
-		//		JSValue jsPos = args[0];
-		//		int pos = jsPos.ToInteger();
-		//
-		//		if (!checkForSingle(evLibIsReady))
-		//			return;
-		//
-		//		lockData();
-		//		g_sharedData[evSelectObject].num = pos;
-		//		runSyncEvent(evSelectObject);
-		//		unlockData();
+		// Контекст UI
+		this->eventManager->selectObject(pos);
 	}
 
 	void JsListener::loadGame()
