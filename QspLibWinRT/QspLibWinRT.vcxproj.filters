@@ -279,6 +279,7 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -460,5 +461,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\Timer.h" />
   </ItemGroup>
 </Project>

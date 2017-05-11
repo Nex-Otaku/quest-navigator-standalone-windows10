@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "QspLib.h"
 #include "EventManager.h"
+#include "Timer.h"
+#include "App.h"
 
 using namespace QuestNavigator;
 
@@ -19,9 +21,17 @@ namespace QspLibWinRT
 		// Создаём обработчик событий.
 		// События используются для синхронизации и передачи данных между потоками.
 		EventManager* eventManager = new EventManager();
+		// Создаём объект для управления таймером.
+		Timer* timer = new Timer();
+		// Создаём объект приложения.
+		App* app = new App();
 
 		// Делаем инъекцию зависимостей.
-		this->jsListener->inject(eventManager);
+		this->jsListener->inject(
+			eventManager,
+			app,
+			timer
+		);
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.

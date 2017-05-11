@@ -13,10 +13,15 @@ namespace QuestNavigator
 	{
 	}
 
-	void JsListener::inject(EventManager* eventManager, App* app)
+	void JsListener::inject(
+		EventManager* eventManager, 
+		App* app,
+		Timer* timer
+	)
 	{
 		this->eventManager = eventManager;
 		this->app = app;
+		this->timer = timer;
 	}
 
 	// Обращение к API плеера из яваскрипта.
@@ -43,6 +48,12 @@ namespace QuestNavigator
 
 	void JsListener::loadGame()
 	{
+		// Контекст UI
+		// Останавливаем таймер
+		this->timer->stopTimer();
+		// Загружаем список файлов и отдаем в яваскрипт
+		JSObject slots = getSaveSlots(true);
+		qspShowSaveSlotsDialog(slots);
 		// STUB
 		//		// Контекст UI
 		//		// Останавливаем таймер

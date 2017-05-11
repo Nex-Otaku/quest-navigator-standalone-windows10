@@ -96,59 +96,6 @@ namespace QspLibWinRT
 //
 //		bool BindMethods(WebView* web_view);
 //
-//		// ********************************************************************
-//		// ********************************************************************
-//		// ********************************************************************
-//		//                       Колбэки интерпретатора
-//		// ********************************************************************
-//		// ********************************************************************
-//		// ********************************************************************
-//
-//		static void RefreshInt(int isRedraw);
-//		static void SetTimer(int msecs);
-//		static void SetInputStrText(QSP_CHAR* text);
-//		static void ShowMessage(QSP_CHAR* message);
-//		static void PlayFile(QSP_CHAR* file, int volume);
-//		static QSP_BOOL IsPlayingFile(QSP_CHAR* file);
-//		static void CloseFile(QSP_CHAR* file);
-//		static void ShowPicture(QSP_CHAR* file);
-//		static void InputBox(const QSP_CHAR* prompt, QSP_CHAR* buffer, int maxLen);
-//		static void PlayerInfo(QSP_CHAR* resource, QSP_CHAR* buffer, int maxLen);
-//		static int GetMSCount();
-//		static void AddMenuItem(QSP_CHAR* name, QSP_CHAR* imgPath);
-//		static int ShowMenu();
-//		static void DeleteMenu();
-//		static void Wait(int msecs);
-//		static void ShowWindow(int type, QSP_BOOL isShow);
-//		static void System(QSP_CHAR* cmd);
-//		static void OpenGameStatus(QSP_CHAR* file);
-//		static void SaveGameStatus(QSP_CHAR* file);
-//
-//		// ********************************************************************
-//		// ********************************************************************
-//		// ********************************************************************
-//		//                        Вызовы JS-функций
-//		// ********************************************************************
-//		// ********************************************************************
-//		// ********************************************************************
-//
-//		// В потоке Ui
-//		void processLibJsCall();
-//		bool jsCallApiFromUi(string name, JSValue arg);
-//		bool onWebDeviceReady();
-//		void qspShowSaveSlotsDialog(JSObject content);
-//		void qspFillLocalGamesList(JSArray games);
-//
-//		// В потоке библиотеки
-//		static void jsCallApiFromLib(string name, JSValue arg);
-//		static void qspSetGroupedContent(JSObject content);
-//		static void qspMsg(WebString text);
-//		static void qspError(JSObject error);
-//		static void qspMenu(JSArray menu);
-//		static void qspInput(WebString text);
-//		static void qspView(WebString path);
-//		static void qspSetInputString(WebString text);
-//
 //
 //		// ********************************************************************
 //		// Вспомогательные обработчики для отладки
@@ -168,21 +115,4 @@ namespace QspLibWinRT
 //
 //		static int objectSelectionIndex;
 //
-//		// ********************************************************************
-//		// THREADS
-//		// ********************************************************************
-//
-//		// Запуск потока библиотеки
-//		void StartLibThread();
-//		// Остановка потока библиотеки
-//		void StopLibThread();
-//		// Основная функция потока библиотеки
-//		static unsigned int __stdcall libThreadFunc(void* pvParam);
-//
-//		// Проверка результатов выполнения библиотечного кода
-//		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
-//		// Установка и запуск таймера
-//		static void startTimer();
-//		// Остановка таймера
-//		static void stopTimer();
 //	};
