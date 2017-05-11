@@ -37,6 +37,8 @@ namespace QuestNavigator
 
 	void JsListener::executeAction(int pos)
 	{
+		// Контекст UI
+		this->eventManager->executeAction(pos);
 		// STUB
 		//		// Контекст UI
 		//		if (args.size() < 1) {
