@@ -8,8 +8,57 @@ namespace QuestNavigator
 	{
 	}
 
-
 	App::~App()
 	{
+	}
+
+	void App::runGame(string fileName)
+	{
+		//		// Контекст UI
+		//		if (gameIsRunning) {
+		//			if (!checkForSingle(evLibIsReady))
+		//				return;
+		//		} else {
+		//			waitForSingle(evLibIsReady);
+		//		}
+		//
+		//		// Готовим данные для передачи в поток
+		//		lockData();
+		//		g_sharedData[evRunGame].str = fileName;
+		//		// Передаём настройку из конфига в скин.
+		//		g_sharedData[evRunGame].num = Configuration::getBool(ecpGameIsStandalone) ? 1 : 0;
+		//		runSyncEvent(evRunGame);
+		//		unlockData();
+		//
+		//		gameIsRunning = true;
+		//
+		//		// Если плеер не запущен в режиме "standalone",
+		//		// и запущена игра не по умолчанию,
+		//		// то записываем время последнего запуска в БД.
+		//		if (!Configuration::getBool(ecpGameIsStandalone)
+		//			&& !Configuration::getBool(ecpRunningDefaultGame)) {
+		//			GamestockEntry game;
+		//			// Пока что запускаем только локальные игры.
+		//			game.web = false;
+		//			game.local_file = Configuration::getString(ecpGameFilePath);
+		//			game.title = Configuration::getString(ecpGameTitle);
+		//			game.hash = Configuration::getString(ecpGameHash);
+		//			game.cache = Configuration::getString(ecpCacheDir);
+		//			game.saves = Configuration::getString(ecpSaveDir);
+		//			game.last_run = (int)time(0);
+		//			Gamestock::updateGame(game);
+		//		}
+	}
+
+	void App::StopGame(bool restart)
+	{
+		//		//Контекст UI
+		//		if (gameIsRunning)
+		//		{
+		//			// Мы должны иметь возможность остановить игру в любой момент.
+		//			runSyncEvent(evStopGame);
+		//			waitForSingle(evGameStopped);
+		//			gameIsRunning = false;
+		//		}
 	}
 }

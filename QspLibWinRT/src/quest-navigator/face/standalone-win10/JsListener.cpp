@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "JsListener.h"
+#include "..\..\core\configuration.h"
 
 namespace QuestNavigator
 {
@@ -12,15 +13,21 @@ namespace QuestNavigator
 	{
 	}
 
-	void JsListener::inject(EventManager * eventManager)
+	void JsListener::inject(EventManager* eventManager, App* app)
 	{
 		this->eventManager = eventManager;
+		this->app = app;
 	}
 
 	// Обращение к API плеера из яваскрипта.
 
 	void JsListener::restartGame()
 	{
+		// Контекст UI
+		string gameFile = Configuration::getString(ecpGameFilePath);
+		app->StopGame(true);
+		app->runGame(gameFile);
+
 		// STUB
 		//		// Контекст UI
 		//		string gameFile = Configuration::getString(ecpGameFilePath);

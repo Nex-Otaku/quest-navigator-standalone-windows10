@@ -2,6 +2,7 @@
 
 #include <string>
 #include "EventManager.h"
+#include "App.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ namespace QuestNavigator
 		JsListener();
 		~JsListener();
 
-		void inject(EventManager* eventManager);
+		void inject(EventManager* eventManager, App* app);
 
 		void restartGame();
 		void executeAction(int pos);
@@ -32,5 +33,6 @@ namespace QuestNavigator
 
 	private:
 		EventManager* eventManager;
+		App* app;
 	};
 }
