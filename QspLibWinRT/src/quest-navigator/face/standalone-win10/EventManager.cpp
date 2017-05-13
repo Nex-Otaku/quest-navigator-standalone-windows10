@@ -78,6 +78,24 @@ namespace QuestNavigator
 		runSyncEvent(evErrorClosed);
 	}
 
+	void EventManager::menuClosed(int pos)
+	{
+		// Контекст UI
+		lockData();
+		g_sharedData[evMenuClosed].num = pos;
+		runSyncEvent(evMenuClosed);
+		unlockData();
+	}
+
+	void EventManager::inputClosed(string text)
+	{
+		// Контекст UI
+		lockData();
+		g_sharedData[evInputClosed].str = text;
+		runSyncEvent(evInputClosed);
+		unlockData();
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -108,36 +108,14 @@ namespace QuestNavigator
 
 	void JsListener::userMenuResult(int pos)
 	{
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для userMenuResult!");
-		//			return;
-		//		}
-		//		JSValue jsPos = args[0];
-		//		int pos = jsPos.ToInteger();
-		//
-		//		lockData();
-		//		g_sharedData[evMenuClosed].num = pos;
-		//		runSyncEvent(evMenuClosed);
-		//		unlockData();
+		// Контекст UI
+		this->eventManager->menuClosed(pos);
 	}
 
 	void JsListener::inputResult(string text)
 	{
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для inputResult!");
-		//			return;
-		//		}
-		//		JSValue jsText = args[0];
-		//		string text = ToString(jsText.ToString());
-		//
-		//		lockData();
-		//		g_sharedData[evInputClosed].str = text;
-		//		runSyncEvent(evInputClosed);
-		//		unlockData();
+		// Контекст UI
+		this->eventManager->inputClosed(text);
 	}
 
 	void JsListener::setMute(bool flag)

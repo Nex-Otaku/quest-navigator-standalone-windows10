@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+
+using namespace std;
+
 namespace QuestNavigator
 {
 	class EventManager
@@ -14,6 +18,8 @@ namespace QuestNavigator
 		void saveSlotSelected(int index);
 		void msgClosed();
 		void errorClosed();
+		void menuClosed(int pos);
+		void inputClosed(string text);
 
 		// Работа с потоками и синхронизацией.
 
