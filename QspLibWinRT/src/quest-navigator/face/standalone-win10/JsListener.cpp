@@ -96,16 +96,14 @@ namespace QuestNavigator
 
 	void JsListener::msgResult()
 	{
-		// STUB
-		//		// Контекст UI
-		//		runSyncEvent(evMsgClosed);
+		// Контекст UI
+		this->eventManager->msgClosed();
 	}
 
 	void JsListener::errorResult()
 	{
-		// STUB
-		//		// Контекст UI
-		//		runSyncEvent(evErrorClosed);
+		// Контекст UI
+		this->eventManager->errorClosed();
 	}
 
 	void JsListener::userMenuResult(int pos)

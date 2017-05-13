@@ -12,6 +12,8 @@ namespace QuestNavigator
 		void selectObject(int pos);
 		void loadSlotSelected(int index);
 		void saveSlotSelected(int index);
+		void msgClosed();
+		void errorClosed();
 
 		// Работа с потоками и синхронизацией.
 
