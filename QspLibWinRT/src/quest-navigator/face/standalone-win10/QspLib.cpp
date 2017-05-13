@@ -3,6 +3,7 @@
 #include "EventManager.h"
 #include "Timer.h"
 #include "App.h"
+#include "JsExecutor.h"
 
 using namespace QuestNavigator;
 
@@ -25,12 +26,15 @@ namespace QspLibWinRT
 		Timer* timer = new Timer();
 		// Создаём объект приложения.
 		App* app = new App();
+		// Создаём объект для выполнения яваскрипта.
+		JsExecutor* jsExecutor = new JsExecutor();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
 			eventManager,
 			app,
-			timer
+			timer,
+			jsExecutor
 		);
 	}
 
