@@ -75,40 +75,23 @@ namespace QuestNavigator
 
 	void JsListener::saveSlotSelected(int index, int mode)
 	{
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 2) {
-		//			showError("Не указаны параметры для saveSlotSelected!");
-		//			return;
-		//		}
-		//		// Номер слота
-		//		JSValue jsIndex = args[0];
-		//		int index = jsIndex.ToInteger();
-		//		// 1 - загрузка, 0 - сохранение
-		//		JSValue jsMode = args[1];
-		//		int mode = jsMode.ToInteger();
-		//
-		//		if (index == -1)
-		//		{
-		//			// Запускаем таймер
-		//			startTimer();
-		//			return;
-		//		}
-		//
-		//		if (!checkForSingle(evLibIsReady))
-		//			return;
-		//
-		//		if (mode == 1) {
-		//			lockData();
-		//			g_sharedData[evLoadSlotSelected].num = index;
-		//			runSyncEvent(evLoadSlotSelected);
-		//			unlockData();
-		//		} else {
-		//			lockData();
-		//			g_sharedData[evSaveSlotSelected].num = index;
-		//			runSyncEvent(evSaveSlotSelected);
-		//			unlockData();
-		//		}
+		// Контекст UI
+
+		// Если номер слота "-1", 
+		// значит, диалог был отменён.
+		if (index == -1)
+		{
+			// Запускаем таймер
+			this->timer->startTimer();
+			return;
+		}
+		
+		// 1 - загрузка, 0 - сохранение
+		if (mode == 1) {
+			this->eventManager->loadSlotSelected(index);
+		} else {
+			this->eventManager->saveSlotSelected(index);
+		}
 	}
 
 	void JsListener::msgResult()

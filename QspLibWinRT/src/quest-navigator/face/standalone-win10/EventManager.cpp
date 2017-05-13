@@ -40,6 +40,32 @@ namespace QuestNavigator
 		unlockData();
 	}
 
+	void EventManager::loadSlotSelected(int index)
+	{
+		// Контекст UI
+		if (!checkForSingle(evLibIsReady)) {
+			return;
+		}
+
+		lockData();
+		g_sharedData[evLoadSlotSelected].num = index;
+		runSyncEvent(evLoadSlotSelected);
+		unlockData();
+	}
+
+	void EventManager::saveSlotSelected(int index)
+	{
+		// Контекст UI
+		if (!checkForSingle(evLibIsReady)) {
+			return;
+		}
+
+		lockData();
+		g_sharedData[evSaveSlotSelected].num = index;
+		runSyncEvent(evSaveSlotSelected);
+		unlockData();
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

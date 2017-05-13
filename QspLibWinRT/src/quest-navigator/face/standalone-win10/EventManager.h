@@ -10,6 +10,8 @@ namespace QuestNavigator
 
 		void executeAction(int pos);
 		void selectObject(int pos);
+		void loadSlotSelected(int index);
+		void saveSlotSelected(int index);
 
 		// Работа с потоками и синхронизацией.
 
