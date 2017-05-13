@@ -45,7 +45,6 @@ namespace QspLibWinRT
 //		MethodDispatcher method_dispatcher_;
 //		QnInterceptor resource_interceptor_;
 //
-//		bool gameIsRunning;
 //		bool programLoaded;
 //		bool jsLibObjectCreated;
 //

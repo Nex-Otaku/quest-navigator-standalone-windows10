@@ -12,6 +12,7 @@ namespace QuestNavigator
 		EventManager();
 		~EventManager();
 
+		// JsListener
 		void executeAction(int pos);
 		void selectObject(int pos);
 		void loadSlotSelected(int index);
@@ -24,7 +25,14 @@ namespace QuestNavigator
 		void inputStringChanged(string text);
 		void inputStringEntered();
 
+		// App
+		void runGame(string fileName, int gameIsStandalone);
+		void stopGame();
+
 		// Работа с потоками и синхронизацией.
+		
+		// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
+		void waitForLibIsReady();
 
 	private:
 		// Список событий для синхронизации потоков

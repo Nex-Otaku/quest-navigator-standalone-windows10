@@ -29,6 +29,8 @@ namespace QuestNavigator
 	private:
 		EventManager* eventManager;
 
+		bool gameIsRunning;
+
 
 		//		// ********************************************************************
 		//		// ********************************************************************

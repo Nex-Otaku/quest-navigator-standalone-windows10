@@ -14,6 +14,10 @@ namespace QuestNavigator
 	{
 	}
 
+	// Вызовы событий из UI.
+
+	// JsListener
+
 	void EventManager::executeAction(int pos)
 	{
 		// Контекст UI
@@ -121,9 +125,47 @@ namespace QuestNavigator
 		runSyncEvent(evInputStringEntered);
 	}
 
+	// App
+
+	void EventManager::runGame(string fileName, int gameIsStandalone)
+	{
+		// Контекст UI
+		if (!checkForSingle(evLibIsReady)) {
+			return;
+		}
+
+		// Готовим данные для передачи в поток
+		lockData();
+		g_sharedData[evRunGame].str = fileName;
+		// Передаём настройку из конфига в скин.
+		g_sharedData[evRunGame].num = gameIsStandalone;
+		runSyncEvent(evRunGame);
+		unlockData();
+	}
+
+	void EventManager::stopGame()
+	{
+		// Контекст UI
+		// Мы должны иметь возможность остановить игру в любой момент.
+		runSyncEvent(evStopGame);
+		waitForSingle(evGameStopped);
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	// public
+
+	// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
+	void EventManager::waitForLibIsReady()
+	{
+		waitForSingle(evLibIsReady);
+	}
+
+	// private
+
+
 
 	// Глобальные переменные для работы с потоками
 	
