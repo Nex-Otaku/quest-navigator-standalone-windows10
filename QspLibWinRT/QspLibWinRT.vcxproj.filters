@@ -44,6 +44,9 @@
     <Filter Include="quest-navigator\face\standalone-win10\dto">
       <UniqueIdentifier>{c98d572d-0bd1-4712-8bd5-43f6f0743b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\face\standalone-win10\completed">
+      <UniqueIdentifier>{995a0106-15a1-4c94-871d-aff7db8df426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -264,9 +267,6 @@
     <ClCompile Include="src\quest-navigator\app\universal\openGameFile.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
@@ -284,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\Timer.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp">
+      <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,9 +451,6 @@
     <ClInclude Include="src\quest-navigator\app\universal\openGameFile.h">
       <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
@@ -471,6 +471,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\dto\SaveSlotsDto.h">
       <Filter>quest-navigator\face\standalone-win10\dto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h">
+      <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
