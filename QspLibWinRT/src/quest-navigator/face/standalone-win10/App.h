@@ -2,6 +2,7 @@
 
 #include <string>
 #include "dto\SaveSlotsDto.h"
+#include "EventManager.h"
 
 using namespace std;
 
@@ -13,6 +14,10 @@ namespace QuestNavigator
 		App();
 		~App();
 
+		void inject(
+			EventManager* eventManager
+		);
+
 		void runGame(string fileName);
 		void StopGame(bool restart);
 		void runNewGame(string contentPath);
@@ -20,6 +25,9 @@ namespace QuestNavigator
 		// STUB
 		//		JSObject getSaveSlots(bool open);
 		SaveSlotsDto getSaveSlots(bool open);
+
+	private:
+		EventManager* eventManager;
 
 
 		//		// ********************************************************************

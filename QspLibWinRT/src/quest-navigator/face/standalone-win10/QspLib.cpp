@@ -36,6 +36,7 @@ namespace QspLibWinRT
 			timer,
 			jsExecutor
 		);
+		app->inject(eventManager);
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.

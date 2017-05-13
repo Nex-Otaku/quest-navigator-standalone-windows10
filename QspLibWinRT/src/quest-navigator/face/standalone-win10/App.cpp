@@ -19,6 +19,13 @@ namespace QuestNavigator
 	{
 	}
 
+	void App::inject(
+		EventManager* eventManager
+	)
+	{
+		this->eventManager = eventManager;
+	}
+
 	void App::runGame(string fileName)
 	{
 		//		// Контекст UI
