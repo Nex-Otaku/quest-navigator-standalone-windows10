@@ -254,6 +254,7 @@
     <ClInclude Include="src\quest-navigator\core\strings.h" />
     <ClInclude Include="src\quest-navigator\core\utils.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\dto\SaveSlotsDto.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsExecutor.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h" />

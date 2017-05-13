@@ -3,13 +3,16 @@
 
 namespace QuestNavigator
 {
-
 	JsExecutor::JsExecutor()
 	{
 	}
 
-
 	JsExecutor::~JsExecutor()
 	{
+	}
+
+	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
+	{
+		// STUB
 	}
 }

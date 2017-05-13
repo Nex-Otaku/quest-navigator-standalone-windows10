@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "JsListener.h"
 #include "..\..\core\configuration.h"
+#include "dto\SaveSlotsDto.h"
 
 namespace QuestNavigator
 {
@@ -16,12 +17,14 @@ namespace QuestNavigator
 	void JsListener::inject(
 		EventManager* eventManager, 
 		App* app,
-		Timer* timer
+		Timer* timer,
+		JsExecutor* jsExecutor
 	)
 	{
 		this->eventManager = eventManager;
 		this->app = app;
 		this->timer = timer;
+		this->jsExecutor = jsExecutor;
 	}
 
 	// Обращение к API плеера из яваскрипта.
@@ -49,29 +52,25 @@ namespace QuestNavigator
 	void JsListener::loadGame()
 	{
 		// Контекст UI
+
 		// Останавливаем таймер
 		this->timer->stopTimer();
+
 		// Загружаем список файлов и отдаем в яваскрипт
-		JSObject slots = getSaveSlots(true);
-		qspShowSaveSlotsDialog(slots);
-		// STUB
-		//		// Контекст UI
-		//		// Останавливаем таймер
-		//		stopTimer();
-		//		// Загружаем список файлов и отдаем в яваскрипт
-		//		JSObject slots = getSaveSlots(true);
-		//		qspShowSaveSlotsDialog(slots);
+		SaveSlotsDto dto = this->app->getSaveSlots(true);
+		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveGame()
 	{
-		// STUB
-		//		// Контекст UI
-		//		// Останавливаем таймер
-		//		stopTimer();
-		//		// Загружаем список файлов и отдаем в яваскрипт
-		//		JSObject slots = getSaveSlots(false);
-		//		qspShowSaveSlotsDialog(slots);
+		// Контекст UI
+
+		// Останавливаем таймер
+		this->timer->stopTimer();
+
+		// Загружаем список файлов и отдаем в яваскрипт
+		SaveSlotsDto dto = this->app->getSaveSlots(false);
+		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveSlotSelected(int index, int mode)

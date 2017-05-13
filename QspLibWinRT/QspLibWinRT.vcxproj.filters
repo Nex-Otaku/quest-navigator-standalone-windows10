@@ -41,6 +41,9 @@
     <Filter Include="quest-navigator\platform\windows10">
       <UniqueIdentifier>{d0d41c84-897e-48b8-9695-d07919f4a690}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\face\standalone-win10\dto">
+      <UniqueIdentifier>{c98d572d-0bd1-4712-8bd5-43f6f0743b68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -465,6 +468,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Timer.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\dto\SaveSlotsDto.h">
+      <Filter>quest-navigator\face\standalone-win10\dto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

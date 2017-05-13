@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "dto\SaveSlotsDto.h"
 
 using namespace std;
 
@@ -14,6 +15,11 @@ namespace QuestNavigator
 
 		void runGame(string fileName);
 		void StopGame(bool restart);
+
+		// STUB
+		//		JSObject getSaveSlots(bool open);
+		SaveSlotsDto getSaveSlots(bool open);
+
 
 		//		// ********************************************************************
 		//		// ********************************************************************

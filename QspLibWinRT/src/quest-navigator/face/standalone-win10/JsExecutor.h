@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dto\SaveSlotsDto.h"
+
 namespace QuestNavigator
 {
 	class JsExecutor
@@ -7,6 +9,10 @@ namespace QuestNavigator
 	public:
 		JsExecutor();
 		~JsExecutor();
+
+		void qspShowSaveSlotsDialog(SaveSlotsDto slotsDto);
+
+
 	};
 	//		// ********************************************************************
 	//		// ********************************************************************

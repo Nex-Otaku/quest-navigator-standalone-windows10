@@ -4,6 +4,7 @@
 #include "EventManager.h"
 #include "App.h"
 #include "Timer.h"
+#include "JsExecutor.h"
 
 using namespace std;
 
@@ -18,7 +19,8 @@ namespace QuestNavigator
 		void inject(
 			EventManager* eventManager, 
 			App* app,
-			Timer* timer
+			Timer* timer,
+			JsExecutor* jsExecutor
 		);
 
 		void restartGame();
@@ -40,5 +42,6 @@ namespace QuestNavigator
 		EventManager* eventManager;
 		App* app;
 		Timer* timer;
+		JsExecutor* jsExecutor;
 	};
 }
