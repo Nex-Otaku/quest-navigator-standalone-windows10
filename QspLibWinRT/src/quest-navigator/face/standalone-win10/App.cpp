@@ -69,6 +69,42 @@ namespace QuestNavigator
 		//		}
 	}
 
+	void App::runNewGame(string contentPath)
+	{
+		//		// Контекст UI
+		//
+		//		// Запускаем игру из нового пути, 
+		//		// либо полностью перечитываем с диска существующую игру.
+		//
+		//		// Для начала, очищаем то, что уже запущено.
+		//		FreeResources();
+		//
+		//		// Заново загружаем конфигурацию, копируем файлы.
+		//		if (!initOptions(contentPath) || !prepareGameFiles()) {
+		//			app_->Quit();
+		//			return;
+		//		}
+		//
+		//		// Обновляем свойства окна согласно настройкам шаблона.
+		//		view_->applySkinToWindow();
+		//
+		//		// Запускаем поток библиотеки.
+		//		initLib();
+		//
+		//		string url = QuestNavigator::getContentUrl();
+		//		WebURL newUrl(ToWebString(url));
+		//		WebView* webView = view_->web_view();
+		//		if (newUrl == webView->url()) {
+		//			// Очищаем кэш веб-содержимого.
+		//			webView->session()->ClearCache();
+		//			// Загружаем страницу заново, игнорируя закэшированные файлы.
+		//			webView->Reload(true);
+		//		} else {
+		//			// Загружаем шаблон.
+		//			webView->LoadURL(newUrl);
+		//		}
+	}
+
 	SaveSlotsDto App::getSaveSlots(bool open)
 	{
 		//Контекст UI

@@ -96,6 +96,31 @@ namespace QuestNavigator
 		unlockData();
 	}
 
+	void EventManager::mute(bool flag)
+	{
+		// Контекст UI
+		lockData();
+		g_sharedData[evMute].flag = flag;
+		runSyncEvent(evMute);
+		unlockData();
+	}
+
+	void EventManager::inputStringChanged(string text)
+	{
+		// Контекст UI
+		lockData();
+		g_sharedData[evInputStringChanged].str = text;
+		runSyncEvent(evInputStringChanged);
+		unlockData();
+	}
+
+	void EventManager::inputStringEntered()
+	{
+		// Контекст UI
+		// Нажали Enter в строке ввода
+		runSyncEvent(evInputStringEntered);
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

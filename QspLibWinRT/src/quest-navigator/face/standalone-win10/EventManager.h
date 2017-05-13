@@ -20,6 +20,9 @@ namespace QuestNavigator
 		void errorClosed();
 		void menuClosed(int pos);
 		void inputClosed(string text);
+		void mute(bool flag);
+		void inputStringChanged(string text);
+		void inputStringEntered();
 
 		// Работа с потоками и синхронизацией.
 

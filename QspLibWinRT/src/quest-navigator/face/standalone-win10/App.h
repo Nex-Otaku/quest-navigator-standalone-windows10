@@ -15,6 +15,7 @@ namespace QuestNavigator
 
 		void runGame(string fileName);
 		void StopGame(bool restart);
+		void runNewGame(string contentPath);
 
 		// STUB
 		//		JSObject getSaveSlots(bool open);

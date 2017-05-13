@@ -120,53 +120,27 @@ namespace QuestNavigator
 
 	void JsListener::setMute(bool flag)
 	{
-		// STUB
-		//		// Контекст UI
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для setMute!");
-		//			return;
-		//		}
-		//		JSValue jsFlag = args[0];
-		//		bool flag = jsFlag.ToBoolean();
-		//
-		//		lockData();
-		//		g_sharedData[evMute].flag = flag;
-		//		runSyncEvent(evMute);
-		//		unlockData();
+		// Контекст UI
+		this->eventManager->mute(flag);
 	}
 
 	void JsListener::setInputString(string text)
 	{
-		// STUB
-		//		// Контекст UI
-		//		// Изменился текст в строке ввода
-		//		if (args.size() < 1) {
-		//			showError("Не указан параметр для setInputString!");
-		//			return;
-		//		}
-		//		JSValue jsText = args[0];
-		//		string text = ToString(jsText.ToString());
-		//
-		//		lockData();
-		//		g_sharedData[evInputStringChanged].str = text;
-		//		runSyncEvent(evInputStringChanged);
-		//		unlockData();
+		// Контекст UI
+		this->eventManager->inputStringChanged(text);
 	}
 
 	void JsListener::runInputString()
 	{
-		// STUB
-		//		// Контекст UI
-		//		// Нажали Enter в строке ввода
-		//		runSyncEvent(evInputStringEntered);
+		// Контекст UI
+		// Нажали Enter в строке ввода
+		this->eventManager->inputStringEntered();
 	}
 
 	void JsListener::runDefaultGame()
 	{
-		// STUB
-		//		// Контекст UI
-		//
-		//		// Запускаем игру по умолчанию.
-		//		runNewGame("");
+		// Контекст UI
+		// Запускаем игру по умолчанию.
+		this->app->runNewGame("");
 	}
 }
