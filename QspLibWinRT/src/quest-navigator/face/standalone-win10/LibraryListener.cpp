@@ -3,6 +3,8 @@
 #include <string>
 #include "..\..\core\skin.h"
 #include "..\..\core\dto\SkinDto.h"
+#include "..\..\core\strings.h"
+#include "..\..\core\encoding.h"
 
 namespace QuestNavigator
 {
