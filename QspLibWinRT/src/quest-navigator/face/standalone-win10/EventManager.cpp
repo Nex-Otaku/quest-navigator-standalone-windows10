@@ -3,6 +3,7 @@
 #include <string>
 #include "..\..\core\dialogs.h"
 #include "..\..\core\thread_sync.h"
+#include "..\..\core\events.h"
 
 using namespace std;
 

@@ -247,6 +247,7 @@
     <ClInclude Include="src\quest-navigator\core\configuration.h" />
     <ClInclude Include="src\quest-navigator\core\dialogs.h" />
     <ClInclude Include="src\quest-navigator\core\encoding.h" />
+    <ClInclude Include="src\quest-navigator\core\events.h" />
     <ClInclude Include="src\quest-navigator\core\files.h" />
     <ClInclude Include="src\quest-navigator\core\thread_sync.h" />
     <ClInclude Include="src\quest-navigator\core\midi.h" />

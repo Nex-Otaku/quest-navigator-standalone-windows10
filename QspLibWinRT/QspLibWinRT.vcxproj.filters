@@ -484,5 +484,8 @@
     <ClInclude Include="src\quest-navigator\core\thread_sync.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\events.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
