@@ -39,8 +39,6 @@ namespace QuestNavigator
 		// Переменные библиотеки
 		// ********************************************************************
 		
-		static string jsExecBuffer;
-		static clock_t gameStartTime;
 	};
 	//		// ********************************************************************
 	//		// THREADS
@@ -60,13 +58,7 @@ namespace QuestNavigator
 	//		// Переменные библиотеки
 	//		// ********************************************************************
 	//
-	//		static string jsExecBuffer;
-	//		static string lastMainDesc;
 	//		static QnApplicationListener* listener;
 	//		static vector<ContainerMenuItem> menuList;
-	//		static clock_t gameStartTime;
 	//		static int timerInterval;
-	//
-	//		static int objectSelectionIndex;
-	//
 }

@@ -1,14 +1,21 @@
 #pragma once
 
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
+#include "JsExecutor.h"
 
 namespace QuestNavigator
 {
 	class LibraryListener
 	{
 	public:
-		LibraryListener();
-		~LibraryListener();
+		// К библиотеке подвязаны статические колбэки, 
+		// поэтому нам приходится использовать синглтон для доступа
+		// к объекту LibraryListener и через него ко всем другим объектам.
+		static LibraryListener* instance();
+
+		void inject(
+			JsExecutor* jsExecutor
+		);
 
 		// ********************************************************************
 		// ********************************************************************
@@ -37,6 +44,27 @@ namespace QuestNavigator
 		static void System(QSP_CHAR* cmd);
 		static void OpenGameStatus(QSP_CHAR* file);
 		static void SaveGameStatus(QSP_CHAR* file);
+
+		// Вспомогательная функция для очистки буфера.
+		// В качестве колбека не используется.
+		// TODO проверить, можно ли будет от неё избавиться, 
+		// уж очень некрасиво получилось.
+		static void resetJsExecBuffer();
+
+	private:
+		static string jsExecBuffer;
+		static string lastMainDesc;
+		static int objectSelectionIndex;
+		static clock_t gameStartTime;
+
+		// Убираем конструктор в приватную область,
+		// так как мы используем синглтон, 
+		// и создавать объект вне самого класса не будем.
+		// Объект создаётся только в методе "instance".
+		LibraryListener();
+		~LibraryListener();
+
+		JsExecutor* jsExecutor;
 	};
 	//		// ********************************************************************
 	//		// ********************************************************************

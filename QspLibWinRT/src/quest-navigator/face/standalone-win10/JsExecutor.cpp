@@ -11,8 +11,23 @@ namespace QuestNavigator
 	{
 	}
 
+	// ********************************************************************
+	// ********************************************************************
+	// ********************************************************************
+	//                        Вызовы JS-функций
+	// ********************************************************************
+	// ********************************************************************
+	// ********************************************************************
+
 	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
 	{
-		// STUB
+		//		// Контекст UI
+		//		jsCallApiFromUi("qspShowSaveSlotsDialog", content);
+	}
+
+	void JsExecutor::qspSetGroupedContent(GroupedContentDto content)
+	{
+		//		// Контекст библиотеки
+		//		jsCallApiFromLib("qspSetGroupedContent", content);
 	}
 }

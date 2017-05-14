@@ -31,17 +31,10 @@ namespace QuestNavigator
 	// Переменные библиотеки
 	// ********************************************************************
 	
-	//string QnApplicationListener::jsExecBuffer = "";
-	//string QnApplicationListener::lastMainDesc = "";
 	//QnApplicationListener* QnApplicationListener::listener = NULL;
 	//vector<ContainerMenuItem> QnApplicationListener::menuList;
 	//clock_t QnApplicationListener::gameStartTime = 0;
 	//int QnApplicationListener::timerInterval = 0;
-	//
-	//int QnApplicationListener::objectSelectionIndex = -2;
-
-	string Library::jsExecBuffer = "";
-	clock_t Library::gameStartTime = 0;
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
 	void Library::StartLibThread()
@@ -172,7 +165,7 @@ namespace QuestNavigator
 						// Передаём настройку из конфига в скин.
 						Skin::setInt(espIsStandalone, isStandalone);
 						// Очищаем буфер JS-команд, передаваемых из игры
-						jsExecBuffer = "";
+						LibraryListener::resetJsExecBuffer();
 	
 						// Устанавливаем период выполнения и запускаем таймер
 						LibraryListener::SetTimer(500);
@@ -195,7 +188,7 @@ namespace QuestNavigator
 						//CloseFile(NULL);
 	
 						//// Очищаем буфер JS-команд, передаваемых из игры
-						//jsExecBuffer = "";
+						//LibraryListener::resetJsExecBuffer();
 	
 						//runSyncEvent(evGameStopped);
 					}
@@ -270,7 +263,7 @@ namespace QuestNavigator
 						//lockData();
 						//index = g_sharedData[evLoadSlotSelected].num;
 						//unlockData();
-						//jsExecBuffer = "";
+						//LibraryListener::resetJsExecBuffer();
 	
 						//string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
 						//if (!fileExists(path)) {
@@ -295,7 +288,7 @@ namespace QuestNavigator
 						//lockData();
 						//index = g_sharedData[evSaveSlotSelected].num;
 						//unlockData();
-						//jsExecBuffer = "";
+						//LibraryListener::resetJsExecBuffer();
 	
 						//string saveDir = Configuration::getString(ecpSaveDir);
 						//if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {

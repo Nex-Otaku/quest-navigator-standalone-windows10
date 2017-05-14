@@ -5,9 +5,24 @@
 #include "..\..\core\dto\SkinDto.h"
 #include "..\..\core\strings.h"
 #include "..\..\core\encoding.h"
+#include "..\..\core\dto\GroupedContentDto.h"
+#include "..\..\core\files.h"
+#include "JsExecutor.h"
+#include "..\..\core\sound.h"
 
 namespace QuestNavigator
 {
+	LibraryListener* LibraryListener::instance()
+	{
+		static LibraryListener inst;
+		return &inst;
+	}
+
+	void LibraryListener::inject(JsExecutor* jsExecutor)
+	{
+		this->jsExecutor = jsExecutor;
+	}
+
 	LibraryListener::LibraryListener()
 	{
 	}
@@ -24,7 +39,12 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 	
-	void LibraryListener::RefreshInt(int isRedraw) 
+	string LibraryListener::jsExecBuffer = "";
+	string LibraryListener::lastMainDesc = "";
+	int LibraryListener::objectSelectionIndex = -2;
+	clock_t LibraryListener::gameStartTime = 0;
+
+	void LibraryListener::RefreshInt(int isRedraw)
 	{
 		//Контекст библиотеки
 		bool needUpdate = Skin::isSomethingChanged();
@@ -33,27 +53,29 @@ namespace QuestNavigator
 		Skin::updateMainScreen();
 		needUpdate = needUpdate || Skin::isSomethingChanged();
 	
-		SkinDto jsSkin;
+		GroupedContentDto groupedContent;
 		bool bSkinPrepared = false;
 		if (needUpdate) {
-			jsSkin = Skin::getJsSkin();
+			SkinDto jsSkin = Skin::getJsSkin();
+			groupedContent.skin = jsSkin;
 			bSkinPrepared = true;
 		}
-	
+
 		//основное описание
-		string mainDesc = "";
 		bool bMainDescPrepared = false;
 		bool bMainDescNeedScroll = false;
 		if ((QSPIsMainDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
 		{
-			mainDesc = Skin::applyHtmlFixes(fromQsp(QSPGetMainDesc()));
+			string mainDesc = Skin::applyHtmlFixes(fromQsp(QSPGetMainDesc()));
 			bMainDescNeedScroll = startsWith(mainDesc, lastMainDesc);
 			lastMainDesc = mainDesc;
+			groupedContent.main = mainDesc;
+			groupedContent.scrollmain = bMainDescNeedScroll ? 1 : 0;
 			bMainDescPrepared = true;
 		}
 	
 		//список действий
-		JSArray acts;
+		vector<GroupedContentDto::act> acts;
 		bool bActsPrepared = false;
 		if ((QSPIsActionsChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
 		{
@@ -63,18 +85,19 @@ namespace QuestNavigator
 				QSP_CHAR* pImgPath;
 				QSP_CHAR* pDesc;
 				QSPGetActionData(i, &pImgPath, &pDesc);
-				JSObject act;
+				GroupedContentDto::act act;
 				string imgPath = getRightPath(fromQsp(pImgPath));
 				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
-				act.SetProperty(WSLit("image"), ToWebString(imgPath));
-				act.SetProperty(WSLit("desc"), ToWebString(desc));
-				acts.Push(act);
+				act.image = imgPath;
+				act.desc = desc;
+				acts.push_back(act);
 			}
+			groupedContent.acts = acts;
 			bActsPrepared = true;
 		}
 	
 		//инвентарь
-		JSArray objs;
+		vector<GroupedContentDto::obj> objs;
 		bool bObjsPrepared = false;
 		int nSelectedObject = QSPGetSelObjectIndex();
 		if ((QSPIsObjectsChanged() == QSP_TRUE) || (nSelectedObject != objectSelectionIndex) || Skin::isHtmlModeChanged)
@@ -86,33 +109,32 @@ namespace QuestNavigator
 				QSP_CHAR* pImgPath;
 				QSP_CHAR* pDesc;
 				QSPGetObjectData(i, &pImgPath, &pDesc);
-				JSObject obj;
+				GroupedContentDto::obj obj;
 				string imgPath = getRightPath(fromQsp(pImgPath));
 				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
 				int selected = (i == nSelectedObject) ? 1 : 0;
-				obj.SetProperty(WSLit("image"), ToWebString(imgPath));
-				obj.SetProperty(WSLit("desc"), ToWebString(desc));
-				obj.SetProperty(WSLit("selected"), JSValue(selected));
-				objs.Push(obj);
+				obj.image = imgPath;
+				obj.desc = desc;
+				obj.selected = selected;
+				objs.push_back(obj);
 			}
+			groupedContent.objs = objs;
 			bObjsPrepared = true;
 		}
 	
 		//доп. описание
-		string varsDesc = "";
 		bool bVarsDescPrepared = false;
 		if ((QSPIsVarsDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
 		{
-			varsDesc = Skin::applyHtmlFixes(fromQsp(QSPGetVarsDesc()));
+			groupedContent.vars = Skin::applyHtmlFixes(fromQsp(QSPGetVarsDesc()));
 			bVarsDescPrepared = true;
 		}
 	
 		// Яваскрипт, переданный из игры командой EXEC('JS:...')
-		string jsCmd = "";
 		bool bJsCmdPrepared = false;
 		if (jsExecBuffer.length() > 0)
 		{
-			jsCmd = jsExecBuffer;
+			groupedContent.js = jsExecBuffer;
 			jsExecBuffer = "";
 			bJsCmdPrepared = true;
 		}
@@ -121,22 +143,7 @@ namespace QuestNavigator
 		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
 			bJsCmdPrepared)
 		{
-			JSObject groupedContent;
-			if (bSkinPrepared)
-				groupedContent.SetProperty(WSLit("skin"), jsSkin);
-			if (bMainDescPrepared) {
-				groupedContent.SetProperty(WSLit("main"), ToWebString(mainDesc));
-				groupedContent.SetProperty(WSLit("scrollmain"), JSValue(bMainDescNeedScroll ? 1 : 0));
-			}
-			if (bActsPrepared)
-				groupedContent.SetProperty(WSLit("acts"), acts);
-			if (bVarsDescPrepared)
-				groupedContent.SetProperty(WSLit("vars"), ToWebString(varsDesc));
-			if (bObjsPrepared)
-				groupedContent.SetProperty(WSLit("objs"), objs);
-			if (bJsCmdPrepared)
-				groupedContent.SetProperty(WSLit("js"), ToWebString(jsCmd));
-			qspSetGroupedContent(groupedContent);
+			instance()->jsExecutor->qspSetGroupedContent(groupedContent);
 		}
 		Skin::resetUpdate();
 	}
@@ -185,9 +192,9 @@ namespace QuestNavigator
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
 	{
-	//		//Контекст библиотеки
-	//		bool isPlaying = SoundManager::isPlaying(fromQsp(file));
-	//		return isPlaying ? QSP_TRUE : QSP_FALSE;
+		//Контекст библиотеки
+		bool isPlaying = SoundManager::isPlaying(fromQsp(file));
+		return isPlaying ? QSP_TRUE : QSP_FALSE;
 	}
 	
 	void LibraryListener::CloseFile(QSP_CHAR* file)
@@ -273,11 +280,11 @@ namespace QuestNavigator
 	
 	int LibraryListener::GetMSCount()
 	{
-	//		//Контекст библиотеки
-	//		clock_t now = clock();
-	//		int elapsed = (int) (((now - gameStartTime) * 1000) / CLOCKS_PER_SEC);
-	//		gameStartTime = now;
-	//		return elapsed;
+		//Контекст библиотеки
+		clock_t now = clock();
+		int elapsed = (int) (((now - gameStartTime) * 1000) / CLOCKS_PER_SEC);
+		gameStartTime = now;
+		return elapsed;
 	}
 	
 	void LibraryListener::AddMenuItem(QSP_CHAR* name, QSP_CHAR* imgPath)
@@ -397,5 +404,10 @@ namespace QuestNavigator
 	//		} else {
 	//			jsExecBuffer = jsExecBuffer + ";qspSaveGame();";
 	//		}
+	}
+
+	void LibraryListener::resetJsExecBuffer()
+	{
+		jsExecBuffer = "";
 	}
 }
