@@ -160,11 +160,9 @@ namespace QuestNavigator
 				case evRunGame:
 					{
 						// Запуск игры
-						string path = "";
-						int isStandalone = 0;
 						SharedDataDto dto = eventManager->getSharedData(ev);
-						path = dto.str;
-						isStandalone = dto.num;
+						string path = dto.str;
+						int isStandalone = dto.num;
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
 						CheckQspResult(res, "QSPLoadGameWorld");
 						// Очищаем скин
