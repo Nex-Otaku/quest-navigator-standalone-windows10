@@ -184,45 +184,53 @@ namespace QuestNavigator
 	// Получаем HANDLE события по его индексу
 	HANDLE EventManager::getEventHandle(eSyncEvent ev)
 	{
-		return HANDLE();
-		//		return g_eventList[ev];
+		return g_eventList[ev];
 	}
 
 	// Запускаем событие
 	void EventManager::runSyncEvent(eSyncEvent ev)
 	{
-		//		BOOL res = SetEvent(getEventHandle(ev));
-		//		if (res == 0) {
-		//			showError("Не удалось запустить событие синхронизации потоков.");
-		//			exit(eecFailToSetEvent);
-		//		}
+		BOOL res = SetEvent(getEventHandle(ev));
+		if (res == 0) {
+			showError("Не удалось запустить событие синхронизации потоков.");
+
+			// STUB
+			// Выход из приложения?
+			//exit(eecFailToSetEvent);
+		}
 	}
 
 	// Высвобождаем описатель и ругаемся если что не так.
 	void EventManager::freeHandle(HANDLE handle)
 	{
-		//		BOOL res = CloseHandle(handle);
-		//		if (res == 0) {
-		//			showError("Не удалось высвободить описатель объекта ядра.");
-		//			exit(eecFailToCloseHandle);
-		//		}
+		BOOL res = CloseHandle(handle);
+		if (res == 0) {
+			showError("Не удалось высвободить описатель объекта ядра.");
+
+			// STUB
+			// Выход из приложения?
+			//exit(eecFailToCloseHandle);
+		}
 	}
 
 	// Входим в критическую секцию
 	void EventManager::lockData()
 	{
-		//		try {
-		//			EnterCriticalSection(&g_csSharedData);
-		//		} catch (...) {
-		//			showError("Не удалось войти в критическую секцию.");
-		//			exit(eecUnableEnterCs2);
-		//		}
+		try {
+			EnterCriticalSection(&g_csSharedData);
+		} catch (...) {
+			showError("Не удалось войти в критическую секцию.");
+
+			// STUB
+			// Выход из приложения?
+			//exit(eecUnableEnterCs2);
+		}
 	}
 
 	// Выходим из критической секции
 	void EventManager::unlockData()
 	{
-		//		LeaveCriticalSection(&g_csSharedData);
+		LeaveCriticalSection(&g_csSharedData);
 	}
 
 	// Ожидаем события
