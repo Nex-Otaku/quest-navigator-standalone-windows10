@@ -210,6 +210,24 @@ namespace QuestNavigator
 		runSyncEvent(evShutdown);
 	}
 
+	void EventManager::libIsReady()
+	{
+		// Сообщаем потоку UI, что библиотека готова к выполнению команд
+		runSyncEvent(evLibIsReady);
+	}
+
+	DWORD EventManager::waitForAnyEvent()
+	{
+		// Ожидаем любое из событий синхронизации
+		DWORD res = WaitForMultipleObjects((DWORD)evLastUi, g_eventList, FALSE, INFINITE);
+		return res;
+	}
+
+	bool EventManager::isValidEvent(DWORD waitResult)
+	{
+		return (waitResult < WAIT_OBJECT_0) || (waitResult >(WAIT_OBJECT_0 + evLast - 1));
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -70,13 +70,19 @@ namespace QuestNavigator
 		this->eventManager->freeEvents();
 		this->eventManager->freeSharedData();
 	}
+
+	EventManager * Library::getEventManager()
+	{
+		return this->eventManager;
+	}
 	
 	// Основная функция потока библиотеки. Вызывается только раз за весь жизненный цикл программы.
 	unsigned int Library::libThreadFunc(void* pvParam)
 	{
-		// Сохраняем указатель на listener
-		// STUB это нам надо?
-		//listener = (QnApplicationListener*) pvParam;
+		// Сохраняем указатель на объект Library.
+		Library* library = (Library*)pvParam;
+		// Получаем указатель на EventManager.
+		EventManager* eventManager = library->getEventManager();
 	
 		// Все функции библиотеки QSP (QSPInit и т.д.) 
 		// вызываются только внутри потока библиотеки.
@@ -124,10 +130,10 @@ namespace QuestNavigator
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
-			runSyncEvent(evLibIsReady);
+			eventManager->libIsReady();
 			// Ожидаем любое из событий синхронизации
-			DWORD res = WaitForMultipleObjects((DWORD)evLastUi, g_eventList, FALSE, INFINITE);
-			if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + evLast - 1))) {
+			DWORD res = eventManager->waitForAnyEvent();
+			if (!eventManager->isValidEvent(res)) {
 				showError("Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;
 			} else {

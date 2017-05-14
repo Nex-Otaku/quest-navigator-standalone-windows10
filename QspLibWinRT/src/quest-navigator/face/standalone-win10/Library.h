@@ -19,6 +19,8 @@ namespace QuestNavigator
 		// Остановка потока библиотеки
 		void StopLibThread();
 
+		EventManager* getEventManager();
+
 	private:
 		EventManager* eventManager;
 

@@ -2,6 +2,7 @@
 
 #include <string>
 #include "Timer.h"
+#include "..\..\core\events.h"
 
 using namespace std;
 
@@ -41,6 +42,10 @@ namespace QuestNavigator
 		void freeSharedData();
 
 		void shutdown();
+		void libIsReady();
+
+		DWORD waitForAnyEvent();
+		bool isValidEvent(DWORD waitResult);
 
 		// Работа с потоками и синхронизацией.
 		
