@@ -487,5 +487,8 @@
     <ClInclude Include="src\quest-navigator\core\events.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\dto\SharedDataDto.h">
+      <Filter>quest-navigator\face\standalone-win10\dto</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

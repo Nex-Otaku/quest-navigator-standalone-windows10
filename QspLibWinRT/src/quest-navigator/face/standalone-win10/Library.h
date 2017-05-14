@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EventManager.h"
+#include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 
 namespace QuestNavigator
 {
@@ -19,6 +20,8 @@ namespace QuestNavigator
 		// Остановка потока библиотеки
 		void StopLibThread();
 
+	protected:
+		// Для вызова из статики.
 		EventManager* getEventManager();
 
 	private:
@@ -28,6 +31,16 @@ namespace QuestNavigator
 
 		// Основная функция потока библиотеки
 		static unsigned int __stdcall libThreadFunc(void* pvParam);
+		
+		// Проверка результатов выполнения библиотечного кода
+		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
+
+		// ********************************************************************
+		// Переменные библиотеки
+		// ********************************************************************
+		
+		static string jsExecBuffer;
+		static clock_t gameStartTime;
 	};
 	//		// ********************************************************************
 	//		// THREADS
@@ -42,4 +55,18 @@ namespace QuestNavigator
 	//
 	//		// Проверка результатов выполнения библиотечного кода
 	//		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
+
+	//		// ********************************************************************
+	//		// Переменные библиотеки
+	//		// ********************************************************************
+	//
+	//		static string jsExecBuffer;
+	//		static string lastMainDesc;
+	//		static QnApplicationListener* listener;
+	//		static vector<ContainerMenuItem> menuList;
+	//		static clock_t gameStartTime;
+	//		static int timerInterval;
+	//
+	//		static int objectSelectionIndex;
+	//
 }

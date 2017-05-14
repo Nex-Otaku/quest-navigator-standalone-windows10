@@ -99,17 +99,4 @@ namespace QspLibWinRT
 //		// ********************************************************************
 //		void alert(WebView* caller, const JSArray& args);
 //
-//		// ********************************************************************
-//		// Переменные библиотеки
-//		// ********************************************************************
-//
-//		static string jsExecBuffer;
-//		static string lastMainDesc;
-//		static QnApplicationListener* listener;
-//		static vector<ContainerMenuItem> menuList;
-//		static clock_t gameStartTime;
-//		static int timerInterval;
-//
-//		static int objectSelectionIndex;
-//
 //	};

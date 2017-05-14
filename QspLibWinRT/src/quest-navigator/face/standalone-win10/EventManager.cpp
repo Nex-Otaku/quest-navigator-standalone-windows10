@@ -228,6 +228,17 @@ namespace QuestNavigator
 		return (waitResult < WAIT_OBJECT_0) || (waitResult >(WAIT_OBJECT_0 + evLast - 1));
 	}
 
+	SharedDataDto EventManager::getSharedData(eSyncEvent ev)
+	{
+		SharedDataDto dto;
+		lockData();
+		dto.str = g_sharedData[ev].str;
+		dto.num = g_sharedData[ev].num;
+		dto.flag = g_sharedData[ev].flag;
+		unlockData();
+		return dto;
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

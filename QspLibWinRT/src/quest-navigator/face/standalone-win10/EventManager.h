@@ -3,6 +3,7 @@
 #include <string>
 #include "Timer.h"
 #include "..\..\core\events.h"
+#include "dto\SharedDataDto.h"
 
 using namespace std;
 
@@ -46,6 +47,7 @@ namespace QuestNavigator
 
 		DWORD waitForAnyEvent();
 		bool isValidEvent(DWORD waitResult);
+		SharedDataDto getSharedData(eSyncEvent ev);
 
 		// Работа с потоками и синхронизацией.
 		
@@ -61,14 +63,7 @@ namespace QuestNavigator
 		CRITICAL_SECTION g_csSharedData;
 
 		// Разделяемые данные
-		struct SharedData
-		{
-			string str;
-			int num;
-			//JSValue jsValue; Данные для передачи вызова из библиотеки (из кода игры) в яваскрипт.
-			bool flag;
-		};
-		SharedData g_sharedData[evLast];
+		SharedDataDto g_sharedData[evLast];
 
 		// События для синхронизации потоков
 		HANDLE g_eventList[evLast];

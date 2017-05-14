@@ -7,6 +7,7 @@
 #include "..\..\core\skin.h"
 #include "..\..\core\sound.h"
 #include "..\..\core\events.h"
+#include "..\..\core\encoding.h"
 
 namespace QuestNavigator
 {
@@ -24,6 +25,22 @@ namespace QuestNavigator
 	{
 		this->eventManager = eventManager;
 	}
+
+	// ********************************************************************
+	// Переменные библиотеки
+	// ********************************************************************
+	
+	//string QnApplicationListener::jsExecBuffer = "";
+	//string QnApplicationListener::lastMainDesc = "";
+	//QnApplicationListener* QnApplicationListener::listener = NULL;
+	//vector<ContainerMenuItem> QnApplicationListener::menuList;
+	//clock_t QnApplicationListener::gameStartTime = 0;
+	//int QnApplicationListener::timerInterval = 0;
+	//
+	//int QnApplicationListener::objectSelectionIndex = -2;
+
+	string Library::jsExecBuffer = "";
+	clock_t Library::gameStartTime = 0;
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
 	void Library::StartLibThread()
@@ -145,10 +162,9 @@ namespace QuestNavigator
 						// Запуск игры
 						string path = "";
 						int isStandalone = 0;
-						lockData();
-						path = g_sharedData[evRunGame].str;
-						isStandalone = g_sharedData[evRunGame].num;
-						unlockData();
+						SharedDataDto dto = eventManager->getSharedData(ev);
+						path = dto.str;
+						isStandalone = dto.num;
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
 						CheckQspResult(res, "QSPLoadGameWorld");
 						// Очищаем скин
@@ -160,7 +176,10 @@ namespace QuestNavigator
 						jsExecBuffer = "";
 	
 						// Устанавливаем период выполнения и запускаем таймер
-						SetTimer(500);
+
+						// STUB
+						// LibraryListener
+						// SetTimer(500);
 	
 						//Запускаем счетчик миллисекунд
 						gameStartTime = clock();
@@ -171,18 +190,18 @@ namespace QuestNavigator
 					break;
 				case evStopGame:
 					{
-						// Остановка игры
+						//// Остановка игры
 	
-						// Останавливаем таймер.
-						stopTimer();
+						//// Останавливаем таймер.
+						//stopTimer();
 	
-						//останавливаем музыку
-						CloseFile(NULL);
+						////останавливаем музыку
+						//CloseFile(NULL);
 	
-						// Очищаем буфер JS-команд, передаваемых из игры
-						jsExecBuffer = "";
+						//// Очищаем буфер JS-команд, передаваемых из игры
+						//jsExecBuffer = "";
 	
-						runSyncEvent(evGameStopped);
+						//runSyncEvent(evGameStopped);
 					}
 					break;
 				case evShutdown:
@@ -193,43 +212,43 @@ namespace QuestNavigator
 					break;
 				case evExecuteCode:
 					{
-						// Выполнение строки кода
-						string code = "";
-						lockData();
-						code = g_sharedData[evExecuteCode].str;
-						unlockData();
-						wstring wCode = widen(code);
-						QSP_BOOL res = QSPExecString(wCode.c_str(), QSP_TRUE);
-						CheckQspResult(res, "QSPExecString");
+						//// Выполнение строки кода
+						//string code = "";
+						//lockData();
+						//code = g_sharedData[evExecuteCode].str;
+						//unlockData();
+						//wstring wCode = widen(code);
+						//QSP_BOOL res = QSPExecString(wCode.c_str(), QSP_TRUE);
+						//CheckQspResult(res, "QSPExecString");
 					}
 					break;
 				case evExecuteAction:
 					{
-						// Выполнение действия
-						int pos = 0;
-						lockData();
-						pos = g_sharedData[evExecuteAction].num;
-						unlockData();
-						QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
-						CheckQspResult(res, "QSPSetSelActionIndex");
-						res = QSPExecuteSelActionCode(QSP_TRUE);
-						CheckQspResult(res, "QSPExecuteSelActionCode");
+						//// Выполнение действия
+						//int pos = 0;
+						//lockData();
+						//pos = g_sharedData[evExecuteAction].num;
+						//unlockData();
+						//QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
+						//CheckQspResult(res, "QSPSetSelActionIndex");
+						//res = QSPExecuteSelActionCode(QSP_TRUE);
+						//CheckQspResult(res, "QSPExecuteSelActionCode");
 					}
 					break;
 				case evSelectObject:
 					{
-						// Выбор предмета
-						int pos = 0;
-						lockData();
-						pos = g_sharedData[evSelectObject].num;
-						unlockData();
-						// Костыль - следим за номером выбранного предмета,
-						// так как иначе невозможно будет обновить
-						// окно предметов при вызове UNSEL в ONOBJSEL.
-						// Нужно исправить это в библиотеке QSP.
-						objectSelectionIndex = -2;
-						QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
-						CheckQspResult(res, "QSPSetSelObjectIndex");
+						//// Выбор предмета
+						//int pos = 0;
+						//lockData();
+						//pos = g_sharedData[evSelectObject].num;
+						//unlockData();
+						//// Костыль - следим за номером выбранного предмета,
+						//// так как иначе невозможно будет обновить
+						//// окно предметов при вызове UNSEL в ONOBJSEL.
+						//// Нужно исправить это в библиотеке QSP.
+						//objectSelectionIndex = -2;
+						//QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
+						//CheckQspResult(res, "QSPSetSelObjectIndex");
 					}
 					break;
 				case evTimer:
@@ -241,69 +260,69 @@ namespace QuestNavigator
 					break;
 				case evMute:
 					{
-						// Включение / выключение звука
-						bool flag = false;
-						lockData();
-						flag = g_sharedData[evMute].flag;
-						unlockData();
-						SoundManager::mute(flag);
+						//// Включение / выключение звука
+						//bool flag = false;
+						//lockData();
+						//flag = g_sharedData[evMute].flag;
+						//unlockData();
+						//SoundManager::mute(flag);
 					}
 					break;
 				case evLoadSlotSelected:
 					{
-						int index = 0;
-						lockData();
-						index = g_sharedData[evLoadSlotSelected].num;
-						unlockData();
-						jsExecBuffer = "";
+						//int index = 0;
+						//lockData();
+						//index = g_sharedData[evLoadSlotSelected].num;
+						//unlockData();
+						//jsExecBuffer = "";
 	
-						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
-						if (!fileExists(path)) {
-							showError("Не найден файл сохранения");
-							break;
-						}
+						//string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
+						//if (!fileExists(path)) {
+						//	showError("Не найден файл сохранения");
+						//	break;
+						//}
 	
-						// Выключаем музыку
-						CloseFile(NULL);
+						//// Выключаем музыку
+						//CloseFile(NULL);
 	
-						// Загружаем сохранение
-						QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
-						CheckQspResult(res, "QSPOpenSavedGame");
+						//// Загружаем сохранение
+						//QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
+						//CheckQspResult(res, "QSPOpenSavedGame");
 	
-						// Запускаем таймер
-						startTimer();
+						//// Запускаем таймер
+						//startTimer();
 					}
 					break;
 				case evSaveSlotSelected:
 					{
-						int index = 0;
-						lockData();
-						index = g_sharedData[evSaveSlotSelected].num;
-						unlockData();
-						jsExecBuffer = "";
+						//int index = 0;
+						//lockData();
+						//index = g_sharedData[evSaveSlotSelected].num;
+						//unlockData();
+						//jsExecBuffer = "";
 	
-						string saveDir = Configuration::getString(ecpSaveDir);
-						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-							showError("Не удалось создать папку для сохранения: " + saveDir);
-							break;
-						}
+						//string saveDir = Configuration::getString(ecpSaveDir);
+						//if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
+						//	showError("Не удалось создать папку для сохранения: " + saveDir);
+						//	break;
+						//}
 	
-						string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
+						//string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
 	
-						QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
-						CheckQspResult(res, "QSPSaveGame");
+						//QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
+						//CheckQspResult(res, "QSPSaveGame");
 	
-						startTimer();
+						//startTimer();
 					}
 					break;
 				case evInputStringChanged:
 					{
-						// Изменился текст в строке ввода
-						string text = "";
-						lockData();
-						text = g_sharedData[evInputStringChanged].str;
-						unlockData();
-						QSPSetInputStrText(widen(text).c_str());
+						//// Изменился текст в строке ввода
+						//string text = "";
+						//lockData();
+						//text = g_sharedData[evInputStringChanged].str;
+						//unlockData();
+						//QSPSetInputStrText(widen(text).c_str());
 					}
 					break;
 				case evInputStringEntered:
@@ -330,5 +349,45 @@ namespace QuestNavigator
 		// Завершаем работу потока
 		_endthreadex(0);
 		return 0;
+	}
+
+	// Проверяем статус выполнения операции и сообщаем об ошибке, если требуется.
+	void Library::CheckQspResult(QSP_BOOL successfull, string failMsg)
+	{
+		//Контекст библиотеки
+		//if (successfull == QSP_FALSE)
+		//{
+		//	//Контекст библиотеки
+		//	int line = -1;
+		//	int actIndex = -1;
+		//	string desc = "";
+		//	string loc = "";
+		//	int errorNum = -1;
+		//	QSP_CHAR* pErrorLoc = NULL;
+		//	QSPGetLastErrorData(&errorNum, &pErrorLoc, &actIndex, &line);
+		//	loc = Skin::applyHtmlFixes(fromQsp(pErrorLoc));
+		//	desc = Skin::applyHtmlFixes(fromQsp(QSPGetErrorDesc(errorNum)));
+	
+		//	// Обновляем скин
+		//	Skin::updateBaseVars();
+		//	Skin::updateMsgDialog();
+		//	// Если что-то изменилось, то передаем в яваскрипт
+		//	if (Skin::isSomethingChanged())
+		//	{
+		//		RefreshInt(QSP_TRUE);
+		//	}
+	
+		//	JSObject jsErrorContainer;
+		//	jsErrorContainer.SetProperty(WSLit("desc"), ToWebString(desc));
+		//	jsErrorContainer.SetProperty(WSLit("loc"), ToWebString(loc));
+		//	jsErrorContainer.SetProperty(WSLit("actIndex"), JSValue(actIndex));
+		//	jsErrorContainer.SetProperty(WSLit("line"), JSValue(line));
+	
+		//	// Передаём данные в поток UI
+		//	qspError(jsErrorContainer);
+	
+		//	// Ждём закрытия диалога
+		//	waitForSingleLib(evErrorClosed);
+		//}
 	}
 }
