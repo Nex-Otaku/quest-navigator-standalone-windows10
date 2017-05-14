@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "EventManager.h"
 #include <string>
+#include "..\..\core\dialogs.h"
 
 using namespace std;
 
@@ -169,24 +170,15 @@ namespace QuestNavigator
 	// событие с автосбросом, инициализированное в занятом состоянии.
 	HANDLE EventManager::CreateSyncEvent()
 	{
-		//		HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
-		//		if (eventHandle == NULL) {
-		//			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
-		//			exit(eecFailToCreateEvent);
-		//		}
-		//		return eventHandle;
-	}
+		HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
+		if (eventHandle == NULL) {
+			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
 
-	// Создаём таймер.
-	HANDLE EventManager::CreateTimer()
-	{
-		return HANDLE();
-		//		HANDLE timerHandle = CreateWaitableTimer(NULL, FALSE, NULL);
-		//		if (timerHandle == NULL) {
-		//			showError("Не получилось создать таймер.");
-		//			exit(eecFailToCreateTimer);
-		//		}
-		//		return timerHandle;
+			// STUB
+			// Выход из приложения?
+			//exit(eecFailToCreateEvent);
+		}
+		return eventHandle;
 	}
 
 	// Получаем HANDLE события по его индексу

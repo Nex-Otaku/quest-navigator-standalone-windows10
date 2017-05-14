@@ -44,4 +44,16 @@ namespace QuestNavigator
 		//			showError("Не удалось остановить таймер!");
 		//		}
 	}
+
+	// Создаём таймер.
+	HANDLE Timer::CreateTimer()
+	{
+		return HANDLE();
+		//		HANDLE timerHandle = CreateWaitableTimer(NULL, FALSE, NULL);
+		//		if (timerHandle == NULL) {
+		//			showError("Не получилось создать таймер.");
+		//			exit(eecFailToCreateTimer);
+		//		}
+		//		return timerHandle;
+	}
 }

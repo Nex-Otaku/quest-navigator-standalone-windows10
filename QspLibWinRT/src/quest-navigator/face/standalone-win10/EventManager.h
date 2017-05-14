@@ -95,8 +95,6 @@ namespace QuestNavigator
 		// Создаём объект ядра для синхронизации потоков,
 		// событие с автосбросом, инициализированное в занятом состоянии.
 		HANDLE CreateSyncEvent();
-		// Создаём таймер.
-		HANDLE CreateTimer();
 		// Получаем HANDLE события по его индексу
 		HANDLE getEventHandle(eSyncEvent ev);
 		// Запускаем событие
