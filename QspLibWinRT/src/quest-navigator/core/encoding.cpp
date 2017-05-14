@@ -14,6 +14,9 @@ namespace QuestNavigator {
 	{
 		//WebString webStr = WideToWebString(str);
 		//return ToString(webStr);
+
+		// STUB
+		return "";
 	}
 	string fromQsp(QSP_CHAR* str)
 	{
@@ -33,5 +36,9 @@ namespace QuestNavigator {
 		//WebString webStr = ToWebString(str);
 		//wstring wStr = wstring((wchar_t*)webStr.data());
 		//return wStr;
+
+		// STUB
+		wstring wStr;
+		return wStr;
 	}
 }

@@ -75,6 +75,9 @@ namespace QuestNavigator {
 		//wstring wDir = szDir;
 		//string dir = narrow(wDir);
 		//return dir;
+
+		// STUB
+		return "";
 	}
 
 	// Преобразовываем путь к файлу сохранения.
@@ -160,6 +163,9 @@ namespace QuestNavigator {
 		//wstring wCanonicalizedPath = szCanonicalizedPath;
 		//string result = narrow(wCanonicalizedPath);
 		//return result;
+
+		// STUB
+		return "";
 	}
 
 	// Загружаем файл в память
@@ -218,6 +224,9 @@ namespace QuestNavigator {
 		//wstring wPath = widen(path);
 		//int res = SHCreateDirectoryEx(NULL, wPath.c_str(), NULL);
 		//return res == ERROR_SUCCESS;
+
+		// STUB
+		return true;
 	}
 
 	// Удаляем папку со всем содержимым.
@@ -347,6 +356,9 @@ namespace QuestNavigator {
 		//	}
 		//} 
 		//return true;
+
+		// STUB
+		return true;
 	}
 
 	// Копируем дерево файлов

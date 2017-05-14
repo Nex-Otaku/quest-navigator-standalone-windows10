@@ -165,26 +165,6 @@ namespace QuestNavigator
 
 	// private
 
-
-
-	// Глобальные переменные для работы с потоками
-	
-	// Структура для критических секций
-	CRITICAL_SECTION g_csSharedData;
-	
-	// Разделяемые данные
-	struct SharedData
-	{
-		string str;
-		int num;
-		//JSValue jsValue; Данные для передачи вызова из библиотеки (из кода игры) в яваскрипт.
-		bool flag;
-	};
-	SharedData g_sharedData[evLast];
-	
-	// События для синхронизации потоков
-	HANDLE g_eventList[evLast];
-
 	// Создаём объект ядра для синхронизации потоков,
 	// событие с автосбросом, инициализированное в занятом состоянии.
 	HANDLE EventManager::CreateSyncEvent()

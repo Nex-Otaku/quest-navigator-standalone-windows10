@@ -294,6 +294,11 @@ namespace QuestNavigator {
 		//	return false;
 
 		//return true;
+
+
+
+		// STUB
+		return true;
 	}
 
 	// Загружаем настройки игры из файла config.xml
