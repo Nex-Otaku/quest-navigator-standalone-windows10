@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "JsListener.h"
 #include "..\..\core\configuration.h"
-#include "dto\SaveSlotsDto.h"
+#include "..\..\core\dto\SaveSlotsDto.h"
 
 namespace QuestNavigator
 {

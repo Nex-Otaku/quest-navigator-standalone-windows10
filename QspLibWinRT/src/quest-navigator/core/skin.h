@@ -2,6 +2,7 @@
 
 #include <string>
 #include "configuration.h"
+#include "dto\SkinDto.h"
 //#include <Awesomium/WebCore.h>
 
 using namespace std;
@@ -114,6 +115,7 @@ namespace QuestNavigator {
 		static void updateInputDialog();
 		static void updateMsgDialog();
 		//static JSObject getJsSkin();
+		static SkinDto getJsSkin();
 		static bool isSomethingChanged();
 		static void showWindow(int type, int isShow);
 		static string applyHtmlFixes(string text, bool forceHtml = false);

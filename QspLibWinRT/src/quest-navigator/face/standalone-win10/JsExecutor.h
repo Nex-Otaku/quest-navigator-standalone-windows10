@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dto\SaveSlotsDto.h"
+#include "..\..\core\dto\SaveSlotsDto.h"
 
 namespace QuestNavigator
 {

@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "LibraryListener.h"
+#include <string>
+#include "..\..\core\skin.h"
+#include "..\..\core\dto\SkinDto.h"
 
 namespace QuestNavigator
 {
@@ -21,119 +24,119 @@ namespace QuestNavigator
 	
 	void LibraryListener::RefreshInt(int isRedraw) 
 	{
-	//		//Контекст библиотеки
-	//		bool needUpdate = Skin::isSomethingChanged();
-	//		Skin::updateBaseVars();
-	//		needUpdate = needUpdate || Skin::isSomethingChanged();
-	//		Skin::updateMainScreen();
-	//		needUpdate = needUpdate || Skin::isSomethingChanged();
-	//
-	//		JSObject jsSkin;
-	//		bool bSkinPrepared = false;
-	//		if (needUpdate) {
-	//			jsSkin = Skin::getJsSkin();
-	//			bSkinPrepared = true;
-	//		}
-	//
-	//		//основное описание
-	//		string mainDesc = "";
-	//		bool bMainDescPrepared = false;
-	//		bool bMainDescNeedScroll = false;
-	//		if ((QSPIsMainDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
-	//		{
-	//			mainDesc = Skin::applyHtmlFixes(fromQsp(QSPGetMainDesc()));
-	//			bMainDescNeedScroll = startsWith(mainDesc, lastMainDesc);
-	//			lastMainDesc = mainDesc;
-	//			bMainDescPrepared = true;
-	//		}
-	//
-	//		//список действий
-	//		JSArray acts;
-	//		bool bActsPrepared = false;
-	//		if ((QSPIsActionsChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
-	//		{
-	//			int nActsCount = QSPGetActionsCount();
-	//			for (int i = 0; i < nActsCount; i++)
-	//			{
-	//				QSP_CHAR* pImgPath;
-	//				QSP_CHAR* pDesc;
-	//				QSPGetActionData(i, &pImgPath, &pDesc);
-	//				JSObject act;
-	//				string imgPath = getRightPath(fromQsp(pImgPath));
-	//				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
-	//				act.SetProperty(WSLit("image"), ToWebString(imgPath));
-	//				act.SetProperty(WSLit("desc"), ToWebString(desc));
-	//				acts.Push(act);
-	//			}
-	//			bActsPrepared = true;
-	//		}
-	//
-	//		//инвентарь
-	//		JSArray objs;
-	//		bool bObjsPrepared = false;
-	//		int nSelectedObject = QSPGetSelObjectIndex();
-	//		if ((QSPIsObjectsChanged() == QSP_TRUE) || (nSelectedObject != objectSelectionIndex) || Skin::isHtmlModeChanged)
-	//		{
-	//			objectSelectionIndex = nSelectedObject;
-	//			int nObjsCount = QSPGetObjectsCount();
-	//			for (int i = 0; i < nObjsCount; i++)
-	//			{
-	//				QSP_CHAR* pImgPath;
-	//				QSP_CHAR* pDesc;
-	//				QSPGetObjectData(i, &pImgPath, &pDesc);
-	//				JSObject obj;
-	//				string imgPath = getRightPath(fromQsp(pImgPath));
-	//				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
-	//				int selected = (i == nSelectedObject) ? 1 : 0;
-	//				obj.SetProperty(WSLit("image"), ToWebString(imgPath));
-	//				obj.SetProperty(WSLit("desc"), ToWebString(desc));
-	//				obj.SetProperty(WSLit("selected"), JSValue(selected));
-	//				objs.Push(obj);
-	//			}
-	//			bObjsPrepared = true;
-	//		}
-	//
-	//		//доп. описание
-	//		string varsDesc = "";
-	//		bool bVarsDescPrepared = false;
-	//		if ((QSPIsVarsDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
-	//		{
-	//			varsDesc = Skin::applyHtmlFixes(fromQsp(QSPGetVarsDesc()));
-	//			bVarsDescPrepared = true;
-	//		}
-	//
-	//		// Яваскрипт, переданный из игры командой EXEC('JS:...')
-	//		string jsCmd = "";
-	//		bool bJsCmdPrepared = false;
-	//		if (jsExecBuffer.length() > 0)
-	//		{
-	//			jsCmd = jsExecBuffer;
-	//			jsExecBuffer = "";
-	//			bJsCmdPrepared = true;
-	//		}
-	//
-	//		// Передаем собранные данные в яваскрипт
-	//		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
-	//			bJsCmdPrepared)
-	//		{
-	//			JSObject groupedContent;
-	//			if (bSkinPrepared)
-	//				groupedContent.SetProperty(WSLit("skin"), jsSkin);
-	//			if (bMainDescPrepared) {
-	//				groupedContent.SetProperty(WSLit("main"), ToWebString(mainDesc));
-	//				groupedContent.SetProperty(WSLit("scrollmain"), JSValue(bMainDescNeedScroll ? 1 : 0));
-	//			}
-	//			if (bActsPrepared)
-	//				groupedContent.SetProperty(WSLit("acts"), acts);
-	//			if (bVarsDescPrepared)
-	//				groupedContent.SetProperty(WSLit("vars"), ToWebString(varsDesc));
-	//			if (bObjsPrepared)
-	//				groupedContent.SetProperty(WSLit("objs"), objs);
-	//			if (bJsCmdPrepared)
-	//				groupedContent.SetProperty(WSLit("js"), ToWebString(jsCmd));
-	//			qspSetGroupedContent(groupedContent);
-	//		}
-	//		Skin::resetUpdate();
+		//Контекст библиотеки
+		bool needUpdate = Skin::isSomethingChanged();
+		Skin::updateBaseVars();
+		needUpdate = needUpdate || Skin::isSomethingChanged();
+		Skin::updateMainScreen();
+		needUpdate = needUpdate || Skin::isSomethingChanged();
+	
+		SkinDto jsSkin;
+		bool bSkinPrepared = false;
+		if (needUpdate) {
+			jsSkin = Skin::getJsSkin();
+			bSkinPrepared = true;
+		}
+	
+		//основное описание
+		string mainDesc = "";
+		bool bMainDescPrepared = false;
+		bool bMainDescNeedScroll = false;
+		if ((QSPIsMainDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
+		{
+			mainDesc = Skin::applyHtmlFixes(fromQsp(QSPGetMainDesc()));
+			bMainDescNeedScroll = startsWith(mainDesc, lastMainDesc);
+			lastMainDesc = mainDesc;
+			bMainDescPrepared = true;
+		}
+	
+		//список действий
+		JSArray acts;
+		bool bActsPrepared = false;
+		if ((QSPIsActionsChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
+		{
+			int nActsCount = QSPGetActionsCount();
+			for (int i = 0; i < nActsCount; i++)
+			{
+				QSP_CHAR* pImgPath;
+				QSP_CHAR* pDesc;
+				QSPGetActionData(i, &pImgPath, &pDesc);
+				JSObject act;
+				string imgPath = getRightPath(fromQsp(pImgPath));
+				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
+				act.SetProperty(WSLit("image"), ToWebString(imgPath));
+				act.SetProperty(WSLit("desc"), ToWebString(desc));
+				acts.Push(act);
+			}
+			bActsPrepared = true;
+		}
+	
+		//инвентарь
+		JSArray objs;
+		bool bObjsPrepared = false;
+		int nSelectedObject = QSPGetSelObjectIndex();
+		if ((QSPIsObjectsChanged() == QSP_TRUE) || (nSelectedObject != objectSelectionIndex) || Skin::isHtmlModeChanged)
+		{
+			objectSelectionIndex = nSelectedObject;
+			int nObjsCount = QSPGetObjectsCount();
+			for (int i = 0; i < nObjsCount; i++)
+			{
+				QSP_CHAR* pImgPath;
+				QSP_CHAR* pDesc;
+				QSPGetObjectData(i, &pImgPath, &pDesc);
+				JSObject obj;
+				string imgPath = getRightPath(fromQsp(pImgPath));
+				string desc = Skin::applyHtmlFixes(fromQsp(pDesc));
+				int selected = (i == nSelectedObject) ? 1 : 0;
+				obj.SetProperty(WSLit("image"), ToWebString(imgPath));
+				obj.SetProperty(WSLit("desc"), ToWebString(desc));
+				obj.SetProperty(WSLit("selected"), JSValue(selected));
+				objs.Push(obj);
+			}
+			bObjsPrepared = true;
+		}
+	
+		//доп. описание
+		string varsDesc = "";
+		bool bVarsDescPrepared = false;
+		if ((QSPIsVarsDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
+		{
+			varsDesc = Skin::applyHtmlFixes(fromQsp(QSPGetVarsDesc()));
+			bVarsDescPrepared = true;
+		}
+	
+		// Яваскрипт, переданный из игры командой EXEC('JS:...')
+		string jsCmd = "";
+		bool bJsCmdPrepared = false;
+		if (jsExecBuffer.length() > 0)
+		{
+			jsCmd = jsExecBuffer;
+			jsExecBuffer = "";
+			bJsCmdPrepared = true;
+		}
+	
+		// Передаем собранные данные в яваскрипт
+		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
+			bJsCmdPrepared)
+		{
+			JSObject groupedContent;
+			if (bSkinPrepared)
+				groupedContent.SetProperty(WSLit("skin"), jsSkin);
+			if (bMainDescPrepared) {
+				groupedContent.SetProperty(WSLit("main"), ToWebString(mainDesc));
+				groupedContent.SetProperty(WSLit("scrollmain"), JSValue(bMainDescNeedScroll ? 1 : 0));
+			}
+			if (bActsPrepared)
+				groupedContent.SetProperty(WSLit("acts"), acts);
+			if (bVarsDescPrepared)
+				groupedContent.SetProperty(WSLit("vars"), ToWebString(varsDesc));
+			if (bObjsPrepared)
+				groupedContent.SetProperty(WSLit("objs"), objs);
+			if (bJsCmdPrepared)
+				groupedContent.SetProperty(WSLit("js"), ToWebString(jsCmd));
+			qspSetGroupedContent(groupedContent);
+		}
+		Skin::resetUpdate();
 	}
 	
 	void LibraryListener::SetTimer(int msecs)

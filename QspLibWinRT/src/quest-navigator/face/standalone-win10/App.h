@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "dto\SaveSlotsDto.h"
+#include "..\..\core\dto\SaveSlotsDto.h"
 #include "EventManager.h"
 #include "Library.h"
 

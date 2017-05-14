@@ -3,7 +3,7 @@
 #include <string>
 #include "Timer.h"
 #include "..\..\core\events.h"
-#include "dto\SharedDataDto.h"
+#include "..\..\core\dto\SharedDataDto.h"
 
 using namespace std;
 

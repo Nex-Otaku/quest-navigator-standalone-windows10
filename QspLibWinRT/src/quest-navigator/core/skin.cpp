@@ -255,71 +255,74 @@ namespace QuestNavigator {
 		loadValue(espMsgTextFormat, "MSG_FORMAT");
 	}
 
-	//JSObject Skin::getJsSkin()
-	//{
-	//	JSObject skin;
-	//	if (sizeof(jsParamNames) / sizeof(char*) != espLast) {
-	//		showError("Список имён не совпадает со списком параметров");
-	//		return skin;
-	//	}
-	//	for (int i = 0; i < espLast; i++) {
-	//		eSkinParam eIterator = (eSkinParam)i;
-	//		int numValue = 0;
-	//		string strValue = "";
-	//		string name = "";
-	//		bool bResultIsString = getType(eIterator) == ecvString;
-	//		if (bResultIsString) {
-	//			strValue = getString(eIterator);
-	//		} else {
-	//			numValue = getInt(eIterator);
-	//		}
-	//		bool bError = false;
-	//		name = jsParamNames[i];
-	//		switch (eIterator)
-	//		{
-	//			// Целочисленные параметры
-	//		case espHideScrollAny:
-	//		case espHideScrollArrows:
-	//		case espHideScrollMain:
-	//		case espHideScrollActs:
-	//		case espHideScrollVars:
-	//		case espHideScrollObjs:
-	//		case espUseHtml:
-	//		case espNoSave:
-	//		case espDisableScroll:
-	//		case espViewAlwaysShow:
-	//		case espIsStandalone:
-	//		case espShowActs:
-	//		case espShowVars:
-	//		case espShowObjs:
-	//		case espShowInput:
-	//			break;
-	//			// Строки с HTML-содержимым
-	//		case espMsgTextFormat:
-	//		case espInputTextFormat:
-	//		case espMainDescTextFormat:
-	//		case espVarsDescTextFormat:
-	//			{
-	//				strValue = applyHtmlFixes(strValue, true);
-	//			}
-	//			break;
-	//		default:
-	//			{
-	//				showError("Неизвестный параметр оформления.");
-	//				bError = true;
-	//			}
-	//			break;
-	//		}
-	//		if (bError)
-	//			break;
-	//		if (bResultIsString) {
-	//			skin.SetProperty(ToWebString(name), ToWebString(strValue));
-	//		} else {
-	//			skin.SetProperty(ToWebString(name), JSValue(numValue));
-	//		}
-	//	}
-	//	return skin;
-	//}
+	SkinDto Skin::getJsSkin()
+	{
+		SkinDto skin;
+		//JSObject skin;
+		if (sizeof(jsParamNames) / sizeof(char*) != espLast) {
+			showError("Список имён не совпадает со списком параметров");
+			return skin;
+		}
+		for (int i = 0; i < espLast; i++) {
+			eSkinParam eIterator = (eSkinParam)i;
+			int numValue = 0;
+			string strValue = "";
+			string name = "";
+			bool bResultIsString = getType(eIterator) == ecvString;
+			if (bResultIsString) {
+				strValue = getString(eIterator);
+			} else {
+				numValue = getInt(eIterator);
+			}
+			bool bError = false;
+			name = jsParamNames[i];
+			switch (eIterator)
+			{
+				// Целочисленные параметры
+			case espHideScrollAny:
+			case espHideScrollArrows:
+			case espHideScrollMain:
+			case espHideScrollActs:
+			case espHideScrollVars:
+			case espHideScrollObjs:
+			case espUseHtml:
+			case espNoSave:
+			case espDisableScroll:
+			case espViewAlwaysShow:
+			case espIsStandalone:
+			case espShowActs:
+			case espShowVars:
+			case espShowObjs:
+			case espShowInput:
+				break;
+				// Строки с HTML-содержимым
+			case espMsgTextFormat:
+			case espInputTextFormat:
+			case espMainDescTextFormat:
+			case espVarsDescTextFormat:
+				{
+					strValue = applyHtmlFixes(strValue, true);
+				}
+				break;
+			default:
+				{
+					showError("Неизвестный параметр оформления.");
+					bError = true;
+				}
+				break;
+			}
+			if (bError)
+				break;
+			if (bResultIsString) {
+				// STUB
+				// skin.SetProperty(ToWebString(name), ToWebString(strValue));
+			} else {
+				// STUB
+				// skin.SetProperty(ToWebString(name), JSValue(numValue));
+			}
+		}
+		return skin;
+	}
 
 	bool Skin::isSomethingChanged()
 	{
