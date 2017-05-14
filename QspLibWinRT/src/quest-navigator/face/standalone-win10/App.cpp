@@ -21,10 +21,36 @@ namespace QuestNavigator
 	}
 
 	void App::inject(
-		EventManager* eventManager
+		EventManager* eventManager,
+		Library* library
 	)
 	{
 		this->eventManager = eventManager;
+		this->library = library;
+	}
+
+	void App::initLib()
+	{
+		// Контекст UI
+		gameIsRunning = false;
+		
+		//Запускаем поток библиотеки
+		this->library->StartLibThread();
+	}
+
+	void App::FreeResources()
+	{
+		// Контекст UI
+		
+		// Процедура "честного" высвобождения всех ресурсов - в т.ч. остановка потока библиотеки
+		
+		// Очищаем ВСЕ на выходе
+		if (gameIsRunning)
+		{
+			StopGame(false);
+		}
+		// Останавливаем поток библиотеки
+		this->library->StopLibThread();
 	}
 
 	void App::runGame(string fileName)
@@ -55,38 +81,44 @@ namespace QuestNavigator
 
 	void App::runNewGame(string contentPath)
 	{
-		//		// Контекст UI
-		//
-		//		// Запускаем игру из нового пути, 
-		//		// либо полностью перечитываем с диска существующую игру.
-		//
-		//		// Для начала, очищаем то, что уже запущено.
-		//		FreeResources();
-		//
-		//		// Заново загружаем конфигурацию, копируем файлы.
-		//		if (!initOptions(contentPath) || !prepareGameFiles()) {
-		//			app_->Quit();
-		//			return;
-		//		}
-		//
-		//		// Обновляем свойства окна согласно настройкам шаблона.
-		//		view_->applySkinToWindow();
-		//
-		//		// Запускаем поток библиотеки.
-		//		initLib();
-		//
-		//		string url = QuestNavigator::getContentUrl();
-		//		WebURL newUrl(ToWebString(url));
-		//		WebView* webView = view_->web_view();
-		//		if (newUrl == webView->url()) {
-		//			// Очищаем кэш веб-содержимого.
-		//			webView->session()->ClearCache();
-		//			// Загружаем страницу заново, игнорируя закэшированные файлы.
-		//			webView->Reload(true);
-		//		} else {
-		//			// Загружаем шаблон.
-		//			webView->LoadURL(newUrl);
-		//		}
+		// Контекст UI
+		
+		// Запускаем игру из нового пути, 
+		// либо полностью перечитываем с диска существующую игру.
+		
+		// Для начала, очищаем то, что уже запущено.
+		FreeResources();
+		
+		// Заново загружаем конфигурацию, копируем файлы.
+		if (!initOptions(contentPath) || !prepareGameFiles()) {
+			//app_->Quit();
+			// STUB
+			// Сделать здесь вывод ошибок.
+			return;
+		}
+		
+		// Обновляем свойства окна согласно настройкам шаблона.
+		//view_->applySkinToWindow();
+		
+		// Запускаем поток библиотеки.
+		initLib();
+
+		// !!! STUB
+		// Этот код нам не нужен в standalone?
+		// Каким образом перезагружаем страницу для полного обновления скина?
+
+		//string url = QuestNavigator::getContentUrl();
+		//WebURL newUrl(ToWebString(url));
+		//WebView* webView = view_->web_view();
+		//if (newUrl == webView->url()) {
+		//	// Очищаем кэш веб-содержимого.
+		//	webView->session()->ClearCache();
+		//	// Загружаем страницу заново, игнорируя закэшированные файлы.
+		//	webView->Reload(true);
+		//} else {
+		//	// Загружаем шаблон.
+		//	webView->LoadURL(newUrl);
+		//}
 	}
 
 	SaveSlotsDto App::getSaveSlots(bool open)

@@ -8,8 +8,17 @@ namespace QuestNavigator
 	{
 	}
 
-
 	Library::~Library()
 	{
+	}
+
+	void Library::StartLibThread()
+	{
+		// STUB
+	}
+
+	void Library::StopLibThread()
+	{
+		// STUB
 	}
 }

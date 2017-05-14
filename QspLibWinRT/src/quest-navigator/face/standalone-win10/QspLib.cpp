@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "App.h"
 #include "JsExecutor.h"
+#include "Library.h"
 
 using namespace QuestNavigator;
 
@@ -28,6 +29,8 @@ namespace QspLibWinRT
 		App* app = new App();
 		// Создаём объект для выполнения яваскрипта.
 		JsExecutor* jsExecutor = new JsExecutor();
+		// Создаём объект для управления потоком библиотеки.
+		Library* library = new Library();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -36,7 +39,10 @@ namespace QspLibWinRT
 			timer,
 			jsExecutor
 		);
-		app->inject(eventManager);
+		app->inject(
+			eventManager,
+			library
+		);
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.

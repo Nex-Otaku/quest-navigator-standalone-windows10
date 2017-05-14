@@ -7,6 +7,11 @@ namespace QuestNavigator
 	public:
 		Library();
 		~Library();
+
+		// Запуск потока библиотеки
+		void StartLibThread();
+		// Остановка потока библиотеки
+		void StopLibThread();
 	};
 	//		// ********************************************************************
 	//		// THREADS
