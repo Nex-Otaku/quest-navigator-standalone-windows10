@@ -236,73 +236,69 @@ namespace QuestNavigator
 	// Ожидаем события
 	bool EventManager::waitForSingle(HANDLE handle)
 	{
-		return false;
-		//		DWORD res = WaitForSingleObject(handle, INFINITE);
-		//		if (res != WAIT_OBJECT_0) {
-		//			showError("Не удалось дождаться события синхронизации");
-		//			return false;
-		//		}
-		//		return true;
+		DWORD res = WaitForSingleObject(handle, INFINITE);
+		if (res != WAIT_OBJECT_0) {
+			showError("Не удалось дождаться события синхронизации");
+			return false;
+		}
+		return true;
 	}
 
 	bool EventManager::waitForSingle(eSyncEvent ev)
 	{
-		return false;
-		//		return waitForSingle(getEventHandle(ev));
+		return waitForSingle(getEventHandle(ev));
 	}
 
 	bool EventManager::waitForSingleLib(eSyncEvent ev)
 	{
-		return false;
-		//		// Контекст библиотеки.
-		//		// Мы должны иметь возможность в любой момент остановить игру либо поток библиотеки.
-		//		// Поэтому при ожидании в библиотеке единичного события синхронизации,
-		//		// такого как например закрытие диалога,
-		//		// мы вместо "waitForSingle" вызываем "waitForSingleLib".
-		//		// Эта функция дополнительно проверяет на наличие события, 
-		//		// указывающего, что мы должны остановить игру либо поток библиотеки.
-		//
-		//		// События для синхронизации потоков
-		//		HANDLE eventList[3];
-		//		eSyncEvent syncEvents[3];
-		//		syncEvents[0] = evShutdown;
-		//		syncEvents[1] = evStopGame;
-		//		syncEvents[2] = ev;
-		//		for (int i = 0; i < 3; i++) {
-		//			eventList[i] = getEventHandle(syncEvents[i]);
-		//		}
-		//
-		//		DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE);
-		//		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
-		//			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
-		//		} else {
-		//			// Если событие было "evShutdown" или "evStopGame",
-		//			// вызываем их заново.
-		//			// Это необходимо, так как вызов "WaitForMultipleObjects" их уже сбросил.
-		//			for (int i = 0; i < 3; i++) {
-		//				if (eventList[i])
-		//				break;
-		//			}
-		//			eSyncEvent breakingEvent = syncEvents[res];
-		//			if (breakingEvent != ev) {
-		//				runSyncEvent(breakingEvent);
-		//			}
-		//		}
-		//		return true;
+		// Контекст библиотеки.
+		// Мы должны иметь возможность в любой момент остановить игру либо поток библиотеки.
+		// Поэтому при ожидании в библиотеке единичного события синхронизации,
+		// такого как например закрытие диалога,
+		// мы вместо "waitForSingle" вызываем "waitForSingleLib".
+		// Эта функция дополнительно проверяет на наличие события, 
+		// указывающего, что мы должны остановить игру либо поток библиотеки.
+		
+		// События для синхронизации потоков
+		HANDLE eventList[3];
+		eSyncEvent syncEvents[3];
+		syncEvents[0] = evShutdown;
+		syncEvents[1] = evStopGame;
+		syncEvents[2] = ev;
+		for (int i = 0; i < 3; i++) {
+			eventList[i] = getEventHandle(syncEvents[i]);
+		}
+		
+		DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE);
+		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
+			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
+		} else {
+			// Если событие было "evShutdown" или "evStopGame",
+			// вызываем их заново.
+			// Это необходимо, так как вызов "WaitForMultipleObjects" их уже сбросил.
+			for (int i = 0; i < 3; i++) {
+				if (eventList[i])
+				break;
+			}
+			eSyncEvent breakingEvent = syncEvents[res];
+			if (breakingEvent != ev) {
+				runSyncEvent(breakingEvent);
+			}
+		}
+		return true;
 	}
 
 	bool EventManager::checkForSingle(eSyncEvent ev)
 	{
-		return false;
-		//		// Проверяем, доступен ли объект синхронизации.
-		//		// Если недоступен, сразу возвращаем "false".
-		//		// Для ожидания объекта следует использовать "waitForSingle".
-		//		HANDLE handle = getEventHandle(ev);
-		//		DWORD res = WaitForSingleObject(handle, 0);
-		//		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
-		//			showError("Сбой синхронизации");
-		//			return false;
-		//		}
-		//		return res == WAIT_OBJECT_0;
+		// Проверяем, доступен ли объект синхронизации.
+		// Если недоступен, сразу возвращаем "false".
+		// Для ожидания объекта следует использовать "waitForSingle".
+		HANDLE handle = getEventHandle(ev);
+		DWORD res = WaitForSingleObject(handle, 0);
+		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
+			showError("Сбой синхронизации");
+			return false;
+		}
+		return res == WAIT_OBJECT_0;
 	}
 }
