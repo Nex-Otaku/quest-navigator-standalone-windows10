@@ -48,8 +48,6 @@ namespace QspLibWinRT
 //		bool programLoaded;
 //		bool jsLibObjectCreated;
 //
-//		HANDLE libThread;
-//
 //		// ’эндл мьютекса.
 //		HANDLE hInstanceMutex;
 //

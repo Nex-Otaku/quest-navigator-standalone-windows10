@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Timer.h"
 
 using namespace std;
 
@@ -11,6 +12,10 @@ namespace QuestNavigator
 	public:
 		EventManager();
 		~EventManager();
+
+		void inject(
+			Timer* timer
+		);
 
 		// JsListener
 		void executeAction(int pos);
@@ -29,12 +34,22 @@ namespace QuestNavigator
 		void runGame(string fileName, int gameIsStandalone);
 		void stopGame();
 
+		// Library
+		void initEvents();
+		void initSharedData();
+		void freeEvents();
+		void freeSharedData();
+
+		void shutdown();
+
 		// Работа с потоками и синхронизацией.
 		
 		// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
 		void waitForLibIsReady();
 
 	private:
+		Timer* timer;
+
 		// Список событий для синхронизации потоков
 		enum eSyncEvent
 		{
@@ -99,16 +114,13 @@ namespace QuestNavigator
 		HANDLE getEventHandle(eSyncEvent ev);
 		// Запускаем событие
 		void runSyncEvent(eSyncEvent ev);
-		// Высвобождаем описатель и ругаемся если что не так.
-		void freeHandle(HANDLE handle);
 		// Входим в критическую секцию
 		void lockData();
 		// Выходим из критической секции
 		void unlockData();
 		// Ожидаем события
-		bool waitForSingle(HANDLE handle);
-		bool waitForSingle(eSyncEvent ev);
+		bool waitForSingleEvent(eSyncEvent ev);
 		bool waitForSingleLib(eSyncEvent ev);
-		bool checkForSingle(eSyncEvent ev);
+		bool checkForSingleEvent(eSyncEvent ev);
 	};
 }

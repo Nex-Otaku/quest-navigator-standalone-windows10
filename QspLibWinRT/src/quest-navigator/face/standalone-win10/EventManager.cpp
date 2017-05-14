@@ -2,6 +2,7 @@
 #include "EventManager.h"
 #include <string>
 #include "..\..\core\dialogs.h"
+#include "..\..\core\thread_sync.h"
 
 using namespace std;
 
@@ -15,6 +16,11 @@ namespace QuestNavigator
 	{
 	}
 
+	void EventManager::inject(Timer* timer)
+	{
+		this->timer = timer;
+	}
+
 	// Вызовы событий из UI.
 
 	// JsListener
@@ -22,7 +28,7 @@ namespace QuestNavigator
 	void EventManager::executeAction(int pos)
 	{
 		// Контекст UI
-		if (!checkForSingle(evLibIsReady)) {
+		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 		
@@ -35,7 +41,7 @@ namespace QuestNavigator
 	void EventManager::selectObject(int pos)
 	{
 		// Контекст UI
-		if (!checkForSingle(evLibIsReady)) {
+		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 		
@@ -48,7 +54,7 @@ namespace QuestNavigator
 	void EventManager::loadSlotSelected(int index)
 	{
 		// Контекст UI
-		if (!checkForSingle(evLibIsReady)) {
+		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
@@ -61,7 +67,7 @@ namespace QuestNavigator
 	void EventManager::saveSlotSelected(int index)
 	{
 		// Контекст UI
-		if (!checkForSingle(evLibIsReady)) {
+		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
@@ -131,7 +137,7 @@ namespace QuestNavigator
 	void EventManager::runGame(string fileName, int gameIsStandalone)
 	{
 		// Контекст UI
-		if (!checkForSingle(evLibIsReady)) {
+		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
@@ -149,7 +155,58 @@ namespace QuestNavigator
 		// Контекст UI
 		// Мы должны иметь возможность остановить игру в любой момент.
 		runSyncEvent(evStopGame);
-		waitForSingle(evGameStopped);
+		waitForSingleEvent(evGameStopped);
+	}
+
+	// Library
+
+	void EventManager::initEvents()
+	{
+		// Инициализируем объекты синхронизации.
+		// Используемые объекты - события с автосбросом, 
+		// инициализированные в занятом состоянии, и один таймер.
+		for (int i = 0; i < (int)evLast; i++) {
+			HANDLE eventHandle = (i == (int)evTimer) ? this->timer->CreateTimer() : CreateSyncEvent();
+			if (eventHandle == NULL)
+				return;
+			g_eventList[i] = eventHandle;
+		}
+	}
+
+	void EventManager::initSharedData()
+	{
+		// Инициализируем структуру критической секции
+		try {
+			InitializeCriticalSection(&g_csSharedData);
+		}
+		catch (...) {
+			showError("Не удалось проинициализировать структуру критической секции.");
+
+			// STUB
+			// Сделать выход из приложения?
+			//exit(eecFailToInitCs);
+			return;
+		}
+	}
+
+	void EventManager::freeEvents()
+	{
+		// Закрываем хэндлы событий
+		for (int i = 0; i < (int)evLast; i++) {
+			freeHandle(g_eventList[i]);
+			g_eventList[i] = NULL;
+		}
+	}
+
+	void EventManager::freeSharedData()
+	{
+		// Высвобождаем структуру критической секции
+		DeleteCriticalSection(&g_csSharedData);
+	}
+
+	void EventManager::shutdown()
+	{
+		runSyncEvent(evShutdown);
 	}
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -161,7 +218,7 @@ namespace QuestNavigator
 	// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
 	void EventManager::waitForLibIsReady()
 	{
-		waitForSingle(evLibIsReady);
+		waitForSingleEvent(evLibIsReady);
 	}
 
 	// private
@@ -200,19 +257,6 @@ namespace QuestNavigator
 		}
 	}
 
-	// Высвобождаем описатель и ругаемся если что не так.
-	void EventManager::freeHandle(HANDLE handle)
-	{
-		BOOL res = CloseHandle(handle);
-		if (res == 0) {
-			showError("Не удалось высвободить описатель объекта ядра.");
-
-			// STUB
-			// Выход из приложения?
-			//exit(eecFailToCloseHandle);
-		}
-	}
-
 	// Входим в критическую секцию
 	void EventManager::lockData()
 	{
@@ -233,18 +277,7 @@ namespace QuestNavigator
 		LeaveCriticalSection(&g_csSharedData);
 	}
 
-	// Ожидаем события
-	bool EventManager::waitForSingle(HANDLE handle)
-	{
-		DWORD res = WaitForSingleObject(handle, INFINITE);
-		if (res != WAIT_OBJECT_0) {
-			showError("Не удалось дождаться события синхронизации");
-			return false;
-		}
-		return true;
-	}
-
-	bool EventManager::waitForSingle(eSyncEvent ev)
+	bool EventManager::waitForSingleEvent(eSyncEvent ev)
 	{
 		return waitForSingle(getEventHandle(ev));
 	}
@@ -255,7 +288,7 @@ namespace QuestNavigator
 		// Мы должны иметь возможность в любой момент остановить игру либо поток библиотеки.
 		// Поэтому при ожидании в библиотеке единичного события синхронизации,
 		// такого как например закрытие диалога,
-		// мы вместо "waitForSingle" вызываем "waitForSingleLib".
+		// мы вместо "waitForSingleEvent" вызываем "waitForSingleLib".
 		// Эта функция дополнительно проверяет на наличие события, 
 		// указывающего, что мы должны остановить игру либо поток библиотеки.
 		
@@ -288,7 +321,7 @@ namespace QuestNavigator
 		return true;
 	}
 
-	bool EventManager::checkForSingle(eSyncEvent ev)
+	bool EventManager::checkForSingleEvent(eSyncEvent ev)
 	{
 		// Проверяем, доступен ли объект синхронизации.
 		// Если недоступен, сразу возвращаем "false".

@@ -291,6 +291,9 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\thread_sync.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -477,6 +480,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\thread_sync.h">
+      <Filter>quest-navigator\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
