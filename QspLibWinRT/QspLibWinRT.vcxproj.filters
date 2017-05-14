@@ -282,13 +282,13 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\face\standalone-win10\Timer.cpp">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp">
       <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp">
+      <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\Timer.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClCompile>
   </ItemGroup>
@@ -466,9 +466,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\face\standalone-win10\Timer.h">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\dto\SaveSlotsDto.h">
       <Filter>quest-navigator\face\standalone-win10\dto</Filter>
     </ClInclude>
@@ -476,6 +473,9 @@
       <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h">
+      <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\Timer.h">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClInclude>
   </ItemGroup>
