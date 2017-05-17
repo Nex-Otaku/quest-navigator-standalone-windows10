@@ -2,6 +2,7 @@
 
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "JsExecutor.h"
+#include "Timer.h"
 
 namespace QuestNavigator
 {
@@ -14,7 +15,8 @@ namespace QuestNavigator
 		static LibraryListener* instance();
 
 		void inject(
-			JsExecutor* jsExecutor
+			JsExecutor* jsExecutor,
+			Timer* timer
 		);
 
 		// ********************************************************************
@@ -50,7 +52,8 @@ namespace QuestNavigator
 		// TODO проверить, можно ли будет от неЄ избавитьс€, 
 		// уж очень некрасиво получилось.
 		static void resetJsExecBuffer();
-
+		// —брасываем счЄтчик миллисекунд.
+		static void resetMsCount();
 	private:
 		static string jsExecBuffer;
 		static string lastMainDesc;
@@ -65,6 +68,7 @@ namespace QuestNavigator
 		~LibraryListener();
 
 		JsExecutor* jsExecutor;
+		Timer* timer;
 	};
 	//		// ********************************************************************
 	//		// ********************************************************************

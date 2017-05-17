@@ -9,6 +9,7 @@
 #include "..\..\core\files.h"
 #include "JsExecutor.h"
 #include "..\..\core\sound.h"
+#include "Timer.h"
 
 namespace QuestNavigator
 {
@@ -18,9 +19,13 @@ namespace QuestNavigator
 		return &inst;
 	}
 
-	void LibraryListener::inject(JsExecutor* jsExecutor)
+	void LibraryListener::inject(
+		JsExecutor* jsExecutor,
+		Timer* timer
+	)
 	{
 		this->jsExecutor = jsExecutor;
+		this->timer = timer;
 	}
 
 	LibraryListener::LibraryListener()
@@ -150,9 +155,9 @@ namespace QuestNavigator
 	
 	void LibraryListener::SetTimer(int msecs)
 	{
-	//		//Контекст библиотеки
-	//		timerInterval = msecs;
-	//		startTimer();
+		//Контекст библиотеки
+		instance()->timer->setTimerInterval(msecs);
+		instance()->timer->startTimer();
 	}
 	
 	void LibraryListener::SetInputStrText(QSP_CHAR* text)
@@ -277,7 +282,9 @@ namespace QuestNavigator
 	//		wstring wResult = widen(result);
 	//		wcsncpy(buffer, wResult.c_str(), maxLen);
 	}
-	
+
+	// Возвращаем количество миллисекунд, 
+	// прошедших с момента последнего вызова этой функции.
 	int LibraryListener::GetMSCount()
 	{
 		//Контекст библиотеки
@@ -321,6 +328,9 @@ namespace QuestNavigator
 	//		unlockData();
 	//
 	//		return result;
+
+		//STUB
+		return -1;
 	}
 	
 	void LibraryListener::DeleteMenu()
@@ -409,5 +419,10 @@ namespace QuestNavigator
 	void LibraryListener::resetJsExecBuffer()
 	{
 		jsExecBuffer = "";
+	}
+
+	void LibraryListener::resetMsCount()
+	{
+		gameStartTime = clock();
 	}
 }

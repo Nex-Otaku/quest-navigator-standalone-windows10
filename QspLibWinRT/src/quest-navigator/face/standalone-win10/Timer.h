@@ -14,5 +14,11 @@ namespace QuestNavigator
 		void stopTimer();
 		// Создаём таймер.
 		HANDLE CreateTimer();
+
+		// Установка интервала срабатывания таймера.
+		void setTimerInterval(int msecs);
+
+	private:
+		int timerInterval;
 	};
 }

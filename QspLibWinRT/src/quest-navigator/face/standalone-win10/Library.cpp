@@ -33,8 +33,6 @@ namespace QuestNavigator
 	
 	//QnApplicationListener* QnApplicationListener::listener = NULL;
 	//vector<ContainerMenuItem> QnApplicationListener::menuList;
-	//clock_t QnApplicationListener::gameStartTime = 0;
-	//int QnApplicationListener::timerInterval = 0;
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
 	void Library::StartLibThread()
@@ -171,7 +169,7 @@ namespace QuestNavigator
 						LibraryListener::SetTimer(500);
 	
 						//Запускаем счетчик миллисекунд
-						gameStartTime = clock();
+						LibraryListener::resetMsCount();
 	
 						res = QSPRestartGame(QSP_TRUE);
 						CheckQspResult(res, "QSPRestartGame");

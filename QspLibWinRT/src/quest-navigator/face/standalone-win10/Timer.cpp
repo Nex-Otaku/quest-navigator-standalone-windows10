@@ -4,6 +4,7 @@
 namespace QuestNavigator
 {
 	Timer::Timer()
+		: timerInterval(0)
 	{
 	}
 
@@ -55,5 +56,10 @@ namespace QuestNavigator
 		//			exit(eecFailToCreateTimer);
 		//		}
 		//		return timerHandle;
+	}
+
+	void Timer::setTimerInterval(int msecs)
+	{
+		timerInterval = msecs;
 	}
 }
