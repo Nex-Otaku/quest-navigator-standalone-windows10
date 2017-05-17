@@ -30,4 +30,10 @@ namespace QuestNavigator
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspSetGroupedContent", content);
 	}
+
+	void JsExecutor::qspSetInputString(string text)
+	{
+		//		// Контекст библиотеки
+		//		jsCallApiFromLib("qspSetInputString", text);
+	}
 }

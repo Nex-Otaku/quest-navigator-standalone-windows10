@@ -162,8 +162,8 @@ namespace QuestNavigator
 	
 	void LibraryListener::SetInputStrText(QSP_CHAR* text)
 	{
-	//		//Контекст библиотеки
-	//		qspSetInputString(ToWebString(fromQsp(text)));
+		//Контекст библиотеки
+		instance()->jsExecutor->qspSetInputString(fromQsp(text));
 	}
 	
 	void LibraryListener::ShowMessage(QSP_CHAR* message)

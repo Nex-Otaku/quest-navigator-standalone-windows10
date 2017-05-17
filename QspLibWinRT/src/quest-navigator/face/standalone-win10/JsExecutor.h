@@ -1,7 +1,10 @@
 #pragma once
 
+#include <string>
 #include "..\..\core\dto\SaveSlotsDto.h"
 #include "..\..\core\dto\GroupedContentDto.h"
+
+using namespace std;
 
 namespace QuestNavigator
 {
@@ -34,6 +37,6 @@ namespace QuestNavigator
 		//		static void qspMenu(JSArray menu);
 		//		static void qspInput(WebString text);
 		//		static void qspView(WebString path);
-		//		static void qspSetInputString(WebString text);
+		static void qspSetInputString(string text);
 	};
 }
