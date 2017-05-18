@@ -50,7 +50,8 @@ namespace QspLibWinRT
 		eventManager->inject(timer);
 		libraryListener->inject(
 			jsExecutor,
-			timer
+			timer,
+			eventManager
 		);
 	}
 

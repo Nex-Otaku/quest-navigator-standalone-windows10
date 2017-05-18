@@ -3,6 +3,7 @@
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "JsExecutor.h"
 #include "Timer.h"
+#include "EventManager.h"
 
 namespace QuestNavigator
 {
@@ -16,7 +17,8 @@ namespace QuestNavigator
 
 		void inject(
 			JsExecutor* jsExecutor,
-			Timer* timer
+			Timer* timer,
+			EventManager* eventManager
 		);
 
 		// ********************************************************************
@@ -69,6 +71,7 @@ namespace QuestNavigator
 
 		JsExecutor* jsExecutor;
 		Timer* timer;
+		EventManager* eventManager;
 	};
 	//		// ********************************************************************
 	//		// ********************************************************************

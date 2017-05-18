@@ -239,6 +239,28 @@ namespace QuestNavigator
 		return dto;
 	}
 
+	// LibraryListener
+
+	void EventManager::waitForMsgClosed()
+	{
+		waitForSingleLib(evMsgClosed);
+	}
+
+	void EventManager::waitForInputClosed()
+	{
+		waitForSingleLib(evInputClosed);
+	}
+
+	void EventManager::waitForMenuClosed()
+	{
+		waitForSingleLib(evMenuClosed);
+	}
+
+	void EventManager::waitForErrorClosed()
+	{
+		waitForSingleLib(evErrorClosed);
+	}
+
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

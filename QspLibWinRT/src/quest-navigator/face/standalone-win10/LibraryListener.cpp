@@ -10,6 +10,7 @@
 #include "JsExecutor.h"
 #include "..\..\core\sound.h"
 #include "Timer.h"
+#include "EventManager.h"
 
 namespace QuestNavigator
 {
@@ -21,11 +22,13 @@ namespace QuestNavigator
 
 	void LibraryListener::inject(
 		JsExecutor* jsExecutor,
-		Timer* timer
+		Timer* timer,
+		EventManager* eventManager
 	)
 	{
 		this->jsExecutor = jsExecutor;
 		this->timer = timer;
+		this->eventManager = eventManager;
 	}
 
 	LibraryListener::LibraryListener()
@@ -168,24 +171,24 @@ namespace QuestNavigator
 	
 	void LibraryListener::ShowMessage(QSP_CHAR* message)
 	{
-	//		//Контекст библиотеки
-	//
-	//		// Обновляем скин
-	//		Skin::updateBaseVars();
-	//		Skin::updateMsgDialog();
-	//		// Если что-то изменилось, то передаем в яваскрипт
-	//		if (Skin::isSomethingChanged())
-	//		{
-	//			RefreshInt(QSP_TRUE);
-	//		}
-	//
-	//		string msgValue = Skin::applyHtmlFixes(fromQsp(message));
-	//
-	//		// Передаём данные в поток UI
-	//		qspMsg(ToWebString(msgValue));
-	//
-	//		// Ждём закрытия диалога
-	//		waitForSingleLib(evMsgClosed);
+		//Контекст библиотеки
+	
+		// Обновляем скин
+		Skin::updateBaseVars();
+		Skin::updateMsgDialog();
+		// Если что-то изменилось, то передаем в яваскрипт
+		if (Skin::isSomethingChanged())
+		{
+			RefreshInt(QSP_TRUE);
+		}
+	
+		string msgValue = Skin::applyHtmlFixes(fromQsp(message));
+	
+		// Передаём данные в поток UI
+		instance()->jsExecutor->qspMsg(msgValue);
+	
+		// Ждём закрытия диалога
+		instance()->eventManager->waitForMsgClosed();
 	}
 	
 	void LibraryListener::PlayFile(QSP_CHAR* file, int volume)

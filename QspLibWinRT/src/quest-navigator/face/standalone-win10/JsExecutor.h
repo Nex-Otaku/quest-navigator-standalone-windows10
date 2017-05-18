@@ -32,7 +32,7 @@ namespace QuestNavigator
 		// В потоке библиотеки
 		//		static void jsCallApiFromLib(string name, JSValue arg);
 		static void qspSetGroupedContent(GroupedContentDto content);
-		//		static void qspMsg(WebString text);
+		static void qspMsg(string text);
 		//		static void qspError(JSObject error);
 		//		static void qspMenu(JSArray menu);
 		//		static void qspInput(WebString text);

@@ -49,6 +49,12 @@ namespace QuestNavigator
 		bool isValidEvent(DWORD waitResult);
 		SharedDataDto getSharedData(eSyncEvent ev);
 
+		// LibraryListener
+		void waitForMsgClosed();
+		void waitForInputClosed();
+		void waitForMenuClosed();
+		void waitForErrorClosed();
+
 		// Работа с потоками и синхронизацией.
 		
 		// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
