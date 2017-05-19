@@ -13,6 +13,7 @@
 #include "EventManager.h"
 #include "..\..\core\dialogs.h"
 #include "..\..\core\dto\MenuItemDto.h"
+#include "Library.h"
 
 namespace QuestNavigator
 {
@@ -341,52 +342,52 @@ namespace QuestNavigator
 	
 	void LibraryListener::Wait(int msecs)
 	{
-	//		//Контекст библиотеки
-	//		Sleep((DWORD)msecs);
+		//Контекст библиотеки
+		Sleep((DWORD)msecs);
 	}
 	
 	void LibraryListener::ShowWindow(int type, QSP_BOOL isShow)
 	{
-	//		// Контекст библиотеки
-	//		Skin::showWindow(type, isShow);
+		// Контекст библиотеки
+		Skin::showWindow(type, isShow);
 	}
 	
 	void LibraryListener::System(QSP_CHAR* cmd)
 	{
-	//		//Контекст библиотеки
-	//		string jsCmd = fromQsp(cmd);
-	//		string jsCmdUpper = toUpper(jsCmd);
-	//		if (startsWith(jsCmdUpper, "JS:"))
-	//		{
-	//			jsCmd = jsCmd.substr(string("JS:").length());
-	//			// Сохраняем яваскрипт, переданный из игры командой EXEC('JS:...')
-	//			// На выполнение отдаём при обновлении интерфейса
-	//			jsExecBuffer = jsExecBuffer + jsCmd;
-	//		}
+		//Контекст библиотеки
+		string jsCmd = fromQsp(cmd);
+		string jsCmdUpper = toUpper(jsCmd);
+		if (startsWith(jsCmdUpper, "JS:"))
+		{
+			jsCmd = jsCmd.substr(string("JS:").length());
+			// Сохраняем яваскрипт, переданный из игры командой EXEC('JS:...')
+			// На выполнение отдаём при обновлении интерфейса
+			jsExecBuffer = jsExecBuffer + jsCmd;
+		}
 	}
 	
 	void LibraryListener::OpenGameStatus(QSP_CHAR* file)
 	{
-	//		//Контекст библиотеки
-	//		if (file != 0) {
-	//			// Библиотека возвращает абсолютный путь к файлу сохранения,
-	//			// вычисляемый по пути к файлу игры.
-	//			// Таким образом, если игра запущена из пути "D:\CoolGame\game.qsp",
-	//			// то при выполнении команды 
-	//			// OPENGAME 'saves\save1.sav'
-	//			// сейв будет загружаться из папки игры:
-	//			// "D:\CoolGame\saves\save1.sav"
-	//			// Нас это не устраивает, 
-	//			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
-	//			// Поэтому мы меняем путь, заданный библиотекой, на свой.
-	//			string saveFile = getRealSaveFile(fromQsp(file));
-	//			if (fileExists(saveFile)) {
-	//				QSP_BOOL res = QSPOpenSavedGame(widen(saveFile).c_str(), QSP_FALSE);
-	//				CheckQspResult(res, "QSPOpenSavedGame");
-	//			}
-	//		} else {
-	//			jsExecBuffer = jsExecBuffer + ";qspLoadGame();";
-	//		}
+		//Контекст библиотеки
+		if (file != 0) {
+			// Библиотека возвращает абсолютный путь к файлу сохранения,
+			// вычисляемый по пути к файлу игры.
+			// Таким образом, если игра запущена из пути "D:\CoolGame\game.qsp",
+			// то при выполнении команды 
+			// OPENGAME 'saves\save1.sav'
+			// сейв будет загружаться из папки игры:
+			// "D:\CoolGame\saves\save1.sav"
+			// Нас это не устраивает, 
+			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
+			// Поэтому мы меняем путь, заданный библиотекой, на свой.
+			string saveFile = getRealSaveFile(fromQsp(file));
+			if (fileExists(saveFile)) {
+				QSP_BOOL res = QSPOpenSavedGame(widen(saveFile).c_str(), QSP_FALSE);
+				Library::CheckQspResult(res, "QSPOpenSavedGame");
+			}
+		} else {
+			jsExecBuffer = jsExecBuffer + ";qspLoadGame();";
+		}
 	}
 	
 	void LibraryListener::SaveGameStatus(QSP_CHAR* file)

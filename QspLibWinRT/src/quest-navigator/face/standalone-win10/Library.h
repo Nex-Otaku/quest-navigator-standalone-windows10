@@ -20,6 +20,9 @@ namespace QuestNavigator
 		// Остановка потока библиотеки
 		void StopLibThread();
 
+		// Проверка результатов выполнения библиотечного кода
+		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
+
 	protected:
 		// Для вызова из статики.
 		EventManager* getEventManager();
@@ -32,9 +35,6 @@ namespace QuestNavigator
 		// Основная функция потока библиотеки
 		static unsigned int __stdcall libThreadFunc(void* pvParam);
 		
-		// Проверка результатов выполнения библиотечного кода
-		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
-
 		// ********************************************************************
 		// Переменные библиотеки
 		// ********************************************************************
