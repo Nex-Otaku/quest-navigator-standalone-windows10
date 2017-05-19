@@ -216,6 +216,12 @@ namespace QuestNavigator
 		runSyncEvent(evLibIsReady);
 	}
 
+	void EventManager::gameStopped()
+	{
+		// Ѕиблиотека сообщила, что игра остановлена.
+		runSyncEvent(evGameStopped);
+	}
+
 	DWORD EventManager::waitForAnyEvent()
 	{
 		// ќжидаем любое из событий синхронизации

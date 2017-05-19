@@ -9,6 +9,7 @@
 #include "..\..\core\events.h"
 #include "..\..\core\encoding.h"
 #include "LibraryListener.h"
+#include "Timer.h"
 
 namespace QuestNavigator
 {
@@ -21,10 +22,12 @@ namespace QuestNavigator
 	}
 
 	void Library::inject(
-		EventManager* eventManager
+		EventManager* eventManager,
+		Timer* timer
 	)
 	{
 		this->eventManager = eventManager;
+		this->timer = timer;
 	}
 
 	// ********************************************************************
@@ -79,18 +82,11 @@ namespace QuestNavigator
 		this->eventManager->freeSharedData();
 	}
 
-	EventManager * Library::getEventManager()
-	{
-		return this->eventManager;
-	}
-	
 	// Основная функция потока библиотеки. Вызывается только раз за весь жизненный цикл программы.
 	unsigned int Library::libThreadFunc(void* pvParam)
 	{
 		// Сохраняем указатель на объект Library.
 		Library* library = (Library*)pvParam;
-		// Получаем указатель на EventManager.
-		EventManager* eventManager = library->getEventManager();
 	
 		// Все функции библиотеки QSP (QSPInit и т.д.) 
 		// вызываются только внутри потока библиотеки.
@@ -138,10 +134,10 @@ namespace QuestNavigator
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
-			eventManager->libIsReady();
+			library->eventManager->libIsReady();
 			// Ожидаем любое из событий синхронизации
-			DWORD res = eventManager->waitForAnyEvent();
-			if (!eventManager->isValidEvent(res)) {
+			DWORD res = library->eventManager->waitForAnyEvent();
+			if (!library->eventManager->isValidEvent(res)) {
 				showError("Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;
 			} else {
@@ -151,7 +147,7 @@ namespace QuestNavigator
 				case evRunGame:
 					{
 						// Запуск игры
-						SharedDataDto dto = eventManager->getSharedData(ev);
+						SharedDataDto dto = library->eventManager->getSharedData(ev);
 						string path = dto.str;
 						int isStandalone = dto.num;
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
@@ -176,18 +172,18 @@ namespace QuestNavigator
 					break;
 				case evStopGame:
 					{
-						//// Остановка игры
+						// Остановка игры
 	
-						//// Останавливаем таймер.
-						//stopTimer();
+						// Останавливаем таймер.
+						library->timer->stopTimer();
 	
-						////останавливаем музыку
-						//CloseFile(NULL);
+						//останавливаем музыку
+						LibraryListener::CloseFile(NULL);
 	
-						//// Очищаем буфер JS-команд, передаваемых из игры
-						//LibraryListener::resetJsExecBuffer();
+						// Очищаем буфер JS-команд, передаваемых из игры
+						LibraryListener::resetJsExecBuffer();
 	
-						//runSyncEvent(evGameStopped);
+						library->eventManager->gameStopped();
 					}
 					break;
 				case evShutdown:

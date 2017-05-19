@@ -44,6 +44,7 @@ namespace QuestNavigator
 
 		void shutdown();
 		void libIsReady();
+		void gameStopped();
 
 		DWORD waitForAnyEvent();
 		bool isValidEvent(DWORD waitResult);

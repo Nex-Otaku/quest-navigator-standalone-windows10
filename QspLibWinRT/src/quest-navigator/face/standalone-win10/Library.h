@@ -2,6 +2,7 @@
 
 #include "EventManager.h"
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
+#include "Timer.h"
 
 namespace QuestNavigator
 {
@@ -12,7 +13,8 @@ namespace QuestNavigator
 		~Library();
 
 		void Library::inject(
-			EventManager* eventManager
+			EventManager* eventManager,
+			Timer* timer
 		);
 
 		// Запуск потока библиотеки
@@ -23,12 +25,9 @@ namespace QuestNavigator
 		// Проверка результатов выполнения библиотечного кода
 		static void CheckQspResult(QSP_BOOL successfull, string failMsg);
 
-	protected:
-		// Для вызова из статики.
-		EventManager* getEventManager();
-
 	private:
 		EventManager* eventManager;
+		Timer* timer;
 
 		HANDLE libThread;
 
