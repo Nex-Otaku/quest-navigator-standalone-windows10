@@ -36,7 +36,7 @@ namespace QuestNavigator
 		//		static void qspError(JSObject error);
 		//		static void qspMenu(JSArray menu);
 		//		static void qspInput(WebString text);
-		//		static void qspView(WebString path);
+		static void qspView(string path);
 		static void qspSetInputString(string text);
 	};
 }

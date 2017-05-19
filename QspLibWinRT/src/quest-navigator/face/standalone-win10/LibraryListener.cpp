@@ -11,6 +11,7 @@
 #include "..\..\core\sound.h"
 #include "Timer.h"
 #include "EventManager.h"
+#include "..\..\core\dialogs.h"
 
 namespace QuestNavigator
 {
@@ -193,9 +194,9 @@ namespace QuestNavigator
 	
 	void LibraryListener::PlayFile(QSP_CHAR* file, int volume)
 	{
-	//		//Контекст библиотеки
-	//		string fileName = fromQsp(file);
-	//		SoundManager::play(fileName, volume);
+		//Контекст библиотеки
+		string fileName = fromQsp(file);
+		SoundManager::play(fileName, volume);
 	}
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
@@ -207,27 +208,27 @@ namespace QuestNavigator
 	
 	void LibraryListener::CloseFile(QSP_CHAR* file)
 	{
-	//		//Контекст библиотеки
-	//		bool closeAll = file == NULL;
-	//		SoundManager::close(closeAll, fromQsp(file));
+		//Контекст библиотеки
+		bool closeAll = file == NULL;
+		SoundManager::close(closeAll, fromQsp(file));
 	}
 	
 	void LibraryListener::ShowPicture(QSP_CHAR* file)
 	{
-	//		//Контекст библиотеки
-	//		string fileName = getRightPath(fromQsp(file));
-	//
-	//		// Проверяем читаемость файла.
-	//		// Если файл не существует или не читается, выходим.
-	//		if (fileName.length() > 0) {
-	//			if (!fileExists(fileName)) {
-	//				showError("Оператор VIEW. Не найден файл: " + fileName);
-	//				return;
-	//			}
-	//		}
-	//
-	//		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку
-	//		qspView(ToWebString(fileName));
+		//Контекст библиотеки
+		string fileName = getRightPath(fromQsp(file));
+	
+		// Проверяем читаемость файла.
+		// Если файл не существует или не читается, выходим.
+		if (fileName.length() > 0) {
+			if (!fileExists(fileName)) {
+				showError("Оператор VIEW. Не найден файл: " + fileName);
+				return;
+			}
+		}
+	
+		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку
+		instance()->jsExecutor->qspView(fileName);
 	}
 	
 	void LibraryListener::InputBox(const QSP_CHAR* prompt, QSP_CHAR* buffer, int maxLen)
