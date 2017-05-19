@@ -4,6 +4,7 @@
 #include "JsExecutor.h"
 #include "Timer.h"
 #include "EventManager.h"
+#include "..\..\core\dto\MenuItemDto.h"
 
 namespace QuestNavigator
 {
@@ -61,6 +62,7 @@ namespace QuestNavigator
 		static string lastMainDesc;
 		static int objectSelectionIndex;
 		static clock_t gameStartTime;
+		static vector<MenuItemDto> menuList;
 
 		// Убираем конструктор в приватную область,
 		// так как мы используем синглтон, 

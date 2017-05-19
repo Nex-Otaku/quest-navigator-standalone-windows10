@@ -247,6 +247,7 @@
     <ClInclude Include="src\quest-navigator\core\configuration.h" />
     <ClInclude Include="src\quest-navigator\core\dialogs.h" />
     <ClInclude Include="src\quest-navigator\core\dto\GroupedContentDto.h" />
+    <ClInclude Include="src\quest-navigator\core\dto\MenuItemDto.h" />
     <ClInclude Include="src\quest-navigator\core\dto\SaveSlotsDto.h" />
     <ClInclude Include="src\quest-navigator\core\dto\SharedDataDto.h" />
     <ClInclude Include="src\quest-navigator\core\dto\SkinDto.h" />

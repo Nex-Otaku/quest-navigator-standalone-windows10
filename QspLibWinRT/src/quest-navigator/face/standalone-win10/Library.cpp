@@ -32,7 +32,6 @@ namespace QuestNavigator
 	// ********************************************************************
 	
 	//QnApplicationListener* QnApplicationListener::listener = NULL;
-	//vector<ContainerMenuItem> QnApplicationListener::menuList;
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
 	void Library::StartLibThread()

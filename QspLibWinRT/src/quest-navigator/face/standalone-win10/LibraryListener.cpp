@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "EventManager.h"
 #include "..\..\core\dialogs.h"
+#include "..\..\core\dto\MenuItemDto.h"
 
 namespace QuestNavigator
 {
@@ -52,6 +53,7 @@ namespace QuestNavigator
 	string LibraryListener::lastMainDesc = "";
 	int LibraryListener::objectSelectionIndex = -2;
 	clock_t LibraryListener::gameStartTime = 0;
+	vector<MenuItemDto> LibraryListener::menuList;
 
 	void LibraryListener::RefreshInt(int isRedraw)
 	{
@@ -298,47 +300,43 @@ namespace QuestNavigator
 	
 	void LibraryListener::AddMenuItem(QSP_CHAR* name, QSP_CHAR* imgPath)
 	{
-	//		//Контекст библиотеки
-	//		ContainerMenuItem item;
-	//		item.imgPath = getRightPath(fromQsp(imgPath));
-	//		item.name = fromQsp(name);
-	//		menuList.push_back(item);
+		//Контекст библиотеки
+		MenuItemDto item;
+		item.image = getRightPath(fromQsp(imgPath));
+		item.desc = fromQsp(name);
+		menuList.push_back(item);
 	}
 	
 	int LibraryListener::ShowMenu()
 	{
-	//		//Контекст библиотеки
-	//
-	//		JSArray jsMenuList;
-	//		for (int i = 0; i < (int)menuList.size(); i++) {
-	//			JSObject jsMenuItem;
-	//			jsMenuItem.SetProperty(WSLit("image"), ToWebString(menuList[i].imgPath));
-	//			jsMenuItem.SetProperty(WSLit("desc"), ToWebString(Skin::applyHtmlFixes(menuList[i].name)));
-	//			jsMenuList.Push(jsMenuItem);
-	//		}
-	//
-	//		// Передаём данные в поток UI
-	//		qspMenu(jsMenuList);
-	//
-	//		// Ждём закрытия диалога
-	//		waitForSingleLib(evMenuClosed);
-	//
-	//		// Возвращаем результат
-	//		int result = -1;
-	//		lockData();
-	//		result = g_sharedData[evMenuClosed].num;
-	//		unlockData();
-	//
-	//		return result;
+		//Контекст библиотеки
 
-		//STUB
-		return -1;
+		// Формируем список меню с учётом настроек скина.
+		vector<MenuItemDto> formattedMenuList;
+		for (int i = 0; i < (int)menuList.size(); i++) {
+			MenuItemDto item;
+			item.image = menuList[i].image;
+			item.desc = Skin::applyHtmlFixes(menuList[i].desc);
+			formattedMenuList.push_back(item);
+		}
+	
+		// Передаём данные в поток UI
+		instance()->jsExecutor->qspMenu(formattedMenuList);
+	
+		// Ждём закрытия диалога
+		instance()->eventManager->waitForMenuClosed();
+	
+		// Возвращаем результат
+		SharedDataDto dto = instance()->eventManager->getSharedData(evMenuClosed);
+		int result = dto.num;
+	
+		return result;
 	}
 	
 	void LibraryListener::DeleteMenu()
 	{
-	//		//Контекст библиотеки
-	//		menuList.clear();
+		//Контекст библиотеки
+		menuList.clear();
 	}
 	
 	void LibraryListener::Wait(int msecs)

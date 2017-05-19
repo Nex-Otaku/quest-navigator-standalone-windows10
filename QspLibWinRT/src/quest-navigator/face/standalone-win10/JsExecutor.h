@@ -1,8 +1,10 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "..\..\core\dto\SaveSlotsDto.h"
 #include "..\..\core\dto\GroupedContentDto.h"
+#include "..\..\core\dto\MenuItemDto.h"
 
 using namespace std;
 
@@ -34,7 +36,7 @@ namespace QuestNavigator
 		static void qspSetGroupedContent(GroupedContentDto content);
 		static void qspMsg(string text);
 		//		static void qspError(JSObject error);
-		//		static void qspMenu(JSArray menu);
+		static void qspMenu(vector<MenuItemDto> menu);
 		static void qspInput(string text);
 		static void qspView(string path);
 		static void qspSetInputString(string text);

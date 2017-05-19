@@ -31,13 +31,6 @@ namespace QspLibWinRT
 	};
 }
 
-//	// Контейнер для элемента меню
-//	struct ContainerMenuItem {
-//		string imgPath;
-//		string name;
-//	};
-//
-//
 //	class QnApplicationListener : public Application::Listener, public Awesomium::WebViewListener::Load {
 //		Application* app_;
 //		View* view_;

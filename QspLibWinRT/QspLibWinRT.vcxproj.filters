@@ -496,5 +496,8 @@
     <ClInclude Include="src\quest-navigator\core\dto\GroupedContentDto.h">
       <Filter>quest-navigator\core\dto</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\dto\MenuItemDto.h">
+      <Filter>quest-navigator\core\dto</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

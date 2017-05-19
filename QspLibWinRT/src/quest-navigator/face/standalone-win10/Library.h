@@ -59,5 +59,4 @@ namespace QuestNavigator
 	//		// ********************************************************************
 	//
 	//		static QnApplicationListener* listener;
-	//		static vector<ContainerMenuItem> menuList;
 }
