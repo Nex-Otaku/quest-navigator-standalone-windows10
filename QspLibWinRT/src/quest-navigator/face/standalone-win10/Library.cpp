@@ -10,6 +10,8 @@
 #include "..\..\core\encoding.h"
 #include "LibraryListener.h"
 #include "Timer.h"
+#include "..\..\core\files.h"
+#include "..\..\core\utils.h"
 
 namespace QuestNavigator
 {
@@ -236,59 +238,53 @@ namespace QuestNavigator
 					break;
 				case evMute:
 					{
-						//// Включение / выключение звука
-						//bool flag = false;
-						//lockData();
-						//flag = g_sharedData[evMute].flag;
-						//unlockData();
-						//SoundManager::mute(flag);
+						// Включение / выключение звука
+						SharedDataDto dto = library->eventManager->getSharedData(evMute);
+						bool flag = dto.flag;
+						SoundManager::mute(flag);
 					}
 					break;
 				case evLoadSlotSelected:
 					{
-						//int index = 0;
-						//lockData();
-						//index = g_sharedData[evLoadSlotSelected].num;
-						//unlockData();
-						//LibraryListener::resetJsExecBuffer();
+						SharedDataDto dto = library->eventManager->getSharedData(evLoadSlotSelected);
+						int index = dto.num;
+						LibraryListener::resetJsExecBuffer();
 	
-						//string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
-						//if (!fileExists(path)) {
-						//	showError("Не найден файл сохранения");
-						//	break;
-						//}
+						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
+						if (!fileExists(path)) {
+							showError("Не найден файл сохранения");
+							break;
+						}
 	
-						//// Выключаем музыку
-						//CloseFile(NULL);
+						// Выключаем музыку
+						LibraryListener::CloseFile(NULL);
 	
-						//// Загружаем сохранение
-						//QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
-						//CheckQspResult(res, "QSPOpenSavedGame");
+						// Загружаем сохранение
+						QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
+						CheckQspResult(res, "QSPOpenSavedGame");
 	
-						//// Запускаем таймер
-						//startTimer();
+						// Запускаем таймер
+						library->timer->startTimer();
 					}
 					break;
 				case evSaveSlotSelected:
 					{
-						//int index = 0;
-						//lockData();
-						//index = g_sharedData[evSaveSlotSelected].num;
-						//unlockData();
-						//LibraryListener::resetJsExecBuffer();
+						SharedDataDto dto = library->eventManager->getSharedData(evSaveSlotSelected);
+						int index = dto.num;
+						LibraryListener::resetJsExecBuffer();
 	
-						//string saveDir = Configuration::getString(ecpSaveDir);
-						//if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-						//	showError("Не удалось создать папку для сохранения: " + saveDir);
-						//	break;
-						//}
+						string saveDir = Configuration::getString(ecpSaveDir);
+						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
+							showError("Не удалось создать папку для сохранения: " + saveDir);
+							break;
+						}
 	
-						//string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
+						string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
 	
-						//QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
-						//CheckQspResult(res, "QSPSaveGame");
+						QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
+						CheckQspResult(res, "QSPSaveGame");
 	
-						//startTimer();
+						library->timer->startTimer();
 					}
 					break;
 				case evInputStringChanged:
