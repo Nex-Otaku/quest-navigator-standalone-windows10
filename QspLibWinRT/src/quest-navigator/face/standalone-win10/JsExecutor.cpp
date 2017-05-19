@@ -37,6 +37,12 @@ namespace QuestNavigator
 		//		jsCallApiFromLib("qspMsg", text);
 	}
 
+	void JsExecutor::qspInput(string text)
+	{
+		//		// Контекст библиотеки
+		//		jsCallApiFromLib("qspInput", text);
+	}
+
 	void JsExecutor::qspView(string path)
 	{
 		//		// Контекст библиотеки

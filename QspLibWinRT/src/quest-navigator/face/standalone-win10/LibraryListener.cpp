@@ -233,32 +233,30 @@ namespace QuestNavigator
 	
 	void LibraryListener::InputBox(const QSP_CHAR* prompt, QSP_CHAR* buffer, int maxLen)
 	{
-	//		//Контекст библиотеки
-	//
-	//		// Обновляем скин
-	//		Skin::updateBaseVars();
-	//		Skin::updateInputDialog();
-	//		// Если что-то изменилось, то передаем в яваскрипт
-	//		if (Skin::isSomethingChanged())
-	//		{
-	//			RefreshInt(QSP_TRUE);
-	//		}
-	//
-	//		string promptValue = fromQsp(prompt);
-	//
-	//		// Передаём данные в поток UI
-	//		qspInput(ToWebString(promptValue));
-	//
-	//		// Ждём закрытия диалога
-	//		waitForSingleLib(evInputClosed);
-	//
-	//		// Возвращаем результат в библиотеку
-	//		string result = "";
-	//		lockData();
-	//		result = g_sharedData[evInputClosed].str;
-	//		unlockData();
-	//		wstring wResult = widen(result);
-	//		wcsncpy(buffer, wResult.c_str(), maxLen);
+		//Контекст библиотеки
+	
+		// Обновляем скин
+		Skin::updateBaseVars();
+		Skin::updateInputDialog();
+		// Если что-то изменилось, то передаем в яваскрипт
+		if (Skin::isSomethingChanged())
+		{
+			RefreshInt(QSP_TRUE);
+		}
+	
+		string promptValue = fromQsp(prompt);
+	
+		// Передаём данные в поток UI
+		instance()->jsExecutor->qspInput(promptValue);
+	
+		// Ждём закрытия диалога
+		instance()->eventManager->waitForInputClosed();
+	
+		// Возвращаем результат в библиотеку
+		SharedDataDto dto = instance()->eventManager->getSharedData(evInputClosed);
+		string result = dto.str;
+		wstring wResult = widen(result);
+		wcsncpy(buffer, wResult.c_str(), maxLen);
 	}
 	
 	
