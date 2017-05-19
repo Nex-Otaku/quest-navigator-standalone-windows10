@@ -426,4 +426,9 @@ namespace QuestNavigator
 	{
 		gameStartTime = clock();
 	}
+
+	void LibraryListener::setObjectSelectionIndex(int index)
+	{
+		objectSelectionIndex = index;
+	}
 }

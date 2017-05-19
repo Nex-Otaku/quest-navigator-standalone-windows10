@@ -194,43 +194,37 @@ namespace QuestNavigator
 					break;
 				case evExecuteCode:
 					{
-						//// Выполнение строки кода
-						//string code = "";
-						//lockData();
-						//code = g_sharedData[evExecuteCode].str;
-						//unlockData();
-						//wstring wCode = widen(code);
-						//QSP_BOOL res = QSPExecString(wCode.c_str(), QSP_TRUE);
-						//CheckQspResult(res, "QSPExecString");
+						// Выполнение строки кода
+						SharedDataDto dto = library->eventManager->getSharedData(evExecuteCode);
+						string code = dto.str;
+						wstring wCode = widen(code);
+						QSP_BOOL res = QSPExecString(wCode.c_str(), QSP_TRUE);
+						CheckQspResult(res, "QSPExecString");
 					}
 					break;
 				case evExecuteAction:
 					{
-						//// Выполнение действия
-						//int pos = 0;
-						//lockData();
-						//pos = g_sharedData[evExecuteAction].num;
-						//unlockData();
-						//QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
-						//CheckQspResult(res, "QSPSetSelActionIndex");
-						//res = QSPExecuteSelActionCode(QSP_TRUE);
-						//CheckQspResult(res, "QSPExecuteSelActionCode");
+						// Выполнение действия
+						SharedDataDto dto = library->eventManager->getSharedData(evExecuteAction);
+						int pos = dto.num;
+						QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
+						CheckQspResult(res, "QSPSetSelActionIndex");
+						res = QSPExecuteSelActionCode(QSP_TRUE);
+						CheckQspResult(res, "QSPExecuteSelActionCode");
 					}
 					break;
 				case evSelectObject:
 					{
-						//// Выбор предмета
-						//int pos = 0;
-						//lockData();
-						//pos = g_sharedData[evSelectObject].num;
-						//unlockData();
-						//// Костыль - следим за номером выбранного предмета,
-						//// так как иначе невозможно будет обновить
-						//// окно предметов при вызове UNSEL в ONOBJSEL.
-						//// Нужно исправить это в библиотеке QSP.
-						//objectSelectionIndex = -2;
-						//QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
-						//CheckQspResult(res, "QSPSetSelObjectIndex");
+						// Выбор предмета
+						SharedDataDto dto = library->eventManager->getSharedData(evSelectObject);
+						int pos = dto.num;
+						// Костыль - следим за номером выбранного предмета,
+						// так как иначе невозможно будет обновить
+						// окно предметов при вызове UNSEL в ONOBJSEL.
+						// Нужно исправить это в библиотеке QSP.
+						LibraryListener::setObjectSelectionIndex(-2);
+						QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
+						CheckQspResult(res, "QSPSetSelObjectIndex");
 					}
 					break;
 				case evTimer:

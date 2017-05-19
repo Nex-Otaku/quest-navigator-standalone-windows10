@@ -57,6 +57,10 @@ namespace QuestNavigator
 		static void resetJsExecBuffer();
 		// Сбрасываем счётчик миллисекунд.
 		static void resetMsCount();
+		// Устанавливаем номер выделенного предмета.
+		// TODO исправить в библиотеке, чтобы эта переменная не требовалась.
+		// См. обработку evSelectObject в Library.
+		static void setObjectSelectionIndex(int index);
 	private:
 		static string jsExecBuffer;
 		static string lastMainDesc;
