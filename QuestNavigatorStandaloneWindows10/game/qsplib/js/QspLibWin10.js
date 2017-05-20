@@ -10,20 +10,14 @@ var qspLibMode = "WINDOWS10";       // "AIR", "PHONEGAP", "AWESOMIUM" - уста
 
 var QspLib = null;
 
+$(function () {
+    console.log("ready!");
+});
 function onWebDeviceReady() {
 	if (QspLib !== null) {
 		throw "onWebDeviceReady must be called only once!";
 	}
-	// Эта функция вызывается из движка Awesomium
-	// в обработчике завершения загрузки страницы.
-	// Только к этому моменту мы можем быть уверены,
-	// что созданный движком Awesomium библиотечный объект "QspLibAwesomium"
-	// уже загружен и нормально обработает вызовы колбэков.
-	// Событие "$(document).ready" срабатывает раньше.
-	if (typeof QspLibAwesomium == 'undefined') {
-		throw "QspLibAwesomium is not available in \"document.ready\"";
-	}
-	QspLib = QspLibAwesomium;
+    QspLib = new QspLibWinRT.QspLib();
 	// Запускаем API.
 	qspInitApi();
 	// Самодельный диалог alert, 
