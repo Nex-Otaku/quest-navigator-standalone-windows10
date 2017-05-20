@@ -273,9 +273,6 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsExecutor.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp">
       <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClCompile>
@@ -292,6 +289,9 @@
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\LibraryListener.cpp">
+      <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClCompile>
   </ItemGroup>
@@ -460,9 +460,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsExecutor.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h">
-      <Filter>quest-navigator\face\standalone-win10</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h">
       <Filter>quest-navigator\face\standalone-win10\completed</Filter>
     </ClInclude>
@@ -501,6 +498,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\core\dto\ErrorDto.h">
       <Filter>quest-navigator\core\dto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h">
+      <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

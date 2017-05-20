@@ -16,7 +16,8 @@
 
 namespace QuestNavigator
 {
-	Library::Library()
+	Library::Library() 
+		: libThread(NULL)
 	{
 	}
 
@@ -34,12 +35,6 @@ namespace QuestNavigator
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
 	}
-
-	// ********************************************************************
-	// Переменные библиотеки
-	// ********************************************************************
-	
-	//QnApplicationListener* QnApplicationListener::listener = NULL;
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
 	void Library::StartLibThread()
