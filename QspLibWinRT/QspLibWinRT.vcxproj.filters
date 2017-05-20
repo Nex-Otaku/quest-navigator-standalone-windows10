@@ -499,5 +499,8 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\LibraryListener.h">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\dto\ErrorDto.h">
+      <Filter>quest-navigator\core\dto</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

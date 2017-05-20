@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "..\..\core\files.h"
 #include "..\..\core\utils.h"
+#include "..\..\core\dto\ErrorDto.h"
 
 namespace QuestNavigator
 {
@@ -25,11 +26,13 @@ namespace QuestNavigator
 
 	void Library::inject(
 		EventManager* eventManager,
-		Timer* timer
+		Timer* timer,
+		JsExecutor* jsExecutor
 	)
 	{
 		this->eventManager = eventManager;
 		this->timer = timer;
+		this->jsExecutor = jsExecutor;
 	}
 
 	// ********************************************************************
@@ -153,7 +156,7 @@ namespace QuestNavigator
 						string path = dto.str;
 						int isStandalone = dto.num;
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
-						CheckQspResult(res, "QSPLoadGameWorld");
+						library->CheckQspResult(res, "QSPLoadGameWorld");
 						// Очищаем скин
 						Skin::resetUpdate();
 						Skin::resetSettings();
@@ -169,7 +172,7 @@ namespace QuestNavigator
 						LibraryListener::resetMsCount();
 	
 						res = QSPRestartGame(QSP_TRUE);
-						CheckQspResult(res, "QSPRestartGame");
+						library->CheckQspResult(res, "QSPRestartGame");
 					}
 					break;
 				case evStopGame:
@@ -201,7 +204,7 @@ namespace QuestNavigator
 						string code = dto.str;
 						wstring wCode = widen(code);
 						QSP_BOOL res = QSPExecString(wCode.c_str(), QSP_TRUE);
-						CheckQspResult(res, "QSPExecString");
+						library->CheckQspResult(res, "QSPExecString");
 					}
 					break;
 				case evExecuteAction:
@@ -210,9 +213,9 @@ namespace QuestNavigator
 						SharedDataDto dto = library->eventManager->getSharedData(evExecuteAction);
 						int pos = dto.num;
 						QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
-						CheckQspResult(res, "QSPSetSelActionIndex");
+						library->CheckQspResult(res, "QSPSetSelActionIndex");
 						res = QSPExecuteSelActionCode(QSP_TRUE);
-						CheckQspResult(res, "QSPExecuteSelActionCode");
+						library->CheckQspResult(res, "QSPExecuteSelActionCode");
 					}
 					break;
 				case evSelectObject:
@@ -226,14 +229,14 @@ namespace QuestNavigator
 						// Нужно исправить это в библиотеке QSP.
 						LibraryListener::setObjectSelectionIndex(-2);
 						QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
-						CheckQspResult(res, "QSPSetSelObjectIndex");
+						library->CheckQspResult(res, "QSPSetSelObjectIndex");
 					}
 					break;
 				case evTimer:
 					{
 						// Таймер
 						QSP_BOOL res = QSPExecCounter(QSP_TRUE);
-						CheckQspResult(res, "QSPExecCounter");
+						library->CheckQspResult(res, "QSPExecCounter");
 					}
 					break;
 				case evMute:
@@ -261,7 +264,7 @@ namespace QuestNavigator
 	
 						// Загружаем сохранение
 						QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
-						CheckQspResult(res, "QSPOpenSavedGame");
+						library->CheckQspResult(res, "QSPOpenSavedGame");
 	
 						// Запускаем таймер
 						library->timer->startTimer();
@@ -282,25 +285,23 @@ namespace QuestNavigator
 						string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
 	
 						QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
-						CheckQspResult(res, "QSPSaveGame");
+						library->CheckQspResult(res, "QSPSaveGame");
 	
 						library->timer->startTimer();
 					}
 					break;
 				case evInputStringChanged:
 					{
-						//// Изменился текст в строке ввода
-						//string text = "";
-						//lockData();
-						//text = g_sharedData[evInputStringChanged].str;
-						//unlockData();
-						//QSPSetInputStrText(widen(text).c_str());
+						// Изменился текст в строке ввода
+						SharedDataDto dto = library->eventManager->getSharedData(evInputStringChanged);
+						string text = dto.str;
+						QSPSetInputStrText(widen(text).c_str());
 					}
 					break;
 				case evInputStringEntered:
 					{
 						QSP_BOOL res = QSPExecUserInput(QSP_TRUE);
-						CheckQspResult(res, "QSPExecUserInput");
+						library->CheckQspResult(res, "QSPExecUserInput");
 					}
 					break;
 				default:
@@ -327,39 +328,39 @@ namespace QuestNavigator
 	void Library::CheckQspResult(QSP_BOOL successfull, string failMsg)
 	{
 		//Контекст библиотеки
-		//if (successfull == QSP_FALSE)
-		//{
-		//	//Контекст библиотеки
-		//	int line = -1;
-		//	int actIndex = -1;
-		//	string desc = "";
-		//	string loc = "";
-		//	int errorNum = -1;
-		//	QSP_CHAR* pErrorLoc = NULL;
-		//	QSPGetLastErrorData(&errorNum, &pErrorLoc, &actIndex, &line);
-		//	loc = Skin::applyHtmlFixes(fromQsp(pErrorLoc));
-		//	desc = Skin::applyHtmlFixes(fromQsp(QSPGetErrorDesc(errorNum)));
+		if (successfull == QSP_FALSE)
+		{
+			//Контекст библиотеки
+			int line = -1;
+			int actIndex = -1;
+			string desc = "";
+			string loc = "";
+			int errorNum = -1;
+			QSP_CHAR* pErrorLoc = NULL;
+			QSPGetLastErrorData(&errorNum, &pErrorLoc, &actIndex, &line);
+			loc = Skin::applyHtmlFixes(fromQsp(pErrorLoc));
+			desc = Skin::applyHtmlFixes(fromQsp(QSPGetErrorDesc(errorNum)));
 	
-		//	// Обновляем скин
-		//	Skin::updateBaseVars();
-		//	Skin::updateMsgDialog();
-		//	// Если что-то изменилось, то передаем в яваскрипт
-		//	if (Skin::isSomethingChanged())
-		//	{
-		//		RefreshInt(QSP_TRUE);
-		//	}
+			// Обновляем скин
+			Skin::updateBaseVars();
+			Skin::updateMsgDialog();
+			// Если что-то изменилось, то передаем в яваскрипт
+			if (Skin::isSomethingChanged())
+			{
+				LibraryListener::RefreshInt(QSP_TRUE);
+			}
 	
-		//	JSObject jsErrorContainer;
-		//	jsErrorContainer.SetProperty(WSLit("desc"), ToWebString(desc));
-		//	jsErrorContainer.SetProperty(WSLit("loc"), ToWebString(loc));
-		//	jsErrorContainer.SetProperty(WSLit("actIndex"), JSValue(actIndex));
-		//	jsErrorContainer.SetProperty(WSLit("line"), JSValue(line));
+			ErrorDto errorDto;
+			errorDto.desc = desc;
+			errorDto.loc = loc;
+			errorDto.actIndex = actIndex;
+			errorDto.line = line;
 	
-		//	// Передаём данные в поток UI
-		//	qspError(jsErrorContainer);
+			// Передаём данные в поток UI
+			this->jsExecutor->qspError(errorDto);
 	
-		//	// Ждём закрытия диалога
-		//	waitForSingleLib(evErrorClosed);
-		//}
+			// Ждём закрытия диалога
+			this->eventManager->waitForErrorClosed();
+		}
 	}
 }

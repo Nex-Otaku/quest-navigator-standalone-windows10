@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "EventManager.h"
 #include "..\..\core\dto\MenuItemDto.h"
+#include "Library.h"
 
 namespace QuestNavigator
 {
@@ -19,7 +20,8 @@ namespace QuestNavigator
 		void inject(
 			JsExecutor* jsExecutor,
 			Timer* timer,
-			EventManager* eventManager
+			EventManager* eventManager,
+			Library* library
 		);
 
 		// ********************************************************************
@@ -78,5 +80,6 @@ namespace QuestNavigator
 		JsExecutor* jsExecutor;
 		Timer* timer;
 		EventManager* eventManager;
+		Library* library;
 	};
 }

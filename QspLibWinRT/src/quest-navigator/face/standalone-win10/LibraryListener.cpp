@@ -26,12 +26,14 @@ namespace QuestNavigator
 	void LibraryListener::inject(
 		JsExecutor* jsExecutor,
 		Timer* timer,
-		EventManager* eventManager
+		EventManager* eventManager,
+		Library* library
 	)
 	{
 		this->jsExecutor = jsExecutor;
 		this->timer = timer;
 		this->eventManager = eventManager;
+		this->library = library;
 	}
 
 	LibraryListener::LibraryListener()
@@ -383,7 +385,7 @@ namespace QuestNavigator
 			string saveFile = getRealSaveFile(fromQsp(file));
 			if (fileExists(saveFile)) {
 				QSP_BOOL res = QSPOpenSavedGame(widen(saveFile).c_str(), QSP_FALSE);
-				Library::CheckQspResult(res, "QSPOpenSavedGame");
+				instance()->library->CheckQspResult(res, "QSPOpenSavedGame");
 			}
 		} else {
 			jsExecBuffer = jsExecBuffer + ";qspLoadGame();";
@@ -411,7 +413,7 @@ namespace QuestNavigator
 			// Поэтому мы меняем путь, заданный библиотекой, на свой.
 			string saveFile = getRealSaveFile(fromQsp(file));
 			QSP_BOOL res = QSPSaveGame(widen(saveFile).c_str(), QSP_FALSE);
-			Library::CheckQspResult(res, "QSPSaveGame");
+			instance()->library->CheckQspResult(res, "QSPSaveGame");
 		} else {
 			jsExecBuffer = jsExecBuffer + ";qspSaveGame();";
 		}
