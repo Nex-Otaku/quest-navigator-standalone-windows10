@@ -74,6 +74,7 @@
     <Content Include="game\qsplib\js\jquery.retina.js" />
     <Content Include="game\qsplib\js\jquery.transit.js" />
     <Content Include="game\qsplib\js\QspLibAIR.js" />
+    <Content Include="game\qsplib\js\QspLibWin10.js" />
     <Content Include="game\qsplib\js\QspLibAwesomium.js" />
     <Content Include="game\qsplib\js\QspLibPG.js" />
     <Content Include="game\standalone_content\config.xml" />

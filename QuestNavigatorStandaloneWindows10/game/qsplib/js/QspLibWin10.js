@@ -1,6 +1,6 @@
 /*
 *  Bridge:
-*           Javascript -> Awesomium QSP Plugin
+*           Javascript -> QSP Windows10 Runtime Component
 *
 */
 
