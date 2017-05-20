@@ -50,6 +50,12 @@
     <Filter Include="quest-navigator\core\dto">
       <UniqueIdentifier>{51116c6b-3b16-4da0-b05f-320f995897f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\core\completed">
+      <UniqueIdentifier>{9f79cdd5-c894-41ac-bcee-4116c681409e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="quest-navigator\core\drafted">
+      <UniqueIdentifier>{342704ff-4b1c-4f9b-b384-a9974a04a160}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -219,9 +225,6 @@
     <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\configuration.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\core\midi.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
@@ -252,13 +255,7 @@
     <ClCompile Include="src\quest-navigator\core\files.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\dialogs.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\core\encoding.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\strings.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\app\universal\update.cpp">
@@ -285,14 +282,23 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\thread_sync.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\LibraryListener.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\configuration.cpp">
+      <Filter>quest-navigator\core\completed</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\dialogs.cpp">
+      <Filter>quest-navigator\core\drafted</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\strings.cpp">
+      <Filter>quest-navigator\core\completed</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\thread_sync.cpp">
+      <Filter>quest-navigator\core\drafted</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,9 +406,6 @@
     <ClInclude Include="src\quest-navigator\app\universal\gamestock.h">
       <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\configuration.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\core\midi.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
@@ -439,13 +442,7 @@
     <ClInclude Include="src\quest-navigator\core\files.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\dialogs.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\core\encoding.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\strings.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\app\universal\update.h">
@@ -472,12 +469,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\thread_sync.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\events.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\core\dto\SaveSlotsDto.h">
       <Filter>quest-navigator\core\dto</Filter>
     </ClInclude>
@@ -501,6 +492,21 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h">
       <Filter>quest-navigator\face\standalone-win10\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\configuration.h">
+      <Filter>quest-navigator\core\completed</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\dialogs.h">
+      <Filter>quest-navigator\core\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\events.h">
+      <Filter>quest-navigator\core\completed</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\strings.h">
+      <Filter>quest-navigator\core\completed</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\thread_sync.h">
+      <Filter>quest-navigator\core\drafted</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

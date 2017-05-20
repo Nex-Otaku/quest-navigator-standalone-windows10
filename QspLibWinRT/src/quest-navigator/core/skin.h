@@ -114,7 +114,6 @@ namespace QuestNavigator {
 		static void updateMainScreen();
 		static void updateInputDialog();
 		static void updateMsgDialog();
-		//static JSObject getJsSkin();
 		static SkinDto getJsSkin();
 		static bool isSomethingChanged();
 		static void showWindow(int type, int isShow);

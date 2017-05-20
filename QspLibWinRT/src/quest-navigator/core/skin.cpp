@@ -258,7 +258,6 @@ namespace QuestNavigator {
 	SkinDto Skin::getJsSkin()
 	{
 		SkinDto skin;
-		//JSObject skin;
 		if (sizeof(jsParamNames) / sizeof(char*) != espLast) {
 			showError("Список имён не совпадает со списком параметров");
 			return skin;
