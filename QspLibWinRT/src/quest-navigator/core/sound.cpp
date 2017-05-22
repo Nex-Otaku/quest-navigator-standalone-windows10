@@ -76,7 +76,8 @@ namespace QuestNavigator {
 			EnterCriticalSection(&csMusicData);
 		} catch (...) {
 			showError("Не удалось войти в критическую секцию.");
-			exit(eecUnableEnterCs3);
+			// STUB
+			//exit(eecUnableEnterCs3);
 		}
 	}
 
