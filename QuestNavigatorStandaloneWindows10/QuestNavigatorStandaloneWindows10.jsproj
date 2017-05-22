@@ -60,6 +60,7 @@
     </AppxManifest>
     <Content Include="game\qsplib\js\api.js" />
     <Content Include="game\qsplib\js\clickbuster.js" />
+    <Content Include="game\qsplib\js\coreWin10.js" />
     <Content Include="game\qsplib\js\core.js" />
     <Content Include="game\qsplib\js\coreAIR.js" />
     <Content Include="game\qsplib\js\coreAwesomium.js" />
@@ -67,7 +68,10 @@
     <Content Include="game\qsplib\js\corePG-ios.js" />
     <Content Include="game\qsplib\js\fastclick.js" />
     <Content Include="game\qsplib\js\iscroll.js" />
+    <Content Include="game\qsplib\js\jquery-1.12.4.js" />
+    <Content Include="game\qsplib\js\jquery-1.12.4.min.js" />
     <Content Include="game\qsplib\js\jquery-1.8.2.min.js" />
+    <Content Include="game\qsplib\js\jquery-3.2.1.min.js" />
     <Content Include="game\qsplib\js\jquery.borderimage.js" />
     <Content Include="game\qsplib\js\jquery.contextMenu.js" />
     <Content Include="game\qsplib\js\jquery.imagesloaded.js" />

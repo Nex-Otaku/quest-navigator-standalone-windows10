@@ -13,17 +13,26 @@
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
     -->
     <!--script type="text/javascript" src="../qsplib/js/core.js"></!--script-->
+    <script type="text/javascript" src="../qsplib/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../qsplib/js/coreWin10.js"></script>
     <script type="text/javascript" src="../qsplib/js/QspLibWin10.js"></script>
     <script type="text/javascript" src="../qsplib/js/api.js"></script>
     <script type="text/javascript" src="../standalone_content/skins/js/game.js"></script>
     <script type="text/javascript">
+        /*
+        никакой inline-javascript не работает в приложении Windows 10.
+        что-то там с настройками безопасности.
+
+        А нам, в принципе, и не надо.
+
         $(document).ready(function () {
             qspInitApi();
         });
+        */
     </script>
 </head>
 <body>
+    <div id="debug">## DEBUG ##</div>
     <div id="qsp-back-image"></div>
     <!-- Описание основное и дополнительное, действия, инвентарь -->
     <div id="qsp-wrapper-main">

@@ -11,11 +11,15 @@ var qspLibMode = "WINDOWS10";       // "AIR", "PHONEGAP", "AWESOMIUM" - уста
 var QspLib = null;
 
 $(function () {
-    console.log("ready!");
+    // При загрузке документа, запускаем приложение.
+    //onDocumentReady();
+    QspLib = new QspLibWinRT.QspLib();
+    //qspInitApi();
 });
-function onWebDeviceReady() {
+
+function onDocumentReady() {
 	if (QspLib !== null) {
-		throw "onWebDeviceReady must be called only once!";
+        throw "onDocumentReady must be called only once!";
 	}
     QspLib = new QspLibWinRT.QspLib();
 	// Запускаем API.
