@@ -29,6 +29,50 @@ namespace QuestNavigator
 		this->library = library;
 	}
 
+	void App::init()
+	{
+		// Контекст UI
+		
+		if (!Configuration::init() 
+			|| !initOptions("") 
+			|| !prepareGameFiles() 
+			/*|| !registerInstance()*/) {
+			// STUB
+			// Как аварийно завершить работу, пока не ясно.
+			//app_->Quit();
+			return;
+		}
+		
+		// Проверяем обновления (не нужно в standalone)
+		/*
+		#ifdef _WIN32
+		if (!Configuration::getBool(ecpGameIsStandalone)) {
+			checkUpdate();
+		}
+		#endif
+		*/
+		
+		//view_ = View::Create(Configuration::getInt(QuestNavigator::ecpGameWidth), Configuration::getInt(ecpGameHeight));
+		
+		// Перехватчик запросов, выполняющихся при нажатии на ссылку.
+		//resource_interceptor_.setApp(app_);
+		//app_->web_core()->set_resource_interceptor(&resource_interceptor_);
+		
+		initLib();
+		
+		// Привязываем обработку событий загрузки HTML-фреймов.
+		// Интерфейс Awesomium::WebViewListener::Load.
+		//view_->web_view()->set_load_listener(this);
+		
+		// Загружаем страницу с HTML, CSS и JS. 
+		// В обработчике onDocumentReady привяжем глобальный JS-объект для библиотеки.
+		// По завершению загрузки будет вызван обработчик onFinishLoadingFrame.
+		//std::string url = QuestNavigator::getContentUrl();
+		//view_->web_view()->LoadURL(WebURL(ToWebString(url)));
+		
+		//programLoaded = true;
+	}
+
 	void App::initLib()
 	{
 		// Контекст UI

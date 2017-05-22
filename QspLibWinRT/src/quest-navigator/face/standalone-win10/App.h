@@ -20,6 +20,8 @@ namespace QuestNavigator
 			Library* library
 		);
 
+		void init();
+
 		void runGame(string fileName);
 		void StopGame(bool restart);
 		void runNewGame(string contentPath);

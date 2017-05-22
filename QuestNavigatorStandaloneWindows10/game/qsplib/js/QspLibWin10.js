@@ -12,17 +12,26 @@ var QspLib = null;
 
 $(function () {
     // При загрузке документа, запускаем приложение.
-    //onDocumentReady();
-    QspLib = new QspLibWinRT.QspLib();
-    //qspInitApi();
+    //console.log('onDocumentReady();');
+    //$('#debug').append('onDocumentReady();<br>');
+    log('');
+    log('onDocumentReady();');
+    onDocumentReady();
 });
+
+function log(text)
+{
+    $('#debug').append(text + '<br>');
+}
 
 function onDocumentReady() {
 	if (QspLib !== null) {
         throw "onDocumentReady must be called only once!";
 	}
+    log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
 	// Запускаем API.
+    log('qspInitApi();');
 	qspInitApi();
 	// Самодельный диалог alert, 
 	// так как в Awesomium стандартные диалоги не работают.
@@ -42,6 +51,7 @@ function debug(str) {
 function qspLibOnInitApi() {
 	setTimeout( function() { // Delay for Mozilla
 		// Запуск игры по завершению инициализации API.
+        log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
 }

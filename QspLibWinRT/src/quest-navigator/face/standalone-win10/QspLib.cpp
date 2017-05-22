@@ -58,6 +58,9 @@ namespace QspLibWinRT
 			eventManager,
 			library
 		);
+
+		// Запускаем приложение.
+		app->init();
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.
