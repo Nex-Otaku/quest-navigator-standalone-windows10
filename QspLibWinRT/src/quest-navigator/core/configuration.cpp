@@ -20,6 +20,10 @@ namespace QuestNavigator {
 	}
 	string ConfigValue::getString()
 	{
+		if (_type == ecvInvalid) {
+			showError("Параметр конфигурации не инициализирован");
+			return _str;
+		}
 		if (_type != ecvString) {
 			showError("Неправильно указан тип параметра");
 		}
@@ -39,6 +43,10 @@ namespace QuestNavigator {
 	}
 	int ConfigValue::getInt()
 	{
+		if (_type == ecvInvalid) {
+			showError("Параметр конфигурации не инициализирован");
+			return _num;
+		}
 		if (_type != ecvInt) {
 			showError("Неправильно указан тип параметра");
 		}
@@ -58,6 +66,10 @@ namespace QuestNavigator {
 	}
 	bool ConfigValue::getBool()
 	{
+		if (_type == ecvInvalid) {
+			showError("Параметр конфигурации не инициализирован");
+			return _flag;
+		}
 		if (_type != ecvBool) {
 			showError("Неправильно указан тип параметра");
 		}
