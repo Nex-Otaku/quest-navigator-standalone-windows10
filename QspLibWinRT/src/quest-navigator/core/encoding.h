@@ -7,7 +7,7 @@ using namespace std;
 
 namespace QuestNavigator {
 
-	// ”тилиты дл¤ преобразовани¤ строк
+	// Утилиты для преобразования строк
 
 	// UTF-16 wstring -> UTF-16 WebString
 	//WebString WideToWebString(wstring str);
