@@ -7,6 +7,7 @@
 #include "Library.h"
 #include "LibraryListener.h"
 #include "..\..\platform\windows10\UwpJsExecutor.h"
+#include "..\..\platform\windows10\ErrorDebugReporter.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -39,6 +40,8 @@ namespace QspLibWinRT
 		Library* library = new Library();
 		// Создаём синглтон-объект для обработки колбеков библиотеки.
 		LibraryListener* libraryListener = LibraryListener::instance();
+		// Создаём объект для вывода ошибок - в целях отладки.
+		ErrorDebugReporter* errorDebugReporter = ErrorDebugReporter::instance();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -64,6 +67,7 @@ namespace QspLibWinRT
 			library
 		);
 		jsExecutor->inject(uwpJsExecutor);
+		errorDebugReporter->inject(uwpJsExecutor);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

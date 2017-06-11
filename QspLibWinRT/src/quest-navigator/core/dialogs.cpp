@@ -1,4 +1,5 @@
 #include "dialogs.h"
+#include "..\platform\windows10\ErrorDebugReporter.h"
 
 namespace QuestNavigator {
 
@@ -13,6 +14,8 @@ namespace QuestNavigator {
 	// Отображаем ошибку.
 	void showError(string msg)
 	{
-		showMessage(msg, "Ошибка");
+		// Для отладки в Windows 10 подключаем отдельный класс.
+		// showMessage(msg, "Ошибка");
+		ErrorDebugReporter::instance()->showError(msg);
 	}
 }

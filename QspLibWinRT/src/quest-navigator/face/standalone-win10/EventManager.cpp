@@ -390,12 +390,17 @@ namespace QuestNavigator
 		// Проверяем, доступен ли объект синхронизации.
 		// Если недоступен, сразу возвращаем "false".
 		// Для ожидания объекта следует использовать "waitForSingle".
+		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
+		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 2");
 		DWORD res = WaitForSingleObject(handle, 0);
+		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 3");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
+			this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent Сбой синхронизации");
 			showError("Сбой синхронизации");
 			return false;
 		}
+		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 4");
 		return res == WAIT_OBJECT_0;
 	}
 }
