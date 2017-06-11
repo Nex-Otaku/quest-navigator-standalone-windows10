@@ -306,7 +306,9 @@
     <ClCompile Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.cpp">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -521,8 +523,10 @@
     <ClInclude Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.h">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Constants.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
   </ItemGroup>
