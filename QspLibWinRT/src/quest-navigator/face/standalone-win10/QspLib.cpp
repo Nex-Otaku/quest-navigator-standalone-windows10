@@ -6,8 +6,10 @@
 #include "JsExecutor.h"
 #include "Library.h"
 #include "LibraryListener.h"
+#include "..\..\platform\windows10\UwpJsExecutor.h"
 
 using namespace QuestNavigator;
+using namespace QspLibWinRT;
 
 namespace QspLibWinRT
 {
@@ -30,6 +32,9 @@ namespace QspLibWinRT
 		App* app = new App();
 		// Создаём объект для выполнения яваскрипта.
 		JsExecutor* jsExecutor = new JsExecutor();
+		// Создаём вспомогательный объект для выполнения яваскрипта, 
+		// который работает непосредственно на уровне платформы.
+		UwpJsExecutor^ uwpJsExecutor = ref new UwpJsExecutor();
 		// Создаём объект для управления потоком библиотеки.
 		Library* library = new Library();
 		// Создаём синглтон-объект для обработки колбеков библиотеки.
@@ -58,9 +63,20 @@ namespace QspLibWinRT
 			eventManager,
 			library
 		);
+		jsExecutor->inject(uwpJsExecutor);
+
+		// Сохраняем публичное свойство 
+		// для последующей привязки колбеков в яваскрпите
+		// через объект UwpJsExecutor.
+		this->uwpJsExecutor = uwpJsExecutor;
 
 		// Запускаем приложение.
 		app->init();
+	}
+
+	UwpJsExecutor^ QspLib::getUwpJsExecutor()
+	{
+		return this->uwpJsExecutor;
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.

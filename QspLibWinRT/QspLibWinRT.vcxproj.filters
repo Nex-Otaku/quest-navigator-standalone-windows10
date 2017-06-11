@@ -300,6 +300,9 @@
     <ClCompile Include="src\quest-navigator\core\thread_sync.cpp">
       <Filter>quest-navigator\core\drafted</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\windows10\UwpJsExecutor.cpp">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -507,6 +510,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\core\thread_sync.h">
       <Filter>quest-navigator\core\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\windows10\UwpJsExecutor.h">
+      <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

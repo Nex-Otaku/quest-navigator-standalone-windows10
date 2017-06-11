@@ -6,8 +6,10 @@
 #include "..\..\core\dto\GroupedContentDto.h"
 #include "..\..\core\dto\MenuItemDto.h"
 #include "..\..\core\dto\ErrorDto.h"
+#include "..\..\platform\windows10\UwpJsExecutor.h"
 
 using namespace std;
+using namespace QspLibWinRT;
 
 namespace QuestNavigator
 {
@@ -16,6 +18,10 @@ namespace QuestNavigator
 	public:
 		JsExecutor();
 		~JsExecutor();
+
+		void inject(
+			UwpJsExecutor^ uwpJsExecutor
+		);
 
 		// ********************************************************************
 		// ********************************************************************
@@ -27,19 +33,28 @@ namespace QuestNavigator
 		
 		// В потоке Ui
 		//		void processLibJsCall();
-		//		bool jsCallApiFromUi(string name, JSValue arg);
 		//		bool onWebDeviceReady();
 		void qspShowSaveSlotsDialog(SaveSlotsDto slotsDto);
 		//		void qspFillLocalGamesList(JSArray games);
 
 		// В потоке библиотеки
 		//		static void jsCallApiFromLib(string name, JSValue arg);
-		static void qspSetGroupedContent(GroupedContentDto content);
-		static void qspMsg(string text);
-		static void qspError(ErrorDto error);
-		static void qspMenu(vector<MenuItemDto> menu);
-		static void qspInput(string text);
-		static void qspView(string path);
-		static void qspSetInputString(string text);
+		void qspSetGroupedContent(GroupedContentDto content);
+		void qspMsg(string text);
+		void qspError(ErrorDto error);
+		void qspMenu(vector<MenuItemDto> menu);
+		void qspInput(string text);
+		void qspView(string path);
+		void qspSetInputString(string text);
+
+	private:
+		UwpJsExecutor^ uwpJsExecutor;
+
+		// В потоке Ui
+		bool jsCallApiFromUi(string name, SaveSlotsDto slotsDto);
+		bool jsCallDebug(string message);
+
+		// Конвертация строк
+		Platform::String^ convertFromString(string input);
 	};
 }

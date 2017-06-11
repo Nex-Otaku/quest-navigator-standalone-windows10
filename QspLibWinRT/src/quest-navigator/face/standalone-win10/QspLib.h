@@ -1,6 +1,7 @@
 #pragma once
 
 #include "JsListener.h"
+#include "..\..\platform\windows10\UwpJsExecutor.h"
 
 using namespace QuestNavigator;
 
@@ -26,8 +27,11 @@ namespace QspLibWinRT
 		void runInputString();
 		void runDefaultGame();
 
+		// Объект для привязки колбеков.
+		UwpJsExecutor^ getUwpJsExecutor();
 	private:
 		JsListener* jsListener;
+		UwpJsExecutor^ uwpJsExecutor;
 	};
 }
 

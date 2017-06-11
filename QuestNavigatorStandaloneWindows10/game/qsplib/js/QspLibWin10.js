@@ -30,6 +30,15 @@ function onDocumentReady() {
 	}
     log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
+
+    // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
+    var uwpJsExecutor = QspLib.getUwpJsExecutor();
+    //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
+    // primeFoundEvent is a user-defined event in nativeObject
+    // It passes the results back to this thread as they are produced
+    // and the event handler that we define here immediately displays them.
+    uwpJsExecutor.showDebugMessageEvent += debugCallbackHandler;
+
 	// Запускаем API.
     log('qspInitApi();');
 	qspInitApi();
@@ -54,4 +63,8 @@ function qspLibOnInitApi() {
         log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
+}
+
+function debugCallbackHandler(params) {
+    log('debug message received');
 }
