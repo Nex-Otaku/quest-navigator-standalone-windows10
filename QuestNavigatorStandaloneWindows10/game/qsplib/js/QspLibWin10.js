@@ -37,7 +37,11 @@ function onDocumentReady() {
     // primeFoundEvent is a user-defined event in nativeObject
     // It passes the results back to this thread as they are produced
     // and the event handler that we define here immediately displays them.
-    uwpJsExecutor.showDebugMessageEvent += debugCallbackHandler;
+    //uwpJsExecutor.showDebugMessageEvent += debugCallbackHandler;
+    //onprimefoundevent
+    uwpJsExecutor.onshowdebugmessageevent = debugCallbackHandler;
+
+    QspLib.callDebugMessage();
 
 	// Запускаем API.
     log('qspInitApi();');
@@ -66,5 +70,6 @@ function qspLibOnInitApi() {
 }
 
 function debugCallbackHandler(params) {
-    log('debug message received');
+    var message = params.target.toString();
+    log('debug message received: ' + message);
 }

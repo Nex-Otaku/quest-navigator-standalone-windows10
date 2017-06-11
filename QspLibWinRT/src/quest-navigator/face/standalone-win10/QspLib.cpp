@@ -79,6 +79,11 @@ namespace QspLibWinRT
 		return this->uwpJsExecutor;
 	}
 
+	void QspLib::callDebugMessage()
+	{
+		this->uwpJsExecutor->jsCallDebug("simple debug call");
+	}
+
 	// Колбэки из яваскрипта к функциям API плеера.
 
 	// По приведению типов int, bool, wchar_t

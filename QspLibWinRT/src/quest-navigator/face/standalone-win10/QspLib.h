@@ -27,6 +27,9 @@ namespace QspLibWinRT
 		void runInputString();
 		void runDefaultGame();
 
+		// Метод для отладки
+		void callDebugMessage();
+
 		// Объект для привязки колбеков.
 		UwpJsExecutor^ getUwpJsExecutor();
 	private:

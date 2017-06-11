@@ -41,7 +41,7 @@ namespace QspLibWinRT {
 			ref new DispatchedHandler([this, message]()
 		{
 			// Просто передаём тестовое сообщение.
-			this->showDebugMessageEvent("testMessage");
+			this->showDebugMessageEvent(message);
 
 		}, Platform::CallbackContext::Any));
 
