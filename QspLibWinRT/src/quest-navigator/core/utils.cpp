@@ -303,80 +303,81 @@ namespace QuestNavigator {
 	//}
 
 	// Загружаем настройки игры из файла config.xml
-	bool loadGameConfig()
-	{
-		// Устанавливаем настройки по умолчанию
-		Configuration::setInt(ecpGameWidth, 800);
-		Configuration::setInt(ecpGameHeight, 600);
-		Configuration::setInt(ecpGameMinWidth, 0);
-		Configuration::setInt(ecpGameMinHeight, 0);
-		Configuration::setInt(ecpGameMaxWidth, 0);
-		Configuration::setInt(ecpGameMaxHeight, 0);
-		Configuration::setString(ecpGameTitle, Configuration::getString(ecpGameFileName));
-		Configuration::setBool(ecpGameResizeable, true);
-		Configuration::setBool(ecpGameFullscreenAvailable, true);
-		Configuration::setBool(ecpGameStartFullscreen, false);
-		Configuration::setString(ecpSkinName, "");
-		Configuration::setBool(ecpGameIsStandalone, false);
+	// См. ConfigurationBuilder
+	//bool loadGameConfig()
+	//{
+	//	// Устанавливаем настройки по умолчанию
+	//	Configuration::setInt(ecpGameWidth, 800);
+	//	Configuration::setInt(ecpGameHeight, 600);
+	//	Configuration::setInt(ecpGameMinWidth, 0);
+	//	Configuration::setInt(ecpGameMinHeight, 0);
+	//	Configuration::setInt(ecpGameMaxWidth, 0);
+	//	Configuration::setInt(ecpGameMaxHeight, 0);
+	//	Configuration::setString(ecpGameTitle, Configuration::getString(ecpGameFileName));
+	//	Configuration::setBool(ecpGameResizeable, true);
+	//	Configuration::setBool(ecpGameFullscreenAvailable, true);
+	//	Configuration::setBool(ecpGameStartFullscreen, false);
+	//	Configuration::setString(ecpSkinName, "");
+	//	Configuration::setBool(ecpGameIsStandalone, false);
 
-		string configFilePath = Configuration::getString(ecpConfigFilePath);
-		// Если файл не найден, то всё в порядке,
-		// просто оставляем дефолтные настройки.
-		if (!fileExists(configFilePath))
-			return true;
+	//	string configFilePath = Configuration::getString(ecpConfigFilePath);
+	//	// Если файл не найден, то всё в порядке,
+	//	// просто оставляем дефолтные настройки.
+	//	if (!fileExists(configFilePath))
+	//		return true;
 
-		TiXmlDocument doc;
-		// Читаем файл в память
-		void* buffer = NULL;
-		int bufferLength = 0;
-		if (!loadFileToBuffer(configFilePath, &buffer, &bufferLength)) {
-			showError("Не удалось прочесть файл \"" + configFilePath + "\".");
-			return false;
-		}
-		// Разбираем XML
-		doc.Parse((const char*)buffer, 0, TIXML_ENCODING_UTF8);
-		delete buffer;
-		if (doc.Error())
-		{
-			showError("Не удалось загрузить XML-структуру из файла \"" + configFilePath + "\".");
-			return false;
-		}
-		TiXmlElement* root = doc.FirstChildElement();
-		if (root == NULL)
-		{
-			showError("Не найден корневой элемент конфигурационного файла \"" + configFilePath + "\".");
-			return false;
-		}
+	//	TiXmlDocument doc;
+	//	// Читаем файл в память
+	//	void* buffer = NULL;
+	//	int bufferLength = 0;
+	//	if (!loadFileToBuffer(configFilePath, &buffer, &bufferLength)) {
+	//		showError("Не удалось прочесть файл \"" + configFilePath + "\".");
+	//		return false;
+	//	}
+	//	// Разбираем XML
+	//	doc.Parse((const char*)buffer, 0, TIXML_ENCODING_UTF8);
+	//	delete buffer;
+	//	if (doc.Error())
+	//	{
+	//		showError("Не удалось загрузить XML-структуру из файла \"" + configFilePath + "\".");
+	//		return false;
+	//	}
+	//	TiXmlElement* root = doc.FirstChildElement();
+	//	if (root == NULL)
+	//	{
+	//		showError("Не найден корневой элемент конфигурационного файла \"" + configFilePath + "\".");
+	//		return false;
+	//	}
 
-		bool valid = true;
-		LOAD_XML_ATTRIB("width", ecpGameWidth);
-		LOAD_XML_ATTRIB("height", ecpGameHeight);
-		LOAD_XML_ATTRIB("minWidth", ecpGameMinWidth);
-		LOAD_XML_ATTRIB("minHeight", ecpGameMinHeight);
-		LOAD_XML_ATTRIB("maxWidth", ecpGameMaxWidth);
-		LOAD_XML_ATTRIB("maxHeight", ecpGameMaxHeight);
-		LOAD_XML_ATTRIB("title", ecpGameTitle);
-		LOAD_XML_ATTRIB("resizeable", ecpGameResizeable);
-		LOAD_XML_ATTRIB("fullscreenAvailable", ecpGameFullscreenAvailable);
-		LOAD_XML_ATTRIB("startFullscreen", ecpGameStartFullscreen);
-		LOAD_XML_ATTRIB("skinName", ecpSkinName);
-		LOAD_XML_ATTRIB("standalone", ecpGameIsStandalone);
-		if (!valid) {
-			return false;
-		}
+	//	bool valid = true;
+	//	LOAD_XML_ATTRIB("width", ecpGameWidth);
+	//	LOAD_XML_ATTRIB("height", ecpGameHeight);
+	//	LOAD_XML_ATTRIB("minWidth", ecpGameMinWidth);
+	//	LOAD_XML_ATTRIB("minHeight", ecpGameMinHeight);
+	//	LOAD_XML_ATTRIB("maxWidth", ecpGameMaxWidth);
+	//	LOAD_XML_ATTRIB("maxHeight", ecpGameMaxHeight);
+	//	LOAD_XML_ATTRIB("title", ecpGameTitle);
+	//	LOAD_XML_ATTRIB("resizeable", ecpGameResizeable);
+	//	LOAD_XML_ATTRIB("fullscreenAvailable", ecpGameFullscreenAvailable);
+	//	LOAD_XML_ATTRIB("startFullscreen", ecpGameStartFullscreen);
+	//	LOAD_XML_ATTRIB("skinName", ecpSkinName);
+	//	LOAD_XML_ATTRIB("standalone", ecpGameIsStandalone);
+	//	if (!valid) {
+	//		return false;
+	//	}
 
-		// Обрабатываем настройки игры
-		if (Configuration::getBool(ecpGameFullscreenAvailable) && 
-			Configuration::getBool(ecpGameStartFullscreen)) {
-				Configuration::setBool(ecpIsFullscreen, true);
-		}
-		string gameTitle = Configuration::getString(ecpGameTitle);
-		if (gameTitle != "") {
-			Configuration::setString(ecpWindowTitle, gameTitle);
-		}
+	//	// Обрабатываем настройки игры
+	//	if (Configuration::getBool(ecpGameFullscreenAvailable) && 
+	//		Configuration::getBool(ecpGameStartFullscreen)) {
+	//			Configuration::setBool(ecpIsFullscreen, true);
+	//	}
+	//	string gameTitle = Configuration::getString(ecpGameTitle);
+	//	if (gameTitle != "") {
+	//		Configuration::setString(ecpWindowTitle, gameTitle);
+	//	}
 
-		return true;
-	}
+	//	return true;
+	//}
 
 	// Готовим игру к запуску.
 	bool prepareGameFiles()

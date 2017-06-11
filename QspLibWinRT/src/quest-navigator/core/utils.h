@@ -69,8 +69,11 @@ namespace QuestNavigator {
 	// Устанавливаем конфигурацию плеера при старте
 	// См. ConfigurationBuilder
 	//bool initOptions(string contentPath);
+
 	// Загружаем настройки игры из файла config.xml
-	bool loadGameConfig();
+	// См. ConfigurationBuilder
+	//bool loadGameConfig();
+
 	// Готовим игру к запуску
 	bool prepareGameFiles();
 	// Получаем идентификатор для мьютекса.
