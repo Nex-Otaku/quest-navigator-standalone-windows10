@@ -56,7 +56,7 @@ namespace QspLibWinRT
 			timer,
 			jsExecutor
 		);
-		eventManager->inject(timer);
+		eventManager->inject(timer, uwpJsExecutor);
 		libraryListener->inject(
 			jsExecutor,
 			timer,
@@ -94,7 +94,9 @@ namespace QspLibWinRT
 
 	void QspLib::restartGame()
 	{
+		this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
 		this->jsListener->restartGame();
+		this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
 	}
 
 	void QspLib::executeAction(int32 pos)

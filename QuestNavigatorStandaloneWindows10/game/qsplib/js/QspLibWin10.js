@@ -71,5 +71,5 @@ function qspLibOnInitApi() {
 
 function debugCallbackHandler(params) {
     var message = params.target.toString();
-    log('debug message received: ' + message);
+    log('debug: ' + message);
 }

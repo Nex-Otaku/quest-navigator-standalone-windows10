@@ -17,9 +17,12 @@ namespace QuestNavigator
 	{
 	}
 
-	void EventManager::inject(Timer* timer)
+	void EventManager::inject(Timer* timer, UwpJsExecutor^ uwpJsExecutor)
 	{
 		this->timer = timer;
+
+		// Отладка.
+		this->uwpJsExecutor = uwpJsExecutor;
 	}
 
 	// Вызовы событий из UI.
@@ -137,11 +140,13 @@ namespace QuestNavigator
 
 	void EventManager::runGame(string fileName, int gameIsStandalone)
 	{
+		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 1");
 		// Контекст UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
+		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 2");
 		// Готовим данные для передачи в поток
 		lockData();
 		g_sharedData[evRunGame].str = fileName;
@@ -149,6 +154,7 @@ namespace QuestNavigator
 		g_sharedData[evRunGame].num = gameIsStandalone;
 		runSyncEvent(evRunGame);
 		unlockData();
+		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 3");
 	}
 
 	void EventManager::stopGame()

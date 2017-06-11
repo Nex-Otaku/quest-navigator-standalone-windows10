@@ -5,7 +5,12 @@
 #include "..\..\core\events.h"
 #include "..\..\core\dto\SharedDataDto.h"
 
+// Отладка.
+#include "..\..\platform\windows10\UwpJsExecutor.h"
+
 using namespace std;
+// Отладка.
+using namespace QspLibWinRT;
 
 namespace QuestNavigator
 {
@@ -16,7 +21,10 @@ namespace QuestNavigator
 		~EventManager();
 
 		void inject(
-			Timer* timer
+			Timer* timer,
+
+			// Для отладки.
+			UwpJsExecutor^ uwpJsExecutor
 		);
 
 		// JsListener
@@ -62,6 +70,9 @@ namespace QuestNavigator
 		void waitForLibIsReady();
 
 	private:
+		// Отладка.
+		UwpJsExecutor^ uwpJsExecutor;
+
 		Timer* timer;
 
 		// Переменные для работы с потоками
