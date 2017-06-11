@@ -4,6 +4,7 @@
 #include "..\..\core\dto\SaveSlotsDto.h"
 #include "EventManager.h"
 #include "Library.h"
+#include "ConfigurationBuilder.h"
 
 using namespace std;
 
@@ -17,7 +18,8 @@ namespace QuestNavigator
 
 		void inject(
 			EventManager* eventManager,
-			Library* library
+			Library* library,
+			ConfigurationBuilder* configurationBuilder
 		);
 
 		void init();
@@ -31,6 +33,7 @@ namespace QuestNavigator
 	private:
 		EventManager* eventManager;
 		Library* library;
+		ConfigurationBuilder* configurationBuilder;
 
 		bool gameIsRunning;
 

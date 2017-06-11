@@ -5,6 +5,7 @@
 #include "..\..\core\utils.h"
 #include <vector>
 #include <string>
+#include "..\..\core\dialogs.h"
 
 using namespace std;
 
@@ -22,11 +23,13 @@ namespace QuestNavigator
 
 	void App::inject(
 		EventManager* eventManager,
-		Library* library
+		Library* library,
+		ConfigurationBuilder* configurationBuilder
 	)
 	{
 		this->eventManager = eventManager;
 		this->library = library;
+		this->configurationBuilder = configurationBuilder;
 	}
 
 	void App::init()
@@ -34,12 +37,13 @@ namespace QuestNavigator
 		// Контекст UI
 		
 		if (!Configuration::init() 
-			|| !initOptions("") 
+			|| !configurationBuilder->build()
 			|| !prepareGameFiles() 
 			/*|| !registerInstance()*/) {
 			// STUB
 			// Как аварийно завершить работу, пока не ясно.
 			//app_->Quit();
+			showError("Не удалось процинициализировать приложение.");
 			return;
 		}
 		
@@ -134,10 +138,11 @@ namespace QuestNavigator
 		FreeResources();
 		
 		// Заново загружаем конфигурацию, копируем файлы.
-		if (!initOptions(contentPath) || !prepareGameFiles()) {
+		if (!configurationBuilder->build()/* initOptions(contentPath)*/  || !prepareGameFiles()) {
 			//app_->Quit();
 			// STUB
 			// Сделать здесь вывод ошибок.
+			showError("Не удалось перезапустить приложение.");
 			return;
 		}
 		

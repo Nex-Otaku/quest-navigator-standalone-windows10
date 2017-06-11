@@ -53,8 +53,9 @@ string url = narrow(wUrl);
 namespace QuestNavigator {
 
 	// Загрузка конфигурации плеера
-	bool initOptions(string contentPath)
-	{
+	// См. ConfigurationBuilder
+	//bool initOptions(string contentPath)
+	//{
 		//// Устанавливаем параметры по умолчанию
 		//Configuration::setBool(ecpSoundCacheEnabled, false);
 		//Configuration::setInt(ecpSaveSlotMax, 5);
@@ -298,8 +299,8 @@ namespace QuestNavigator {
 
 
 		// STUB
-		return true;
-	}
+	//	return true;
+	//}
 
 	// Загружаем настройки игры из файла config.xml
 	bool loadGameConfig()

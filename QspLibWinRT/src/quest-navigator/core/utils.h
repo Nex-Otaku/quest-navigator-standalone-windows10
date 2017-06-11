@@ -67,7 +67,8 @@ namespace QuestNavigator {
 	// Прочее
 
 	// Устанавливаем конфигурацию плеера при старте
-	bool initOptions(string contentPath);
+	// См. ConfigurationBuilder
+	//bool initOptions(string contentPath);
 	// Загружаем настройки игры из файла config.xml
 	bool loadGameConfig();
 	// Готовим игру к запуску

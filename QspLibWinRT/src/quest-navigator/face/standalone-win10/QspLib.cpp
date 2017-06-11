@@ -42,6 +42,8 @@ namespace QspLibWinRT
 		LibraryListener* libraryListener = LibraryListener::instance();
 		// Создаём объект для вывода ошибок - в целях отладки.
 		ErrorDebugReporter* errorDebugReporter = ErrorDebugReporter::instance();
+		// Создаём билдер конфигурации.
+		ConfigurationBuilder* configurationBuilder = new ConfigurationBuilder();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -52,7 +54,8 @@ namespace QspLibWinRT
 		);
 		app->inject(
 			eventManager,
-			library
+			library,
+			configurationBuilder
 		);
 		library->inject(
 			eventManager,
