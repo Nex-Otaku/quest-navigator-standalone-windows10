@@ -2,6 +2,7 @@
 #include "ConfigurationBuilder.h"
 #include "..\..\core\configuration.h"
 #include "Constants.h"
+#include "..\..\core\files.h"
 
 namespace QuestNavigator
 {
