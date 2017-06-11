@@ -522,5 +522,8 @@
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\Constants.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
