@@ -1,7 +1,7 @@
 #include "openGameFile.h"
 
 namespace QuestNavigator {
-	// Диалог для открытия файла игры с диска.
+	// Р”РёР°Р»РѕРі РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РёРіСЂС‹ СЃ РґРёСЃРєР°.
 	string openGameFileDialog(HWND hwnd)
 	{
 		//string filePath = "";
@@ -18,11 +18,11 @@ namespace QuestNavigator {
 		//// use the contents of szFile to initialize itself.
 		//ofn.lpstrFile[0] = '\0';
 		//ofn.nMaxFile = sizeof(wszFile);
-		//string extensions = "Игры QSP (*.QSP)\r*.QSP\rУстаревший формат (*.GAM)\r*.GAM\r";
+		//string extensions = "РРіСЂС‹ QSP (*.QSP)\r*.QSP\rРЈСЃС‚Р°СЂРµРІС€РёР№ С„РѕСЂРјР°С‚ (*.GAM)\r*.GAM\r";
 		//wstring wExtensions = widen(extensions);
-		//// Меняем \r на нулевой байт. 
-		//// Если в исходную строку сразу вписать нулевой байт,
-		//// то она обрежется при конвертации.
+		//// РњРµРЅСЏРµРј \r РЅР° РЅСѓР»РµРІРѕР№ Р±Р°Р№С‚. 
+		//// Р•СЃР»Рё РІ РёСЃС…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ СЃСЂР°Р·Сѓ РІРїРёСЃР°С‚СЊ РЅСѓР»РµРІРѕР№ Р±Р°Р№С‚,
+		//// С‚Рѕ РѕРЅР° РѕР±СЂРµР¶РµС‚СЃСЏ РїСЂРё РєРѕРЅРІРµСЂС‚Р°С†РёРё.
 		//std::replace(wExtensions.begin(), wExtensions.end(), '\r', '\0');
 		//ofn.lpstrFilter = wExtensions.c_str();
 		//ofn.nFilterIndex = 1;
@@ -37,12 +37,12 @@ namespace QuestNavigator {
 		//if (res == 0) {
 		//	DWORD dwError = CommDlgExtendedError();
 		//	if (dwError != 0) {
-		//		showError("Ошибка при открытии файла");
+		//		showError("РћС€РёР±РєР° РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„Р°Р№Р»Р°");
 		//	}
 		//	return "";
 		//}
 
-		//// Возвращаем имя открытого файла.
+		//// Р’РѕР·РІСЂР°С‰Р°РµРј РёРјСЏ РѕС‚РєСЂС‹С‚РѕРіРѕ С„Р°Р№Р»Р°.
 		//wstring wFilePath = ofn.lpstrFile;
 		//filePath = narrow(wFilePath);
 		//return filePath;

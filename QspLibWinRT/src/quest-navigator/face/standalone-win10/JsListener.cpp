@@ -27,11 +27,11 @@ namespace QuestNavigator
 		this->jsExecutor = jsExecutor;
 	}
 
-	// Îáðàùåíèå ê API ïëååðà èç ÿâàñêðèïòà.
+	// ÐžÐ±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ðº API Ð¿Ð»ÐµÐµÑ€Ð° Ð¸Ð· ÑÐ²Ð°ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°.
 
 	void JsListener::restartGame()
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		string gameFile = Configuration::getString(ecpGameFilePath);
 		app->StopGame(true);
 		app->runGame(gameFile);
@@ -39,54 +39,54 @@ namespace QuestNavigator
 
 	void JsListener::executeAction(int pos)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->executeAction(pos);
 	}
 
 	void JsListener::selectObject(int pos)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->selectObject(pos);
 	}
 
 	void JsListener::loadGame()
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 
-		// Îñòàíàâëèâàåì òàéìåð
+		// ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€
 		this->timer->stopTimer();
 
-		// Çàãðóæàåì ñïèñîê ôàéëîâ è îòäàåì â ÿâàñêðèïò
+		// Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð¸ Ð¾Ñ‚Ð´Ð°ÐµÐ¼ Ð² ÑÐ²Ð°ÑÐºÑ€Ð¸Ð¿Ñ‚
 		SaveSlotsDto dto = this->app->getSaveSlots(true);
 		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveGame()
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 
-		// Îñòàíàâëèâàåì òàéìåð
+		// ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€
 		this->timer->stopTimer();
 
-		// Çàãðóæàåì ñïèñîê ôàéëîâ è îòäàåì â ÿâàñêðèïò
+		// Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð¸ Ð¾Ñ‚Ð´Ð°ÐµÐ¼ Ð² ÑÐ²Ð°ÑÐºÑ€Ð¸Ð¿Ñ‚
 		SaveSlotsDto dto = this->app->getSaveSlots(false);
 		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveSlotSelected(int index, int mode)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 
-		// Åñëè íîìåð ñëîòà "-1", 
-		// çíà÷èò, äèàëîã áûë îòìåí¸í.
+		// Ð•ÑÐ»Ð¸ Ð½Ð¾Ð¼ÐµÑ€ ÑÐ»Ð¾Ñ‚Ð° "-1", 
+		// Ð·Ð½Ð°Ñ‡Ð¸Ñ‚, Ð´Ð¸Ð°Ð»Ð¾Ð³ Ð±Ñ‹Ð» Ð¾Ñ‚Ð¼ÐµÐ½Ñ‘Ð½.
 		if (index == -1)
 		{
-			// Çàïóñêàåì òàéìåð
+			// Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€
 			this->timer->startTimer();
 			return;
 		}
 		
-		// 1 - çàãðóçêà, 0 - ñîõðàíåíèå
+		// 1 - Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°, 0 - ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ
 		if (mode == 1) {
 			this->eventManager->loadSlotSelected(index);
 		} else {
@@ -96,51 +96,51 @@ namespace QuestNavigator
 
 	void JsListener::msgResult()
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->msgClosed();
 	}
 
 	void JsListener::errorResult()
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->errorClosed();
 	}
 
 	void JsListener::userMenuResult(int pos)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->menuClosed(pos);
 	}
 
 	void JsListener::inputResult(string text)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->inputClosed(text);
 	}
 
 	void JsListener::setMute(bool flag)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->mute(flag);
 	}
 
 	void JsListener::setInputString(string text)
 	{
-		// Êîíòåêñò UI
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		this->eventManager->inputStringChanged(text);
 	}
 
 	void JsListener::runInputString()
 	{
-		// Êîíòåêñò UI
-		// Íàæàëè Enter â ñòðîêå ââîäà
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
+		// ÐÐ°Ð¶Ð°Ð»Ð¸ Enter Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ Ð²Ð²Ð¾Ð´Ð°
 		this->eventManager->inputStringEntered();
 	}
 
 	void JsListener::runDefaultGame()
 	{
-		// Êîíòåêñò UI
-		// Çàïóñêàåì èãðó ïî óìîë÷àíèþ.
+		// ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
+		// Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð¸Ð³Ñ€Ñƒ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ.
 		this->app->runNewGame("");
 	}
 }

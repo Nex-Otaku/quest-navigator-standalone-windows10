@@ -24,7 +24,7 @@ namespace QspLibWinRT {
 		m_dispatcher->RunAsync(CoreDispatcherPriority::Normal,
 			ref new DispatchedHandler([this, message/* slotsDto */]()
 		{
-			// Ïîòîì ìû çäåñü ïåðåäàäèì ñòðóêòóðó äëÿ âûçîâà ñëîòîâ ñîõðàíåíèÿ.
+			// ÐŸÐ¾Ñ‚Ð¾Ð¼ Ð¼Ñ‹ Ð·Ð´ÐµÑÑŒ Ð¿ÐµÑ€ÐµÐ´Ð°Ð´Ð¸Ð¼ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñƒ Ð´Ð»Ñ Ð²Ñ‹Ð·Ð¾Ð²Ð° ÑÐ»Ð¾Ñ‚Ð¾Ð² ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ.
 			this->showSaveSlotsDialogEvent("testMessage");
 
 		}, Platform::CallbackContext::Any));
@@ -40,7 +40,7 @@ namespace QspLibWinRT {
 		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
 			ref new DispatchedHandler([this, message]()
 		{
-			// Ïðîñòî ïåðåäà¸ì òåñòîâîå ñîîáùåíèå.
+			// ÐŸÑ€Ð¾ÑÑ‚Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‘Ð¼ Ñ‚ÐµÑÑ‚Ð¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ.
 			this->showDebugMessageEvent(message);
 
 		}, Platform::CallbackContext::Any));

@@ -26,18 +26,18 @@ namespace QuestNavigator
 		// ********************************************************************
 		// ********************************************************************
 		// ********************************************************************
-		//                        Вызовы JS-функций
+		//                        Р’С‹Р·РѕРІС‹ JS-С„СѓРЅРєС†РёР№
 		// ********************************************************************
 		// ********************************************************************
 		// ********************************************************************
 		
-		// В потоке Ui
+		// Р’ РїРѕС‚РѕРєРµ Ui
 		//		void processLibJsCall();
 		//		bool onWebDeviceReady();
 		void qspShowSaveSlotsDialog(SaveSlotsDto slotsDto);
 		//		void qspFillLocalGamesList(JSArray games);
 
-		// В потоке библиотеки
+		// Р’ РїРѕС‚РѕРєРµ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		static void jsCallApiFromLib(string name, JSValue arg);
 		void qspSetGroupedContent(GroupedContentDto content);
 		void qspMsg(string text);
@@ -50,11 +50,11 @@ namespace QuestNavigator
 	private:
 		UwpJsExecutor^ uwpJsExecutor;
 
-		// В потоке Ui
+		// Р’ РїРѕС‚РѕРєРµ Ui
 		bool jsCallApiFromUi(string name, SaveSlotsDto slotsDto);
 		bool jsCallDebug(string message);
 
-		// Конвертация строк
+		// РљРѕРЅРІРµСЂС‚Р°С†РёСЏ СЃС‚СЂРѕРє
 		Platform::String^ convertFromString(string input);
 	};
 }

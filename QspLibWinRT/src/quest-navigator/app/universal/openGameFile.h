@@ -6,6 +6,6 @@
 using namespace std;
 
 namespace QuestNavigator {
-	// Диалог для открытия файла игры с диска.
+	// Ж’РёР°Р»РѕРі РґР»В¤ РѕС‚РєСЂС‹С‚РёВ¤ С„Р°Р№Р»Р° РёРіСЂС‹ СЃ РґРёСЃРєР°.
 	string openGameFileDialog(HWND hWnd);
 }

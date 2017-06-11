@@ -3,7 +3,7 @@
 
 namespace QuestNavigator {
 
-	// Ïîêàçûâàåì ñèñòåìíûé äèàëîã MessageBox.
+	// ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÐ¼ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ð¹ Ð´Ð¸Ð°Ð»Ð¾Ð³ MessageBox.
 	void showMessage(string msg, string title)
 	{
 		//wstring wMsg = widen(msg);
@@ -11,11 +11,11 @@ namespace QuestNavigator {
 		//MessageBox(0, wMsg.c_str(), wTitle.c_str(), MB_OK);
 	}
 
-	// Îòîáðàæàåì îøèáêó.
+	// ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÐµÐ¼ Ð¾ÑˆÐ¸Ð±ÐºÑƒ.
 	void showError(string msg)
 	{
-		// Äëÿ îòëàäêè â Windows 10 ïîäêëþ÷àåì îòäåëüíûé êëàññ.
-		// showMessage(msg, "Îøèáêà");
+		// Ð”Ð»Ñ Ð¾Ñ‚Ð»Ð°Ð´ÐºÐ¸ Ð² Windows 10 Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ.
+		// showMessage(msg, "ÐžÑˆÐ¸Ð±ÐºÐ°");
 		ErrorDebugReporter::instance()->showError(msg);
 	}
 }

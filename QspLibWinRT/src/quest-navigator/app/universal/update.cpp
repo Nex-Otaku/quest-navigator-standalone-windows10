@@ -6,7 +6,7 @@
 
 namespace QuestNavigator {
 
-	// Проверяем наличие апдейта при старте
+	// РџСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ Р°РїРґРµР№С‚Р° РїСЂРё СЃС‚Р°СЂС‚Рµ
 	void checkUpdate()
 	{
 		//// Initialize WinSparkle as soon as the app itself is initialized, right
@@ -19,7 +19,7 @@ namespace QuestNavigator {
 		//win_sparkle_init();
 	}
 
-	// Завершаем работу апдейтера по выходу из приложения
+	// Р—Р°РІРµСЂС€Р°РµРј СЂР°Р±РѕС‚Сѓ Р°РїРґРµР№С‚РµСЂР° РїРѕ РІС‹С…РѕРґСѓ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ
 	void finishUpdate()
 	{
 		//win_sparkle_cleanup();

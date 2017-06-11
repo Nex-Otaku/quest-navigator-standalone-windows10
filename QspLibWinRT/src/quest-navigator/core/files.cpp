@@ -8,7 +8,7 @@
 
 namespace QuestNavigator {
 
-	// Получаем URL из полного пути к файлу
+	// РџРѕР»СѓС‡Р°РµРј URL РёР· РїРѕР»РЅРѕРіРѕ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ
 	string getUrlFromFilePath(string filePath)
 	{
 		//TCHAR szString[1024];
@@ -18,7 +18,7 @@ namespace QuestNavigator {
 		//DWORD sUrl = 1024;
 		//HRESULT res = UrlCreateFromPath(FileName, szUrl, &sUrl, NULL);
 		//if (res != S_OK) {
-		//	showError("Не удалось преобразовать в URL путь вида: [" + filePath + "]");
+		//	showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РІ URL РїСѓС‚СЊ РІРёРґР°: [" + filePath + "]");
 		//	return "";
 		//}
 		//wstring wUrl = szUrl;
@@ -26,14 +26,14 @@ namespace QuestNavigator {
 		//return url;
 	}
 
-	// URL к содержимому
+	// URL Рє СЃРѕРґРµСЂР¶РёРјРѕРјСѓ
 	string getContentUrl()
 	{
 		string contentPath = Configuration::getString(ecpSkinFilePath);
 		return getUrlFromFilePath(contentPath);
 	}
 
-	// Проверяем файл на существование и читаемость
+	// РџСЂРѕРІРµСЂСЏРµРј С„Р°Р№Р» РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Рё С‡РёС‚Р°РµРјРѕСЃС‚СЊ
 	bool fileExists(string path)
 	{
 		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
@@ -41,7 +41,7 @@ namespace QuestNavigator {
 			!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 	}
 
-	// Проверяем папку на существование и читаемость
+	// РџСЂРѕРІРµСЂСЏРµРј РїР°РїРєСѓ РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Рё С‡РёС‚Р°РµРјРѕСЃС‚СЊ
 	bool dirExists(string path)
 	{
 		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
@@ -49,7 +49,7 @@ namespace QuestNavigator {
 			(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 	}
 
-	// Получаем путь к папке плеера
+	// РџРѕР»СѓС‡Р°РµРј РїСѓС‚СЊ Рє РїР°РїРєРµ РїР»РµРµСЂР°
 	string getPlayerDir()
 	{
 		//TCHAR buffer[MAX_PATH];
@@ -57,18 +57,18 @@ namespace QuestNavigator {
 
 		//DWORD res = GetModuleFileName(NULL, szDir, (DWORD)MAX_PATH);
 		//if (res == 0) {
-		//	showError("Не могу прочесть путь к плееру");
+		//	showError("РќРµ РјРѕРіСѓ РїСЂРѕС‡РµСЃС‚СЊ РїСѓС‚СЊ Рє РїР»РµРµСЂСѓ");
 		//	return "";
 		//}
 		//if (res == MAX_PATH) {
-		//	showError("Путь к плееру не помещается в буфер");
+		//	showError("РџСѓС‚СЊ Рє РїР»РµРµСЂСѓ РЅРµ РїРѕРјРµС‰Р°РµС‚СЃСЏ РІ Р±СѓС„РµСЂ");
 		//	return "";
 		//}
 
-		//// Удаляем имя исполняемого файла, оставляем только путь к нему, без слэша в конце.
+		//// РЈРґР°Р»СЏРµРј РёРјСЏ РёСЃРїРѕР»РЅСЏРµРјРѕРіРѕ С„Р°Р№Р»Р°, РѕСЃС‚Р°РІР»СЏРµРј С‚РѕР»СЊРєРѕ РїСѓС‚СЊ Рє РЅРµРјСѓ, Р±РµР· СЃР»СЌС€Р° РІ РєРѕРЅС†Рµ.
 		//res = PathRemoveFileSpec(szDir);
 		//if (res == 0) {
-		//	showError("Ошибка при обработке пути к плееру");
+		//	showError("РћС€РёР±РєР° РїСЂРё РѕР±СЂР°Р±РѕС‚РєРµ РїСѓС‚Рё Рє РїР»РµРµСЂСѓ");
 		//	return "";
 		//}
 
@@ -80,7 +80,7 @@ namespace QuestNavigator {
 		return "";
 	}
 
-	// Преобразовываем путь к файлу сохранения.
+	// РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ СЃРѕС…СЂР°РЅРµРЅРёСЏ.
 	string getRealSaveFile(string file)
 	{
 		// "D:\MySaveDirForCoolGame"
@@ -100,11 +100,11 @@ namespace QuestNavigator {
 		return saveFile;
 	}
 
-	// Меняем слэши в пути к файлу в зависимости от системы
+	// РњРµРЅСЏРµРј СЃР»СЌС€Рё РІ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЃРёСЃС‚РµРјС‹
 	string getRightPath(string path)
 	{
-		// Вызывая эту функцию для обработки пути,
-		// мы будем уверены что слэши всегда направлены в нужную сторону.
+		// Р’С‹Р·С‹РІР°СЏ СЌС‚Сѓ С„СѓРЅРєС†РёСЋ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РїСѓС‚Рё,
+		// РјС‹ Р±СѓРґРµРј СѓРІРµСЂРµРЅС‹ С‡С‚Рѕ СЃР»СЌС€Рё РІСЃРµРіРґР° РЅР°РїСЂР°РІР»РµРЅС‹ РІ РЅСѓР¶РЅСѓСЋ СЃС‚РѕСЂРѕРЅСѓ.
 		string result = path;
 #ifdef WIN32
 		result = slashToBackslash(path);
@@ -112,35 +112,35 @@ namespace QuestNavigator {
 		return result;
 	}
 
-	// Преобразовываем относительный путь в абсолютный
+	// РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РїСѓС‚СЊ РІ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№
 	string relativePathToAbsolute(string relative)
 	{
-		//// Если путь не относительный, сразу возвращаем.
+		//// Р•СЃР»Рё РїСѓС‚СЊ РЅРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№, СЃСЂР°Р·Сѓ РІРѕР·РІСЂР°С‰Р°РµРј.
 		//wstring wRelative = widen(relative);
 		//BOOL res = PathIsRelative(wRelative.c_str());
 		//if (res == FALSE) {
 		//	return relative;
 		//}
 
-		//// Получаем рабочую директорию.
+		//// РџРѕР»СѓС‡Р°РµРј СЂР°Р±РѕС‡СѓСЋ РґРёСЂРµРєС‚РѕСЂРёСЋ.
 		//TCHAR buffer[MAX_PATH];
 		//PTSTR szDir = buffer;
 		//DWORD curDirLen = GetCurrentDirectory((DWORD)MAX_PATH, szDir);
 		//if (curDirLen == 0) {
-		//	showError("Не могу прочесть текущую директорию");
+		//	showError("РќРµ РјРѕРіСѓ РїСЂРѕС‡РµСЃС‚СЊ С‚РµРєСѓС‰СѓСЋ РґРёСЂРµРєС‚РѕСЂРёСЋ");
 		//	return "";
 		//}
 		//if (curDirLen >= MAX_PATH) {
-		//	showError("Путь к текущей директории не помещается в буфер");
+		//	showError("РџСѓС‚СЊ Рє С‚РµРєСѓС‰РµР№ РґРёСЂРµРєС‚РѕСЂРёРё РЅРµ РїРѕРјРµС‰Р°РµС‚СЃСЏ РІ Р±СѓС„РµСЂ");
 		//	return "";
 		//}
 
-		//// Совмещаем путь к рабочей директории и относительный путь.
+		//// РЎРѕРІРјРµС‰Р°РµРј РїСѓС‚СЊ Рє СЂР°Р±РѕС‡РµР№ РґРёСЂРµРєС‚РѕСЂРёРё Рё РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РїСѓС‚СЊ.
 		//TCHAR bufferAbsolute[MAX_PATH];
 		//PTSTR szAbsolute = bufferAbsolute;
 		//PTSTR szCombined = PathCombine(szAbsolute, szDir, wRelative.c_str());
 		//if (szCombined == NULL) {
-		//	showError("Не удалось получить абсолютный путь");
+		//	showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ");
 		//	return "";
 		//}
 		//wstring wAbsolute = szCombined;
@@ -149,7 +149,7 @@ namespace QuestNavigator {
 		//return absolute;
 	}
 
-	// Приводим путь к каноничной форме.
+	// РџСЂРёРІРѕРґРёРј РїСѓС‚СЊ Рє РєР°РЅРѕРЅРёС‡РЅРѕР№ С„РѕСЂРјРµ.
 	string canonicalizePath(string path)
 	{
 		//wstring wPathSrc = widen(path);
@@ -157,7 +157,7 @@ namespace QuestNavigator {
 		//PTSTR szCanonicalizedPath = buffer;
 		//BOOL res = PathCanonicalize(buffer, wPathSrc.c_str());
 		//if (res == FALSE) {
-		//	showError("Не удалось привести путь к каноническому виду");
+		//	showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРёРІРµСЃС‚Рё РїСѓС‚СЊ Рє РєР°РЅРѕРЅРёС‡РµСЃРєРѕРјСѓ РІРёРґСѓ");
 		//	return "";
 		//}
 		//wstring wCanonicalizedPath = szCanonicalizedPath;
@@ -168,32 +168,32 @@ namespace QuestNavigator {
 		return "";
 	}
 
-	// Загружаем файл в память
+	// Р—Р°РіСЂСѓР¶Р°РµРј С„Р°Р№Р» РІ РїР°РјСЏС‚СЊ
 	bool loadFileToBuffer(string path, void** bufferPtr, int* bufferLength)
 	{
-		//// Открываем файл для чтения
+		//// РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ
 		//wstring wPath = widen(path);
 		//HANDLE hFile = CreateFile(wPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		//if (hFile == INVALID_HANDLE_VALUE)
 		//	return false;
-		//// Узнаём размер файла
+		//// РЈР·РЅР°С‘Рј СЂР°Р·РјРµСЂ С„Р°Р№Р»Р°
 		//DWORD dwFileSize = GetFileSize(hFile, NULL);
 		//if (dwFileSize == INVALID_FILE_SIZE) {
 		//	CloseHandle(hFile);
 		//	return false;
 		//}
-		//// В буфере будет завершающий нулевой байт.
+		//// Р’ Р±СѓС„РµСЂРµ Р±СѓРґРµС‚ Р·Р°РІРµСЂС€Р°СЋС‰РёР№ РЅСѓР»РµРІРѕР№ Р±Р°Р№С‚.
 		//int totalBufferLength = dwFileSize + 1;
-		//// Выделяем блок памяти
+		//// Р’С‹РґРµР»СЏРµРј Р±Р»РѕРє РїР°РјСЏС‚Рё
 		//char* pFileChunk = NULL;
-		//// Может не хватить памяти (если файл слишком большой)
+		//// РњРѕР¶РµС‚ РЅРµ С…РІР°С‚РёС‚СЊ РїР°РјСЏС‚Рё (РµСЃР»Рё С„Р°Р№Р» СЃР»РёС€РєРѕРј Р±РѕР»СЊС€РѕР№)
 		//try {
 		//	pFileChunk = new char[totalBufferLength];
 		//} catch (...) {
 		//	CloseHandle(hFile);
 		//	return false;
 		//}
-		//// Читаем файл в память
+		//// Р§РёС‚Р°РµРј С„Р°Р№Р» РІ РїР°РјСЏС‚СЊ
 		//DWORD dwBytesRead = 0;
 		//BOOL res = ReadFile(hFile, pFileChunk, dwFileSize, &dwBytesRead, NULL);
 		//if ((res == FALSE) || (dwBytesRead != dwFileSize)) {
@@ -201,22 +201,22 @@ namespace QuestNavigator {
 		//	delete pFileChunk;
 		//	return false;
 		//}
-		//// Закрываем файл
+		//// Р—Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 		//res = CloseHandle(hFile);
 		//if (res == 0) {
 		//	delete pFileChunk;
 		//	return false;
 		//}
-		//// Записываем завершающий нулевой байт в буфер, для корректного чтения.
+		//// Р—Р°РїРёСЃС‹РІР°РµРј Р·Р°РІРµСЂС€Р°СЋС‰РёР№ РЅСѓР»РµРІРѕР№ Р±Р°Р№С‚ РІ Р±СѓС„РµСЂ, РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ С‡С‚РµРЅРёСЏ.
 		//pFileChunk[dwFileSize] = 0;
-		//// Возвращаем результат
+		//// Р’РѕР·РІСЂР°С‰Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
 		//*bufferPtr = pFileChunk;
 		//*bufferLength = totalBufferLength;
-		//// Не забываем освободить память вызовом "delete" после использования!
+		//// РќРµ Р·Р°Р±С‹РІР°РµРј РѕСЃРІРѕР±РѕРґРёС‚СЊ РїР°РјСЏС‚СЊ РІС‹Р·РѕРІРѕРј "delete" РїРѕСЃР»Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ!
 		//return true;
 	}
 
-	// Создаём папки
+	// РЎРѕР·РґР°С‘Рј РїР°РїРєРё
 	bool buildDirectoryPath(string path)
 	{
 		//if (dirExists(path))
@@ -229,7 +229,7 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Удаляем папку со всем содержимым.
+	// РЈРґР°Р»СЏРµРј РїР°РїРєСѓ СЃРѕ РІСЃРµРј СЃРѕРґРµСЂР¶РёРјС‹Рј.
 	bool deleteDirectory(string path)
 	{
 		//if (!dirExists(path))
@@ -257,7 +257,7 @@ namespace QuestNavigator {
 		//return (0 == nFileDeleteOprnRet) && (stSHFileOpStruct.fAnyOperationsAborted == FALSE);
 	}
 
-	// Возвращаем список файлов либо папок
+	// Р’РѕР·РІСЂР°С‰Р°РµРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ Р»РёР±Рѕ РїР°РїРѕРє
 	bool _getFilesOrFoldersList(string directory, string mask, vector<string>& list, bool bFileMode)
 	{
 		vector<string> result;
@@ -268,12 +268,12 @@ namespace QuestNavigator {
 
 		wstring wDir = widen(getRightPath(directory + PATH_DELIMITER + mask));
 		if (wDir.size() + 1 > MAX_PATH) {
-			showError("Слишком длинный путь");
+			showError("РЎР»РёС€РєРѕРј РґР»РёРЅРЅС‹Р№ РїСѓС‚СЊ");
 			return false;
 		}
 		LPCWSTR szDir = wDir.c_str();
 
-		string label = bFileMode ? "файла" : "папки";
+		string label = bFileMode ? "С„Р°Р№Р»Р°" : "РїР°РїРєРё";
 
 		// Find the first file in the directory.
 
@@ -287,7 +287,7 @@ namespace QuestNavigator {
 				return true;
 			}
 			else {
-				showError("Не удалось осуществить поиск " + label + " в папке " + directory + " по заданной маске " + mask);
+				showError("РќРµ СѓРґР°Р»РѕСЃСЊ РѕСЃСѓС‰РµСЃС‚РІРёС‚СЊ РїРѕРёСЃРє " + label + " РІ РїР°РїРєРµ " + directory + " РїРѕ Р·Р°РґР°РЅРЅРѕР№ РјР°СЃРєРµ " + mask);
 				return false;
 			}
 		}
@@ -306,13 +306,13 @@ namespace QuestNavigator {
 		dwError = GetLastError();
 		if (dwError != ERROR_NO_MORE_FILES)
 		{
-			showError("Не удалось осуществить повторный поиск " + label + " в папке " + directory + " по заданной маске " + mask);
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РѕСЃСѓС‰РµСЃС‚РІРёС‚СЊ РїРѕРІС‚РѕСЂРЅС‹Р№ РїРѕРёСЃРє " + label + " РІ РїР°РїРєРµ " + directory + " РїРѕ Р·Р°РґР°РЅРЅРѕР№ РјР°СЃРєРµ " + mask);
 			return false;
 		}
 
 		BOOL res = FindClose(hFind);
 		if (res == 0) {
-			showError("Не удалось высвободить дескриптор поиска");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РІС‹СЃРІРѕР±РѕРґРёС‚СЊ РґРµСЃРєСЂРёРїС‚РѕСЂ РїРѕРёСЃРєР°");
 			return false;
 		}
 
@@ -320,31 +320,31 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Возвращаем список файлов
+	// Р’РѕР·РІСЂР°С‰Р°РµРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ
 	bool getFilesList(string directory, string mask, vector<string>& list)
 	{
 		return _getFilesOrFoldersList(directory, mask, list, true);
 	}
 
-	// Возвращаем список папок
+	// Р’РѕР·РІСЂР°С‰Р°РµРј СЃРїРёСЃРѕРє РїР°РїРѕРє
 	bool getFoldersList(string directory, vector<string>& list)
 	{
 		return _getFilesOrFoldersList(directory, "*.*", list, false);
 	}
 
-	// Копируем файл
+	// РљРѕРїРёСЂСѓРµРј С„Р°Р№Р»
 	bool copyFile(string from, string to)
 	{
 		//wstring wFrom = widen(from);
 		//wstring wTo = widen(to);
-		//// Копируем файл на новое место.
+		//// РљРѕРїРёСЂСѓРµРј С„Р°Р№Р» РЅР° РЅРѕРІРѕРµ РјРµСЃС‚Рѕ.
 		//BOOL res = CopyFileW(wFrom.c_str(), wTo.c_str(), FALSE);
 		//if (res == 0) {
 		//	return false;
 		//}
-		//// Сбрасываем атрибут "только для чтения" с файла назначения.
-		//// Если этого не сделать, 
-		//// позже будут сбои при попытке перезаписать этот файл.
+		//// РЎР±СЂР°СЃС‹РІР°РµРј Р°С‚СЂРёР±СѓС‚ "С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ" СЃ С„Р°Р№Р»Р° РЅР°Р·РЅР°С‡РµРЅРёСЏ.
+		//// Р•СЃР»Рё СЌС‚РѕРіРѕ РЅРµ СЃРґРµР»Р°С‚СЊ, 
+		//// РїРѕР·Р¶Рµ Р±СѓРґСѓС‚ СЃР±РѕРё РїСЂРё РїРѕРїС‹С‚РєРµ РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ СЌС‚РѕС‚ С„Р°Р№Р».
 		//DWORD dwAttrs = GetFileAttributes(wTo.c_str()); 
 		//if (dwAttrs == INVALID_FILE_ATTRIBUTES) {
 		//	return false;
@@ -361,7 +361,7 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Копируем дерево файлов
+	// РљРѕРїРёСЂСѓРµРј РґРµСЂРµРІРѕ С„Р°Р№Р»РѕРІ
 	bool copyFileTree(string from, string to)
 	{
 		return copyFileTree(from, to, "*.*");
@@ -369,35 +369,35 @@ namespace QuestNavigator {
 	bool copyFileTree(string from, string to, string mask)
 	{
 		if (from == to) {
-			showError("Нельзя копировать папку в саму себя: \"" + to + "\"");
+			showError("РќРµР»СЊР·СЏ РєРѕРїРёСЂРѕРІР°С‚СЊ РїР°РїРєСѓ РІ СЃР°РјСѓ СЃРµР±СЏ: \"" + to + "\"");
 			return false;
 		}
-		// Если папка назначения не существует, создаём.
+		// Р•СЃР»Рё РїР°РїРєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, СЃРѕР·РґР°С‘Рј.
 		if (!buildDirectoryPath(to)) {
-			showError("Не удалось создать папку \"" + to + "\"");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ РїР°РїРєСѓ \"" + to + "\"");
 			return false;
 		}
-		// Выясняем, какие файлы находятся в папке.
+		// Р’С‹СЏСЃРЅСЏРµРј, РєР°РєРёРµ С„Р°Р№Р»С‹ РЅР°С…РѕРґСЏС‚СЃСЏ РІ РїР°РїРєРµ.
 		vector<string> vecFiles;
 		if (!getFilesList(from, mask, vecFiles))
 			return false;
-		// Копируем все найденные файлы.
+		// РљРѕРїРёСЂСѓРµРј РІСЃРµ РЅР°Р№РґРµРЅРЅС‹Рµ С„Р°Р№Р»С‹.
 		for (int i = 0; i < (int)vecFiles.size(); i++) {
 			string source = from + PATH_DELIMITER + vecFiles[i];
 			string dest = to + PATH_DELIMITER + vecFiles[i];
 			if (!copyFile(source, dest)) {
-				showError("Не удалось скопировать файл из \"" + source +
-					"\" в \"" + dest + "\".");
+				showError("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ С„Р°Р№Р» РёР· \"" + source +
+					"\" РІ \"" + dest + "\".");
 				return false;
 			}
 		}
-		// Получаем список вложенных папок.
+		// РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє РІР»РѕР¶РµРЅРЅС‹С… РїР°РїРѕРє.
 		vector<string> vecFolders;
 		if (!getFoldersList(from, vecFolders))
 			return false;
-		// Проходим по всем вложенным папкам.
+		// РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РІР»РѕР¶РµРЅРЅС‹Рј РїР°РїРєР°Рј.
 		for (int i = 0; i < (int)vecFolders.size(); i++) {
-			// Для каждой вложенной папки рекурсивно вызываем функцию копирования.
+			// Р”Р»СЏ РєР°Р¶РґРѕР№ РІР»РѕР¶РµРЅРЅРѕР№ РїР°РїРєРё СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј С„СѓРЅРєС†РёСЋ РєРѕРїРёСЂРѕРІР°РЅРёСЏ.
 			string source = from + PATH_DELIMITER + vecFolders[i];
 			string dest = to + PATH_DELIMITER + vecFolders[i];
 			if (!copyFileTree(source, dest, mask))
@@ -406,19 +406,19 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Ищем первый файл "*.qsp" в папке.
+	// РС‰РµРј РїРµСЂРІС‹Р№ С„Р°Р№Р» "*.qsp" РІ РїР°РїРєРµ.
 	bool findGameFile(string dir, string &gameFileName) {
-		// Ищем все QSP-файлы в корне указанной папки
+		// РС‰РµРј РІСЃРµ QSP-С„Р°Р№Р»С‹ РІ РєРѕСЂРЅРµ СѓРєР°Р·Р°РЅРЅРѕР№ РїР°РїРєРё
 		vector<string> gameFileList;
 		if (!getFilesList(dir, "*.qsp", gameFileList))
 			return false;
 		int count = (int)gameFileList.size();
 		if (count == 0) {
-			showError("Не найден файл игры в папке " + dir);
+			showError("РќРµ РЅР°Р№РґРµРЅ С„Р°Р№Р» РёРіСЂС‹ РІ РїР°РїРєРµ " + dir);
 			return false;
 		}
 		else if (count > 1) {
-			showError("В корневой папке игры должен находиться только один файл с расширением \"*.qsp\". Папка: " + dir);
+			showError("Р’ РєРѕСЂРЅРµРІРѕР№ РїР°РїРєРµ РёРіСЂС‹ РґРѕР»Р¶РµРЅ РЅР°С…РѕРґРёС‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ С„Р°Р№Р» СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј \"*.qsp\". РџР°РїРєР°: " + dir);
 			return false;
 		}
 		gameFileName = gameFileList[0];

@@ -8,8 +8,8 @@ using namespace std;
 
 namespace QuestNavigator {
 
-	// Показываем системный диалог MessageBox.
+	// РџРѕРєР°Р·С‹РІР°РµРј СЃРёСЃС‚РµРјРЅС‹Р№ РґРёР°Р»РѕРі MessageBox.
 	void showMessage(string msg, string title);
-	// Отображаем ошибку.
+	// РћС‚РѕР±СЂР°Р¶Р°РµРј РѕС€РёР±РєСѓ.
 	void showError(string msg);
 }

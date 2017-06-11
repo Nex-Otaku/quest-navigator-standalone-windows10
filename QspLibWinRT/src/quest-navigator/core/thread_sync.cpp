@@ -2,26 +2,26 @@
 #include "dialogs.h"
 
 namespace QuestNavigator {
-	// Ожидаем события
+	// РћР¶РёРґР°РµРј СЃРѕР±С‹С‚РёСЏ
 	bool waitForSingle(HANDLE handle)
 	{
 		DWORD res = WaitForSingleObject(handle, INFINITE);
 		if (res != WAIT_OBJECT_0) {
-			showError("Не удалось дождаться события синхронизации");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РґРѕР¶РґР°С‚СЊСЃСЏ СЃРѕР±С‹С‚РёСЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё");
 			return false;
 		}
 		return true;
 	}
 
-	// Высвобождаем описатель и ругаемся если что не так.
+	// Р’С‹СЃРІРѕР±РѕР¶РґР°РµРј РѕРїРёСЃР°С‚РµР»СЊ Рё СЂСѓРіР°РµРјСЃСЏ РµСЃР»Рё С‡С‚Рѕ РЅРµ С‚Р°Рє.
 	void freeHandle(HANDLE handle)
 	{
 		BOOL res = CloseHandle(handle);
 		if (res == 0) {
-			showError("Не удалось высвободить описатель объекта ядра.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РІС‹СЃРІРѕР±РѕРґРёС‚СЊ РѕРїРёСЃР°С‚РµР»СЊ РѕР±СЉРµРєС‚Р° СЏРґСЂР°.");
 
 			// STUB
-			// Выход из приложения?
+			// Р’С‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ?
 			//exit(eecFailToCloseHandle);
 		}
 	}

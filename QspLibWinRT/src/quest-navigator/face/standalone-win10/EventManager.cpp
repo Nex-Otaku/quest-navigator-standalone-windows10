@@ -21,17 +21,17 @@ namespace QuestNavigator
 	{
 		this->timer = timer;
 
-		// Отладка.
+		// РћС‚Р»Р°РґРєР°.
 		this->uwpJsExecutor = uwpJsExecutor;
 	}
 
-	// Вызовы событий из UI.
+	// Р’С‹Р·РѕРІС‹ СЃРѕР±С‹С‚РёР№ РёР· UI.
 
 	// JsListener
 
 	void EventManager::executeAction(int pos)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
@@ -44,7 +44,7 @@ namespace QuestNavigator
 
 	void EventManager::selectObject(int pos)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
@@ -57,7 +57,7 @@ namespace QuestNavigator
 
 	void EventManager::loadSlotSelected(int index)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
@@ -70,7 +70,7 @@ namespace QuestNavigator
 
 	void EventManager::saveSlotSelected(int index)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
@@ -83,19 +83,19 @@ namespace QuestNavigator
 
 	void EventManager::msgClosed()
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		runSyncEvent(evMsgClosed);
 	}
 
 	void EventManager::errorClosed()
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		runSyncEvent(evErrorClosed);
 	}
 
 	void EventManager::menuClosed(int pos)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		lockData();
 		g_sharedData[evMenuClosed].num = pos;
 		runSyncEvent(evMenuClosed);
@@ -104,7 +104,7 @@ namespace QuestNavigator
 
 	void EventManager::inputClosed(string text)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		lockData();
 		g_sharedData[evInputClosed].str = text;
 		runSyncEvent(evInputClosed);
@@ -113,7 +113,7 @@ namespace QuestNavigator
 
 	void EventManager::mute(bool flag)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		lockData();
 		g_sharedData[evMute].flag = flag;
 		runSyncEvent(evMute);
@@ -122,7 +122,7 @@ namespace QuestNavigator
 
 	void EventManager::inputStringChanged(string text)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		lockData();
 		g_sharedData[evInputStringChanged].str = text;
 		runSyncEvent(evInputStringChanged);
@@ -131,8 +131,8 @@ namespace QuestNavigator
 
 	void EventManager::inputStringEntered()
 	{
-		// Контекст UI
-		// Нажали Enter в строке ввода
+		// РљРѕРЅС‚РµРєСЃС‚ UI
+		// РќР°Р¶Р°Р»Рё Enter РІ СЃС‚СЂРѕРєРµ РІРІРѕРґР°
 		runSyncEvent(evInputStringEntered);
 	}
 
@@ -141,16 +141,16 @@ namespace QuestNavigator
 	void EventManager::runGame(string fileName, int gameIsStandalone)
 	{
 		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 1");
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
 		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 2");
-		// Готовим данные для передачи в поток
+		// Р“РѕС‚РѕРІРёРј РґР°РЅРЅС‹Рµ РґР»СЏ РїРµСЂРµРґР°С‡Рё РІ РїРѕС‚РѕРє
 		lockData();
 		g_sharedData[evRunGame].str = fileName;
-		// Передаём настройку из конфига в скин.
+		// РџРµСЂРµРґР°С‘Рј РЅР°СЃС‚СЂРѕР№РєСѓ РёР· РєРѕРЅС„РёРіР° РІ СЃРєРёРЅ.
 		g_sharedData[evRunGame].num = gameIsStandalone;
 		runSyncEvent(evRunGame);
 		unlockData();
@@ -159,8 +159,8 @@ namespace QuestNavigator
 
 	void EventManager::stopGame()
 	{
-		// Контекст UI
-		// Мы должны иметь возможность остановить игру в любой момент.
+		// РљРѕРЅС‚РµРєСЃС‚ UI
+		// РњС‹ РґРѕР»Р¶РЅС‹ РёРјРµС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РёРіСЂСѓ РІ Р»СЋР±РѕР№ РјРѕРјРµРЅС‚.
 		runSyncEvent(evStopGame);
 		waitForSingleEvent(evGameStopped);
 	}
@@ -169,9 +169,9 @@ namespace QuestNavigator
 
 	void EventManager::initEvents()
 	{
-		// Инициализируем объекты синхронизации.
-		// Используемые объекты - события с автосбросом, 
-		// инициализированные в занятом состоянии, и один таймер.
+		// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РѕР±СЉРµРєС‚С‹ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё.
+		// РСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РѕР±СЉРµРєС‚С‹ - СЃРѕР±С‹С‚РёСЏ СЃ Р°РІС‚РѕСЃР±СЂРѕСЃРѕРј, 
+		// РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Рµ РІ Р·Р°РЅСЏС‚РѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, Рё РѕРґРёРЅ С‚Р°Р№РјРµСЂ.
 		for (int i = 0; i < (int)evLast; i++) {
 			HANDLE eventHandle = (i == (int)evTimer) ? this->timer->CreateTimer() : CreateSyncEvent();
 			if (eventHandle == NULL)
@@ -182,15 +182,15 @@ namespace QuestNavigator
 
 	void EventManager::initSharedData()
 	{
-		// Инициализируем структуру критической секции
+		// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃС‚СЂСѓРєС‚СѓСЂСѓ РєСЂРёС‚РёС‡РµСЃРєРѕР№ СЃРµРєС†РёРё
 		try {
 			InitializeCriticalSection(&g_csSharedData);
 		}
 		catch (...) {
-			showError("Не удалось проинициализировать структуру критической секции.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РєСЂРёС‚РёС‡РµСЃРєРѕР№ СЃРµРєС†РёРё.");
 
 			// STUB
-			// Сделать выход из приложения?
+			// РЎРґРµР»Р°С‚СЊ РІС‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ?
 			//exit(eecFailToInitCs);
 			return;
 		}
@@ -198,7 +198,7 @@ namespace QuestNavigator
 
 	void EventManager::freeEvents()
 	{
-		// Закрываем хэндлы событий
+		// Р—Р°РєСЂС‹РІР°РµРј С…СЌРЅРґР»С‹ СЃРѕР±С‹С‚РёР№
 		for (int i = 0; i < (int)evLast; i++) {
 			freeHandle(g_eventList[i]);
 			g_eventList[i] = NULL;
@@ -207,7 +207,7 @@ namespace QuestNavigator
 
 	void EventManager::freeSharedData()
 	{
-		// Высвобождаем структуру критической секции
+		// Р’С‹СЃРІРѕР±РѕР¶РґР°РµРј СЃС‚СЂСѓРєС‚СѓСЂСѓ РєСЂРёС‚РёС‡РµСЃРєРѕР№ СЃРµРєС†РёРё
 		DeleteCriticalSection(&g_csSharedData);
 	}
 
@@ -218,19 +218,19 @@ namespace QuestNavigator
 
 	void EventManager::libIsReady()
 	{
-		// Сообщаем потоку UI, что библиотека готова к выполнению команд
+		// РЎРѕРѕР±С‰Р°РµРј РїРѕС‚РѕРєСѓ UI, С‡С‚Рѕ Р±РёР±Р»РёРѕС‚РµРєР° РіРѕС‚РѕРІР° Рє РІС‹РїРѕР»РЅРµРЅРёСЋ РєРѕРјР°РЅРґ
 		runSyncEvent(evLibIsReady);
 	}
 
 	void EventManager::gameStopped()
 	{
-		// Библиотека сообщила, что игра остановлена.
+		// Р‘РёР±Р»РёРѕС‚РµРєР° СЃРѕРѕР±С‰РёР»Р°, С‡С‚Рѕ РёРіСЂР° РѕСЃС‚Р°РЅРѕРІР»РµРЅР°.
 		runSyncEvent(evGameStopped);
 	}
 
 	DWORD EventManager::waitForAnyEvent()
 	{
-		// Ожидаем любое из событий синхронизации
+		// РћР¶РёРґР°РµРј Р»СЋР±РѕРµ РёР· СЃРѕР±С‹С‚РёР№ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё
 		DWORD res = WaitForMultipleObjects((DWORD)evLastUi, g_eventList, FALSE, INFINITE);
 		return res;
 	}
@@ -274,12 +274,12 @@ namespace QuestNavigator
 	}
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// Работа с синхронизацией и потоками.
+	// Р Р°Р±РѕС‚Р° СЃ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРµР№ Рё РїРѕС‚РѕРєР°РјРё.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	// public
 
-	// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
+	// РћР¶РёРґР°РµРј, РїРѕРєР° РїРѕС‚РѕРє Р±РёР±Р»РёРѕС‚РµРєРё РЅРµ Р±СѓРґРµС‚ РіРѕС‚РѕРІ Рє РїРѕР»СѓС‡РµРЅРёСЋ СЃРѕРѕР±С‰РµРЅРёР№.
 	void EventManager::waitForLibIsReady()
 	{
 		waitForSingleEvent(evLibIsReady);
@@ -287,55 +287,55 @@ namespace QuestNavigator
 
 	// private
 
-	// Создаём объект ядра для синхронизации потоков,
-	// событие с автосбросом, инициализированное в занятом состоянии.
+	// РЎРѕР·РґР°С‘Рј РѕР±СЉРµРєС‚ СЏРґСЂР° РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕС‚РѕРєРѕРІ,
+	// СЃРѕР±С‹С‚РёРµ СЃ Р°РІС‚РѕСЃР±СЂРѕСЃРѕРј, РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅРѕРµ РІ Р·Р°РЅСЏС‚РѕРј СЃРѕСЃС‚РѕСЏРЅРёРё.
 	HANDLE EventManager::CreateSyncEvent()
 	{
 		HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
 		if (eventHandle == NULL) {
-			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
+			showError("РќРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ СЏРґСЂР° \"СЃРѕР±С‹С‚РёРµ\" РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕС‚РѕРєРѕРІ.");
 
 			// STUB
-			// Выход из приложения?
+			// Р’С‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ?
 			//exit(eecFailToCreateEvent);
 		}
 		return eventHandle;
 	}
 
-	// Получаем HANDLE события по его индексу
+	// РџРѕР»СѓС‡Р°РµРј HANDLE СЃРѕР±С‹С‚РёСЏ РїРѕ РµРіРѕ РёРЅРґРµРєСЃСѓ
 	HANDLE EventManager::getEventHandle(eSyncEvent ev)
 	{
 		return g_eventList[ev];
 	}
 
-	// Запускаем событие
+	// Р—Р°РїСѓСЃРєР°РµРј СЃРѕР±С‹С‚РёРµ
 	void EventManager::runSyncEvent(eSyncEvent ev)
 	{
 		BOOL res = SetEvent(getEventHandle(ev));
 		if (res == 0) {
-			showError("Не удалось запустить событие синхронизации потоков.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РїСѓСЃС‚РёС‚СЊ СЃРѕР±С‹С‚РёРµ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕС‚РѕРєРѕРІ.");
 
 			// STUB
-			// Выход из приложения?
+			// Р’С‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ?
 			//exit(eecFailToSetEvent);
 		}
 	}
 
-	// Входим в критическую секцию
+	// Р’С…РѕРґРёРј РІ РєСЂРёС‚РёС‡РµСЃРєСѓСЋ СЃРµРєС†РёСЋ
 	void EventManager::lockData()
 	{
 		try {
 			EnterCriticalSection(&g_csSharedData);
 		} catch (...) {
-			showError("Не удалось войти в критическую секцию.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РІРѕР№С‚Рё РІ РєСЂРёС‚РёС‡РµСЃРєСѓСЋ СЃРµРєС†РёСЋ.");
 
 			// STUB
-			// Выход из приложения?
+			// Р’С‹С…РѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ?
 			//exit(eecUnableEnterCs2);
 		}
 	}
 
-	// Выходим из критической секции
+	// Р’С‹С…РѕРґРёРј РёР· РєСЂРёС‚РёС‡РµСЃРєРѕР№ СЃРµРєС†РёРё
 	void EventManager::unlockData()
 	{
 		LeaveCriticalSection(&g_csSharedData);
@@ -348,15 +348,15 @@ namespace QuestNavigator
 
 	bool EventManager::waitForSingleLib(eSyncEvent ev)
 	{
-		// Контекст библиотеки.
-		// Мы должны иметь возможность в любой момент остановить игру либо поток библиотеки.
-		// Поэтому при ожидании в библиотеке единичного события синхронизации,
-		// такого как например закрытие диалога,
-		// мы вместо "waitForSingleEvent" вызываем "waitForSingleLib".
-		// Эта функция дополнительно проверяет на наличие события, 
-		// указывающего, что мы должны остановить игру либо поток библиотеки.
+		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё.
+		// РњС‹ РґРѕР»Р¶РЅС‹ РёРјРµС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РІ Р»СЋР±РѕР№ РјРѕРјРµРЅС‚ РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РёРіСЂСѓ Р»РёР±Рѕ РїРѕС‚РѕРє Р±РёР±Р»РёРѕС‚РµРєРё.
+		// РџРѕСЌС‚РѕРјСѓ РїСЂРё РѕР¶РёРґР°РЅРёРё РІ Р±РёР±Р»РёРѕС‚РµРєРµ РµРґРёРЅРёС‡РЅРѕРіРѕ СЃРѕР±С‹С‚РёСЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё,
+		// С‚Р°РєРѕРіРѕ РєР°Рє РЅР°РїСЂРёРјРµСЂ Р·Р°РєСЂС‹С‚РёРµ РґРёР°Р»РѕРіР°,
+		// РјС‹ РІРјРµСЃС‚Рѕ "waitForSingleEvent" РІС‹Р·С‹РІР°РµРј "waitForSingleLib".
+		// Р­С‚Р° С„СѓРЅРєС†РёСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ РїСЂРѕРІРµСЂСЏРµС‚ РЅР° РЅР°Р»РёС‡РёРµ СЃРѕР±С‹С‚РёСЏ, 
+		// СѓРєР°Р·С‹РІР°СЋС‰РµРіРѕ, С‡С‚Рѕ РјС‹ РґРѕР»Р¶РЅС‹ РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РёРіСЂСѓ Р»РёР±Рѕ РїРѕС‚РѕРє Р±РёР±Р»РёРѕС‚РµРєРё.
 		
-		// События для синхронизации потоков
+		// РЎРѕР±С‹С‚РёСЏ РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕС‚РѕРєРѕРІ
 		HANDLE eventList[3];
 		eSyncEvent syncEvents[3];
 		syncEvents[0] = evShutdown;
@@ -368,11 +368,11 @@ namespace QuestNavigator
 		
 		DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
-			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РґРѕР¶РґР°С‚СЊСЃСЏ РµРґРёРЅРёС‡РЅРѕРіРѕ СЃРѕР±С‹С‚РёСЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё Р±РёР±Р»РёРѕС‚РµРєРё.");
 		} else {
-			// Если событие было "evShutdown" или "evStopGame",
-			// вызываем их заново.
-			// Это необходимо, так как вызов "WaitForMultipleObjects" их уже сбросил.
+			// Р•СЃР»Рё СЃРѕР±С‹С‚РёРµ Р±С‹Р»Рѕ "evShutdown" РёР»Рё "evStopGame",
+			// РІС‹Р·С‹РІР°РµРј РёС… Р·Р°РЅРѕРІРѕ.
+			// Р­С‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ, С‚Р°Рє РєР°Рє РІС‹Р·РѕРІ "WaitForMultipleObjects" РёС… СѓР¶Рµ СЃР±СЂРѕСЃРёР».
 			for (int i = 0; i < 3; i++) {
 				if (eventList[i])
 				break;
@@ -387,17 +387,17 @@ namespace QuestNavigator
 
 	bool EventManager::checkForSingleEvent(eSyncEvent ev)
 	{
-		// Проверяем, доступен ли объект синхронизации.
-		// Если недоступен, сразу возвращаем "false".
-		// Для ожидания объекта следует использовать "waitForSingle".
+		// РџСЂРѕРІРµСЂСЏРµРј, РґРѕСЃС‚СѓРїРµРЅ Р»Рё РѕР±СЉРµРєС‚ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё.
+		// Р•СЃР»Рё РЅРµРґРѕСЃС‚СѓРїРµРЅ, СЃСЂР°Р·Сѓ РІРѕР·РІСЂР°С‰Р°РµРј "false".
+		// Р”Р»СЏ РѕР¶РёРґР°РЅРёСЏ РѕР±СЉРµРєС‚Р° СЃР»РµРґСѓРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ "waitForSingle".
 		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
 		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 2");
 		DWORD res = WaitForSingleObject(handle, 0);
 		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 3");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
-			this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent Сбой синхронизации");
-			showError("Сбой синхронизации");
+			this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent sync failure");
+			showError("РЎР±РѕР№ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё");
 			return false;
 		}
 		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 4");

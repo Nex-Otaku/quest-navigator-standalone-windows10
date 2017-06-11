@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Контейнер для элемента меню
+// РљРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ СЌР»РµРјРµРЅС‚Р° РјРµРЅСЋ
 struct MenuItemDto {
 	string image;
 	string desc;

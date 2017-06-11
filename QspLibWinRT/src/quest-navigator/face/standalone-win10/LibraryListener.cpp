@@ -47,7 +47,7 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
-	//                       Колбэки интерпретатора
+	//                       РљРѕР»Р±СЌРєРё РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
@@ -60,7 +60,7 @@ namespace QuestNavigator
 
 	void LibraryListener::RefreshInt(int isRedraw)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		bool needUpdate = Skin::isSomethingChanged();
 		Skin::updateBaseVars();
 		needUpdate = needUpdate || Skin::isSomethingChanged();
@@ -75,7 +75,7 @@ namespace QuestNavigator
 			bSkinPrepared = true;
 		}
 
-		//основное описание
+		//РѕСЃРЅРѕРІРЅРѕРµ РѕРїРёСЃР°РЅРёРµ
 		bool bMainDescPrepared = false;
 		bool bMainDescNeedScroll = false;
 		if ((QSPIsMainDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
@@ -88,7 +88,7 @@ namespace QuestNavigator
 			bMainDescPrepared = true;
 		}
 	
-		//список действий
+		//СЃРїРёСЃРѕРє РґРµР№СЃС‚РІРёР№
 		vector<GroupedContentDto::act> acts;
 		bool bActsPrepared = false;
 		if ((QSPIsActionsChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
@@ -110,7 +110,7 @@ namespace QuestNavigator
 			bActsPrepared = true;
 		}
 	
-		//инвентарь
+		//РёРЅРІРµРЅС‚Р°СЂСЊ
 		vector<GroupedContentDto::obj> objs;
 		bool bObjsPrepared = false;
 		int nSelectedObject = QSPGetSelObjectIndex();
@@ -136,7 +136,7 @@ namespace QuestNavigator
 			bObjsPrepared = true;
 		}
 	
-		//доп. описание
+		//РґРѕРї. РѕРїРёСЃР°РЅРёРµ
 		bool bVarsDescPrepared = false;
 		if ((QSPIsVarsDescChanged() == QSP_TRUE) || Skin::isHtmlModeChanged)
 		{
@@ -144,7 +144,7 @@ namespace QuestNavigator
 			bVarsDescPrepared = true;
 		}
 	
-		// Яваскрипт, переданный из игры командой EXEC('JS:...')
+		// РЇРІР°СЃРєСЂРёРїС‚, РїРµСЂРµРґР°РЅРЅС‹Р№ РёР· РёРіСЂС‹ РєРѕРјР°РЅРґРѕР№ EXEC('JS:...')
 		bool bJsCmdPrepared = false;
 		if (jsExecBuffer.length() > 0)
 		{
@@ -153,7 +153,7 @@ namespace QuestNavigator
 			bJsCmdPrepared = true;
 		}
 	
-		// Передаем собранные данные в яваскрипт
+		// РџРµСЂРµРґР°РµРј СЃРѕР±СЂР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ РІ СЏРІР°СЃРєСЂРёРїС‚
 		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
 			bJsCmdPrepared)
 		{
@@ -164,25 +164,25 @@ namespace QuestNavigator
 	
 	void LibraryListener::SetTimer(int msecs)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		instance()->timer->setTimerInterval(msecs);
 		instance()->timer->startTimer();
 	}
 	
 	void LibraryListener::SetInputStrText(QSP_CHAR* text)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		instance()->jsExecutor->qspSetInputString(fromQsp(text));
 	}
 	
 	void LibraryListener::ShowMessage(QSP_CHAR* message)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 	
-		// Обновляем скин
+		// РћР±РЅРѕРІР»СЏРµРј СЃРєРёРЅ
 		Skin::updateBaseVars();
 		Skin::updateMsgDialog();
-		// Если что-то изменилось, то передаем в яваскрипт
+		// Р•СЃР»Рё С‡С‚Рѕ-С‚Рѕ РёР·РјРµРЅРёР»РѕСЃСЊ, С‚Рѕ РїРµСЂРµРґР°РµРј РІ СЏРІР°СЃРєСЂРёРїС‚
 		if (Skin::isSomethingChanged())
 		{
 			RefreshInt(QSP_TRUE);
@@ -190,60 +190,60 @@ namespace QuestNavigator
 	
 		string msgValue = Skin::applyHtmlFixes(fromQsp(message));
 	
-		// Передаём данные в поток UI
+		// РџРµСЂРµРґР°С‘Рј РґР°РЅРЅС‹Рµ РІ РїРѕС‚РѕРє UI
 		instance()->jsExecutor->qspMsg(msgValue);
 	
-		// Ждём закрытия диалога
+		// Р–РґС‘Рј Р·Р°РєСЂС‹С‚РёСЏ РґРёР°Р»РѕРіР°
 		instance()->eventManager->waitForMsgClosed();
 	}
 	
 	void LibraryListener::PlayFile(QSP_CHAR* file, int volume)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		string fileName = fromQsp(file);
 		SoundManager::play(fileName, volume);
 	}
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		bool isPlaying = SoundManager::isPlaying(fromQsp(file));
 		return isPlaying ? QSP_TRUE : QSP_FALSE;
 	}
 	
 	void LibraryListener::CloseFile(QSP_CHAR* file)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		bool closeAll = file == NULL;
 		SoundManager::close(closeAll, fromQsp(file));
 	}
 	
 	void LibraryListener::ShowPicture(QSP_CHAR* file)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		string fileName = getRightPath(fromQsp(file));
 	
-		// Проверяем читаемость файла.
-		// Если файл не существует или не читается, выходим.
+		// РџСЂРѕРІРµСЂСЏРµРј С‡РёС‚Р°РµРјРѕСЃС‚СЊ С„Р°Р№Р»Р°.
+		// Р•СЃР»Рё С„Р°Р№Р» РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РёР»Рё РЅРµ С‡РёС‚Р°РµС‚СЃСЏ, РІС‹С…РѕРґРёРј.
 		if (fileName.length() > 0) {
 			if (!fileExists(fileName)) {
-				showError("Оператор VIEW. Не найден файл: " + fileName);
+				showError("РћРїРµСЂР°С‚РѕСЂ VIEW. РќРµ РЅР°Р№РґРµРЅ С„Р°Р№Р»: " + fileName);
 				return;
 			}
 		}
 	
-		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку
+		// "РџСѓСЃС‚РѕРµ" РёРјСЏ С„Р°Р№Р»Р° С‚РѕР¶Рµ РёРјРµРµС‚ Р·РЅР°С‡РµРЅРёРµ - С‚Р°Рє РјС‹ СЃРєСЂС‹РІР°РµРј РєР°СЂС‚РёРЅРєСѓ
 		instance()->jsExecutor->qspView(fileName);
 	}
 	
 	void LibraryListener::InputBox(const QSP_CHAR* prompt, QSP_CHAR* buffer, int maxLen)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 	
-		// Обновляем скин
+		// РћР±РЅРѕРІР»СЏРµРј СЃРєРёРЅ
 		Skin::updateBaseVars();
 		Skin::updateInputDialog();
-		// Если что-то изменилось, то передаем в яваскрипт
+		// Р•СЃР»Рё С‡С‚Рѕ-С‚Рѕ РёР·РјРµРЅРёР»РѕСЃСЊ, С‚Рѕ РїРµСЂРµРґР°РµРј РІ СЏРІР°СЃРєСЂРёРїС‚
 		if (Skin::isSomethingChanged())
 		{
 			RefreshInt(QSP_TRUE);
@@ -251,13 +251,13 @@ namespace QuestNavigator
 	
 		string promptValue = fromQsp(prompt);
 	
-		// Передаём данные в поток UI
+		// РџРµСЂРµРґР°С‘Рј РґР°РЅРЅС‹Рµ РІ РїРѕС‚РѕРє UI
 		instance()->jsExecutor->qspInput(promptValue);
 	
-		// Ждём закрытия диалога
+		// Р–РґС‘Рј Р·Р°РєСЂС‹С‚РёСЏ РґРёР°Р»РѕРіР°
 		instance()->eventManager->waitForInputClosed();
 	
-		// Возвращаем результат в библиотеку
+		// Р’РѕР·РІСЂР°С‰Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ Р±РёР±Р»РёРѕС‚РµРєСѓ
 		SharedDataDto dto = instance()->eventManager->getSharedData(evInputClosed);
 		string result = dto.str;
 		wstring wResult = widen(result);
@@ -265,15 +265,15 @@ namespace QuestNavigator
 	}
 	
 	
-	// Функция запросов к плееру.
-	// С помощью этой функции мы можем в игре узнать параметры окружения плеера.
-	// Вызывается так: $platform = GETPLAYER('platform')
+	// Р¤СѓРЅРєС†РёСЏ Р·Р°РїСЂРѕСЃРѕРІ Рє РїР»РµРµСЂСѓ.
+	// РЎ РїРѕРјРѕС‰СЊСЋ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РјС‹ РјРѕР¶РµРј РІ РёРіСЂРµ СѓР·РЅР°С‚СЊ РїР°СЂР°РјРµС‚СЂС‹ РѕРєСЂСѓР¶РµРЅРёСЏ РїР»РµРµСЂР°.
+	// Р’С‹Р·С‹РІР°РµС‚СЃСЏ С‚Р°Рє: $platform = GETPLAYER('platform')
 	// @param resource
 	// @return
 	
 	void LibraryListener::PlayerInfo(QSP_CHAR* resource, QSP_CHAR* buffer, int maxLen)
 	{
-	//		//Контекст библиотеки
+	//		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 	//		string resourceName = fromQsp(resource);
 	//		resourceName = toLower(resourceName);
 	//		string result = "";
@@ -285,16 +285,16 @@ namespace QuestNavigator
 	//			result = QN_VERSION;
 	//		}
 	//
-	//		// Возвращаем результат в библиотеку
+	//		// Р’РѕР·РІСЂР°С‰Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ Р±РёР±Р»РёРѕС‚РµРєСѓ
 	//		wstring wResult = widen(result);
 	//		wcsncpy(buffer, wResult.c_str(), maxLen);
 	}
 
-	// Возвращаем количество миллисекунд, 
-	// прошедших с момента последнего вызова этой функции.
+	// Р’РѕР·РІСЂР°С‰Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РјРёР»Р»РёСЃРµРєСѓРЅРґ, 
+	// РїСЂРѕС€РµРґС€РёС… СЃ РјРѕРјРµРЅС‚Р° РїРѕСЃР»РµРґРЅРµРіРѕ РІС‹Р·РѕРІР° СЌС‚РѕР№ С„СѓРЅРєС†РёРё.
 	int LibraryListener::GetMSCount()
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		clock_t now = clock();
 		int elapsed = (int) (((now - gameStartTime) * 1000) / CLOCKS_PER_SEC);
 		gameStartTime = now;
@@ -303,7 +303,7 @@ namespace QuestNavigator
 	
 	void LibraryListener::AddMenuItem(QSP_CHAR* name, QSP_CHAR* imgPath)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		MenuItemDto item;
 		item.image = getRightPath(fromQsp(imgPath));
 		item.desc = fromQsp(name);
@@ -312,9 +312,9 @@ namespace QuestNavigator
 	
 	int LibraryListener::ShowMenu()
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 
-		// Формируем список меню с учётом настроек скина.
+		// Р¤РѕСЂРјРёСЂСѓРµРј СЃРїРёСЃРѕРє РјРµРЅСЋ СЃ СѓС‡С‘С‚РѕРј РЅР°СЃС‚СЂРѕРµРє СЃРєРёРЅР°.
 		vector<MenuItemDto> formattedMenuList;
 		for (int i = 0; i < (int)menuList.size(); i++) {
 			MenuItemDto item;
@@ -323,13 +323,13 @@ namespace QuestNavigator
 			formattedMenuList.push_back(item);
 		}
 	
-		// Передаём данные в поток UI
+		// РџРµСЂРµРґР°С‘Рј РґР°РЅРЅС‹Рµ РІ РїРѕС‚РѕРє UI
 		instance()->jsExecutor->qspMenu(formattedMenuList);
 	
-		// Ждём закрытия диалога
+		// Р–РґС‘Рј Р·Р°РєСЂС‹С‚РёСЏ РґРёР°Р»РѕРіР°
 		instance()->eventManager->waitForMenuClosed();
 	
-		// Возвращаем результат
+		// Р’РѕР·РІСЂР°С‰Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
 		SharedDataDto dto = instance()->eventManager->getSharedData(evMenuClosed);
 		int result = dto.num;
 	
@@ -338,50 +338,50 @@ namespace QuestNavigator
 	
 	void LibraryListener::DeleteMenu()
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		menuList.clear();
 	}
 	
 	void LibraryListener::Wait(int msecs)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		Sleep((DWORD)msecs);
 	}
 	
 	void LibraryListener::ShowWindow(int type, QSP_BOOL isShow)
 	{
-		// Контекст библиотеки
+		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		Skin::showWindow(type, isShow);
 	}
 	
 	void LibraryListener::System(QSP_CHAR* cmd)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		string jsCmd = fromQsp(cmd);
 		string jsCmdUpper = toUpper(jsCmd);
 		if (startsWith(jsCmdUpper, "JS:"))
 		{
 			jsCmd = jsCmd.substr(string("JS:").length());
-			// Сохраняем яваскрипт, переданный из игры командой EXEC('JS:...')
-			// На выполнение отдаём при обновлении интерфейса
+			// РЎРѕС…СЂР°РЅСЏРµРј СЏРІР°СЃРєСЂРёРїС‚, РїРµСЂРµРґР°РЅРЅС‹Р№ РёР· РёРіСЂС‹ РєРѕРјР°РЅРґРѕР№ EXEC('JS:...')
+			// РќР° РІС‹РїРѕР»РЅРµРЅРёРµ РѕС‚РґР°С‘Рј РїСЂРё РѕР±РЅРѕРІР»РµРЅРёРё РёРЅС‚РµСЂС„РµР№СЃР°
 			jsExecBuffer = jsExecBuffer + jsCmd;
 		}
 	}
 	
 	void LibraryListener::OpenGameStatus(QSP_CHAR* file)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		if (file != 0) {
-			// Библиотека возвращает абсолютный путь к файлу сохранения,
-			// вычисляемый по пути к файлу игры.
-			// Таким образом, если игра запущена из пути "D:\CoolGame\game.qsp",
-			// то при выполнении команды 
+			// Р‘РёР±Р»РёРѕС‚РµРєР° РІРѕР·РІСЂР°С‰Р°РµС‚ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ СЃРѕС…СЂР°РЅРµРЅРёСЏ,
+			// РІС‹С‡РёСЃР»СЏРµРјС‹Р№ РїРѕ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ РёРіСЂС‹.
+			// РўР°РєРёРј РѕР±СЂР°Р·РѕРј, РµСЃР»Рё РёРіСЂР° Р·Р°РїСѓС‰РµРЅР° РёР· РїСѓС‚Рё "D:\CoolGame\game.qsp",
+			// С‚Рѕ РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё РєРѕРјР°РЅРґС‹ 
 			// OPENGAME 'saves\save1.sav'
-			// сейв будет загружаться из папки игры:
+			// СЃРµР№РІ Р±СѓРґРµС‚ Р·Р°РіСЂСѓР¶Р°С‚СЊСЃСЏ РёР· РїР°РїРєРё РёРіСЂС‹:
 			// "D:\CoolGame\saves\save1.sav"
-			// Нас это не устраивает, 
-			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
-			// Поэтому мы меняем путь, заданный библиотекой, на свой.
+			// РќР°СЃ СЌС‚Рѕ РЅРµ СѓСЃС‚СЂР°РёРІР°РµС‚, 
+			// РЅР°Рј РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ СЃРµР№РІС‹ С…СЂР°РЅРёР»РёСЃСЊ РІ РѕС‚РґРµР»СЊРЅРѕРј Р±РµР·РѕРїР°СЃРЅРѕРј РјРµСЃС‚Рµ.
+			// РџРѕСЌС‚РѕРјСѓ РјС‹ РјРµРЅСЏРµРј РїСѓС‚СЊ, Р·Р°РґР°РЅРЅС‹Р№ Р±РёР±Р»РёРѕС‚РµРєРѕР№, РЅР° СЃРІРѕР№.
 			string saveFile = getRealSaveFile(fromQsp(file));
 			if (fileExists(saveFile)) {
 				QSP_BOOL res = QSPOpenSavedGame(widen(saveFile).c_str(), QSP_FALSE);
@@ -394,23 +394,23 @@ namespace QuestNavigator
 	
 	void LibraryListener::SaveGameStatus(QSP_CHAR* file)
 	{
-		//Контекст библиотеки
+		//РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		if (file != 0) {
 			string saveDir = Configuration::getString(ecpSaveDir);
 			if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-				showError("Не удалось создать папку для сохранения: " + saveDir);
+				showError("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ РїР°РїРєСѓ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ: " + saveDir);
 				return;
 			}
-			// Библиотека возвращает абсолютный путь к файлу сохранения,
-			// вычисляемый по пути к файлу игры.
-			// Таким образом, если игра запущена из пути "D:\CoolGame\game.qsp",
-			// то при выполнении команды 
+			// Р‘РёР±Р»РёРѕС‚РµРєР° РІРѕР·РІСЂР°С‰Р°РµС‚ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ СЃРѕС…СЂР°РЅРµРЅРёСЏ,
+			// РІС‹С‡РёСЃР»СЏРµРјС‹Р№ РїРѕ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ РёРіСЂС‹.
+			// РўР°РєРёРј РѕР±СЂР°Р·РѕРј, РµСЃР»Рё РёРіСЂР° Р·Р°РїСѓС‰РµРЅР° РёР· РїСѓС‚Рё "D:\CoolGame\game.qsp",
+			// С‚Рѕ РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё РєРѕРјР°РЅРґС‹ 
 			// SAVEGAME 'saves\save1.sav'
-			// сейв будет сохраняться в папке игры:
+			// СЃРµР№РІ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅСЏС‚СЊСЃСЏ РІ РїР°РїРєРµ РёРіСЂС‹:
 			// "D:\CoolGame\saves\save1.sav"
-			// Нас это не устраивает, 
-			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
-			// Поэтому мы меняем путь, заданный библиотекой, на свой.
+			// РќР°СЃ СЌС‚Рѕ РЅРµ СѓСЃС‚СЂР°РёРІР°РµС‚, 
+			// РЅР°Рј РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ СЃРµР№РІС‹ С…СЂР°РЅРёР»РёСЃСЊ РІ РѕС‚РґРµР»СЊРЅРѕРј Р±РµР·РѕРїР°СЃРЅРѕРј РјРµСЃС‚Рµ.
+			// РџРѕСЌС‚РѕРјСѓ РјС‹ РјРµРЅСЏРµРј РїСѓС‚СЊ, Р·Р°РґР°РЅРЅС‹Р№ Р±РёР±Р»РёРѕС‚РµРєРѕР№, РЅР° СЃРІРѕР№.
 			string saveFile = getRealSaveFile(fromQsp(file));
 			QSP_BOOL res = QSPSaveGame(widen(saveFile).c_str(), QSP_FALSE);
 			instance()->library->CheckQspResult(res, "QSPSaveGame");

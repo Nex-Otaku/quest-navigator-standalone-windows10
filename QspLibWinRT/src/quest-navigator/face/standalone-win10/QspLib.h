@@ -27,10 +27,10 @@ namespace QspLibWinRT
 		void runInputString();
 		void runDefaultGame();
 
-		// Метод для отладки
+		// РњРµС‚РѕРґ РґР»СЏ РѕС‚Р»Р°РґРєРё
 		void callDebugMessage();
 
-		// Объект для привязки колбеков.
+		// РћР±СЉРµРєС‚ РґР»СЏ РїСЂРёРІСЏР·РєРё РєРѕР»Р±РµРєРѕРІ.
 		UwpJsExecutor^ getUwpJsExecutor();
 	private:
 		JsListener* jsListener;
@@ -48,7 +48,7 @@ namespace QspLibWinRT
 //		bool programLoaded;
 //		bool jsLibObjectCreated;
 //
-//		// Хэндл мьютекса.
+//		// РҐСЌРЅРґР» РјСЊСЋС‚РµРєСЃР°.
 //		HANDLE hInstanceMutex;
 //
 //	public:
@@ -95,7 +95,7 @@ namespace QspLibWinRT
 //
 //
 //		// ********************************************************************
-//		// Вспомогательные обработчики для отладки
+//		// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ РѕР±СЂР°Р±РѕС‚С‡РёРєРё РґР»СЏ РѕС‚Р»Р°РґРєРё
 //		// ********************************************************************
 //		void alert(WebView* caller, const JSArray& args);
 //

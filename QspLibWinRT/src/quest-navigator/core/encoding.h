@@ -7,7 +7,7 @@ using namespace std;
 
 namespace QuestNavigator {
 
-	// Óòèëèòû äëÿ ïðåîáðàçîâàíèÿ ñòðîê
+	// â€Ñ‚Ð¸Ð»Ð¸Ñ‚Ñ‹ Ð´Ð»Â¤ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Â¤ ÑÑ‚Ñ€Ð¾Ðº
 
 	// UTF-16 wstring -> UTF-16 WebString
 	//WebString WideToWebString(wstring str);

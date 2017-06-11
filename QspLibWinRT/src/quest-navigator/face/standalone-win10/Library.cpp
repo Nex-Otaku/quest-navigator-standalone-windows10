@@ -36,16 +36,16 @@ namespace QuestNavigator
 		this->jsExecutor = jsExecutor;
 	}
 
-	// Çàïóñê ïîòîêà áèáëèîòåêè. Âûçûâàåòñÿ òîëüêî ðàç ïðè ñòàðòå ïðîãðàììû.
+	// Ð—Ð°Ð¿ÑƒÑÐº Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸. Ð’Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð· Ð¿Ñ€Ð¸ ÑÑ‚Ð°Ñ€Ñ‚Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹.
 	void Library::StartLibThread()
 	{
-		//Êîíòåêñò UI
+		//ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ UI
 		if (libThread != NULL)
 		{
 			showError("StartLibThread: failed, libThread is not null");
 
 			// STUB
-			// Ñäåëàòü âûõîä èç ïðèëîæåíèÿ?
+			// Ð¡Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð²Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ?
 			//exit(eecLibThreadAlreadyStarted);
 			return;
 		}
@@ -55,26 +55,26 @@ namespace QuestNavigator
 
 		libThread = (HANDLE)_beginthreadex(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
 		if (libThread == NULL) {
-			showError("Íå ïîëó÷èëîñü ñîçäàòü ïîòîê èíòåðïðåòàòîðà.");
+			showError("ÐÐµ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿Ð¾Ñ‚Ð¾Ðº Ð¸Ð½Ñ‚ÐµÑ€Ð¿Ñ€ÐµÑ‚Ð°Ñ‚Ð¾Ñ€Ð°.");
 
 			// STUB
-			// Ñäåëàòü âûõîä èç ïðèëîæåíèÿ?
+			// Ð¡Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð²Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ?
 			//exit(eecFailToBeginLibThread);
 			return;
 		}
 	}
 
-	// Îñòàíîâêà ïîòîêà áèáëèîòåêè. Âûçûâàåòñÿ òîëüêî ðàç ïðè çàâåðøåíèè ïðîãðàììû.
+	// ÐžÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸. Ð’Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð· Ð¿Ñ€Ð¸ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹.
 	void Library::StopLibThread()
 	{
 		if (libThread == NULL)
 			return;
 
-		// Ñîîáùàåì ïîòîêó áèáëèîòåêè, ÷òî íóæíî çàâåðøèòü ðàáîòó
+		// Ð¡Ð¾Ð¾Ð±Ñ‰Ð°ÐµÐ¼ Ð¿Ð¾Ñ‚Ð¾ÐºÑƒ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸, Ñ‡Ñ‚Ð¾ Ð½ÑƒÐ¶Ð½Ð¾ Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ
 		this->eventManager->shutdown();
-		// Æä¸ì çàâåðøåíèÿ áèáëèîòå÷íîãî ïîòîêà
+		// Ð–Ð´Ñ‘Ð¼ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÑ‡Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
 		waitForSingle(libThread);
-		// Çàêðûâàåì õýíäë áèáëèîòå÷íîãî ïîòîêà
+		// Ð—Ð°ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ñ…ÑÐ½Ð´Ð» Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÑ‡Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
 		freeHandle(libThread);
 		libThread = NULL;
 
@@ -82,19 +82,19 @@ namespace QuestNavigator
 		this->eventManager->freeSharedData();
 	}
 
-	// Îñíîâíàÿ ôóíêöèÿ ïîòîêà áèáëèîòåêè. Âûçûâàåòñÿ òîëüêî ðàç çà âåñü æèçíåííûé öèêë ïðîãðàììû.
+	// ÐžÑÐ½Ð¾Ð²Ð½Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸. Ð’Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð· Ð·Ð° Ð²ÐµÑÑŒ Ð¶Ð¸Ð·Ð½ÐµÐ½Ð½Ñ‹Ð¹ Ñ†Ð¸ÐºÐ» Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹.
 	unsigned int Library::libThreadFunc(void* pvParam)
 	{
-		// Ñîõðàíÿåì óêàçàòåëü íà îáúåêò Library.
+		// Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð¾Ð±ÑŠÐµÐºÑ‚ Library.
 		Library* library = (Library*)pvParam;
 	
-		// Âñå ôóíêöèè áèáëèîòåêè QSP (QSPInit è ò.ä.) 
-		// âûçûâàþòñÿ òîëüêî âíóòðè ïîòîêà áèáëèîòåêè.
+		// Ð’ÑÐµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ QSP (QSPInit Ð¸ Ñ‚.Ð´.) 
+		// Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÑŽÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ Ð¿Ð¾Ñ‚Ð¾ÐºÐ° Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸.
 
-		// Èíèöèàëèçèðóåì áèáëèîòåêó
+		// Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÐ¼ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÑƒ
 		QSPInit();
 	
-		// Ïðèâÿçûâàåì êîëáýêè
+		// ÐŸÑ€Ð¸Ð²ÑÐ·Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð»Ð±ÑÐºÐ¸
 		QSPSetCallBack(QSP_CALL_REFRESHINT, (QSP_CALLBACK)&LibraryListener::RefreshInt);
 		QSPSetCallBack(QSP_CALL_SETTIMER, (QSP_CALLBACK)&LibraryListener::SetTimer);
 		QSPSetCallBack(QSP_CALL_SETINPUTSTRTEXT, (QSP_CALLBACK)&LibraryListener::SetInputStrText);
@@ -110,8 +110,8 @@ namespace QuestNavigator
 		QSPSetCallBack(QSP_CALL_INPUTBOX, (QSP_CALLBACK)&LibraryListener::InputBox);
 
 		// STUB
-		// Ðàçîáðàòüñÿ, ïî÷åìó íå îïðåäåëåíà êîíñòàíòà QSP_CALL_PLAYERINFO.
-		// Íåàêòóàëüíûå èñõîäíèêè? Íå òà âåòêà?
+		// Ð Ð°Ð·Ð¾Ð±Ñ€Ð°Ñ‚ÑŒÑÑ, Ð¿Ð¾Ñ‡ÐµÐ¼Ñƒ Ð½Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð° ÐºÐ¾Ð½ÑÑ‚Ð°Ð½Ñ‚Ð° QSP_CALL_PLAYERINFO.
+		// ÐÐµÐ°ÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ðµ Ð¸ÑÑ…Ð¾Ð´Ð½Ð¸ÐºÐ¸? ÐÐµ Ñ‚Ð° Ð²ÐµÑ‚ÐºÐ°?
 		//QSPSetCallBack(QSP_CALL_PLAYERINFO, (QSP_CALLBACK)&PlayerInfo);
 
 		QSPSetCallBack(QSP_CALL_SHOWIMAGE, (QSP_CALLBACK)&LibraryListener::ShowPicture);
@@ -120,25 +120,25 @@ namespace QuestNavigator
 		QSPSetCallBack(QSP_CALL_OPENGAMESTATUS, (QSP_CALLBACK)&LibraryListener::OpenGameStatus);
 		QSPSetCallBack(QSP_CALL_SAVEGAMESTATUS, (QSP_CALLBACK)&LibraryListener::SaveGameStatus);
 	
-		// Çàïîëíÿåì çíà÷åíèÿ ïî óìîë÷àíèþ äëÿ ñêèíà
+		// Ð—Ð°Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð´Ð»Ñ ÑÐºÐ¸Ð½Ð°
 		Skin::initDefaults();
 	
-		// Ôëàã äëÿ çàâåðøåíèÿ ïîòîêà
+		// Ð¤Ð»Ð°Ð³ Ð´Ð»Ñ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
 		bool bShutdown = false;
 	
-		// Çàïóñêàåì äâèæîê Audiere äëÿ ïðîèãðûâàíèÿ çâóêîâûõ ôàéëîâ
+		// Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð´Ð²Ð¸Ð¶Ð¾Ðº Audiere Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð¸Ð³Ñ€Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð·Ð²ÑƒÐºÐ¾Ð²Ñ‹Ñ… Ñ„Ð°Ð¹Ð»Ð¾Ð²
 		if (!SoundManager::init()) {
 			bShutdown = true;
 		}
 	
-		// Îáðàáîòêà ñîáûòèé ïðîèñõîäèò â öèêëå
+		// ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹ Ð¿Ñ€Ð¾Ð¸ÑÑ…Ð¾Ð´Ð¸Ñ‚ Ð² Ñ†Ð¸ÐºÐ»Ðµ
 		while (!bShutdown) {
-			// Ñîîáùàåì ïîòîêó UI, ÷òî áèáëèîòåêà ãîòîâà ê âûïîëíåíèþ êîìàíä
+			// Ð¡Ð¾Ð¾Ð±Ñ‰Ð°ÐµÐ¼ Ð¿Ð¾Ñ‚Ð¾ÐºÑƒ UI, Ñ‡Ñ‚Ð¾ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð³Ð¾Ñ‚Ð¾Ð²Ð° Ðº Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸ÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´
 			library->eventManager->libIsReady();
-			// Îæèäàåì ëþáîå èç ñîáûòèé ñèíõðîíèçàöèè
+			// ÐžÐ¶Ð¸Ð´Ð°ÐµÐ¼ Ð»ÑŽÐ±Ð¾Ðµ Ð¸Ð· ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸
 			DWORD res = library->eventManager->waitForAnyEvent();
 			if (!library->eventManager->isValidEvent(res)) {
-				showError("Íå óäàëîñü äîæäàòüñÿ ìíîæåñòâåííîãî ñîáûòèÿ ñèíõðîíèçàöèè áèáëèîòåêè.");
+				showError("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð´Ð¾Ð¶Ð´Ð°Ñ‚ÑŒÑÑ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸.");
 				bShutdown = true;
 			} else {
 				eSyncEvent ev = (eSyncEvent)res;
@@ -146,24 +146,24 @@ namespace QuestNavigator
 				{
 				case evRunGame:
 					{
-						// Çàïóñê èãðû
+						// Ð—Ð°Ð¿ÑƒÑÐº Ð¸Ð³Ñ€Ñ‹
 						SharedDataDto dto = library->eventManager->getSharedData(ev);
 						string path = dto.str;
 						int isStandalone = dto.num;
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
 						library->CheckQspResult(res, "QSPLoadGameWorld");
-						// Î÷èùàåì ñêèí
+						// ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÑÐºÐ¸Ð½
 						Skin::resetUpdate();
 						Skin::resetSettings();
-						// Ïåðåäà¸ì íàñòðîéêó èç êîíôèãà â ñêèí.
+						// ÐŸÐµÑ€ÐµÐ´Ð°Ñ‘Ð¼ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÑƒ Ð¸Ð· ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð° Ð² ÑÐºÐ¸Ð½.
 						Skin::setInt(espIsStandalone, isStandalone);
-						// Î÷èùàåì áóôåð JS-êîìàíä, ïåðåäàâàåìûõ èç èãðû
+						// ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ Ð±ÑƒÑ„ÐµÑ€ JS-ÐºÐ¾Ð¼Ð°Ð½Ð´, Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ñ… Ð¸Ð· Ð¸Ð³Ñ€Ñ‹
 						LibraryListener::resetJsExecBuffer();
 	
-						// Óñòàíàâëèâàåì ïåðèîä âûïîëíåíèÿ è çàïóñêàåì òàéìåð
+						// Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð¿ÐµÑ€Ð¸Ð¾Ð´ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð¸ Ð·Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€
 						LibraryListener::SetTimer(500);
 	
-						//Çàïóñêàåì ñ÷åò÷èê ìèëëèñåêóíä
+						//Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº Ð¼Ð¸Ð»Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´
 						LibraryListener::resetMsCount();
 	
 						res = QSPRestartGame(QSP_TRUE);
@@ -172,15 +172,15 @@ namespace QuestNavigator
 					break;
 				case evStopGame:
 					{
-						// Îñòàíîâêà èãðû
+						// ÐžÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð¸Ð³Ñ€Ñ‹
 	
-						// Îñòàíàâëèâàåì òàéìåð.
+						// ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€.
 						library->timer->stopTimer();
 	
-						//îñòàíàâëèâàåì ìóçûêó
+						//Ð¾ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ
 						LibraryListener::CloseFile(NULL);
 	
-						// Î÷èùàåì áóôåð JS-êîìàíä, ïåðåäàâàåìûõ èç èãðû
+						// ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ Ð±ÑƒÑ„ÐµÑ€ JS-ÐºÐ¾Ð¼Ð°Ð½Ð´, Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ñ… Ð¸Ð· Ð¸Ð³Ñ€Ñ‹
 						LibraryListener::resetJsExecBuffer();
 	
 						library->eventManager->gameStopped();
@@ -188,13 +188,13 @@ namespace QuestNavigator
 					break;
 				case evShutdown:
 					{
-						// Çàâåðøåíèå ðàáîòû
+						// Ð—Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹
 						bShutdown = true;
 					}
 					break;
 				case evExecuteCode:
 					{
-						// Âûïîëíåíèå ñòðîêè êîäà
+						// Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸ ÐºÐ¾Ð´Ð°
 						SharedDataDto dto = library->eventManager->getSharedData(evExecuteCode);
 						string code = dto.str;
 						wstring wCode = widen(code);
@@ -204,7 +204,7 @@ namespace QuestNavigator
 					break;
 				case evExecuteAction:
 					{
-						// Âûïîëíåíèå äåéñòâèÿ
+						// Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ
 						SharedDataDto dto = library->eventManager->getSharedData(evExecuteAction);
 						int pos = dto.num;
 						QSP_BOOL res = QSPSetSelActionIndex(pos, QSP_FALSE);
@@ -215,13 +215,13 @@ namespace QuestNavigator
 					break;
 				case evSelectObject:
 					{
-						// Âûáîð ïðåäìåòà
+						// Ð’Ñ‹Ð±Ð¾Ñ€ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð°
 						SharedDataDto dto = library->eventManager->getSharedData(evSelectObject);
 						int pos = dto.num;
-						// Êîñòûëü - ñëåäèì çà íîìåðîì âûáðàííîãî ïðåäìåòà,
-						// òàê êàê èíà÷å íåâîçìîæíî áóäåò îáíîâèòü
-						// îêíî ïðåäìåòîâ ïðè âûçîâå UNSEL â ONOBJSEL.
-						// Íóæíî èñïðàâèòü ýòî â áèáëèîòåêå QSP.
+						// ÐšÐ¾ÑÑ‚Ñ‹Ð»ÑŒ - ÑÐ»ÐµÐ´Ð¸Ð¼ Ð·Ð° Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð¼ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð°,
+						// Ñ‚Ð°Ðº ÐºÐ°Ðº Ð¸Ð½Ð°Ñ‡Ðµ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð±ÑƒÐ´ÐµÑ‚ Ð¾Ð±Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ
+						// Ð¾ÐºÐ½Ð¾ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð¾Ð² Ð¿Ñ€Ð¸ Ð²Ñ‹Ð·Ð¾Ð²Ðµ UNSEL Ð² ONOBJSEL.
+						// ÐÑƒÐ¶Ð½Ð¾ Ð¸ÑÐ¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾ Ð² Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐµ QSP.
 						LibraryListener::setObjectSelectionIndex(-2);
 						QSP_BOOL res = QSPSetSelObjectIndex(pos, QSP_TRUE);
 						library->CheckQspResult(res, "QSPSetSelObjectIndex");
@@ -229,14 +229,14 @@ namespace QuestNavigator
 					break;
 				case evTimer:
 					{
-						// Òàéìåð
+						// Ð¢Ð°Ð¹Ð¼ÐµÑ€
 						QSP_BOOL res = QSPExecCounter(QSP_TRUE);
 						library->CheckQspResult(res, "QSPExecCounter");
 					}
 					break;
 				case evMute:
 					{
-						// Âêëþ÷åíèå / âûêëþ÷åíèå çâóêà
+						// Ð’ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ / Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð·Ð²ÑƒÐºÐ°
 						SharedDataDto dto = library->eventManager->getSharedData(evMute);
 						bool flag = dto.flag;
 						SoundManager::mute(flag);
@@ -250,18 +250,18 @@ namespace QuestNavigator
 	
 						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
 						if (!fileExists(path)) {
-							showError("Íå íàéäåí ôàéë ñîõðàíåíèÿ");
+							showError("ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ Ñ„Ð°Ð¹Ð» ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ");
 							break;
 						}
 	
-						// Âûêëþ÷àåì ìóçûêó
+						// Ð’Ñ‹ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð¼ÑƒÐ·Ñ‹ÐºÑƒ
 						LibraryListener::CloseFile(NULL);
 	
-						// Çàãðóæàåì ñîõðàíåíèå
+						// Ð—Ð°Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ
 						QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
 						library->CheckQspResult(res, "QSPOpenSavedGame");
 	
-						// Çàïóñêàåì òàéìåð
+						// Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€
 						library->timer->startTimer();
 					}
 					break;
@@ -273,7 +273,7 @@ namespace QuestNavigator
 	
 						string saveDir = Configuration::getString(ecpSaveDir);
 						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-							showError("Íå óäàëîñü ñîçäàòü ïàïêó äëÿ ñîõðàíåíèÿ: " + saveDir);
+							showError("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿Ð°Ð¿ÐºÑƒ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ: " + saveDir);
 							break;
 						}
 	
@@ -287,7 +287,7 @@ namespace QuestNavigator
 					break;
 				case evInputStringChanged:
 					{
-						// Èçìåíèëñÿ òåêñò â ñòðîêå ââîäà
+						// Ð˜Ð·Ð¼ÐµÐ½Ð¸Ð»ÑÑ Ñ‚ÐµÐºÑÑ‚ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ Ð²Ð²Ð¾Ð´Ð°
 						SharedDataDto dto = library->eventManager->getSharedData(evInputStringChanged);
 						string text = dto.str;
 						QSPSetInputStrText(widen(text).c_str());
@@ -301,31 +301,31 @@ namespace QuestNavigator
 					break;
 				default:
 					{
-						showError("Íåîáðàáîòàííîå ñîáûòèå ñèíõðîíèçàöèè!");
+						showError("ÐÐµÐ¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ð½Ð¾Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸!");
 					}
 					break;
 				}
 			}
 		}
 	
-		// Îñòàíàâëèâàåì çâóêîâîé äâèæîê
+		// ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð·Ð²ÑƒÐºÐ¾Ð²Ð¾Ð¹ Ð´Ð²Ð¸Ð¶Ð¾Ðº
 		SoundManager::close(true, "");
 		SoundManager::deinit();
 	
-		// Çàâåðøàåì ðàáîòó áèáëèîòåêè
+		// Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸
 		QSPDeInit();
-		// Çàâåðøàåì ðàáîòó ïîòîêà
+		// Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
 		_endthreadex(0);
 		return 0;
 	}
 
-	// Ïðîâåðÿåì ñòàòóñ âûïîëíåíèÿ îïåðàöèè è ñîîáùàåì îá îøèáêå, åñëè òðåáóåòñÿ.
+	// ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ ÑÑ‚Ð°Ñ‚ÑƒÑ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð¸ ÑÐ¾Ð¾Ð±Ñ‰Ð°ÐµÐ¼ Ð¾Ð± Ð¾ÑˆÐ¸Ð±ÐºÐµ, ÐµÑÐ»Ð¸ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ.
 	void Library::CheckQspResult(QSP_BOOL successfull, string failMsg)
 	{
-		//Êîíòåêñò áèáëèîòåêè
+		//ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸
 		if (successfull == QSP_FALSE)
 		{
-			//Êîíòåêñò áèáëèîòåêè
+			//ÐšÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸
 			int line = -1;
 			int actIndex = -1;
 			string desc = "";
@@ -336,10 +336,10 @@ namespace QuestNavigator
 			loc = Skin::applyHtmlFixes(fromQsp(pErrorLoc));
 			desc = Skin::applyHtmlFixes(fromQsp(QSPGetErrorDesc(errorNum)));
 	
-			// Îáíîâëÿåì ñêèí
+			// ÐžÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ ÑÐºÐ¸Ð½
 			Skin::updateBaseVars();
 			Skin::updateMsgDialog();
-			// Åñëè ÷òî-òî èçìåíèëîñü, òî ïåðåäàåì â ÿâàñêðèïò
+			// Ð•ÑÐ»Ð¸ Ñ‡Ñ‚Ð¾-Ñ‚Ð¾ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð»Ð¾ÑÑŒ, Ñ‚Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð°ÐµÐ¼ Ð² ÑÐ²Ð°ÑÐºÑ€Ð¸Ð¿Ñ‚
 			if (Skin::isSomethingChanged())
 			{
 				LibraryListener::RefreshInt(QSP_TRUE);
@@ -351,10 +351,10 @@ namespace QuestNavigator
 			errorDto.actIndex = actIndex;
 			errorDto.line = line;
 	
-			// Ïåðåäà¸ì äàííûå â ïîòîê UI
+			// ÐŸÐµÑ€ÐµÐ´Ð°Ñ‘Ð¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð² Ð¿Ð¾Ñ‚Ð¾Ðº UI
 			this->jsExecutor->qspError(errorDto);
 	
-			// Æä¸ì çàêðûòèÿ äèàëîãà
+			// Ð–Ð´Ñ‘Ð¼ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
 			this->eventManager->waitForErrorClosed();
 		}
 	}

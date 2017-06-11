@@ -8,30 +8,30 @@ using namespace QuestNavigator;
 
 namespace QspLibWinRT
 {
-	// Делегаты для обработки событий в JS.
-	// Как передать в делегат JS структуру?
+	// Р”РµР»РµРіР°С‚С‹ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№ РІ JS.
+	// РљР°Рє РїРµСЂРµРґР°С‚СЊ РІ РґРµР»РµРіР°С‚ JS СЃС‚СЂСѓРєС‚СѓСЂСѓ?
 	public delegate void ShowSaveSlotsDialogHandler(Platform::String^ testMessage);
 
 
 	public delegate void ShowDebugMessageHandler(Platform::String^ testMessage);
 
-	// Объект для вызова JS-кода из C++.
+	// РћР±СЉРµРєС‚ РґР»СЏ РІС‹Р·РѕРІР° JS-РєРѕРґР° РёР· C++.
 	public ref class UwpJsExecutor sealed
 	{
 	public:
 		UwpJsExecutor();
 
-		// В потоке Ui
+		// Р’ РїРѕС‚РѕРєРµ Ui
 		// bool jsCallApiFromUi(Platform::String^ name, SaveSlotsDto slotsDto);
 		bool jsCallApiFromUi(Platform::String^ name, Platform::String^ message);
 
-		// Для тестирования колбеков.
+		// Р”Р»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ РєРѕР»Р±РµРєРѕРІ.
 		bool jsCallDebug(Platform::String^ message);
 
 		event ShowDebugMessageHandler^ showDebugMessageEvent;
 
 	private:
-		// Делегат для запуска JS-кода из C++.
+		// Р”РµР»РµРіР°С‚ РґР»СЏ Р·Р°РїСѓСЃРєР° JS-РєРѕРґР° РёР· C++.
 		// Event whose type is a delegate "class"
 		event ShowSaveSlotsDialogHandler^ showSaveSlotsDialogEvent;
 

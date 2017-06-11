@@ -19,14 +19,14 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
-	//                        Вызовы JS-функций
+	//                        Р’С‹Р·РѕРІС‹ JS-С„СѓРЅРєС†РёР№
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
 
 	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 		//jsCallApiFromUi("qspShowSaveSlotsDialog", slotsDto);
 
 		jsCallDebug("qspShowSaveSlotsDialog");
@@ -34,49 +34,49 @@ namespace QuestNavigator
 
 	void JsExecutor::qspSetGroupedContent(GroupedContentDto content)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspSetGroupedContent", content);
 		jsCallDebug("qspSetGroupedContent");
 	}
 
 	void JsExecutor::qspMsg(string text)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspMsg", text);
 		jsCallDebug("qspMsg");
 	}
 
 	void JsExecutor::qspError(ErrorDto error)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspError", error);
 		jsCallDebug("qspError");
 	}
 
 	void JsExecutor::qspMenu(vector<MenuItemDto> menu)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspMenu", menu);
 		jsCallDebug("qspMenu");
 	}
 
 	void JsExecutor::qspInput(string text)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspInput", text);
 		jsCallDebug("qspInput");
 	}
 
 	void JsExecutor::qspView(string path)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspView", path);
 		jsCallDebug("qspView");
 	}
 
 	void JsExecutor::qspSetInputString(string text)
 	{
-		//		// Контекст библиотеки
+		//		// РљРѕРЅС‚РµРєСЃС‚ Р±РёР±Р»РёРѕС‚РµРєРё
 		//		jsCallApiFromLib("qspSetInputString", text);
 		jsCallDebug("qspSetInputString");
 	}
@@ -84,14 +84,14 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
-	//                        Инфраструктура
+	//                        РРЅС„СЂР°СЃС‚СЂСѓРєС‚СѓСЂР°
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************
 
 	bool JsExecutor::jsCallApiFromUi(string name, SaveSlotsDto slotsDto)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 
 		Platform::String^ pName = convertFromString(name);
 		Platform::String^ pMessage = convertFromString("test");
@@ -111,11 +111,11 @@ namespace QuestNavigator
 		//	windowObject.Invoke(ToWebString(name), args);
 		//	Error err = windowObject.last_error();
 		//	if (err != Error::kError_None) {
-		//		showError("Ошибка при выполнении JS-вызова.");
+		//		showError("РћС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё JS-РІС‹Р·РѕРІР°.");
 		//		return false;
 		//	}
 		//} else {
-		//	showError("Не удалось получить доступ к объекту окна.");
+		//	showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї Рє РѕР±СЉРµРєС‚Сѓ РѕРєРЅР°.");
 		//	return false;
 		//}
 		//return true;
@@ -126,7 +126,7 @@ namespace QuestNavigator
 
 	bool JsExecutor::jsCallDebug(string message)
 	{
-		// Контекст UI
+		// РљРѕРЅС‚РµРєСЃС‚ UI
 
 		Platform::String^ pMessage = convertFromString("test");
 
