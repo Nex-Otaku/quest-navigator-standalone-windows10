@@ -173,7 +173,10 @@ namespace QuestNavigator
 		// Используемые объекты - события с автосбросом, 
 		// инициализированные в занятом состоянии, и один таймер.
 		for (int i = 0; i < (int)evLast; i++) {
-			HANDLE eventHandle = (i == (int)evTimer) ? this->timer->CreateTimer() : CreateSyncEvent();
+			HANDLE eventHandle = /* таймер временно отключен,
+								 заполняем описатель как для обычного события.
+								 (i == (int)evTimer) ? this->timer->CreateTimer() : */
+				CreateSyncEvent();
 			if (eventHandle == NULL)
 				return;
 			g_eventList[i] = eventHandle;
