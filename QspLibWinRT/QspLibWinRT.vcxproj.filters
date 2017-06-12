@@ -56,6 +56,9 @@
     <Filter Include="quest-navigator\core\drafted">
       <UniqueIdentifier>{342704ff-4b1c-4f9b-b384-a9974a04a160}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quest-navigator\face\universal-awesomium-windows">
+      <UniqueIdentifier>{0be223ed-5a39-4d17-9166-8095d30fbe95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -309,6 +312,9 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\game_files.cpp">
+      <Filter>quest-navigator\face\universal-awesomium-windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -528,6 +534,9 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\game_files.h">
+      <Filter>quest-navigator\face\universal-awesomium-windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

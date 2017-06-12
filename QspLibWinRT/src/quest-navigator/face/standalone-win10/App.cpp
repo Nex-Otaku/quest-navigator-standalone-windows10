@@ -39,7 +39,7 @@ namespace QuestNavigator
 		
 		if (!Configuration::init() 
 			|| !configurationBuilder->build()
-			|| !prepareGameFiles() 
+			/* || !prepareGameFiles() - необходимо только для универсального плеера на Awesomium Windows */
 			/*|| !registerInstance()*/) {
 			// STUB
 			// Как аварийно завершить работу, пока не ясно.
@@ -139,7 +139,7 @@ namespace QuestNavigator
 		FreeResources();
 		
 		// Заново загружаем конфигурацию, копируем файлы.
-		if (!configurationBuilder->build()/* initOptions(contentPath)*/  || !prepareGameFiles()) {
+		if (!configurationBuilder->build()/* initOptions(contentPath)*/ /* только для Awesomium || !prepareGameFiles() */) {
 			//app_->Quit();
 			// STUB
 			// Сделать здесь вывод ошибок.

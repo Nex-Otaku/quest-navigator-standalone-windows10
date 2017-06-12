@@ -74,8 +74,6 @@ namespace QuestNavigator {
 	// См. ConfigurationBuilder
 	//bool loadGameConfig();
 
-	// Готовим игру к запуску
-	bool prepareGameFiles();
 	// Получаем идентификатор для мьютекса.
 	string getInstanceMutexId();
 	// Выводим текст в консоль.
