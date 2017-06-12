@@ -5,6 +5,7 @@
 #include "dialogs.h"
 #include "encoding.h"
 #include "strings.h"
+#include "..\face\standalone-win10\Constants.h"
 
 namespace QuestNavigator {
 

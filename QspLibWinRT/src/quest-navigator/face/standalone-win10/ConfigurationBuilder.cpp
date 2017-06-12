@@ -1,7 +1,7 @@
 #include "pch.h"
+#include "Constants.h"
 #include "ConfigurationBuilder.h"
 #include "..\..\core\configuration.h"
-#include "Constants.h"
 #include "..\..\core\files.h"
 
 namespace QuestNavigator
@@ -178,63 +178,63 @@ namespace QuestNavigator
 		//	}
 		//}
 		
-		if (contentDir == "") {
-			// Запускаем игру по умолчанию
-			runningDefaultGame = true;
-			string assetsDir = getPlayerDir() + PATH_DELIMITER + ASSETS_DIR;
-			configFilePath = getRightPath(assetsDir + PATH_DELIMITER 
-				+ DEFAULT_CONTENT_REL_PATH + PATH_DELIMITER 
-				+ DEFAULT_CONFIG_FILE);
-			contentDir = assetsDir + PATH_DELIMITER + DEFAULT_CONTENT_REL_PATH;
-			// Определяем файл игры (*.qsp) в указанной папке.
-			if (!findGameFile(contentDir, gameFileName))
-				return false;
-			gameFilePath = contentDir + PATH_DELIMITER + gameFileName;
-			skinFilePath = getRightPath(contentDir + PATH_DELIMITER + DEFAULT_SKIN_FILE);
-		}
+		//if (contentDir == "") {
+		//	// Запускаем игру по умолчанию
+		//	runningDefaultGame = true;
+		//	string assetsDir = getPlayerDir() + PATH_DELIMITER + ASSETS_DIR;
+		//	configFilePath = getRightPath(assetsDir + PATH_DELIMITER 
+		//		+ DEFAULT_CONTENT_REL_PATH + PATH_DELIMITER 
+		//		+ DEFAULT_CONFIG_FILE);
+		//	contentDir = assetsDir + PATH_DELIMITER + DEFAULT_CONTENT_REL_PATH;
+		//	// Определяем файл игры (*.qsp) в указанной папке.
+		//	if (!findGameFile(contentDir, gameFileName))
+		//		return false;
+		//	gameFilePath = contentDir + PATH_DELIMITER + gameFileName;
+		//	skinFilePath = getRightPath(contentDir + PATH_DELIMITER + DEFAULT_SKIN_FILE);
+		//}
 
-		// Приводим путь к файлу игры в каноничную форму.
-		gameFilePath = canonicalizePath(gameFilePath);
+		//// Приводим путь к файлу игры в каноничную форму.
+		//gameFilePath = canonicalizePath(gameFilePath);
 		
 		// Считаем уникальный хэш игры.
-		string gameHash = md5(gameFilePath);
+		string gameHash = "";/* md5(gameFilePath); */
 
-		// Папка для сохранений
-		saveDir = "";
-		// Путь к пользовательской папке "Мои документы"
-		WCHAR wszPath[MAX_PATH];
-		HRESULT hr = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, SHGFP_TYPE_CURRENT, wszPath);
-		if (hr != S_OK) {
-			showError("Не удалось получить путь к папке \"Мои документы\".");
-			return false;
-		}
-		saveDir = getRightPath(narrow(wszPath) + PATH_DELIMITER + DEFAULT_SAVE_REL_PATH + PATH_DELIMITER + gameHash);
+		//// Папка для сохранений
+		//saveDir = "";
+		//// Путь к пользовательской папке "Мои документы"
+		//WCHAR wszPath[MAX_PATH];
+		//HRESULT hr = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, SHGFP_TYPE_CURRENT, wszPath);
+		//if (hr != S_OK) {
+		//	showError("Не удалось получить путь к папке \"Мои документы\".");
+		//	return false;
+		//}
+		//saveDir = getRightPath(narrow(wszPath) + PATH_DELIMITER + DEFAULT_SAVE_REL_PATH + PATH_DELIMITER + gameHash);
 
-		// Папка с данными приложения.
-		// В ней находится БД, а также кэшированные игры.
-		hr = SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, wszPath);
-		if (hr != S_OK) {
-			showError("Не удалось получить путь к папке \"Application Data\".");
-			return false;
-		}
-		string appDataDir = narrow(wszPath) + PATH_DELIMITER + APP_DATA_DIR;
+		//// Папка с данными приложения.
+		//// В ней находится БД, а также кэшированные игры.
+		//hr = SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, wszPath);
+		//if (hr != S_OK) {
+		//	showError("Не удалось получить путь к папке \"Application Data\".");
+		//	return false;
+		//}
+		string appDataDir = "";/* narrow(wszPath) + PATH_DELIMITER + APP_DATA_DIR; */
 
 		// Приводим все пути к каноничной форме.
-		contentDir = canonicalizePath(contentDir);
-		skinFilePath = canonicalizePath(skinFilePath);
-		configFilePath = canonicalizePath(configFilePath);
-		saveDir = canonicalizePath(saveDir);
-		appDataDir = canonicalizePath(appDataDir);
+		//contentDir = canonicalizePath(contentDir);
+		//skinFilePath = canonicalizePath(skinFilePath);
+		//configFilePath = canonicalizePath(configFilePath);
+		//saveDir = canonicalizePath(saveDir);
+		//appDataDir = canonicalizePath(appDataDir);
 
-		// Проверяем все файлы на читаемость
-		if (!fileExists(skinFilePath))
-			skinFilePath = "";
-		if (!fileExists(configFilePath))
-			configFilePath = "";
-		if (!fileExists(gameFilePath)) {
-			showError("Не удалось загрузить игру из файла: " + gameFilePath);
-			return false;
-		}
+		//// Проверяем все файлы на читаемость
+		//if (!fileExists(skinFilePath))
+		//	skinFilePath = "";
+		//if (!fileExists(configFilePath))
+		//	configFilePath = "";
+		//if (!fileExists(gameFilePath)) {
+		//	showError("Не удалось загрузить игру из файла: " + gameFilePath);
+		//	return false;
+		//}
 
 		// Сохраняем конфигурацию
 		Configuration::setString(ecpContentDir, contentDir);

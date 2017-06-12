@@ -13,6 +13,7 @@
 #include "..\..\core\files.h"
 #include "..\..\core\utils.h"
 #include "..\..\core\dto\ErrorDto.h"
+#include "Constants.h"
 
 namespace QuestNavigator
 {

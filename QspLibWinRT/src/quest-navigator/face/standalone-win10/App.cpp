@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include "..\..\core\dialogs.h"
+#include "Constants.h"
 
 using namespace std;
 

@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "..\face\standalone-win10\Constants.h"
 #include "files.h"
 #include "configuration.h"
 #include "dialogs.h"

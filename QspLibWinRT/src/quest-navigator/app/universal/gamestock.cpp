@@ -4,6 +4,7 @@
 #include "../../core/files.h"
 #include "../../core/dialogs.h"
 #include "../../core/strings.h"
+#include "../../face/standalone-win10/Constants.h"
 
 namespace QuestNavigator {
 	//sqlite3* Gamestock::pDb = 0;
