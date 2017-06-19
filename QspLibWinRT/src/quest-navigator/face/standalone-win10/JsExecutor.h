@@ -7,6 +7,7 @@
 #include "..\..\core\dto\MenuItemDto.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "..\..\platform\windows10\UwpJsExecutor.h"
+#include "..\..\platform\windows10\StringConverter.h"
 
 using namespace std;
 using namespace QspLibWinRT;
@@ -20,7 +21,8 @@ namespace QuestNavigator
 		~JsExecutor();
 
 		void inject(
-			UwpJsExecutor^ uwpJsExecutor
+			UwpJsExecutor^ uwpJsExecutor,
+			StringConverter* stringConverter
 		);
 
 		// ********************************************************************
@@ -49,12 +51,10 @@ namespace QuestNavigator
 
 	private:
 		UwpJsExecutor^ uwpJsExecutor;
+		StringConverter* stringConverter;
 
 		// В потоке Ui
 		bool jsCallApiFromUi(string name, SaveSlotsDto slotsDto);
 		bool jsCallDebug(string message);
-
-		// Конвертация строк
-		Platform::String^ convertFromString(string input);
 	};
 }

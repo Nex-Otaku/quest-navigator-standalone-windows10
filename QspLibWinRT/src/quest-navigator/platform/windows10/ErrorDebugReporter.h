@@ -2,6 +2,7 @@
 
 #include "UwpJsExecutor.h"
 #include <string>
+#include "StringConverter.h"
 
 using namespace QspLibWinRT;
 using namespace std;
@@ -15,16 +16,15 @@ namespace QuestNavigator
 		static ErrorDebugReporter* instance();
 
 		void inject(
-			UwpJsExecutor^ uwpJsExecutor
+			UwpJsExecutor^ uwpJsExecutor,
+			StringConverter* stringConverter
 		);
 
 		void showError(string message);
 
 	private:
 		UwpJsExecutor^ uwpJsExecutor;
-
-		// Конвертация строк
-		Platform::String^ convertFromString(string input);
+		StringConverter* stringConverter;
 
 		// Убираем конструктор в приватную область,
 		// так как мы используем синглтон, 

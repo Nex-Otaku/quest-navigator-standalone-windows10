@@ -1,10 +1,6 @@
 #include "pch.h"
 #include "UwpJsExecutor.h"
 
-//using namespace concurrency;
-//using namespace Platform::Collections;
-//using namespace Windows::Foundation::Collections;
-//using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
 
 namespace QspLibWinRT {

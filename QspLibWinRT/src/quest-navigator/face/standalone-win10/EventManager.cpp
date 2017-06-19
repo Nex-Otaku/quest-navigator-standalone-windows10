@@ -17,12 +17,13 @@ namespace QuestNavigator
 	{
 	}
 
-	void EventManager::inject(Timer* timer, UwpJsExecutor^ uwpJsExecutor)
+	void EventManager::inject(Timer* timer, UwpJsExecutor^ uwpJsExecutor, StringConverter* stringConverter)
 	{
 		this->timer = timer;
 
 		// Отладка.
 		this->uwpJsExecutor = uwpJsExecutor;
+		this->stringConverter = stringConverter;
 	}
 
 	// Вызовы событий из UI.
@@ -140,13 +141,13 @@ namespace QuestNavigator
 
 	void EventManager::runGame(string fileName, int gameIsStandalone)
 	{
-		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 1");
+		callDebug("EventManager::runGame 1 русский текст");
 		// Контекст UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;
 		}
 
-		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 2");
+		callDebug("EventManager::runGame 2");
 		// Готовим данные для передачи в поток
 		lockData();
 		g_sharedData[evRunGame].str = fileName;
@@ -154,7 +155,7 @@ namespace QuestNavigator
 		g_sharedData[evRunGame].num = gameIsStandalone;
 		runSyncEvent(evRunGame);
 		unlockData();
-		this->uwpJsExecutor->jsCallDebug("EventManager::runGame 3");
+		callDebug("EventManager::runGame 3");
 	}
 
 	void EventManager::stopGame()
@@ -393,17 +394,23 @@ namespace QuestNavigator
 		// Проверяем, доступен ли объект синхронизации.
 		// Если недоступен, сразу возвращаем "false".
 		// Для ожидания объекта следует использовать "waitForSingle".
-		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 1");
+		callDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
-		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 2");
+		callDebug("EventManager::checkForSingleEvent 2");
 		DWORD res = WaitForSingleObject(handle, 0);
-		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 3");
+		callDebug("EventManager::checkForSingleEvent 3");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
-			this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent sync failure");
+			callDebug("EventManager::checkForSingleEvent sync failure");
 			showError("Сбой синхронизации");
 			return false;
 		}
-		this->uwpJsExecutor->jsCallDebug("EventManager::checkForSingleEvent 4");
+		callDebug("EventManager::checkForSingleEvent 4");
+		callDebug("EventManager::checkForSingleEvent: res = " + std::to_string((int)res));
 		return res == WAIT_OBJECT_0;
+	}
+
+	void EventManager::callDebug(string message)
+	{
+		this->uwpJsExecutor->jsCallDebug(stringConverter->convertFromString(message));
 	}
 }

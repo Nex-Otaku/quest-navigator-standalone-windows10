@@ -11,9 +11,10 @@ namespace QuestNavigator
 	{
 	}
 
-	void JsExecutor::inject(UwpJsExecutor ^ uwpJsExecutor)
+	void JsExecutor::inject(UwpJsExecutor^ uwpJsExecutor, StringConverter* stringConverter)
 	{
 		this->uwpJsExecutor = uwpJsExecutor;
+		this->stringConverter = stringConverter;
 	}
 
 	// ********************************************************************
@@ -93,9 +94,8 @@ namespace QuestNavigator
 	{
 		// Контекст UI
 
-		Platform::String^ pName = convertFromString(name);
-		Platform::String^ pMessage = convertFromString("test");
-
+		Platform::String^ pName = stringConverter->convertFromString(name);
+		Platform::String^ pMessage = stringConverter->convertFromString("test");
 
 		return uwpJsExecutor->jsCallApiFromUi(pName, pMessage /* slotsDto */);
 
@@ -127,17 +127,8 @@ namespace QuestNavigator
 	bool JsExecutor::jsCallDebug(string message)
 	{
 		// Контекст UI
-
-		Platform::String^ pMessage = convertFromString("test");
+		Platform::String^ pMessage = stringConverter->convertFromString(message);
 
 		return uwpJsExecutor->jsCallDebug(pMessage);
-	}
-
-	Platform::String^ JsExecutor::convertFromString(string input)
-	{
-		std::wstring w_str = std::wstring(input.begin(), input.end());
-		const wchar_t* w_chars = w_str.c_str();
-
-		return (ref new Platform::String(w_chars));
 	}
 }

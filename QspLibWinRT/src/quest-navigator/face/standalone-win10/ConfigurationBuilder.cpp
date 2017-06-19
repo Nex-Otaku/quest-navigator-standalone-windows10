@@ -236,6 +236,11 @@ namespace QuestNavigator
 		//	return false;
 		//}
 
+
+		// Для платформы Windows 10 standalone заранее известен путь к файлу игры.
+		gameFilePath = "game.qsp";
+
+
 		// Сохраняем конфигурацию
 		Configuration::setString(ecpContentDir, contentDir);
 		Configuration::setString(ecpSkinFilePath, skinFilePath);

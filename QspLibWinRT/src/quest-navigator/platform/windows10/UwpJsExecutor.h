@@ -3,7 +3,6 @@
 #include <string>
 #include "..\..\core\dto\SaveSlotsDto.h"
 
-using namespace std;
 using namespace QuestNavigator;
 
 namespace QspLibWinRT
@@ -22,7 +21,7 @@ namespace QspLibWinRT
 		UwpJsExecutor();
 
 		// В потоке Ui
-		// bool jsCallApiFromUi(Platform::String^ name, SaveSlotsDto slotsDto);
+		//bool jsCallApiFromUi(Platform::String^ name, SaveSlotsDto slotsDto);
 		bool jsCallApiFromUi(Platform::String^ name, Platform::String^ message);
 
 		// Для тестирования колбеков.

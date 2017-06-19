@@ -8,6 +8,7 @@
 #include "LibraryListener.h"
 #include "..\..\platform\windows10\UwpJsExecutor.h"
 #include "..\..\platform\windows10\ErrorDebugReporter.h"
+#include "..\..\platform\windows10\StringConverter.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -44,6 +45,8 @@ namespace QspLibWinRT
 		ErrorDebugReporter* errorDebugReporter = ErrorDebugReporter::instance();
 		// Создаём билдер конфигурации.
 		ConfigurationBuilder* configurationBuilder = new ConfigurationBuilder();
+		// Создаём конвертер для платформенных строк.
+		StringConverter* stringConverter = new StringConverter();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -62,15 +65,15 @@ namespace QspLibWinRT
 			timer,
 			jsExecutor
 		);
-		eventManager->inject(timer, uwpJsExecutor);
+		eventManager->inject(timer, uwpJsExecutor, stringConverter);
 		libraryListener->inject(
 			jsExecutor,
 			timer,
 			eventManager,
 			library
 		);
-		jsExecutor->inject(uwpJsExecutor);
-		errorDebugReporter->inject(uwpJsExecutor);
+		jsExecutor->inject(uwpJsExecutor, stringConverter);
+		errorDebugReporter->inject(uwpJsExecutor, stringConverter);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

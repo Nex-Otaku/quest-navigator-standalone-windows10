@@ -7,6 +7,7 @@
 
 // Отладка.
 #include "..\..\platform\windows10\UwpJsExecutor.h"
+#include "..\..\platform\windows10\StringConverter.h"
 
 using namespace std;
 // Отладка.
@@ -24,7 +25,8 @@ namespace QuestNavigator
 			Timer* timer,
 
 			// Для отладки.
-			UwpJsExecutor^ uwpJsExecutor
+			UwpJsExecutor^ uwpJsExecutor,
+			StringConverter* stringConverter
 		);
 
 		// JsListener
@@ -72,6 +74,7 @@ namespace QuestNavigator
 	private:
 		// Отладка.
 		UwpJsExecutor^ uwpJsExecutor;
+		StringConverter* stringConverter;
 
 		Timer* timer;
 
@@ -101,5 +104,8 @@ namespace QuestNavigator
 		bool waitForSingleEvent(eSyncEvent ev);
 		bool waitForSingleLib(eSyncEvent ev);
 		bool checkForSingleEvent(eSyncEvent ev);
+
+		// Отладка.
+		void callDebug(string message);
 	};
 }

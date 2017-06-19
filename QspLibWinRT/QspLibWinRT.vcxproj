@@ -265,6 +265,7 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Constants.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\EventManager.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\GameFileManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsExecutor.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsListener.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Library.h" />
@@ -280,6 +281,7 @@
     <ClInclude Include="src\quest-navigator\platform\awesomium\view.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\StringConverter.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\UwpJsExecutor.h" />
   </ItemGroup>
   <ItemGroup>
@@ -460,6 +462,7 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\ConfigurationBuilder.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\EventManager.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\GameFileManager.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsExecutor.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsListener.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\Library.cpp" />
@@ -473,6 +476,7 @@
     <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\StringConverter.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\UwpJsExecutor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
