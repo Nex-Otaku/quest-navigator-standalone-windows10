@@ -14,7 +14,7 @@
 #include "..\..\core\utils.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
-#include "..\..\platform\windows10\BeginThread.h"
+#include "..\..\platform\windows10\ThreadEmulation.h"
 
 namespace QuestNavigator
 {
@@ -58,7 +58,7 @@ namespace QuestNavigator
 		//libThread = (HANDLE)_beginthread(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
 		LPTHREAD_START_ROUTINE pLibThreadFunc = &Library::libThreadFunc;
 		//libThread = (HANDLE)UwpCustomBeginThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
-		libThread = (HANDLE)CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		libThread = (HANDLE)ThreadEmulation::CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
 		if (libThread == NULL) {
 			showError("Не получилось создать поток интерпретатора.");
 
