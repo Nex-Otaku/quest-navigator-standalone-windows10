@@ -141,9 +141,10 @@ namespace QuestNavigator
 
 	void EventManager::runGame(string fileName, int gameIsStandalone)
 	{
-		callDebug("EventManager::runGame 1 русский текст");
+		callDebug("EventManager::runGame 1");
 		// Контекст UI
 		if (!checkForSingleEvent(evLibIsReady)) {
+			callDebug("EventManager::runGame не удалось запустить игру, библиотека не готова");
 			return;
 		}
 
@@ -406,6 +407,9 @@ namespace QuestNavigator
 		}
 		callDebug("EventManager::checkForSingleEvent 4");
 		callDebug("EventManager::checkForSingleEvent: res = " + std::to_string((int)res));
+		if (res == WAIT_TIMEOUT) {
+			callDebug("EventManager::checkForSingleEvent wait timeout");
+		}
 		return res == WAIT_OBJECT_0;
 	}
 
