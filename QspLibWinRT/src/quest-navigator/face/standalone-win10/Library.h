@@ -39,6 +39,10 @@ namespace QuestNavigator
 		HANDLE libThread;
 
 		// Основная функция потока библиотеки
-		static unsigned int __stdcall libThreadFunc(void* pvParam);
+		//static unsigned int __stdcall libThreadFunc(void* pvParam);
+		//DWORD(WINAPI *PTHREAD_START_ROUTINE)(
+		//	LPVOID lpThreadParameter
+		//	)
+		static DWORD __stdcall libThreadFunc(LPVOID lpParameter);
 	};
 }

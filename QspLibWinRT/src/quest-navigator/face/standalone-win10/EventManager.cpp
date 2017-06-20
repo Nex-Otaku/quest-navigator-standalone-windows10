@@ -239,7 +239,8 @@ namespace QuestNavigator
 	DWORD EventManager::waitForAnyEvent()
 	{
 		// Ожидаем любое из событий синхронизации
-		DWORD res = WaitForMultipleObjects((DWORD)evLastUi, g_eventList, FALSE, INFINITE);
+		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
+		DWORD res = WaitForMultipleObjectsEx((DWORD)evLastUi, g_eventList, FALSE, INFINITE, FALSE);
 		return res;
 	}
 
@@ -322,7 +323,6 @@ namespace QuestNavigator
 		HANDLE eventHandle = getEventHandle(ev);
 		//BOOL res = SetEvent(getEventHandle(ev));
 		BOOL res = SetEvent(eventHandle);
-		showError("Не удалось запустить событие синхронизации потоков." + std::to_string((int)eventHandle));
 		if (res == 0) {
 			showError("Не удалось запустить событие синхронизации потоков.");
 
@@ -377,7 +377,8 @@ namespace QuestNavigator
 			eventList[i] = getEventHandle(syncEvents[i]);
 		}
 		
-		DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE);
+		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
+		DWORD res = WaitForMultipleObjectsEx((DWORD)3, eventList, FALSE, INFINITE, FALSE);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
 			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
 		} else {
@@ -404,7 +405,7 @@ namespace QuestNavigator
 		callDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
 		callDebug("EventManager::checkForSingleEvent 2");
-		DWORD res = WaitForSingleObject(handle, 0);
+		DWORD res = WaitForSingleObjectEx(handle, 0, FALSE);
 		callDebug("EventManager::checkForSingleEvent 3");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
 			callDebug("EventManager::checkForSingleEvent sync failure");

@@ -321,6 +321,12 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\GameFileManager.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\windows10\BeginThread.cpp">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\windows10\ThreadEmulation.cpp">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -549,6 +555,12 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\GameFileManager.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\windows10\BeginThread.h">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\windows10\ThreadEmulation.h">
+      <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

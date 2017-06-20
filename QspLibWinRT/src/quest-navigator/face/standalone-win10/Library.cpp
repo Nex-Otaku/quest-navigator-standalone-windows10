@@ -14,6 +14,7 @@
 #include "..\..\core\utils.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
+#include "..\..\platform\windows10\BeginThread.h"
 
 namespace QuestNavigator
 {
@@ -54,7 +55,10 @@ namespace QuestNavigator
 		this->eventManager->initEvents();
 		this->eventManager->initSharedData();
 
-		libThread = (HANDLE)_beginthreadex(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
+		//libThread = (HANDLE)_beginthread(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
+		LPTHREAD_START_ROUTINE pLibThreadFunc = &Library::libThreadFunc;
+		//libThread = (HANDLE)UwpCustomBeginThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		libThread = (HANDLE)CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
 		if (libThread == NULL) {
 			showError("Не получилось создать поток интерпретатора.");
 
@@ -84,7 +88,8 @@ namespace QuestNavigator
 	}
 
 	// Основная функция потока библиотеки. Вызывается только раз за весь жизненный цикл программы.
-	unsigned int Library::libThreadFunc(void* pvParam)
+	//unsigned int Library::libThreadFunc(void* pvParam)
+	DWORD Library::libThreadFunc(LPVOID pvParam)
 	{
 		// Сохраняем указатель на объект Library.
 		Library* library = (Library*)pvParam;
