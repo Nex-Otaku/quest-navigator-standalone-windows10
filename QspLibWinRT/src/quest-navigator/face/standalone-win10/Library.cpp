@@ -135,6 +135,7 @@ namespace QuestNavigator
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
+			//showError("library->eventManager->libIsReady();");
 			library->eventManager->libIsReady();
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();

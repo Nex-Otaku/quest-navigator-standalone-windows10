@@ -81,7 +81,9 @@ namespace QspLibWinRT
 		this->uwpJsExecutor = uwpJsExecutor;
 
 		// Запускаем приложение.
+		this->uwpJsExecutor->jsCallDebug("app->init(); start");
 		app->init();
+		this->uwpJsExecutor->jsCallDebug("app->init(); finish");
 	}
 
 	UwpJsExecutor^ QspLib::getUwpJsExecutor()

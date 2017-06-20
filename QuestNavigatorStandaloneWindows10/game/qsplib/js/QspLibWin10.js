@@ -43,6 +43,9 @@ function onDocumentReady() {
 
     QspLib.callDebugMessage();
 
+    setTimeout(function () {
+
+
 	// Запускаем API.
     log('qspInitApi();');
 	qspInitApi();
@@ -54,7 +57,10 @@ function onDocumentReady() {
 
 	qspIsDesktop = true;
 	// Сообщаем API, что нам стал известен тип устройства.
-	qspSetDevice();
+    qspSetDevice();
+
+
+    }, 4000);
 }
 
 function debug(str) {

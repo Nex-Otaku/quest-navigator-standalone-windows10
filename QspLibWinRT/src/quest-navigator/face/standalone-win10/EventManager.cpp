@@ -179,8 +179,10 @@ namespace QuestNavigator
 								 заполняем описатель как для обычного события.
 								 (i == (int)evTimer) ? this->timer->CreateTimer() : */
 				CreateSyncEvent();
-			if (eventHandle == NULL)
+			if (eventHandle == NULL) {
+				callDebug("EventManager::initEvents не удалось зарегистрировать событие");
 				return;
+			}
 			g_eventList[i] = eventHandle;
 		}
 	}
@@ -224,6 +226,7 @@ namespace QuestNavigator
 	void EventManager::libIsReady()
 	{
 		// Сообщаем потоку UI, что библиотека готова к выполнению команд
+		//callDebug("EventManager::libIsReady");
 		runSyncEvent(evLibIsReady);
 	}
 
@@ -316,7 +319,10 @@ namespace QuestNavigator
 	// Запускаем событие
 	void EventManager::runSyncEvent(eSyncEvent ev)
 	{
-		BOOL res = SetEvent(getEventHandle(ev));
+		HANDLE eventHandle = getEventHandle(ev);
+		//BOOL res = SetEvent(getEventHandle(ev));
+		BOOL res = SetEvent(eventHandle);
+		showError("Не удалось запустить событие синхронизации потоков." + std::to_string((int)eventHandle));
 		if (res == 0) {
 			showError("Не удалось запустить событие синхронизации потоков.");
 
