@@ -87,7 +87,11 @@ namespace QuestNavigator {
 	{
 		BOOL res = threadApi->setEvent(handle);
 		if (res == 0) {
+			DWORD error = GetLastError();
+
+
 			showError("ThreadManager::setEvent Не удалось запустить событие синхронизации потоков.");
+			showError("ThreadManager::setEvent Код ошибки: " + std::to_string((int)error));
 
 			// STUB
 			// Выход из приложения?

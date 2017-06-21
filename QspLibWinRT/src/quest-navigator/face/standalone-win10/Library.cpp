@@ -317,7 +317,7 @@ namespace QuestNavigator
 					break;
 				default:
 					{
-						showError("Library::libThreadFunc Необработанное событие синхронизации!");
+						showError("Library::libThreadFunc Необработанное событие синхронизации! Код события: " + std::to_string((int)ev));
 						bShutdown = true;
 					}
 					break;

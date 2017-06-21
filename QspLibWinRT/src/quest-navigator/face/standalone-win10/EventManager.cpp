@@ -252,7 +252,7 @@ namespace QuestNavigator
 
 	bool EventManager::isValidEvent(DWORD waitResult)
 	{
-		return (waitResult < WAIT_OBJECT_0) || (waitResult >(WAIT_OBJECT_0 + evLast - 1));
+		return (waitResult >= WAIT_OBJECT_0) && (waitResult < (WAIT_OBJECT_0 + evLast));
 	}
 
 	SharedDataDto EventManager::getSharedData(eSyncEvent ev)
