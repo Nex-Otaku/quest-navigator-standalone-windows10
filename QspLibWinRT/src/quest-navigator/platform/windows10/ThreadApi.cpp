@@ -38,7 +38,7 @@ namespace QuestNavigator {
 		LPCWSTR lpName
 	)
 	{
-		return CreateEventEx(lpEventAttributes, lpName, NULL, EVENT_MODIFY_STATE /*NULL*//*EVENT_ALL_ACCESS*//*SYNCHRONIZE | EVENT_MODIFY_STATE*/);
+		return CreateEventEx(lpEventAttributes, lpName, NULL, SYNCHRONIZE | EVENT_MODIFY_STATE /*NULL*//*EVENT_ALL_ACCESS*//*SYNCHRONIZE | EVENT_MODIFY_STATE*/);
 	}
 
 	BOOL ThreadApi::setEvent(HANDLE hEvent)

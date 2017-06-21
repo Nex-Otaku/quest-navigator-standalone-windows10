@@ -147,13 +147,21 @@ namespace QuestNavigator
 
 	// App
 
-	void EventManager::runGame(string fileName, int gameIsStandalone)
+	void EventManager::runGame(string fileName, int gameIsStandalone, bool gameIsRunning)
 	{
 		callDebug("EventManager::runGame 1");
 		// Контекст UI
-		if (!checkForSingleEvent(evLibIsReady)) {
-			callDebug("EventManager::runGame не удалось запустить игру, библиотека не готова");
-			return;
+
+		// Проверяем состояние библиотеки.
+		// Если первый запуск, то ждём, пока библиотека запустится.
+		// Если игра уже запущена, то библиотека должна быть уже в готовом состоянии.
+		if (gameIsRunning) {
+			if (!checkForSingleEvent(evLibIsReady)) {
+				callDebug("EventManager::runGame не удалось запустить игру, библиотека не готова");
+				return;
+			}
+		} else {
+			waitForSingleEvent(evLibIsReady);
 		}
 
 		callDebug("EventManager::runGame 2");
@@ -291,14 +299,6 @@ namespace QuestNavigator
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	// public
-
-	// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
-	void EventManager::waitForLibIsReady()
-	{
-		waitForSingleEvent(evLibIsReady);
-	}
 
 	// private
 

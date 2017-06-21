@@ -105,14 +105,11 @@ namespace QuestNavigator
 	void App::runGame(string fileName)
 	{
 		// Контекст UI
-		if (!gameIsRunning) {
-			this->eventManager->waitForLibIsReady();
-		}
 
 		// Передаём настройку из конфига в скин.
 		int isGameStandalone = Configuration::getBool(ecpGameIsStandalone) ? 1 : 0;
 		// Запускаем либо перезапускаем игру.
-		this->eventManager->runGame(fileName, isGameStandalone);
+		this->eventManager->runGame(fileName, isGameStandalone, gameIsRunning);
 		
 		gameIsRunning = true;
 	}

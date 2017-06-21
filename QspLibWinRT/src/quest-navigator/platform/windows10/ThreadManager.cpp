@@ -25,6 +25,7 @@ namespace QuestNavigator {
 			showError("ThreadManager::waitForSingle: Не удалось дождаться события синхронизации");
 			return false;
 		}
+		showError("ThreadManager::waitForSingle: success, handle " + std::to_string((int)handle));
 		return true;
 	}
 
@@ -57,14 +58,22 @@ namespace QuestNavigator {
 		showError("ThreadManager::checkForSingle: res = " + std::to_string((int)res));
 		if (res == WAIT_TIMEOUT) {
 			showError("ThreadManager::checkForSingle wait timeout");
+			showError("ThreadManager::checkForSingle: failed, handle " + std::to_string((int)handle));
 		}
+
+		if (res == WAIT_OBJECT_0) {
+			showError("ThreadManager::checkForSingle: success, handle " + std::to_string((int)handle));
+		}
+
 		return res == WAIT_OBJECT_0;
 	}
 
 	DWORD ThreadManager::waitForMultiple(DWORD nCount, const HANDLE* lpHandles)
 	{
+		showError("ThreadManager::waitForMultiple: start");
 		// Ожидаем любое из событий синхронизации
 		DWORD res = threadApi->waitForMultipleObjects(nCount, lpHandles, FALSE, INFINITE);
+		showError("ThreadManager::waitForMultiple: finish");
 		return res;
 	}
 
@@ -79,6 +88,10 @@ namespace QuestNavigator {
 			// STUB
 			// Выход из приложения?
 			//exit(eecFailToCreateEvent);
+		}
+
+		if (eventHandle != NULL) {
+			//showError("ThreadManager::CreateSyncEvent: success, handle " + std::to_string((int)eventHandle));
 		}
 		return eventHandle;
 	}
@@ -97,6 +110,11 @@ namespace QuestNavigator {
 			// Выход из приложения?
 			//exit(eecFailToSetEvent);
 		}
+
+		if (res != 0) {
+			showError("ThreadManager::setEvent: success, handle " + std::to_string((int)handle));
+		}
+
 		return res;
 	}
 

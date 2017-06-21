@@ -47,7 +47,7 @@ namespace QuestNavigator
 		void inputStringEntered();
 
 		// App
-		void runGame(string fileName, int gameIsStandalone);
+		void runGame(string fileName, int gameIsStandalone, bool gameIsRunning);
 		void stopGame();
 
 		// Library
@@ -69,11 +69,6 @@ namespace QuestNavigator
 		void waitForInputClosed();
 		void waitForMenuClosed();
 		void waitForErrorClosed();
-
-		// Работа с потоками и синхронизацией.
-		
-		// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
-		void waitForLibIsReady();
 
 	private:
 		// Отладка.
