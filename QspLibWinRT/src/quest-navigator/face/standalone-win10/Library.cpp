@@ -81,9 +81,9 @@ namespace QuestNavigator
 		// Сообщаем потоку библиотеки, что нужно завершить работу
 		this->eventManager->shutdown();
 		// Ждём завершения библиотечного потока
-		waitForSingle(libThread);
+		threadManager->waitForSingle(libThread);
 		// Закрываем хэндл библиотечного потока
-		freeHandle(libThread);
+		threadManager->freeHandle(libThread);
 		libThread = NULL;
 
 		this->eventManager->freeEvents();

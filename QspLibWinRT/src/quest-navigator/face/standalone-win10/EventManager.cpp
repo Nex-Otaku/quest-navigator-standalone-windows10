@@ -186,7 +186,7 @@ namespace QuestNavigator
 			HANDLE eventHandle = /* таймер временно отключен,
 								 заполняем описатель как для обычного события.
 								 (i == (int)evTimer) ? this->timer->CreateTimer() : */
-				CreateSyncEvent();
+				threadManager->CreateSyncEvent();
 			if (eventHandle == NULL) {
 				callDebug("EventManager::initEvents не удалось зарегистрировать событие");
 				return;
@@ -215,7 +215,7 @@ namespace QuestNavigator
 	{
 		// Закрываем хэндлы событий
 		for (int i = 0; i < (int)evLast; i++) {
-			freeHandle(g_eventList[i]);
+			threadManager->freeHandle(g_eventList[i]);
 			g_eventList[i] = NULL;
 		}
 	}
@@ -247,9 +247,7 @@ namespace QuestNavigator
 	DWORD EventManager::waitForAnyEvent()
 	{
 		// Ожидаем любое из событий синхронизации
-		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
-		DWORD res = WaitForMultipleObjectsEx((DWORD)evLastUi, g_eventList, FALSE, INFINITE, FALSE);
-		return res;
+		return threadManager->waitForMultiple((DWORD)evLastUi, g_eventList);
 	}
 
 	bool EventManager::isValidEvent(DWORD waitResult)
@@ -304,22 +302,6 @@ namespace QuestNavigator
 
 	// private
 
-	// Создаём объект ядра для синхронизации потоков,
-	// событие с автосбросом, инициализированное в занятом состоянии.
-	HANDLE EventManager::CreateSyncEvent()
-	{
-		//HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
-		HANDLE eventHandle = CreateEventEx(NULL, NULL, NULL, NULL);
-		if (eventHandle == NULL) {
-			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
-
-			// STUB
-			// Выход из приложения?
-			//exit(eecFailToCreateEvent);
-		}
-		return eventHandle;
-	}
-
 	// Получаем HANDLE события по его индексу
 	HANDLE EventManager::getEventHandle(eSyncEvent ev)
 	{
@@ -330,14 +312,9 @@ namespace QuestNavigator
 	void EventManager::runSyncEvent(eSyncEvent ev)
 	{
 		HANDLE eventHandle = getEventHandle(ev);
-		//BOOL res = SetEvent(getEventHandle(ev));
-		BOOL res = SetEvent(eventHandle);
+		BOOL res = threadManager->setEvent(eventHandle);
 		if (res == 0) {
-			showError("Не удалось запустить событие синхронизации потоков.");
-
-			// STUB
-			// Выход из приложения?
-			//exit(eecFailToSetEvent);
+			showError("EventManager::runSyncEvent Не удалось запустить событие синхронизации потоков");
 		}
 	}
 
@@ -363,7 +340,7 @@ namespace QuestNavigator
 
 	bool EventManager::waitForSingleEvent(eSyncEvent ev)
 	{
-		return waitForSingle(getEventHandle(ev));
+		return threadManager->waitForSingle(getEventHandle(ev));
 	}
 
 	bool EventManager::waitForSingleLib(eSyncEvent ev)
@@ -386,10 +363,10 @@ namespace QuestNavigator
 			eventList[i] = getEventHandle(syncEvents[i]);
 		}
 		
-		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
-		DWORD res = WaitForMultipleObjectsEx((DWORD)3, eventList, FALSE, INFINITE, FALSE);
+		//DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE, FALSE);
+		DWORD res = threadManager->waitForMultiple((DWORD)3, eventList);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
-			showError("waitForSingleLib: Не удалось дождаться единичного события синхронизации библиотеки.");
+			showError("EventManager::waitForSingleLib: Не удалось дождаться единичного события синхронизации библиотеки.");
 		} else {
 			// Если событие было "evShutdown" или "evStopGame",
 			// вызываем их заново.
@@ -408,25 +385,12 @@ namespace QuestNavigator
 
 	bool EventManager::checkForSingleEvent(eSyncEvent ev)
 	{
-		// Проверяем, доступен ли объект синхронизации.
-		// Если недоступен, сразу возвращаем "false".
-		// Для ожидания объекта следует использовать "waitForSingle".
 		callDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
 		callDebug("EventManager::checkForSingleEvent 2");
-		DWORD res = WaitForSingleObjectEx(handle, 0, FALSE);
-		callDebug("EventManager::checkForSingleEvent 3");
-		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
-			callDebug("EventManager::checkForSingleEvent sync failure");
-			showError("Сбой синхронизации");
-			return false;
-		}
-		callDebug("EventManager::checkForSingleEvent 4");
-		callDebug("EventManager::checkForSingleEvent: res = " + std::to_string((int)res));
-		if (res == WAIT_TIMEOUT) {
-			callDebug("EventManager::checkForSingleEvent wait timeout");
-		}
-		return res == WAIT_OBJECT_0;
+
+		// Проверка события синхронизации.
+		return threadManager->checkForSingle(handle);
 	}
 
 	void EventManager::callDebug(string message)

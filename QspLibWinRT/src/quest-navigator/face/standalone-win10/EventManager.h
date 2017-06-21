@@ -94,9 +94,6 @@ namespace QuestNavigator
 		// События для синхронизации потоков
 		HANDLE g_eventList[evLast];
 
-		// Создаём объект ядра для синхронизации потоков,
-		// событие с автосбросом, инициализированное в занятом состоянии.
-		HANDLE CreateSyncEvent();
 		// Получаем HANDLE события по его индексу
 		HANDLE getEventHandle(eSyncEvent ev);
 		// Запускаем событие
