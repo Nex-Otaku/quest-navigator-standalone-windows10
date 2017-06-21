@@ -318,6 +318,7 @@ namespace QuestNavigator
 				default:
 					{
 						showError("Library::libThreadFunc Необработанное событие синхронизации!");
+						bShutdown = true;
 					}
 					break;
 				}
