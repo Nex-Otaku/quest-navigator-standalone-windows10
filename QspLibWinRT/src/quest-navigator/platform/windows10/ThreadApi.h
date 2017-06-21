@@ -17,14 +17,39 @@ namespace QuestNavigator {
 		ThreadApi();
 		~ThreadApi();
 
-		//WaitForSingleObject
-		//CloseHandle
-		//SetEvent
-		//CreateThread
-		//CreateEvent
-		//WaitForMultipleObjects
+		// Обёртка для WaitForSingleObject.
+		DWORD WINAPI waitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
 
-		// Обёртка для CreateThread
-		HANDLE WINAPI createThread(_In_opt_ LPSECURITY_ATTRIBUTES unusedThreadAttributes, _In_ SIZE_T unusedStackSize, _In_ LPTHREAD_START_ROUTINE lpStartAddress, _In_opt_ LPVOID lpParameter, _In_ DWORD dwCreationFlags, _Out_opt_ LPDWORD unusedThreadId);
+		// Обёртка для CloseHandle.
+		BOOL WINAPI closeHandle(HANDLE hObject);
+
+		// Обёртка для WaitForMultipleObjects.
+		DWORD WINAPI waitForMultipleObjects(
+			DWORD nCount, 
+			const HANDLE* lpHandles,
+			BOOL bWaitAll,
+			DWORD dwMilliseconds
+		);
+
+		// Обёртка для CreateEvent.
+		HANDLE WINAPI createEvent(
+				LPSECURITY_ATTRIBUTES lpEventAttributes,
+				BOOL bManualReset,
+				BOOL bInitialState,
+				LPCWSTR lpName
+			);
+
+		// Обёртка для SetEvent.
+		BOOL WINAPI setEvent(HANDLE hEvent);
+
+		// Обёртка для CreateThread.
+		HANDLE WINAPI createThread(
+			LPSECURITY_ATTRIBUTES unusedThreadAttributes, 
+			SIZE_T unusedStackSize, 
+			LPTHREAD_START_ROUTINE lpStartAddress, 
+			LPVOID lpParameter, 
+			DWORD dwCreationFlags, 
+			LPDWORD unusedThreadId
+		);
 	};
 }

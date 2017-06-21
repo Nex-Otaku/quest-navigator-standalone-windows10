@@ -20,8 +20,7 @@ namespace QuestNavigator {
 	// Ожидаем события
 	bool ThreadManager::waitForSingle(HANDLE handle)
 	{
-		//DWORD res = WaitForSingleObject(handle, INFINITE);
-		DWORD res = WaitForSingleObjectEx(handle, INFINITE, FALSE);
+		DWORD res = threadApi->waitForSingleObject(handle, INFINITE);
 		if (res != WAIT_OBJECT_0) {
 			showError("ThreadManager::waitForSingle: Не удалось дождаться события синхронизации");
 			return false;
@@ -32,7 +31,7 @@ namespace QuestNavigator {
 	// Высвобождаем описатель и ругаемся если что не так.
 	void ThreadManager::freeHandle(HANDLE handle)
 	{
-		BOOL res = CloseHandle(handle);
+		BOOL res = threadApi->closeHandle(handle);
 		if (res == 0) {
 			showError("Не удалось высвободить описатель объекта ядра.");
 
@@ -47,7 +46,7 @@ namespace QuestNavigator {
 		// Проверяем, доступен ли объект синхронизации.
 		// Если недоступен, сразу возвращаем "false".
 		// Для ожидания объекта следует использовать "waitForSingle".
-		DWORD res = WaitForSingleObjectEx(handle, 0, FALSE);
+		DWORD res = threadApi->waitForSingleObject(handle, 0);
 		showError("ThreadManager::checkForSingle 1");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
 			showError("ThreadManager::checkForSingle sync failure");
@@ -65,8 +64,7 @@ namespace QuestNavigator {
 	DWORD ThreadManager::waitForMultiple(DWORD nCount, const HANDLE* lpHandles)
 	{
 		// Ожидаем любое из событий синхронизации
-		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
-		DWORD res = WaitForMultipleObjectsEx(nCount, lpHandles, FALSE, INFINITE, FALSE);
+		DWORD res = threadApi->waitForMultipleObjects(nCount, lpHandles, FALSE, INFINITE);
 		return res;
 	}
 
@@ -74,8 +72,7 @@ namespace QuestNavigator {
 	// событие с автосбросом, инициализированное в занятом состоянии.
 	HANDLE ThreadManager::CreateSyncEvent()
 	{
-		//HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
-		HANDLE eventHandle = CreateEventEx(NULL, NULL, NULL, NULL);
+		HANDLE eventHandle = threadApi->createEvent(NULL, FALSE, FALSE, NULL);
 		if (eventHandle == NULL) {
 			showError("ThreadManager::CreateSyncEvent Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
 
@@ -88,7 +85,7 @@ namespace QuestNavigator {
 	
 	BOOL ThreadManager::setEvent(HANDLE handle)
 	{
-		BOOL res = SetEvent(handle);
+		BOOL res = threadApi->setEvent(handle);
 		if (res == 0) {
 			showError("ThreadManager::setEvent Не удалось запустить событие синхронизации потоков.");
 
