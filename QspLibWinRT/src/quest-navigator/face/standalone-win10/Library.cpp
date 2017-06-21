@@ -30,12 +30,14 @@ namespace QuestNavigator
 	void Library::inject(
 		EventManager* eventManager,
 		Timer* timer,
-		JsExecutor* jsExecutor
+		JsExecutor* jsExecutor,
+		ThreadManager* threadManager
 	)
 	{
 		this->eventManager = eventManager;
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
+		this->threadManager = threadManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
@@ -67,6 +69,7 @@ namespace QuestNavigator
 			//exit(eecFailToBeginLibThread);
 			return;
 		}
+		showError("StartLibThread: success, libThread created");
 	}
 
 	// Остановка потока библиотеки. Вызывается только раз при завершении программы.
@@ -142,6 +145,7 @@ namespace QuestNavigator
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
 			//showError("library->eventManager->libIsReady();");
 			library->eventManager->libIsReady();
+			//showError("Library thread called libIsReady");
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();
 			if (!library->eventManager->isValidEvent(res)) {

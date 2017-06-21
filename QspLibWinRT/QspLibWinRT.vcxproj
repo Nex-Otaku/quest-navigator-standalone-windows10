@@ -283,7 +283,9 @@
     <ClInclude Include="src\quest-navigator\platform\windows10\BeginThread.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\StringConverter.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ThreadApi.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadEmulation.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ThreadManager.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\UwpJsExecutor.h" />
   </ItemGroup>
   <ItemGroup>
@@ -480,7 +482,9 @@
     <ClCompile Include="src\quest-navigator\platform\windows10\BeginThread.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\StringConverter.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ThreadApi.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadEmulation.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ThreadManager.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\UwpJsExecutor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

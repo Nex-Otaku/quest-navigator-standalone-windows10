@@ -9,6 +9,8 @@
 #include "..\..\platform\windows10\UwpJsExecutor.h"
 #include "..\..\platform\windows10\StringConverter.h"
 
+#include "..\..\platform\windows10\ThreadManager.h"
+
 using namespace std;
 // Отладка.
 using namespace QspLibWinRT;
@@ -26,7 +28,9 @@ namespace QuestNavigator
 
 			// Для отладки.
 			UwpJsExecutor^ uwpJsExecutor,
-			StringConverter* stringConverter
+			StringConverter* stringConverter,
+
+			ThreadManager* threadManager
 		);
 
 		// JsListener
@@ -77,6 +81,7 @@ namespace QuestNavigator
 		StringConverter* stringConverter;
 
 		Timer* timer;
+		ThreadManager* threadManager;
 
 		// Переменные для работы с потоками
 

@@ -4,6 +4,7 @@
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "Timer.h"
 #include "JsExecutor.h"
+#include "..\..\platform\windows10\ThreadManager.h"
 
 namespace QuestNavigator
 {
@@ -16,7 +17,8 @@ namespace QuestNavigator
 		void Library::inject(
 			EventManager* eventManager,
 			Timer* timer,
-			JsExecutor* jsExecutor
+			JsExecutor* jsExecutor,
+			ThreadManager* threadManager
 		);
 
 		// ********************************************************************
@@ -35,6 +37,7 @@ namespace QuestNavigator
 		EventManager* eventManager;
 		Timer* timer;
 		JsExecutor* jsExecutor;
+		ThreadManager* threadManager;
 
 		HANDLE libThread;
 

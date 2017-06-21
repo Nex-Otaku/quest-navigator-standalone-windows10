@@ -4,6 +4,7 @@
 #include "..\..\core\dialogs.h"
 #include "..\..\core\thread_sync.h"
 #include "..\..\core\events.h"
+#include "..\..\platform\windows10\ThreadManager.h"
 
 using namespace std;
 
@@ -17,13 +18,20 @@ namespace QuestNavigator
 	{
 	}
 
-	void EventManager::inject(Timer* timer, UwpJsExecutor^ uwpJsExecutor, StringConverter* stringConverter)
+	void EventManager::inject(
+		Timer* timer,
+		UwpJsExecutor^ uwpJsExecutor,
+		StringConverter* stringConverter,
+		ThreadManager* threadManager
+	)
 	{
 		this->timer = timer;
 
 		// Отладка.
 		this->uwpJsExecutor = uwpJsExecutor;
 		this->stringConverter = stringConverter;
+
+		this->threadManager = threadManager;
 	}
 
 	// Вызовы событий из UI.
@@ -300,7 +308,8 @@ namespace QuestNavigator
 	// событие с автосбросом, инициализированное в занятом состоянии.
 	HANDLE EventManager::CreateSyncEvent()
 	{
-		HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
+		//HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
+		HANDLE eventHandle = CreateEventEx(NULL, NULL, NULL, NULL);
 		if (eventHandle == NULL) {
 			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
 
@@ -380,7 +389,7 @@ namespace QuestNavigator
 		// Для Windows10 используем WaitForMultipleObjectsEx вместо WaitForMultipleObjects
 		DWORD res = WaitForMultipleObjectsEx((DWORD)3, eventList, FALSE, INFINITE, FALSE);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
-			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
+			showError("waitForSingleLib: Не удалось дождаться единичного события синхронизации библиотеки.");
 		} else {
 			// Если событие было "evShutdown" или "evStopGame",
 			// вызываем их заново.

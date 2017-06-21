@@ -327,6 +327,12 @@
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadEmulation.cpp">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\windows10\ThreadManager.cpp">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\windows10\ThreadApi.cpp">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -560,6 +566,12 @@
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadEmulation.h">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\windows10\ThreadManager.h">
+      <Filter>quest-navigator\platform\windows10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\windows10\ThreadApi.h">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
   </ItemGroup>
