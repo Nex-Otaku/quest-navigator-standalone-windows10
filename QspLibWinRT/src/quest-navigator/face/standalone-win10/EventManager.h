@@ -57,7 +57,7 @@ namespace QuestNavigator
 		void freeSharedData();
 
 		void shutdown();
-		void libIsReady();
+		bool setLibIsReady();
 		void gameStopped();
 
 		DWORD waitForAnyEvent();
@@ -97,7 +97,7 @@ namespace QuestNavigator
 		// Получаем HANDLE события по его индексу
 		HANDLE getEventHandle(eSyncEvent ev);
 		// Запускаем событие
-		void runSyncEvent(eSyncEvent ev);
+		bool runSyncEvent(eSyncEvent ev);
 		// Входим в критическую секцию
 		void lockData();
 		// Выходим из критической секции

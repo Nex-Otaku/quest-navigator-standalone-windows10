@@ -145,7 +145,11 @@ namespace QuestNavigator
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
 			//showError("library->eventManager->libIsReady();");
-			library->eventManager->libIsReady();
+			bool libIsReadyIsPosted = library->eventManager->setLibIsReady();
+			if (!libIsReadyIsPosted) {
+				showError("Library::libThreadFunc Не удалось сообщить о готовности библиотеки.");
+				break;
+			}
 			//showError("Library thread called libIsReady");
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();

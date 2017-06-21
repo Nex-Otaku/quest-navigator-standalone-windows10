@@ -231,11 +231,11 @@ namespace QuestNavigator
 		runSyncEvent(evShutdown);
 	}
 
-	void EventManager::libIsReady()
+	bool EventManager::setLibIsReady()
 	{
 		// Сообщаем потоку UI, что библиотека готова к выполнению команд
 		//callDebug("EventManager::libIsReady");
-		runSyncEvent(evLibIsReady);
+		return runSyncEvent(evLibIsReady);
 	}
 
 	void EventManager::gameStopped()
@@ -309,13 +309,14 @@ namespace QuestNavigator
 	}
 
 	// Запускаем событие
-	void EventManager::runSyncEvent(eSyncEvent ev)
+	bool EventManager::runSyncEvent(eSyncEvent ev)
 	{
 		HANDLE eventHandle = getEventHandle(ev);
 		BOOL res = threadManager->setEvent(eventHandle);
-		if (res == 0) {
+		if (res == FALSE) {
 			showError("EventManager::runSyncEvent Не удалось запустить событие синхронизации потоков");
 		}
+		return res == TRUE;
 	}
 
 	// Входим в критическую секцию
