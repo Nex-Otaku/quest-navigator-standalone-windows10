@@ -6,7 +6,7 @@ using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
 namespace QuestNavigator {
-	// На замену функции "_beginthread".
+	// РќР° Р·Р°РјРµРЅСѓ С„СѓРЅРєС†РёРё "_beginthread".
 	_Use_decl_annotations_ HANDLE WINAPI UwpCustomBeginThread(LPSECURITY_ATTRIBUTES unusedThreadAttributes, SIZE_T unusedStackSize, LPTHREAD_START_ROUTINE lpStartAddress, LPVOID lpParameter, DWORD dwCreationFlags, LPDWORD unusedThreadId) {
 		// Create a handle for the new thread.
 		HANDLE threadHandle = CreateEventEx(nullptr, nullptr, CREATE_EVENT_MANUAL_RESET, EVENT_ALL_ACCESS);

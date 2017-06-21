@@ -60,7 +60,8 @@ namespace QuestNavigator
 		//libThread = (HANDLE)_beginthread(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
 		LPTHREAD_START_ROUTINE pLibThreadFunc = &Library::libThreadFunc;
 		//libThread = (HANDLE)UwpCustomBeginThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
-		libThread = (HANDLE)ThreadEmulation::CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		//libThread = (HANDLE)ThreadEmulation::CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		libThread = threadManager->CreateThread(pLibThreadFunc, this);
 		if (libThread == NULL) {
 			showError("Не получилось создать поток интерпретатора.");
 
@@ -149,7 +150,7 @@ namespace QuestNavigator
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();
 			if (!library->eventManager->isValidEvent(res)) {
-				showError("Не удалось дождаться множественного события синхронизации библиотеки.");
+				showError("Library::libThreadFunc Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;
 			} else {
 				eSyncEvent ev = (eSyncEvent)res;
@@ -261,7 +262,7 @@ namespace QuestNavigator
 	
 						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
 						if (!fileExists(path)) {
-							showError("Не найден файл сохранения");
+							showError("Library::libThreadFunc Не найден файл сохранения");
 							break;
 						}
 	
@@ -284,7 +285,7 @@ namespace QuestNavigator
 	
 						string saveDir = Configuration::getString(ecpSaveDir);
 						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-							showError("Не удалось создать папку для сохранения: " + saveDir);
+							showError("Library::libThreadFunc Не удалось создать папку для сохранения: " + saveDir);
 							break;
 						}
 	
@@ -312,7 +313,7 @@ namespace QuestNavigator
 					break;
 				default:
 					{
-						showError("Необработанное событие синхронизации!");
+						showError("Library::libThreadFunc Необработанное событие синхронизации!");
 					}
 					break;
 				}
@@ -326,7 +327,8 @@ namespace QuestNavigator
 		// Завершаем работу библиотеки
 		QSPDeInit();
 		// Завершаем работу потока
-		_endthreadex(0);
+		// STUB Так как мы не используем _beginthreadex, то здесь что-то надо придумать.
+		//_endthreadex(0);
 		return 0;
 	}
 

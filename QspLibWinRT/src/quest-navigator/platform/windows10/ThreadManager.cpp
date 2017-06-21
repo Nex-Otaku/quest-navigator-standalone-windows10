@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ThreadManager.h"
 #include "..\..\core\dialogs.h"
+#include "ThreadApi.h"
 
 namespace QuestNavigator {
 	ThreadManager::ThreadManager()
@@ -16,41 +17,41 @@ namespace QuestNavigator {
 		this->threadApi = threadApi;
 	}
 
-	// Îæèäàåì ñîáûòèÿ
+	// ÐžÐ¶Ð¸Ð´Ð°ÐµÐ¼ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ
 	bool ThreadManager::waitForSingle(HANDLE handle)
 	{
 		//DWORD res = WaitForSingleObject(handle, INFINITE);
 		DWORD res = WaitForSingleObjectEx(handle, INFINITE, FALSE);
 		if (res != WAIT_OBJECT_0) {
-			showError("waitForSingle: Íå óäàëîñü äîæäàòüñÿ ñîáûòèÿ ñèíõðîíèçàöèè");
+			showError("ThreadManager::waitForSingle: ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð´Ð¾Ð¶Ð´Ð°Ñ‚ÑŒÑÑ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸");
 			return false;
 		}
 		return true;
 	}
 
-	// Âûñâîáîæäàåì îïèñàòåëü è ðóãàåìñÿ åñëè ÷òî íå òàê.
+	// Ð’Ñ‹ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°ÐµÐ¼ Ð¾Ð¿Ð¸ÑÐ°Ñ‚ÐµÐ»ÑŒ Ð¸ Ñ€ÑƒÐ³Ð°ÐµÐ¼ÑÑ ÐµÑÐ»Ð¸ Ñ‡Ñ‚Ð¾ Ð½Ðµ Ñ‚Ð°Ðº.
 	void ThreadManager::freeHandle(HANDLE handle)
 	{
 		BOOL res = CloseHandle(handle);
 		if (res == 0) {
-			showError("Íå óäàëîñü âûñâîáîäèòü îïèñàòåëü îáúåêòà ÿäðà.");
+			showError("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð²Ñ‹ÑÐ²Ð¾Ð±Ð¾Ð´Ð¸Ñ‚ÑŒ Ð¾Ð¿Ð¸ÑÐ°Ñ‚ÐµÐ»ÑŒ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÑÐ´Ñ€Ð°.");
 
 			// STUB
-			// Âûõîä èç ïðèëîæåíèÿ?
+			// Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ?
 			//exit(eecFailToCloseHandle);
 		}
 	}
 
 	bool ThreadManager::checkForSingle(HANDLE handle)
 	{
-		// Ïðîâåðÿåì, äîñòóïåí ëè îáúåêò ñèíõðîíèçàöèè.
-		// Åñëè íåäîñòóïåí, ñðàçó âîçâðàùàåì "false".
-		// Äëÿ îæèäàíèÿ îáúåêòà ñëåäóåò èñïîëüçîâàòü "waitForSingle".
+		// ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼, Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Ð»Ð¸ Ð¾Ð±ÑŠÐµÐºÑ‚ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸.
+		// Ð•ÑÐ»Ð¸ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½, ÑÑ€Ð°Ð·Ñƒ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ "false".
+		// Ð”Ð»Ñ Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÑÐ»ÐµÐ´ÑƒÐµÑ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ "waitForSingle".
 		DWORD res = WaitForSingleObjectEx(handle, 0, FALSE);
 		showError("ThreadManager::checkForSingle 1");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
 			showError("ThreadManager::checkForSingle sync failure");
-			showError("Ñáîé ñèíõðîíèçàöèè");
+			showError("Ð¡Ð±Ð¾Ð¹ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸");
 			return false;
 		}
 		showError("ThreadManager::checkForSingle 2");
@@ -63,23 +64,23 @@ namespace QuestNavigator {
 
 	DWORD ThreadManager::waitForMultiple(DWORD nCount, const HANDLE* lpHandles)
 	{
-		// Îæèäàåì ëþáîå èç ñîáûòèé ñèíõðîíèçàöèè
-		// Äëÿ Windows10 èñïîëüçóåì WaitForMultipleObjectsEx âìåñòî WaitForMultipleObjects
+		// ÐžÐ¶Ð¸Ð´Ð°ÐµÐ¼ Ð»ÑŽÐ±Ð¾Ðµ Ð¸Ð· ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸
+		// Ð”Ð»Ñ Windows10 Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼ WaitForMultipleObjectsEx Ð²Ð¼ÐµÑÑ‚Ð¾ WaitForMultipleObjects
 		DWORD res = WaitForMultipleObjectsEx(nCount, lpHandles, FALSE, INFINITE, FALSE);
 		return res;
 	}
 
-	// Ñîçäà¸ì îáúåêò ÿäðà äëÿ ñèíõðîíèçàöèè ïîòîêîâ,
-	// ñîáûòèå ñ àâòîñáðîñîì, èíèöèàëèçèðîâàííîå â çàíÿòîì ñîñòîÿíèè.
+	// Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚ ÑÐ´Ñ€Ð° Ð´Ð»Ñ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ñ‚Ð¾ÐºÐ¾Ð²,
+	// ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ Ñ Ð°Ð²Ñ‚Ð¾ÑÐ±Ñ€Ð¾ÑÐ¾Ð¼, Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾Ðµ Ð² Ð·Ð°Ð½ÑÑ‚Ð¾Ð¼ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸.
 	HANDLE ThreadManager::CreateSyncEvent()
 	{
 		//HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
 		HANDLE eventHandle = CreateEventEx(NULL, NULL, NULL, NULL);
 		if (eventHandle == NULL) {
-			showError("Íå ïîëó÷èëîñü ñîçäàòü îáúåêò ÿäðà \"ñîáûòèå\" äëÿ ñèíõðîíèçàöèè ïîòîêîâ.");
+			showError("ThreadManager::CreateSyncEvent ÐÐµ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¾Ð±ÑŠÐµÐºÑ‚ ÑÐ´Ñ€Ð° \"ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ\" Ð´Ð»Ñ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ñ‚Ð¾ÐºÐ¾Ð².");
 
 			// STUB
-			// Âûõîä èç ïðèëîæåíèÿ?
+			// Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ?
 			//exit(eecFailToCreateEvent);
 		}
 		return eventHandle;
@@ -89,11 +90,18 @@ namespace QuestNavigator {
 	{
 		BOOL res = SetEvent(handle);
 		if (res == 0) {
-			showError("Íå óäàëîñü çàïóñòèòü ñîáûòèå ñèíõðîíèçàöèè ïîòîêîâ.");
+			showError("ThreadManager::setEvent ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ñ‚Ð¾ÐºÐ¾Ð².");
 
 			// STUB
-			// Âûõîä èç ïðèëîæåíèÿ?
+			// Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ?
 			//exit(eecFailToSetEvent);
 		}
+		return res;
+	}
+
+	HANDLE ThreadManager::CreateThread(LPTHREAD_START_ROUTINE lpStartAddress, LPVOID lpParameter)
+	{
+		HANDLE threadHandle = (HANDLE)threadApi->createThread(NULL, 0, lpStartAddress, lpParameter, 0, NULL);
+		return threadHandle;
 	}
 }

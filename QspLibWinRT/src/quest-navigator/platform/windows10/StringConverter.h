@@ -12,7 +12,7 @@ namespace QuestNavigator
 		StringConverter();
 		~StringConverter();
 
-		// Конвертация строк
+		// РљРѕРЅРІРµСЂС‚Р°С†РёСЏ СЃС‚СЂРѕРє
 		Platform::String^ convertFromString(string input);
 	};
 }
