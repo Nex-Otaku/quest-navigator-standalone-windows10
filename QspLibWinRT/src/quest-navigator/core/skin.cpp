@@ -40,7 +40,7 @@ namespace QuestNavigator {
 
 	string Skin::getString(eSkinParam param)
 	{
-		showError("Skin::getString " + to_string((int)param));
+		//showError("Skin::getString " + to_string((int)param));
 		return _paramList[param].getString();
 	}
 	void Skin::setString(eSkinParam param, string value)
@@ -49,7 +49,7 @@ namespace QuestNavigator {
 	}
 	int Skin::getInt(eSkinParam param)
 	{
-		showError("Skin::getString " + to_string((int)param));
+		//showError("Skin::getInt " + to_string((int)param));
 		return _paramList[param].getInt();
 	}
 	void Skin::setInt(eSkinParam param, int value)
@@ -58,7 +58,7 @@ namespace QuestNavigator {
 	}
 	string Skin::getDefaultString(eSkinParam param)
 	{
-		showError("Skin::getDefaultString " + to_string((int)param));
+		//showError("Skin::getDefaultString " + to_string((int)param));
 		return _defaultList[param].getString();
 	}
 	void Skin::setDefaultString(eSkinParam param, string value)
@@ -67,7 +67,7 @@ namespace QuestNavigator {
 	}
 	int Skin::getDefaultInt(eSkinParam param)
 	{
-		showError("Skin::getDefaultInt " + to_string((int)param));
+		//showError("Skin::getDefaultInt " + to_string((int)param));
 		return _defaultList[param].getInt();
 	}
 	void Skin::setDefaultInt(eSkinParam param, int value)
@@ -100,6 +100,7 @@ namespace QuestNavigator {
 	// Заполняем значения по умолчанию
 	void Skin::initDefaults()
 	{
+		//showError("initDefaults");
 		setDefaultInt(espHideScrollAny, 0);
 		setDefaultInt(espHideScrollArrows, 0);
 		setDefaultInt(espHideScrollMain, 0);
@@ -108,6 +109,7 @@ namespace QuestNavigator {
 		setDefaultInt(espHideScrollObjs, 0);
 
 		setDefaultInt(espUseHtml, 0);
+		//showError("espUseHtml set to 0");
 		setDefaultInt(espNoSave, 0);
 		setDefaultInt(espDisableScroll, 0);
 		setDefaultInt(espViewAlwaysShow, 0);
@@ -229,6 +231,7 @@ namespace QuestNavigator {
 		// -----------
 		isChanged = false;
 		loadValue(espUseHtml, "USEHTML");
+		//showError("load espUseHtml from var");
 		if (isChanged) isHtmlModeChanged = true;
 		// Others
 		loadValue(espDisableScroll, "DISABLESCROLL");
@@ -388,6 +391,7 @@ namespace QuestNavigator {
 
 	string Skin::applyHtmlFixes(string text, bool forceHtml)
 	{
+		//showError("applyHtmlFixes");
 		// Контекст библиотеки
 		if (!forceHtml && (getInt(espUseHtml) == 0)) {
 			// Если USEHTML = 0, выводим текст "как есть".
