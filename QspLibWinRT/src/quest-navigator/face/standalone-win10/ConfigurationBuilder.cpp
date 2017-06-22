@@ -14,6 +14,11 @@ namespace QuestNavigator
 	{
 	}
 
+	void ConfigurationBuilder::inject(GameFileManager * gameFileManager)
+	{
+		this->gameFileManager = gameFileManager;
+	}
+
 	bool ConfigurationBuilder::build()
 	{
 		// Устанавливаем параметры по умолчанию
@@ -238,7 +243,7 @@ namespace QuestNavigator
 
 
 		// Для платформы Windows 10 standalone заранее известен путь к файлу игры.
-		gameFilePath = "game.qsp";
+		gameFilePath = gameFileManager->getDefaultGameFilePath();
 
 
 		// Сохраняем конфигурацию

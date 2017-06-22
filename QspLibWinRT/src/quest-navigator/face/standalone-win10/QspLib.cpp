@@ -11,6 +11,7 @@
 #include "..\..\platform\windows10\StringConverter.h"
 #include "..\..\platform\windows10\ThreadManager.h"
 #include "..\..\platform\windows10\ThreadApi.h"
+#include "GameFileManager.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -53,6 +54,8 @@ namespace QspLibWinRT
 		ThreadManager* threadManager = new ThreadManager();
 		// Создаём объект для обёртки платформенной реализации поточных функций.
 		ThreadApi* threadApi = new ThreadApi();
+		// Создаём объект для управления файлом игры.
+		GameFileManager* gameFileManager = new GameFileManager();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -93,6 +96,7 @@ namespace QspLibWinRT
 			stringConverter
 		);
 		threadManager->inject(threadApi);
+		configurationBuilder->inject(gameFileManager);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

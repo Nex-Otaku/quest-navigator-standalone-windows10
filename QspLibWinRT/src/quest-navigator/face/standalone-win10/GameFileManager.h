@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+
+using namespace std;
+
 namespace QuestNavigator
 {
 	class GameFileManager
@@ -8,7 +12,7 @@ namespace QuestNavigator
 		GameFileManager();
 		~GameFileManager();
 
-		// Загружаем файл игры по умолчанию для standalone-приложения.
-		void loadDefaultGameFile();
+		// Путь к файлу игры по умолчанию для standalone-приложения.
+		string getDefaultGameFilePath();
 	};
 }

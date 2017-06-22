@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "GameFileManager.h"
+#include <string>
+
+using namespace std;
 
 namespace QuestNavigator
 {
@@ -11,8 +14,9 @@ namespace QuestNavigator
 	{
 	}
 
-	void GameFileManager::loadDefaultGameFile()
+	string GameFileManager::getDefaultGameFilePath()
 	{
 		// STUB
+		return "game\\standalone_content\\game.qsp";
 	}
 }
