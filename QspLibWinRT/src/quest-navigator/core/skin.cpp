@@ -40,6 +40,7 @@ namespace QuestNavigator {
 
 	string Skin::getString(eSkinParam param)
 	{
+		showError("Skin::getString " + to_string((int)param));
 		return _paramList[param].getString();
 	}
 	void Skin::setString(eSkinParam param, string value)
@@ -48,6 +49,7 @@ namespace QuestNavigator {
 	}
 	int Skin::getInt(eSkinParam param)
 	{
+		showError("Skin::getString " + to_string((int)param));
 		return _paramList[param].getInt();
 	}
 	void Skin::setInt(eSkinParam param, int value)
@@ -56,6 +58,7 @@ namespace QuestNavigator {
 	}
 	string Skin::getDefaultString(eSkinParam param)
 	{
+		showError("Skin::getDefaultString " + to_string((int)param));
 		return _defaultList[param].getString();
 	}
 	void Skin::setDefaultString(eSkinParam param, string value)
@@ -64,6 +67,7 @@ namespace QuestNavigator {
 	}
 	int Skin::getDefaultInt(eSkinParam param)
 	{
+		showError("Skin::getDefaultInt " + to_string((int)param));
 		return _defaultList[param].getInt();
 	}
 	void Skin::setDefaultInt(eSkinParam param, int value)
