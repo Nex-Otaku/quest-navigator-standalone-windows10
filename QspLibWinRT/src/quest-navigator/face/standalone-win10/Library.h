@@ -4,6 +4,7 @@
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "Timer.h"
 #include "JsExecutor.h"
+#include "..\..\platform\windows10\ThreadManager.h"
 
 namespace QuestNavigator
 {
@@ -16,7 +17,8 @@ namespace QuestNavigator
 		void Library::inject(
 			EventManager* eventManager,
 			Timer* timer,
-			JsExecutor* jsExecutor
+			JsExecutor* jsExecutor,
+			ThreadManager* threadManager
 		);
 
 		// ********************************************************************
@@ -35,10 +37,15 @@ namespace QuestNavigator
 		EventManager* eventManager;
 		Timer* timer;
 		JsExecutor* jsExecutor;
+		ThreadManager* threadManager;
 
 		HANDLE libThread;
 
 		// Основная функция потока библиотеки
-		static unsigned int __stdcall libThreadFunc(void* pvParam);
+		//static unsigned int __stdcall libThreadFunc(void* pvParam);
+		//DWORD(WINAPI *PTHREAD_START_ROUTINE)(
+		//	LPVOID lpThreadParameter
+		//	)
+		static DWORD __stdcall libThreadFunc(LPVOID lpParameter);
 	};
 }

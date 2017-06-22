@@ -46,8 +46,7 @@ namespace QspLibWinRT {
 
 	Windows::UI::Core::CoreDispatcher^ UwpJsExecutor::getDispatcher()
 	{
-		auto window = Windows::UI::Core::CoreWindow::GetForCurrentThread();
-		return window->Dispatcher;
+		return Windows::ApplicationModel::Core::CoreApplication::MainView->CoreWindow->Dispatcher;
 	}
 }
 

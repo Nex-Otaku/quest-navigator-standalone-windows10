@@ -9,6 +9,8 @@
 #include "..\..\platform\windows10\UwpJsExecutor.h"
 #include "..\..\platform\windows10\StringConverter.h"
 
+#include "..\..\platform\windows10\ThreadManager.h"
+
 using namespace std;
 // Отладка.
 using namespace QspLibWinRT;
@@ -26,7 +28,9 @@ namespace QuestNavigator
 
 			// Для отладки.
 			UwpJsExecutor^ uwpJsExecutor,
-			StringConverter* stringConverter
+			StringConverter* stringConverter,
+
+			ThreadManager* threadManager
 		);
 
 		// JsListener
@@ -43,7 +47,7 @@ namespace QuestNavigator
 		void inputStringEntered();
 
 		// App
-		void runGame(string fileName, int gameIsStandalone);
+		void runGame(string fileName, int gameIsStandalone, bool gameIsRunning);
 		void stopGame();
 
 		// Library
@@ -53,7 +57,7 @@ namespace QuestNavigator
 		void freeSharedData();
 
 		void shutdown();
-		void libIsReady();
+		bool setLibIsReady();
 		void gameStopped();
 
 		DWORD waitForAnyEvent();
@@ -66,17 +70,13 @@ namespace QuestNavigator
 		void waitForMenuClosed();
 		void waitForErrorClosed();
 
-		// Работа с потоками и синхронизацией.
-		
-		// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
-		void waitForLibIsReady();
-
 	private:
 		// Отладка.
 		UwpJsExecutor^ uwpJsExecutor;
 		StringConverter* stringConverter;
 
 		Timer* timer;
+		ThreadManager* threadManager;
 
 		// Переменные для работы с потоками
 
@@ -89,13 +89,10 @@ namespace QuestNavigator
 		// События для синхронизации потоков
 		HANDLE g_eventList[evLast];
 
-		// Создаём объект ядра для синхронизации потоков,
-		// событие с автосбросом, инициализированное в занятом состоянии.
-		HANDLE CreateSyncEvent();
 		// Получаем HANDLE события по его индексу
 		HANDLE getEventHandle(eSyncEvent ev);
 		// Запускаем событие
-		void runSyncEvent(eSyncEvent ev);
+		bool runSyncEvent(eSyncEvent ev);
 		// Входим в критическую секцию
 		void lockData();
 		// Выходим из критической секции

@@ -4,6 +4,7 @@
 #include "..\..\core\dialogs.h"
 #include "..\..\core\thread_sync.h"
 #include "..\..\core\events.h"
+#include "..\..\platform\windows10\ThreadManager.h"
 
 using namespace std;
 
@@ -17,13 +18,20 @@ namespace QuestNavigator
 	{
 	}
 
-	void EventManager::inject(Timer* timer, UwpJsExecutor^ uwpJsExecutor, StringConverter* stringConverter)
+	void EventManager::inject(
+		Timer* timer,
+		UwpJsExecutor^ uwpJsExecutor,
+		StringConverter* stringConverter,
+		ThreadManager* threadManager
+	)
 	{
 		this->timer = timer;
 
 		// Отладка.
 		this->uwpJsExecutor = uwpJsExecutor;
 		this->stringConverter = stringConverter;
+
+		this->threadManager = threadManager;
 	}
 
 	// Вызовы событий из UI.
@@ -139,12 +147,21 @@ namespace QuestNavigator
 
 	// App
 
-	void EventManager::runGame(string fileName, int gameIsStandalone)
+	void EventManager::runGame(string fileName, int gameIsStandalone, bool gameIsRunning)
 	{
-		callDebug("EventManager::runGame 1 русский текст");
+		callDebug("EventManager::runGame 1");
 		// Контекст UI
-		if (!checkForSingleEvent(evLibIsReady)) {
-			return;
+
+		// Проверяем состояние библиотеки.
+		// Если первый запуск, то ждём, пока библиотека запустится.
+		// Если игра уже запущена, то библиотека должна быть уже в готовом состоянии.
+		if (gameIsRunning) {
+			if (!checkForSingleEvent(evLibIsReady)) {
+				callDebug("EventManager::runGame не удалось запустить игру, библиотека не готова");
+				return;
+			}
+		} else {
+			waitForSingleEvent(evLibIsReady);
 		}
 
 		callDebug("EventManager::runGame 2");
@@ -177,9 +194,11 @@ namespace QuestNavigator
 			HANDLE eventHandle = /* таймер временно отключен,
 								 заполняем описатель как для обычного события.
 								 (i == (int)evTimer) ? this->timer->CreateTimer() : */
-				CreateSyncEvent();
-			if (eventHandle == NULL)
+				threadManager->CreateSyncEvent();
+			if (eventHandle == NULL) {
+				callDebug("EventManager::initEvents не удалось зарегистрировать событие");
 				return;
+			}
 			g_eventList[i] = eventHandle;
 		}
 	}
@@ -204,7 +223,7 @@ namespace QuestNavigator
 	{
 		// Закрываем хэндлы событий
 		for (int i = 0; i < (int)evLast; i++) {
-			freeHandle(g_eventList[i]);
+			threadManager->freeHandle(g_eventList[i]);
 			g_eventList[i] = NULL;
 		}
 	}
@@ -220,10 +239,11 @@ namespace QuestNavigator
 		runSyncEvent(evShutdown);
 	}
 
-	void EventManager::libIsReady()
+	bool EventManager::setLibIsReady()
 	{
 		// Сообщаем потоку UI, что библиотека готова к выполнению команд
-		runSyncEvent(evLibIsReady);
+		//callDebug("EventManager::libIsReady");
+		return runSyncEvent(evLibIsReady);
 	}
 
 	void EventManager::gameStopped()
@@ -235,13 +255,12 @@ namespace QuestNavigator
 	DWORD EventManager::waitForAnyEvent()
 	{
 		// Ожидаем любое из событий синхронизации
-		DWORD res = WaitForMultipleObjects((DWORD)evLastUi, g_eventList, FALSE, INFINITE);
-		return res;
+		return threadManager->waitForMultiple((DWORD)evLastUi, g_eventList);
 	}
 
 	bool EventManager::isValidEvent(DWORD waitResult)
 	{
-		return (waitResult < WAIT_OBJECT_0) || (waitResult >(WAIT_OBJECT_0 + evLast - 1));
+		return (waitResult >= WAIT_OBJECT_0) && (waitResult < (WAIT_OBJECT_0 + evLast));
 	}
 
 	SharedDataDto EventManager::getSharedData(eSyncEvent ev)
@@ -281,30 +300,7 @@ namespace QuestNavigator
 	// Работа с синхронизацией и потоками.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	// public
-
-	// Ожидаем, пока поток библиотеки не будет готов к получению сообщений.
-	void EventManager::waitForLibIsReady()
-	{
-		waitForSingleEvent(evLibIsReady);
-	}
-
 	// private
-
-	// Создаём объект ядра для синхронизации потоков,
-	// событие с автосбросом, инициализированное в занятом состоянии.
-	HANDLE EventManager::CreateSyncEvent()
-	{
-		HANDLE eventHandle = CreateEvent(NULL, FALSE, FALSE, NULL);
-		if (eventHandle == NULL) {
-			showError("Не получилось создать объект ядра \"событие\" для синхронизации потоков.");
-
-			// STUB
-			// Выход из приложения?
-			//exit(eecFailToCreateEvent);
-		}
-		return eventHandle;
-	}
 
 	// Получаем HANDLE события по его индексу
 	HANDLE EventManager::getEventHandle(eSyncEvent ev)
@@ -313,16 +309,14 @@ namespace QuestNavigator
 	}
 
 	// Запускаем событие
-	void EventManager::runSyncEvent(eSyncEvent ev)
+	bool EventManager::runSyncEvent(eSyncEvent ev)
 	{
-		BOOL res = SetEvent(getEventHandle(ev));
-		if (res == 0) {
-			showError("Не удалось запустить событие синхронизации потоков.");
-
-			// STUB
-			// Выход из приложения?
-			//exit(eecFailToSetEvent);
+		HANDLE eventHandle = getEventHandle(ev);
+		BOOL res = threadManager->setEvent(eventHandle);
+		if (res == FALSE) {
+			showError("EventManager::runSyncEvent Не удалось запустить событие синхронизации потоков");
 		}
+		return res == TRUE;
 	}
 
 	// Входим в критическую секцию
@@ -347,7 +341,7 @@ namespace QuestNavigator
 
 	bool EventManager::waitForSingleEvent(eSyncEvent ev)
 	{
-		return waitForSingle(getEventHandle(ev));
+		return threadManager->waitForSingle(getEventHandle(ev));
 	}
 
 	bool EventManager::waitForSingleLib(eSyncEvent ev)
@@ -370,9 +364,10 @@ namespace QuestNavigator
 			eventList[i] = getEventHandle(syncEvents[i]);
 		}
 		
-		DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE);
+		//DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE, FALSE);
+		DWORD res = threadManager->waitForMultiple((DWORD)3, eventList);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
-			showError("Не удалось дождаться единичного события синхронизации библиотеки.");
+			showError("EventManager::waitForSingleLib: Не удалось дождаться единичного события синхронизации библиотеки.");
 		} else {
 			// Если событие было "evShutdown" или "evStopGame",
 			// вызываем их заново.
@@ -391,22 +386,12 @@ namespace QuestNavigator
 
 	bool EventManager::checkForSingleEvent(eSyncEvent ev)
 	{
-		// Проверяем, доступен ли объект синхронизации.
-		// Если недоступен, сразу возвращаем "false".
-		// Для ожидания объекта следует использовать "waitForSingle".
 		callDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
 		callDebug("EventManager::checkForSingleEvent 2");
-		DWORD res = WaitForSingleObject(handle, 0);
-		callDebug("EventManager::checkForSingleEvent 3");
-		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
-			callDebug("EventManager::checkForSingleEvent sync failure");
-			showError("Сбой синхронизации");
-			return false;
-		}
-		callDebug("EventManager::checkForSingleEvent 4");
-		callDebug("EventManager::checkForSingleEvent: res = " + std::to_string((int)res));
-		return res == WAIT_OBJECT_0;
+
+		// Проверка события синхронизации.
+		return threadManager->checkForSingle(handle);
 	}
 
 	void EventManager::callDebug(string message)

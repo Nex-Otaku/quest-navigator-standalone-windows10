@@ -14,6 +14,7 @@
 #include "..\..\core\utils.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
+#include "..\..\platform\windows10\ThreadEmulation.h"
 
 namespace QuestNavigator
 {
@@ -29,12 +30,14 @@ namespace QuestNavigator
 	void Library::inject(
 		EventManager* eventManager,
 		Timer* timer,
-		JsExecutor* jsExecutor
+		JsExecutor* jsExecutor,
+		ThreadManager* threadManager
 	)
 	{
 		this->eventManager = eventManager;
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
+		this->threadManager = threadManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
@@ -54,7 +57,11 @@ namespace QuestNavigator
 		this->eventManager->initEvents();
 		this->eventManager->initSharedData();
 
-		libThread = (HANDLE)_beginthreadex(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
+		//libThread = (HANDLE)_beginthread(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
+		LPTHREAD_START_ROUTINE pLibThreadFunc = &Library::libThreadFunc;
+		//libThread = (HANDLE)UwpCustomBeginThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		//libThread = (HANDLE)ThreadEmulation::CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
+		libThread = threadManager->CreateThread(pLibThreadFunc, this);
 		if (libThread == NULL) {
 			showError("Не получилось создать поток интерпретатора.");
 
@@ -63,6 +70,7 @@ namespace QuestNavigator
 			//exit(eecFailToBeginLibThread);
 			return;
 		}
+		showError("StartLibThread: success, libThread created");
 	}
 
 	// Остановка потока библиотеки. Вызывается только раз при завершении программы.
@@ -74,9 +82,9 @@ namespace QuestNavigator
 		// Сообщаем потоку библиотеки, что нужно завершить работу
 		this->eventManager->shutdown();
 		// Ждём завершения библиотечного потока
-		waitForSingle(libThread);
+		threadManager->waitForSingle(libThread);
 		// Закрываем хэндл библиотечного потока
-		freeHandle(libThread);
+		threadManager->freeHandle(libThread);
 		libThread = NULL;
 
 		this->eventManager->freeEvents();
@@ -84,7 +92,8 @@ namespace QuestNavigator
 	}
 
 	// Основная функция потока библиотеки. Вызывается только раз за весь жизненный цикл программы.
-	unsigned int Library::libThreadFunc(void* pvParam)
+	//unsigned int Library::libThreadFunc(void* pvParam)
+	DWORD Library::libThreadFunc(LPVOID pvParam)
 	{
 		// Сохраняем указатель на объект Library.
 		Library* library = (Library*)pvParam;
@@ -135,11 +144,17 @@ namespace QuestNavigator
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
-			library->eventManager->libIsReady();
+			//showError("library->eventManager->libIsReady();");
+			bool libIsReadyIsPosted = library->eventManager->setLibIsReady();
+			if (!libIsReadyIsPosted) {
+				showError("Library::libThreadFunc Не удалось сообщить о готовности библиотеки.");
+				break;
+			}
+			//showError("Library thread called libIsReady");
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();
 			if (!library->eventManager->isValidEvent(res)) {
-				showError("Не удалось дождаться множественного события синхронизации библиотеки.");
+				showError("Library::libThreadFunc Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;
 			} else {
 				eSyncEvent ev = (eSyncEvent)res;
@@ -251,7 +266,7 @@ namespace QuestNavigator
 	
 						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
 						if (!fileExists(path)) {
-							showError("Не найден файл сохранения");
+							showError("Library::libThreadFunc Не найден файл сохранения");
 							break;
 						}
 	
@@ -274,7 +289,7 @@ namespace QuestNavigator
 	
 						string saveDir = Configuration::getString(ecpSaveDir);
 						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-							showError("Не удалось создать папку для сохранения: " + saveDir);
+							showError("Library::libThreadFunc Не удалось создать папку для сохранения: " + saveDir);
 							break;
 						}
 	
@@ -302,7 +317,8 @@ namespace QuestNavigator
 					break;
 				default:
 					{
-						showError("Необработанное событие синхронизации!");
+						showError("Library::libThreadFunc Необработанное событие синхронизации! Код события: " + std::to_string((int)ev));
+						bShutdown = true;
 					}
 					break;
 				}
@@ -316,7 +332,8 @@ namespace QuestNavigator
 		// Завершаем работу библиотеки
 		QSPDeInit();
 		// Завершаем работу потока
-		_endthreadex(0);
+		// STUB Так как мы не используем _beginthreadex, то здесь что-то надо придумать.
+		//_endthreadex(0);
 		return 0;
 	}
 

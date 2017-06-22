@@ -9,6 +9,8 @@
 #include "..\..\platform\windows10\UwpJsExecutor.h"
 #include "..\..\platform\windows10\ErrorDebugReporter.h"
 #include "..\..\platform\windows10\StringConverter.h"
+#include "..\..\platform\windows10\ThreadManager.h"
+#include "..\..\platform\windows10\ThreadApi.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -47,6 +49,10 @@ namespace QspLibWinRT
 		ConfigurationBuilder* configurationBuilder = new ConfigurationBuilder();
 		// Создаём конвертер для платформенных строк.
 		StringConverter* stringConverter = new StringConverter();
+		// Создаём объект для управления потоками.
+		ThreadManager* threadManager = new ThreadManager();
+		// Создаём объект для обёртки платформенной реализации поточных функций.
+		ThreadApi* threadApi = new ThreadApi();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -63,17 +69,30 @@ namespace QspLibWinRT
 		library->inject(
 			eventManager,
 			timer,
-			jsExecutor
+			jsExecutor,
+			threadManager
 		);
-		eventManager->inject(timer, uwpJsExecutor, stringConverter);
+		eventManager->inject(
+			timer, 
+			uwpJsExecutor, 
+			stringConverter,
+			threadManager
+		);
 		libraryListener->inject(
 			jsExecutor,
 			timer,
 			eventManager,
 			library
 		);
-		jsExecutor->inject(uwpJsExecutor, stringConverter);
-		errorDebugReporter->inject(uwpJsExecutor, stringConverter);
+		jsExecutor->inject(
+			uwpJsExecutor, 
+			stringConverter
+		);
+		errorDebugReporter->inject(
+			uwpJsExecutor, 
+			stringConverter
+		);
+		threadManager->inject(threadApi);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите
@@ -81,7 +100,9 @@ namespace QspLibWinRT
 		this->uwpJsExecutor = uwpJsExecutor;
 
 		// Запускаем приложение.
+		this->uwpJsExecutor->jsCallDebug("app->init(); start");
 		app->init();
+		this->uwpJsExecutor->jsCallDebug("app->init(); finish");
 	}
 
 	UwpJsExecutor^ QspLib::getUwpJsExecutor()
