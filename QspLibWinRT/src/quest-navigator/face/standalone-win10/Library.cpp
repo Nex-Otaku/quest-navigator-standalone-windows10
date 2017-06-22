@@ -183,6 +183,7 @@ namespace QuestNavigator
 						Skin::setInt(espIsStandalone, isStandalone);
 						showError("Library::libThreadFunc ============ evRunGame 6 ============");
 
+						showError("Library::libThreadFunc ============ evRunGame load from " + path);
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
 						showError("Library::libThreadFunc ============ evRunGame 7 ============");
 						library->CheckQspResult(res, "QSPLoadGameWorld");
