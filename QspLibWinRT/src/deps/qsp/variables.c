@@ -617,7 +617,7 @@ int qspArrayPos(QSP_CHAR *varName, QSPVariant *val, int ind, QSP_BOOL isRegExp)
 {
 	int num, count;
 	QSPVar *var;
-	QSP_CHAR *str;
+	QSP_CHAR *str = 0;
 	regex_t *regExp = 0;
 	QSP_BOOL isString;
 	if (!(var = qspVarReferenceWithType(varName, QSP_FALSE, &isString))) return -1;
