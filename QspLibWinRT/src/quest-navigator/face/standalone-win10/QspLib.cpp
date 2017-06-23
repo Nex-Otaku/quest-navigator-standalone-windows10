@@ -97,6 +97,7 @@ namespace QspLibWinRT
 		);
 		threadManager->inject(threadApi);
 		configurationBuilder->inject(gameFileManager);
+		gameFileManager->inject(stringConverter);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

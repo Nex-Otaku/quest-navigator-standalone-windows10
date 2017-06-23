@@ -13,6 +13,7 @@ namespace QuestNavigator
 		~StringConverter();
 
 		// Конвертация строк
-		Platform::String^ convertFromString(string input);
+		Platform::String^ convertStdToUwp(string input);
+		string convertUwpToStd(Platform::String^ input);
 	};
 }

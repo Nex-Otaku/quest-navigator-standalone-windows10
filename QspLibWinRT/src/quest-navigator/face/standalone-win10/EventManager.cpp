@@ -396,6 +396,6 @@ namespace QuestNavigator
 
 	void EventManager::callDebug(string message)
 	{
-		this->uwpJsExecutor->jsCallDebug(stringConverter->convertFromString(message));
+		this->uwpJsExecutor->jsCallDebug(stringConverter->convertStdToUwp(message));
 	}
 }

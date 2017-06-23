@@ -13,7 +13,7 @@ namespace QuestNavigator
 	{
 	}
 
-	Platform::String^ StringConverter::convertFromString(string input)
+	Platform::String^ StringConverter::convertStdToUwp(string input)
 	{
 		// https://stackoverflow.com/questions/28759212/convert-platformstring-to-stdstring
 		// accepted answer, also revert conversion
@@ -27,5 +27,11 @@ namespace QuestNavigator
 		std::wstring w_str = std::wstring(wide.get());
 		const wchar_t* w_chars = w_str.c_str();
 		return (ref new Platform::String(w_chars));
+	}
+
+	string StringConverter::convertUwpToStd(Platform::String ^ input)
+	{
+		// STUB
+		return string();
 	}
 }

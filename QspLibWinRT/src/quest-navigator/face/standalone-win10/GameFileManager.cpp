@@ -14,9 +14,23 @@ namespace QuestNavigator
 	{
 	}
 
+	void GameFileManager::inject(StringConverter* stringConverter)
+	{
+		this->stringConverter = stringConverter;
+	}
+
 	string GameFileManager::getDefaultGameFilePath()
 	{
 		// STUB
-		return "game\\standalone_content\\game.qsp";
+		return getApplicationFolderPath() + "game\\standalone_content\\game.qsp";
+	}
+	
+	string GameFileManager::getApplicationFolderPath()
+	{
+		Windows::ApplicationModel::Package^ package = Windows::ApplicationModel::Package::Current;
+		Windows::Storage::StorageFolder^ installedLocation = package->InstalledLocation;
+
+		Platform::String^ path = installedLocation->Path;
+		return stringConverter->convertUwpToStd(path);
 	}
 }

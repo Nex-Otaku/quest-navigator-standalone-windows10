@@ -25,7 +25,7 @@ namespace QuestNavigator
 
 	void ErrorDebugReporter::showError(string message)
 	{
-		Platform::String^ pMessage = stringConverter->convertFromString("ERROR " + message);
+		Platform::String^ pMessage = stringConverter->convertStdToUwp("ERROR " + message);
 		this->uwpJsExecutor->jsCallDebug(pMessage);
 	}
 }

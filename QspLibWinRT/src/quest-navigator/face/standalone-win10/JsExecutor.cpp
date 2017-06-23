@@ -94,8 +94,8 @@ namespace QuestNavigator
 	{
 		// Контекст UI
 
-		Platform::String^ pName = stringConverter->convertFromString(name);
-		Platform::String^ pMessage = stringConverter->convertFromString("test");
+		Platform::String^ pName = stringConverter->convertStdToUwp(name);
+		Platform::String^ pMessage = stringConverter->convertStdToUwp("test");
 
 		return uwpJsExecutor->jsCallApiFromUi(pName, pMessage /* slotsDto */);
 
@@ -127,7 +127,7 @@ namespace QuestNavigator
 	bool JsExecutor::jsCallDebug(string message)
 	{
 		// Контекст UI
-		Platform::String^ pMessage = stringConverter->convertFromString(message);
+		Platform::String^ pMessage = stringConverter->convertStdToUwp(message);
 
 		return uwpJsExecutor->jsCallDebug(pMessage);
 	}
