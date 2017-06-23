@@ -6,8 +6,10 @@
 #include "..\..\core\dto\MenuItemDto.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "..\..\platform\windows10\StringConverter.h"
+#include "..\..\core\dto\SkinDto.h"
 
 using namespace std;
+using namespace Windows::Data::Json;
 
 namespace QuestNavigator {
 	class JsonSerializer
@@ -25,5 +27,7 @@ namespace QuestNavigator {
 
 	private:
 		StringConverter* stringConverter;
+
+		JsonObject^ getSkinObject(SkinDto dto);
 	};
 }
