@@ -371,6 +371,7 @@ namespace QuestNavigator
 			int errorNum = -1;
 			QSP_CHAR* pErrorLoc = NULL;
 			QSPGetLastErrorData(&errorNum, &pErrorLoc, &actIndex, &line);
+			showError("QSP core library error: " + std::to_string((int)errorNum));
 			loc = Skin::applyHtmlFixes(fromQsp(pErrorLoc));
 			desc = Skin::applyHtmlFixes(fromQsp(QSPGetErrorDesc(errorNum)));
 	

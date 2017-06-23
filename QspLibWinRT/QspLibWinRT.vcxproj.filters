@@ -258,9 +258,6 @@
     <ClCompile Include="src\quest-navigator\core\files.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\encoding.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\app\universal\update.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
@@ -332,6 +329,12 @@
     </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadApi.cpp">
       <Filter>quest-navigator\platform\windows10</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\encoding.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\awesomium_encoding.cpp">
+      <Filter>quest-navigator\platform\awesomium</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,9 +478,6 @@
     <ClInclude Include="src\quest-navigator\core\files.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\encoding.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\app\universal\update.h">
       <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
@@ -573,6 +573,12 @@
     </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadApi.h">
       <Filter>quest-navigator\platform\windows10</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\encoding.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\awesomium_encoding.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
