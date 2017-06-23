@@ -2,7 +2,6 @@
 #include "Library.h"
 #include "..\..\core\dialogs.h"
 #include <process.h>
-#include "..\..\core\thread_sync.h"
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "..\..\core\skin.h"
 #include "..\..\core\sound.h"
@@ -11,7 +10,6 @@
 #include "LibraryListener.h"
 #include "Timer.h"
 #include "..\..\core\files.h"
-#include "..\..\core\utils.h"
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
 #include "..\..\platform\windows10\ThreadEmulation.h"

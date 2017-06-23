@@ -2,7 +2,6 @@
 #include "EventManager.h"
 #include <string>
 #include "..\..\core\dialogs.h"
-#include "..\..\core\thread_sync.h"
 #include "..\..\core\events.h"
 #include "..\..\platform\windows10\ThreadManager.h"
 

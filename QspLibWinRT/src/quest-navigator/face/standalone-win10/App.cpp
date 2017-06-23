@@ -2,7 +2,6 @@
 #include "App.h"
 #include "..\..\core\configuration.h"
 #include "..\..\core\files.h"
-#include "..\..\core\utils.h"
 #include <vector>
 #include <string>
 #include "..\..\core\dialogs.h"

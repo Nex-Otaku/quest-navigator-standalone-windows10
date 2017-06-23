@@ -2,7 +2,7 @@
 //#include <Awesomium/STLHelpers.h>
 #include <vector>
 #include <Windows.h>
-#include "../../core/utils.h"
+#include "../../face/universal-awesomium-windows/utils.h"
 #include "../../core/configuration.h"
 //#include "../quest-navigator/resource.h"
 #include "listener.h"
