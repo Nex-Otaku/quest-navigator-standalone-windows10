@@ -149,7 +149,7 @@ namespace QuestNavigator
 
 	void EventManager::runGame(string fileName, int gameIsStandalone, bool gameIsRunning)
 	{
-		callDebug("EventManager::runGame 1");
+		//callDebug("EventManager::runGame 1");
 		// Контекст UI
 
 		// Проверяем состояние библиотеки.
@@ -164,7 +164,7 @@ namespace QuestNavigator
 			waitForSingleEvent(evLibIsReady);
 		}
 
-		callDebug("EventManager::runGame 2");
+		//callDebug("EventManager::runGame 2");
 		// Готовим данные для передачи в поток
 		lockData();
 		g_sharedData[evRunGame].str = fileName;
@@ -172,7 +172,7 @@ namespace QuestNavigator
 		g_sharedData[evRunGame].num = gameIsStandalone;
 		runSyncEvent(evRunGame);
 		unlockData();
-		callDebug("EventManager::runGame 3");
+		//callDebug("EventManager::runGame 3");
 	}
 
 	void EventManager::stopGame()
@@ -386,9 +386,9 @@ namespace QuestNavigator
 
 	bool EventManager::checkForSingleEvent(eSyncEvent ev)
 	{
-		callDebug("EventManager::checkForSingleEvent 1");
+		//callDebug("EventManager::checkForSingleEvent 1");
 		HANDLE handle = getEventHandle(ev);
-		callDebug("EventManager::checkForSingleEvent 2");
+		//callDebug("EventManager::checkForSingleEvent 2");
 
 		// Проверка события синхронизации.
 		return threadManager->checkForSingle(handle);

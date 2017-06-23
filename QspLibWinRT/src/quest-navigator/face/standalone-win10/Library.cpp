@@ -157,48 +157,48 @@ namespace QuestNavigator
 				{
 				case evRunGame:
 					{
-						showError("Library::libThreadFunc ============ evRunGame start ============");
+						//showError("Library::libThreadFunc ============ evRunGame start ============");
 						// Запуск игры
 						SharedDataDto dto = library->eventManager->getSharedData(ev);
-						showError("Library::libThreadFunc ============ evRunGame 1 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 1 ============");
 						string path = dto.str;
-						showError("Library::libThreadFunc ============ evRunGame 2 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 2 ============");
 						int isStandalone = dto.num;
 
-						showError("Library::libThreadFunc ============ evRunGame 3 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 3 ============");
 						// Очищаем скин.
 						// Если будем выводить ошибку в CheckQspResult,
 						// нам понадобится уже готовый скин.
 						// Поэтому готовим его заранее.
 						Skin::resetUpdate();
-						showError("Library::libThreadFunc ============ evRunGame 4 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 4 ============");
 						Skin::resetSettings();
-						showError("Library::libThreadFunc ============ evRunGame 5 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 5 ============");
 						// Передаём настройку из конфига в скин.
 						Skin::setInt(espIsStandalone, isStandalone);
-						showError("Library::libThreadFunc ============ evRunGame 6 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 6 ============");
 
-						showError("Library::libThreadFunc ============ evRunGame load from " + path);
+						//showError("Library::libThreadFunc ============ evRunGame load from " + path);
 						QSP_BOOL res = QSPLoadGameWorld(widen(path).c_str());
-						showError("Library::libThreadFunc ============ evRunGame 7 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 7 ============");
 						library->CheckQspResult(res, "QSPLoadGameWorld");
-						showError("Library::libThreadFunc ============ evRunGame 8 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 8 ============");
 						// Очищаем буфер JS-команд, передаваемых из игры
 						LibraryListener::resetJsExecBuffer();
-						showError("Library::libThreadFunc ============ evRunGame 9 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 9 ============");
 
 						// Устанавливаем период выполнения и запускаем таймер
 						LibraryListener::SetTimer(500);
-						showError("Library::libThreadFunc ============ evRunGame 10 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 10 ============");
 
 						//Запускаем счетчик миллисекунд
 						LibraryListener::resetMsCount();
-						showError("Library::libThreadFunc ============ evRunGame 11 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 11 ============");
 
 						res = QSPRestartGame(QSP_TRUE);
-						showError("Library::libThreadFunc ============ evRunGame 12 ============");
+						//showError("Library::libThreadFunc ============ evRunGame 12 ============");
 						library->CheckQspResult(res, "QSPRestartGame");
-						showError("Library::libThreadFunc ============ evRunGame finish ============");
+						//showError("Library::libThreadFunc ============ evRunGame finish ============");
 				}
 					break;
 				case evStopGame:

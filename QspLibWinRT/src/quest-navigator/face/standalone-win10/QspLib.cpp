@@ -130,9 +130,9 @@ namespace QspLibWinRT
 
 	void QspLib::restartGame()
 	{
-		this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
+		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
 		this->jsListener->restartGame();
-		this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
+		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
 	}
 
 	void QspLib::executeAction(int32 pos)
