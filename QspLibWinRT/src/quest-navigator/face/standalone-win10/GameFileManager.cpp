@@ -22,7 +22,7 @@ namespace QuestNavigator
 	string GameFileManager::getDefaultGameFilePath()
 	{
 		// STUB
-		return getApplicationFolderPath() + "game\\standalone_content\\game.qsp";
+		return getApplicationFolderPath() + "\\game\\standalone_content\\game.qsp";
 	}
 	
 	string GameFileManager::getApplicationFolderPath()
