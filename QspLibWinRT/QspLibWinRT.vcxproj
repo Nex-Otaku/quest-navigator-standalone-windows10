@@ -274,6 +274,7 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\Timer.h" />
     <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\game_files.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\application.h" />
+    <ClInclude Include="src\quest-navigator\platform\awesomium\awesomium_encoding.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\interceptor.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\js_delegate.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\listener.h" />
@@ -475,6 +476,7 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\Timer.cpp" />
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\game_files.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc" />
+    <ClCompile Include="src\quest-navigator\platform\awesomium\awesomium_encoding.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\interceptor.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc" />
