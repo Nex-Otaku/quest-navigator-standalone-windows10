@@ -14,7 +14,7 @@ namespace QuestNavigator {
 		evSelectObject,			// Выбрать предмет.
 		evMute,					// Включить / выключить звук.
 
-		evJsExecuted,			// JS-запрос выполнен.
+		//evJsExecuted,			// JS-запрос выполнен.
 		evMsgClosed,			// Диалог MSG был закрыт.
 		evMenuClosed,			// Выбран пункт пользовательского меню.
 		evInputClosed,			// Диалог INPUT вернул результат.
@@ -30,7 +30,7 @@ namespace QuestNavigator {
 
 		// Библиотека -> Ui
 
-		evJsCommitted,			// Выполнить JS-запрос.
+		//evJsCommitted,			// Выполнить JS-запрос.
 
 		evGameStopped,			// Игра остановлена.
 

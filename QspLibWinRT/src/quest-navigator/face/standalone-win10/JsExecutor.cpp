@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "JsExecutor.h"
+#include "..\..\platform\windows10\StringConverter.h"
+#include "JsonSerializer.h"
 
 namespace QuestNavigator
 {
@@ -11,10 +13,15 @@ namespace QuestNavigator
 	{
 	}
 
-	void JsExecutor::inject(UwpJsExecutor^ uwpJsExecutor, StringConverter* stringConverter)
+	void JsExecutor::inject(
+		UwpJsExecutor^ uwpJsExecutor, 
+		StringConverter* stringConverter,
+		JsonSerializer* jsonSerializer
+	)
 	{
 		this->uwpJsExecutor = uwpJsExecutor;
 		this->stringConverter = stringConverter;
+		this->jsonSerializer = jsonSerializer;
 	}
 
 	// ********************************************************************
@@ -38,6 +45,24 @@ namespace QuestNavigator
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspSetGroupedContent", content);
 		jsCallDebug("qspSetGroupedContent");
+
+		//JsonObject^ jsonObject = ref new JsonObject();
+
+		//jsonObject->Insert()
+
+
+		string jsonGroupedContentDto = jsonSerializer->serializeGroupedContent(content);
+
+		//MemoryStream stream = new MemoryStream();
+		//DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(Student));
+		//jsonSer.WriteObject(stream, objStudent);
+		//stream.Position = 0;
+		//StreamReader sr = new StreamReader(stream);
+		//lblSerilaize.Text = sr.ReadToEnd();
+
+		//string jsonContent = (new Windows::Data::Json::JsonObject())->
+		//jsCallApi("qspSetGroupedContent", content);
+		jsCallApi("qspSetGroupedContent", jsonGroupedContentDto);
 	}
 
 	void JsExecutor::qspMsg(string text)
@@ -90,38 +115,14 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 
-	bool JsExecutor::jsCallApiFromUi(string name, SaveSlotsDto slotsDto)
+	bool JsExecutor::jsCallApi(string name, string arg)
 	{
 		// Контекст UI
 
 		Platform::String^ pName = stringConverter->convertStdToUwp(name);
-		Platform::String^ pMessage = stringConverter->convertStdToUwp("test");
+		Platform::String^ pArg = stringConverter->convertStdToUwp(arg);
 
-		return uwpJsExecutor->jsCallApiFromUi(pName, pMessage /* slotsDto */);
-
-
-
-
-		//JSValue window = view_->web_view()->ExecuteJavascriptWithResult(
-		//	WSLit("window"), WSLit(""));
-		//if (window.IsObject()) {
-		//	JSArray args;
-		//	args.Push(arg);
-		//	JSObject windowObject = window.ToObject();
-		//	windowObject.Invoke(ToWebString(name), args);
-		//	Error err = windowObject.last_error();
-		//	if (err != Error::kError_None) {
-		//		showError("Ошибка при выполнении JS-вызова.");
-		//		return false;
-		//	}
-		//} else {
-		//	showError("Не удалось получить доступ к объекту окна.");
-		//	return false;
-		//}
-		//return true;
-
-		// STUB
-		return true;
+		return uwpJsExecutor->jsCallApi(pName, pArg);
 	}
 
 	bool JsExecutor::jsCallDebug(string message)

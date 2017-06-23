@@ -12,6 +12,7 @@
 #include "..\..\platform\windows10\ThreadManager.h"
 #include "..\..\platform\windows10\ThreadApi.h"
 #include "GameFileManager.h"
+#include "JsonSerializer.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -56,6 +57,8 @@ namespace QspLibWinRT
 		ThreadApi* threadApi = new ThreadApi();
 		// Создаём объект для управления файлом игры.
 		GameFileManager* gameFileManager = new GameFileManager();
+		// Создаём объект для сериализации DTO в строки JSON.
+		JsonSerializer* jsonSerializer = new JsonSerializer();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -89,7 +92,8 @@ namespace QspLibWinRT
 		);
 		jsExecutor->inject(
 			uwpJsExecutor, 
-			stringConverter
+			stringConverter,
+			jsonSerializer
 		);
 		errorDebugReporter->inject(
 			uwpJsExecutor, 
@@ -98,6 +102,7 @@ namespace QspLibWinRT
 		threadManager->inject(threadApi);
 		configurationBuilder->inject(gameFileManager);
 		gameFileManager->inject(stringConverter);
+		jsonSerializer->inject(stringConverter);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

@@ -8,6 +8,7 @@
 #include "..\..\core\dto\ErrorDto.h"
 #include "..\..\platform\windows10\UwpJsExecutor.h"
 #include "..\..\platform\windows10\StringConverter.h"
+#include "JsonSerializer.h"
 
 using namespace std;
 using namespace QspLibWinRT;
@@ -22,7 +23,8 @@ namespace QuestNavigator
 
 		void inject(
 			UwpJsExecutor^ uwpJsExecutor,
-			StringConverter* stringConverter
+			StringConverter* stringConverter,
+			JsonSerializer* jsonSerializer
 		);
 
 		// ********************************************************************
@@ -52,9 +54,10 @@ namespace QuestNavigator
 	private:
 		UwpJsExecutor^ uwpJsExecutor;
 		StringConverter* stringConverter;
+		JsonSerializer* jsonSerializer;
 
 		// В потоке Ui
-		bool jsCallApiFromUi(string name, SaveSlotsDto slotsDto);
+		bool jsCallApi(string name, string arg);
 		bool jsCallDebug(string message);
 	};
 }
