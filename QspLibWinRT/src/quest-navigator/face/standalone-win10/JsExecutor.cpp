@@ -67,9 +67,11 @@ namespace QuestNavigator
 
 	void JsExecutor::qspMenu(vector<MenuItemDto> menu)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspMenu", menu);
-		jsCallDebug("qspMenu stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspMenu stub");
+		string jsonMenuDto = jsonSerializer->serializeMenu(menu);
+		Platform::String^ pMenu = stringConverter->convertStdToUwp(jsonMenuDto);
+		uwpJsExecutor->jsCallMenu(pMenu);
 	}
 
 	void JsExecutor::qspInput(string text)

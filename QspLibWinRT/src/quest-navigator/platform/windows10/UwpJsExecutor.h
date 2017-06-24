@@ -12,6 +12,7 @@ namespace QspLibWinRT
 	public delegate void CallShowSaveSlotsDialogHandler(Platform::String^ saveSlots);
 	public delegate void CallMsgHandler(Platform::String^ text);
 	public delegate void CallErrorHandler(Platform::String^ error);
+	public delegate void CallMenuHandler(Platform::String^ menu);
 
 	public delegate void ShowDebugMessageHandler(Platform::String^ testMessage);
 
@@ -25,6 +26,7 @@ namespace QspLibWinRT
 		void jsCallShowSaveSlotsDialog(Platform::String^ saveSlots);
 		void jsCallMsg(Platform::String^ text);
 		void jsCallError(Platform::String^ error);
+		void jsCallMenu(Platform::String^ menu);
 
 		// Для тестирования колбеков.
 		void jsCallDebug(Platform::String^ message);
@@ -35,6 +37,7 @@ namespace QspLibWinRT
 		event CallShowSaveSlotsDialogHandler^ callShowSaveSlotsDialogEvent;
 		event CallMsgHandler^ callMsgEvent;
 		event CallErrorHandler^ callErrorEvent;
+		event CallMenuHandler^ callMenuEvent;
 
 		event ShowDebugMessageHandler^ showDebugMessageEvent;
 

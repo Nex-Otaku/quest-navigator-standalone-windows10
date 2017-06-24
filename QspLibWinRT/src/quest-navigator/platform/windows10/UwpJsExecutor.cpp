@@ -44,6 +44,15 @@ namespace QspLibWinRT {
 		}, Platform::CallbackContext::Any));
 	}
 
+	void UwpJsExecutor::jsCallMenu(Platform::String^ menu)
+	{
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+			ref new DispatchedHandler([this, menu]()
+		{
+			this->callMenuEvent(menu);
+		}, Platform::CallbackContext::Any));
+	}
+
 	void UwpJsExecutor::jsCallDebug(Platform::String^ message)
 	{
 		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,

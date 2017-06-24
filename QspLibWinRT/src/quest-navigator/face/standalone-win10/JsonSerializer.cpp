@@ -120,6 +120,25 @@ namespace QuestNavigator {
 		return stringConverter->convertUwpToStd(serialized);
 	}
 
+	string JsonSerializer::serializeMenu(vector<MenuItemDto> menu)
+	{
+		JsonArray^ menuList = ref new JsonArray();
+		for (size_t i = 0; i < menu.size(); i++) {
+			JsonObject^ menuItem = ref new JsonObject();
+
+			JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(menu[i].desc));
+			menuItem->Insert("desc", desc);
+
+			JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(menu[i].image));
+			menuItem->Insert("image", image);
+
+			menuList->Append(menuItem);
+		}
+
+		Platform::String^ serialized = menuList->ToString();
+		return stringConverter->convertUwpToStd(serialized);
+	}
+
 	JsonObject^ JsonSerializer::getSkinObject(SkinDto dto)
 	{
 		JsonObject^ skin = ref new JsonObject();

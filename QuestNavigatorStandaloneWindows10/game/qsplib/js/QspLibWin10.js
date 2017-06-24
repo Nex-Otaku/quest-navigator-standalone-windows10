@@ -38,6 +38,7 @@ function onDocumentReady() {
     uwpJsExecutor.oncallshowsaveslotsdialogevent = showSaveSlotsDialogCallbackHandler;
     uwpJsExecutor.oncallmsgevent = msgCallbackHandler;
     uwpJsExecutor.oncallerrorevent = errorCallbackHandler;
+    uwpJsExecutor.oncallmenuevent = menuCallbackHandler;
 
     //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
     // primeFoundEvent is a user-defined event in nativeObject
@@ -107,8 +108,13 @@ function msgCallbackHandler(text) {
 }
 
 function errorCallbackHandler(error) {
-    var jsError = error.target.toString();
-    qspMsg(jsError);
+    var jsError = JSON.parse(error.target.toString());
+    qspError(jsError);
+}
+
+function menuCallbackHandler(menu) {
+    var jsMenu = JSON.parse(menu.target.toString());
+    qspMenu(jsMenu);
 }
 
 // *******************************************************************
