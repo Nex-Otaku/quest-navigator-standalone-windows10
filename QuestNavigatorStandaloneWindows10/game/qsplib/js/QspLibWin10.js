@@ -48,6 +48,9 @@ function onDocumentReady() {
 
     //setTimeout(function () {
 
+    // Обрабатываем нажатие ссылок с кодом "EXEC:"
+    $(document).on('click', 'a', interceptExecLink);
+
 
 	// Запускаем API.
     //log('qspInitApi();');
@@ -91,4 +94,19 @@ function callSetGroupedContentCallbackHandler(groupedContent) {
     //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
     //log('received: ' + groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
+}
+
+function interceptExecLink(event) {
+    //log('link clicked');
+    //var link = event.target.href;
+    var link = $(this).attr('href');
+    if (link.toUpperCase().startsWith('EXEC:')) {
+        event.preventDefault();
+        var code = link.substr(5);
+        log('code to execute: ' + code);
+
+        // STUB
+        return false;
+    }
+    //log('click go through');
 }
