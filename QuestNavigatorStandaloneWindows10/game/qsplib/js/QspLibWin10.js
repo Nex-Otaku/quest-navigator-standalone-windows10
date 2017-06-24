@@ -12,10 +12,6 @@ var QspLib = null;
 
 $(function () {
     // При загрузке документа, запускаем приложение.
-    //console.log('onDocumentReady();');
-    //$('#debug').append('onDocumentReady();<br>');
-    //log('');
-    //log('onDocumentReady();');
     onDocumentReady();
 });
 
@@ -28,7 +24,6 @@ function onDocumentReady() {
 	if (QspLib !== null) {
         throw "onDocumentReady must be called only once!";
 	}
-    //log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
 
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
@@ -39,25 +34,17 @@ function onDocumentReady() {
     uwpJsExecutor.oncallmsgevent = msgCallbackHandler;
     uwpJsExecutor.oncallerrorevent = errorCallbackHandler;
     uwpJsExecutor.oncallmenuevent = menuCallbackHandler;
+    uwpJsExecutor.oncallinputevent = inputCallbackHandler;
 
-    //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
-    // primeFoundEvent is a user-defined event in nativeObject
-    // It passes the results back to this thread as they are produced
-    // and the event handler that we define here immediately displays them.
-    //uwpJsExecutor.showDebugMessageEvent += debugCallbackHandler;
-    //onprimefoundevent
     uwpJsExecutor.onshowdebugmessageevent = debugCallbackHandler;
 
     QspLib.callDebugMessage();
-
-    //setTimeout(function () {
 
     // Обрабатываем нажатие ссылок с кодом "EXEC:"
     $(document).on('click', 'a', interceptExecLink);
 
 
 	// Запускаем API.
-    //log('qspInitApi();');
 	qspInitApi();
 	// Самодельный диалог alert, 
 	// так как в Awesomium стандартные диалоги не работают.
@@ -68,9 +55,6 @@ function onDocumentReady() {
 	qspIsDesktop = true;
 	// Сообщаем API, что нам стал известен тип устройства.
     qspSetDevice();
-
-
-    //}, 4000);
 }
 
 function debug(str) {
@@ -80,7 +64,6 @@ function debug(str) {
 function qspLibOnInitApi() {
 	setTimeout( function() { // Delay for Mozilla
 		// Запуск игры по завершению инициализации API.
-        //log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
 }
@@ -115,6 +98,11 @@ function errorCallbackHandler(error) {
 function menuCallbackHandler(menu) {
     var jsMenu = JSON.parse(menu.target.toString());
     qspMenu(jsMenu);
+}
+
+function inputCallbackHandler(text) {
+    var jsText = text.target.toString();
+    qspInput(jsText);
 }
 
 // *******************************************************************

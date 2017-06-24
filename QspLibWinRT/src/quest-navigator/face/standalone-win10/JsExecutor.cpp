@@ -76,9 +76,10 @@ namespace QuestNavigator
 
 	void JsExecutor::qspInput(string text)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspInput", text);
-		jsCallDebug("qspInput stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspInput stub");
+		Platform::String^ pText = stringConverter->convertStdToUwp(text);
+		uwpJsExecutor->jsCallInput(pText);
 	}
 
 	void JsExecutor::qspView(string path)

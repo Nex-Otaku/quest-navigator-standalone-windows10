@@ -13,6 +13,7 @@ namespace QspLibWinRT
 	public delegate void CallMsgHandler(Platform::String^ text);
 	public delegate void CallErrorHandler(Platform::String^ error);
 	public delegate void CallMenuHandler(Platform::String^ menu);
+	public delegate void CallInputHandler(Platform::String^ text);
 
 	public delegate void ShowDebugMessageHandler(Platform::String^ testMessage);
 
@@ -27,6 +28,7 @@ namespace QspLibWinRT
 		void jsCallMsg(Platform::String^ text);
 		void jsCallError(Platform::String^ error);
 		void jsCallMenu(Platform::String^ menu);
+		void jsCallInput(Platform::String^ text);
 
 		// Для тестирования колбеков.
 		void jsCallDebug(Platform::String^ message);
@@ -38,6 +40,7 @@ namespace QspLibWinRT
 		event CallMsgHandler^ callMsgEvent;
 		event CallErrorHandler^ callErrorEvent;
 		event CallMenuHandler^ callMenuEvent;
+		event CallInputHandler^ callInputEvent;
 
 		event ShowDebugMessageHandler^ showDebugMessageEvent;
 
