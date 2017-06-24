@@ -53,6 +53,11 @@ namespace QuestNavigator
 
 		string jsonGroupedContentDto = jsonSerializer->serializeGroupedContent(content);
 
+		Platform::String^ pGroupedContent = stringConverter->convertStdToUwp(jsonGroupedContentDto);
+
+		uwpJsExecutor->jsCallSetGroupedContent(pGroupedContent);
+
+
 		//MemoryStream stream = new MemoryStream();
 		//DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(Student));
 		//jsonSer.WriteObject(stream, objStudent);
@@ -62,7 +67,7 @@ namespace QuestNavigator
 
 		//string jsonContent = (new Windows::Data::Json::JsonObject())->
 		//jsCallApi("qspSetGroupedContent", content);
-		jsCallApi("qspSetGroupedContent", jsonGroupedContentDto);
+		//jsCallApi("qspSetGroupedContent", jsonGroupedContentDto);
 	}
 
 	void JsExecutor::qspMsg(string text)
@@ -115,15 +120,13 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 
-	bool JsExecutor::jsCallApi(string name, string arg)
-	{
-		// Контекст UI
+	//bool JsExecutor::jsCallApi(string name, string arg)
+	//{
+	//	Platform::String^ pName = stringConverter->convertStdToUwp(name);
+	//	Platform::String^ pArg = stringConverter->convertStdToUwp(arg);
 
-		Platform::String^ pName = stringConverter->convertStdToUwp(name);
-		Platform::String^ pArg = stringConverter->convertStdToUwp(arg);
-
-		return uwpJsExecutor->jsCallApi(pName, pArg);
-	}
+	//	return uwpJsExecutor->jsCallApi(pName, pArg);
+	//}
 
 	bool JsExecutor::jsCallDebug(string message)
 	{

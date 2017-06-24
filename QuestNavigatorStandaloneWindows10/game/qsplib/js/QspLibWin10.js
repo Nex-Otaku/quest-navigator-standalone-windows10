@@ -33,6 +33,9 @@ function onDocumentReady() {
 
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
     var uwpJsExecutor = QspLib.getUwpJsExecutor();
+
+    uwpJsExecutor.oncallsetgroupedcontentevent = callSetGroupedContentCallbackHandler;
+
     //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
     // primeFoundEvent is a user-defined event in nativeObject
     // It passes the results back to this thread as they are produced
@@ -78,4 +81,14 @@ function qspLibOnInitApi() {
 function debugCallbackHandler(params) {
     var message = params.target.toString();
     log('debug: ' + message);
+}
+
+function callSetGroupedContentCallbackHandler(groupedContent) {
+    var jsGroupedContent = JSON.parse(groupedContent.target.toString());
+
+    //var jsName = name.target.toString();
+    //var jsArg = arg.target.toString();
+    //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
+    log('received: ' + groupedContent.target.toString());
+    qspSetGroupedContent(jsGroupedContent);
 }

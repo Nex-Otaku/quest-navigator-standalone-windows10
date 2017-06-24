@@ -8,12 +8,13 @@ namespace QspLibWinRT {
 	{
 	}
 
-	bool UwpJsExecutor::jsCallApi(Platform::String^ name, Platform::String^ message)
+	bool UwpJsExecutor::jsCallSetGroupedContent(Platform::String^ groupedContent)
 	{
+
 		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
-			ref new DispatchedHandler([this, name, message]()
+			ref new DispatchedHandler([this, groupedContent]()
 		{
-			this->callApiEvent(name, message);
+			this->callSetGroupedContentEvent(groupedContent);
 		}, Platform::CallbackContext::Any));
 
 		return true;
