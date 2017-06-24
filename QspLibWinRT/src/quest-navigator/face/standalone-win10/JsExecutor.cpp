@@ -37,14 +37,14 @@ namespace QuestNavigator
 		// Контекст UI
 		//jsCallApiFromUi("qspShowSaveSlotsDialog", slotsDto);
 
-		jsCallDebug("qspShowSaveSlotsDialog");
+		jsCallDebug("qspShowSaveSlotsDialog stub");
 	}
 
 	void JsExecutor::qspSetGroupedContent(GroupedContentDto content)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspSetGroupedContent", content);
-		jsCallDebug("qspSetGroupedContent");
+		//jsCallDebug("qspSetGroupedContent");
 
 		//JsonObject^ jsonObject = ref new JsonObject();
 
@@ -74,42 +74,42 @@ namespace QuestNavigator
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspMsg", text);
-		jsCallDebug("qspMsg");
+		jsCallDebug("qspMsg stub");
 	}
 
 	void JsExecutor::qspError(ErrorDto error)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspError", error);
-		jsCallDebug("qspError");
+		jsCallDebug("qspError stub");
 	}
 
 	void JsExecutor::qspMenu(vector<MenuItemDto> menu)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspMenu", menu);
-		jsCallDebug("qspMenu");
+		jsCallDebug("qspMenu stub");
 	}
 
 	void JsExecutor::qspInput(string text)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspInput", text);
-		jsCallDebug("qspInput");
+		jsCallDebug("qspInput stub");
 	}
 
 	void JsExecutor::qspView(string path)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspView", path);
-		jsCallDebug("qspView");
+		jsCallDebug("qspView stub");
 	}
 
 	void JsExecutor::qspSetInputString(string text)
 	{
 		//		// Контекст библиотеки
 		//		jsCallApiFromLib("qspSetInputString", text);
-		jsCallDebug("qspSetInputString");
+		jsCallDebug("qspSetInputString stub");
 	}
 
 	// ********************************************************************

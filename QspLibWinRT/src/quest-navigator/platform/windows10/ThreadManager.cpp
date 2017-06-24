@@ -25,7 +25,7 @@ namespace QuestNavigator {
 			showError("ThreadManager::waitForSingle: Не удалось дождаться события синхронизации");
 			return false;
 		}
-		showError("ThreadManager::waitForSingle: success, handle " + std::to_string((int)handle));
+		//showError("ThreadManager::waitForSingle: success, handle " + std::to_string((int)handle));
 		return true;
 	}
 
@@ -48,21 +48,21 @@ namespace QuestNavigator {
 		// Если недоступен, сразу возвращаем "false".
 		// Для ожидания объекта следует использовать "waitForSingle".
 		DWORD res = threadApi->waitForSingleObject(handle, 0);
-		showError("ThreadManager::checkForSingle 1");
+		//showError("ThreadManager::checkForSingle 1");
 		if ((res == WAIT_ABANDONED) || (res == WAIT_FAILED)) {
 			showError("ThreadManager::checkForSingle sync failure");
 			showError("Сбой синхронизации");
 			return false;
 		}
-		showError("ThreadManager::checkForSingle 2");
-		showError("ThreadManager::checkForSingle: res = " + std::to_string((int)res));
+		//showError("ThreadManager::checkForSingle 2");
+		//showError("ThreadManager::checkForSingle: res = " + std::to_string((int)res));
 		if (res == WAIT_TIMEOUT) {
 			showError("ThreadManager::checkForSingle wait timeout");
 			showError("ThreadManager::checkForSingle: failed, handle " + std::to_string((int)handle));
 		}
 
 		if (res == WAIT_OBJECT_0) {
-			showError("ThreadManager::checkForSingle: success, handle " + std::to_string((int)handle));
+			//showError("ThreadManager::checkForSingle: success, handle " + std::to_string((int)handle));
 		}
 
 		return res == WAIT_OBJECT_0;
@@ -70,10 +70,10 @@ namespace QuestNavigator {
 
 	DWORD ThreadManager::waitForMultiple(DWORD nCount, const HANDLE* lpHandles)
 	{
-		showError("ThreadManager::waitForMultiple: start");
+		//showError("ThreadManager::waitForMultiple: start");
 		// Ожидаем любое из событий синхронизации
 		DWORD res = threadApi->waitForMultipleObjects(nCount, lpHandles, FALSE, INFINITE);
-		showError("ThreadManager::waitForMultiple: finish");
+		//showError("ThreadManager::waitForMultiple: finish");
 		return res;
 	}
 
@@ -112,7 +112,7 @@ namespace QuestNavigator {
 		}
 
 		if (res != 0) {
-			showError("ThreadManager::setEvent: success, handle " + std::to_string((int)handle));
+			//showError("ThreadManager::setEvent: success, handle " + std::to_string((int)handle));
 		}
 
 		return res;

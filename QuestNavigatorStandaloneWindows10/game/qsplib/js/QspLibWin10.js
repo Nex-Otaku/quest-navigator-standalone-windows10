@@ -14,8 +14,8 @@ $(function () {
     // При загрузке документа, запускаем приложение.
     //console.log('onDocumentReady();');
     //$('#debug').append('onDocumentReady();<br>');
-    log('');
-    log('onDocumentReady();');
+    //log('');
+    //log('onDocumentReady();');
     onDocumentReady();
 });
 
@@ -28,7 +28,7 @@ function onDocumentReady() {
 	if (QspLib !== null) {
         throw "onDocumentReady must be called only once!";
 	}
-    log('new QspLibWinRT.QspLib();');
+    //log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
 
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
@@ -50,7 +50,7 @@ function onDocumentReady() {
 
 
 	// Запускаем API.
-    log('qspInitApi();');
+    //log('qspInitApi();');
 	qspInitApi();
 	// Самодельный диалог alert, 
 	// так как в Awesomium стандартные диалоги не работают.
@@ -73,7 +73,7 @@ function debug(str) {
 function qspLibOnInitApi() {
 	setTimeout( function() { // Delay for Mozilla
 		// Запуск игры по завершению инициализации API.
-        log('QspLib.restartGame();');
+        //log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
 }
@@ -89,6 +89,6 @@ function callSetGroupedContentCallbackHandler(groupedContent) {
     //var jsName = name.target.toString();
     //var jsArg = arg.target.toString();
     //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
-    log('received: ' + groupedContent.target.toString());
+    //log('received: ' + groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
 }
