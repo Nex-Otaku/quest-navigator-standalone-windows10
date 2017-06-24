@@ -58,9 +58,11 @@ namespace QuestNavigator
 
 	void JsExecutor::qspError(ErrorDto error)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspError", error);
-		jsCallDebug("qspError stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspError stub");
+		string jsonErrorDto = jsonSerializer->serializeError(error);
+		Platform::String^ pError = stringConverter->convertStdToUwp(jsonErrorDto);
+		uwpJsExecutor->jsCallError(pError);
 	}
 
 	void JsExecutor::qspMenu(vector<MenuItemDto> menu)
@@ -99,19 +101,11 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 
-	//bool JsExecutor::jsCallApi(string name, string arg)
-	//{
-	//	Platform::String^ pName = stringConverter->convertStdToUwp(name);
-	//	Platform::String^ pArg = stringConverter->convertStdToUwp(arg);
-
-	//	return uwpJsExecutor->jsCallApi(pName, pArg);
-	//}
-
-	bool JsExecutor::jsCallDebug(string message)
+	void JsExecutor::jsCallDebug(string message)
 	{
 		// Контекст UI
 		Platform::String^ pMessage = stringConverter->convertStdToUwp(message);
 
-		return uwpJsExecutor->jsCallDebug(pMessage);
+		uwpJsExecutor->jsCallDebug(pMessage);
 	}
 }

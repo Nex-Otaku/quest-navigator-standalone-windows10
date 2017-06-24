@@ -102,6 +102,24 @@ namespace QuestNavigator {
 		return stringConverter->convertUwpToStd(serialized);
 	}
 
+	string JsonSerializer::serializeError(ErrorDto dto)
+	{
+		JsonObject^ root = ref new JsonObject();
+
+		JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.desc));
+		root->Insert("desc", desc);
+
+		JsonValue^ loc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.loc));
+		root->Insert("loc", loc);
+
+		root->Insert("actIndex", JsonValue::CreateNumberValue(dto.actIndex));
+
+		root->Insert("line", JsonValue::CreateNumberValue(dto.line));
+
+		Platform::String^ serialized = root->ToString();
+		return stringConverter->convertUwpToStd(serialized);
+	}
+
 	JsonObject^ JsonSerializer::getSkinObject(SkinDto dto)
 	{
 		JsonObject^ skin = ref new JsonObject();

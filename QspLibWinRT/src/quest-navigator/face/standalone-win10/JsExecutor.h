@@ -56,8 +56,6 @@ namespace QuestNavigator
 		StringConverter* stringConverter;
 		JsonSerializer* jsonSerializer;
 
-		// В потоке Ui
-		bool jsCallApi(string name, string arg);
-		bool jsCallDebug(string message);
+		void jsCallDebug(string message);
 	};
 }
