@@ -62,6 +62,15 @@ namespace QspLibWinRT {
 		}, Platform::CallbackContext::Any));
 	}
 
+	void UwpJsExecutor::jsCallView(Platform::String^ path)
+	{
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+			ref new DispatchedHandler([this, path]()
+		{
+			this->callViewEvent(path);
+		}, Platform::CallbackContext::Any));
+	}
+
 	void UwpJsExecutor::jsCallDebug(Platform::String^ message)
 	{
 		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,

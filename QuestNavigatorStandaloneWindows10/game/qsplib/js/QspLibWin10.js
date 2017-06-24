@@ -35,6 +35,7 @@ function onDocumentReady() {
     uwpJsExecutor.oncallerrorevent = errorCallbackHandler;
     uwpJsExecutor.oncallmenuevent = menuCallbackHandler;
     uwpJsExecutor.oncallinputevent = inputCallbackHandler;
+    uwpJsExecutor.oncallviewevent = viewCallbackHandler;
 
     uwpJsExecutor.onshowdebugmessageevent = debugCallbackHandler;
 
@@ -103,6 +104,11 @@ function menuCallbackHandler(menu) {
 function inputCallbackHandler(text) {
     var jsText = text.target.toString();
     qspInput(jsText);
+}
+
+function viewCallbackHandler(path) {
+    var jsPath = path.target.toString();
+    qspView(jsPath);
 }
 
 // *******************************************************************
