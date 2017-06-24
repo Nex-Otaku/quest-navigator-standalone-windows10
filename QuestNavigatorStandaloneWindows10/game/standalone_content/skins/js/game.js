@@ -198,11 +198,15 @@ function skinSetStage(cssClass) {
 function skinToggleButton(selector, pattern, replacement)
 {
 	var t = $(selector);
-	var re = new RegExp(pattern, "g");
-	var btn1 = t.attr('src').replace(re, replacement);
-	var btn2 = t.attr('data-pressed').replace(re, replacement);
-	t.attr('src', btn1);
-	t.attr('data-pressed', btn2);
+    var re = new RegExp(pattern, "g");
+    var src = t.attr('src');
+    var dataPressed = t.attr('data-pressed');
+    if ((typeof (src) != 'undefined') && (typeof (dataPressed) != 'undefined')) {
+        var btn1 = src.replace(re, replacement);
+        var btn2 = dataPressed.replace(re, replacement);
+        t.attr('src', btn1);
+        t.attr('data-pressed', btn2);
+    }
 }
 
 function skinAndroidRefreshBugfix()

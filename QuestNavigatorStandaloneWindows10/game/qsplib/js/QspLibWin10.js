@@ -120,11 +120,14 @@ function setInputStringCallbackHandler(text) {
 // *******************************************************************
 
 function interceptExecLink(event) {
-    var link = $(this).attr('href');
-    if (link.toUpperCase().startsWith('EXEC:')) {
-        event.preventDefault();
-        var code = link.substr(5);
-        QspLib.execLink(code);
-        return false;
+    var anchor = $(this).closest('a');
+    if (anchor.length > 0) {
+        var link = anchor.attr('href');
+        if ((typeof link != 'undefined') && (link.toUpperCase().startsWith('EXEC:'))) {
+            event.preventDefault();
+            var code = link.substr(5);
+            QspLib.execLink(code);
+            return false;
+        }
     }
 }
