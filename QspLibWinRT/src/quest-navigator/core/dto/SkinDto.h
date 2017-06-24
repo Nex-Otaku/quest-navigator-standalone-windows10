@@ -8,11 +8,27 @@ namespace QuestNavigator
 {
 	struct SkinDto
 	{
-		// STUB
+		int hideScrollAny;
+		int hideScrollArrows;
+		int hideScrollMain;
+		int hideScrollActs;
+		int hideScrollVars;
+		int hideScrollObjs;
 
-		//string str;
-		//int num;
-		//JSValue jsValue; Данные для передачи вызова из библиотеки (из кода игры) в яваскрипт.
-		//bool flag;
+		int useHtml;
+		int noSave;
+		int disableScroll;
+		int viewAlwaysShow;
+		int isStandalone;
+
+		int showActs;
+		int showVars;
+		int showObjs;
+		int showInput;
+
+		string msgTextFormat;
+		string inputTextFormat;
+		string mainDescTextFormat;
+		string varsDescTextFormat;
 	};
 }

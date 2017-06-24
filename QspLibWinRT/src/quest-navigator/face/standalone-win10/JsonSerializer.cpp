@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "JsonSerializer.h"
 #include <string>
+#include "..\..\core\skin.h"
 
 using namespace std;
 using namespace Windows::Data::Json;
@@ -71,7 +72,28 @@ namespace QuestNavigator {
 	JsonObject^ JsonSerializer::getSkinObject(SkinDto dto)
 	{
 		JsonObject^ skin = ref new JsonObject();
-		// STUB
+
+		skin->Insert("hideScrollAny", JsonValue::CreateNumberValue(dto.hideScrollAny));
+		skin->Insert("hideScrollArrows", JsonValue::CreateNumberValue(dto.hideScrollArrows));
+		skin->Insert("hideScrollMain", JsonValue::CreateNumberValue(dto.hideScrollMain));
+		skin->Insert("hideScrollActs", JsonValue::CreateNumberValue(dto.hideScrollActs));
+		skin->Insert("hideScrollVars", JsonValue::CreateNumberValue(dto.hideScrollVars));
+		skin->Insert("hideScrollObjs", JsonValue::CreateNumberValue(dto.hideScrollObjs));
+		skin->Insert("useHtml", JsonValue::CreateNumberValue(dto.useHtml));
+		skin->Insert("noSave", JsonValue::CreateNumberValue(dto.noSave));
+		skin->Insert("disableScroll", JsonValue::CreateNumberValue(dto.disableScroll));
+		skin->Insert("viewAlwaysShow", JsonValue::CreateNumberValue(dto.viewAlwaysShow));
+		skin->Insert("isStandalone", JsonValue::CreateNumberValue(dto.isStandalone));
+		skin->Insert("showActs", JsonValue::CreateNumberValue(dto.showActs));
+		skin->Insert("showVars", JsonValue::CreateNumberValue(dto.showVars));
+		skin->Insert("showObjs", JsonValue::CreateNumberValue(dto.showObjs));
+		skin->Insert("showInput", JsonValue::CreateNumberValue(dto.showInput));
+
+		skin->Insert("msgTextFormat", JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.msgTextFormat)));
+		skin->Insert("inputTextFormat", JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.inputTextFormat)));
+		skin->Insert("mainDescTextFormat", JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.mainDescTextFormat)));
+		skin->Insert("varsDescTextFormat", JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.varsDescTextFormat)));
+
 		return skin;
 	}
 }

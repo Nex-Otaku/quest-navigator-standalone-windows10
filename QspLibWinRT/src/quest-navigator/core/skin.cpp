@@ -265,68 +265,28 @@ namespace QuestNavigator {
 	SkinDto Skin::getJsSkin()
 	{
 		SkinDto skin;
-		if (sizeof(jsParamNames) / sizeof(char*) != espLast) {
-			showError("Список имён не совпадает со списком параметров");
-			return skin;
-		}
-		for (int i = 0; i < espLast; i++) {
-			eSkinParam eIterator = (eSkinParam)i;
-			int numValue = 0;
-			string strValue = "";
-			string name = "";
-			bool bResultIsString = getType(eIterator) == ecvString;
-			if (bResultIsString) {
-				strValue = getString(eIterator);
-			} else {
-				numValue = getInt(eIterator);
-			}
-			bool bError = false;
-			name = jsParamNames[i];
-			switch (eIterator)
-			{
-				// Целочисленные параметры
-			case espHideScrollAny:
-			case espHideScrollArrows:
-			case espHideScrollMain:
-			case espHideScrollActs:
-			case espHideScrollVars:
-			case espHideScrollObjs:
-			case espUseHtml:
-			case espNoSave:
-			case espDisableScroll:
-			case espViewAlwaysShow:
-			case espIsStandalone:
-			case espShowActs:
-			case espShowVars:
-			case espShowObjs:
-			case espShowInput:
-				break;
-				// Строки с HTML-содержимым
-			case espMsgTextFormat:
-			case espInputTextFormat:
-			case espMainDescTextFormat:
-			case espVarsDescTextFormat:
-				{
-					strValue = applyHtmlFixes(strValue, true);
-				}
-				break;
-			default:
-				{
-					showError("Неизвестный параметр оформления.");
-					bError = true;
-				}
-				break;
-			}
-			if (bError)
-				break;
-			if (bResultIsString) {
-				// STUB
-				// skin.SetProperty(ToWebString(name), ToWebString(strValue));
-			} else {
-				// STUB
-				// skin.SetProperty(ToWebString(name), JSValue(numValue));
-			}
-		}
+		skin.hideScrollAny = getInt(espHideScrollAny);
+		skin.hideScrollArrows = getInt(espHideScrollArrows);
+		skin.hideScrollMain = getInt(espHideScrollMain);
+		skin.hideScrollActs = getInt(espHideScrollActs);
+		skin.hideScrollVars = getInt(espHideScrollVars);
+		skin.hideScrollObjs = getInt(espHideScrollObjs);
+
+		skin.useHtml = getInt(espUseHtml);
+		skin.noSave = getInt(espNoSave);
+		skin.disableScroll = getInt(espDisableScroll);
+		skin.viewAlwaysShow = getInt(espViewAlwaysShow);
+		skin.isStandalone = getInt(espIsStandalone);
+
+		skin.showActs = getInt(espShowActs);
+		skin.showVars = getInt(espShowVars);
+		skin.showObjs = getInt(espShowObjs);
+		skin.showInput = getInt(espShowInput);
+
+		skin.msgTextFormat = applyHtmlFixes(getString(espMsgTextFormat), true);
+		skin.inputTextFormat = applyHtmlFixes(getString(espInputTextFormat), true);
+		skin.mainDescTextFormat = applyHtmlFixes(getString(espMainDescTextFormat), true);
+		skin.varsDescTextFormat = applyHtmlFixes(getString(espVarsDescTextFormat), true);
 		return skin;
 	}
 
