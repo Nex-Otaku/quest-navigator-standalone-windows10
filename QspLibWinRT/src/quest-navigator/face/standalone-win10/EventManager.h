@@ -45,6 +45,7 @@ namespace QuestNavigator
 		void mute(bool flag);
 		void inputStringChanged(string text);
 		void inputStringEntered();
+		void executeCode(string qspCode);
 
 		// App
 		void runGame(string fileName, int gameIsStandalone, bool gameIsRunning);

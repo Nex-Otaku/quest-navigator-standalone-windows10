@@ -144,6 +144,20 @@ namespace QuestNavigator
 		runSyncEvent(evInputStringEntered);
 	}
 
+	// Выполнение строки кода
+	void EventManager::executeCode(string qspCode)
+	{
+		//Контекст UI
+		if (!checkForSingleEvent(evLibIsReady)) {
+			return;
+		}
+
+		lockData();
+		g_sharedData[evExecuteCode].str = qspCode;
+		runSyncEvent(evExecuteCode);
+		unlockData();
+	}
+
 	// App
 
 	void EventManager::runGame(string fileName, int gameIsStandalone, bool gameIsRunning)

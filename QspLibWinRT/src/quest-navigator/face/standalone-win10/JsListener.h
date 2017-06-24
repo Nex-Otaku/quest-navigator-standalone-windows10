@@ -38,6 +38,8 @@ namespace QuestNavigator
 		void runInputString();
 		void runDefaultGame();
 
+		void execLink(string text);
+
 	private:
 		EventManager* eventManager;
 		App* app;

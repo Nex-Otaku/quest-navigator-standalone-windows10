@@ -27,6 +27,8 @@ namespace QspLibWinRT
 		void runInputString();
 		void runDefaultGame();
 
+		void execLink(Platform::String^ text);
+
 		// Метод для отладки
 		void callDebugMessage();
 
@@ -35,6 +37,7 @@ namespace QspLibWinRT
 	private:
 		JsListener* jsListener;
 		UwpJsExecutor^ uwpJsExecutor;
+		StringConverter* stringConverter;
 	};
 }
 

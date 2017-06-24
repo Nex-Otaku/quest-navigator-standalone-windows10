@@ -97,16 +97,11 @@ function callSetGroupedContentCallbackHandler(groupedContent) {
 }
 
 function interceptExecLink(event) {
-    //log('link clicked');
-    //var link = event.target.href;
     var link = $(this).attr('href');
     if (link.toUpperCase().startsWith('EXEC:')) {
         event.preventDefault();
         var code = link.substr(5);
-        log('code to execute: ' + code);
-
-        // STUB
+        QspLib.execLink(code);
         return false;
     }
-    //log('click go through');
 }

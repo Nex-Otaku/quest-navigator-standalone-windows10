@@ -108,6 +108,8 @@ namespace QspLibWinRT
 		// для последующей привязки колбеков в яваскрпите
 		// через объект UwpJsExecutor.
 		this->uwpJsExecutor = uwpJsExecutor;
+		// Сохраняем указатель на конвертер строк.
+		this->stringConverter = stringConverter;
 
 		// Запускаем приложение.
 		this->uwpJsExecutor->jsCallDebug("app->init(); start");
@@ -117,12 +119,12 @@ namespace QspLibWinRT
 
 	UwpJsExecutor^ QspLib::getUwpJsExecutor()
 	{
-		return this->uwpJsExecutor;
+		return uwpJsExecutor;
 	}
 
 	void QspLib::callDebugMessage()
 	{
-		this->uwpJsExecutor->jsCallDebug("simple debug call");
+		uwpJsExecutor->jsCallDebug("simple debug call");
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.
@@ -136,48 +138,48 @@ namespace QspLibWinRT
 	void QspLib::restartGame()
 	{
 		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
-		this->jsListener->restartGame();
+		jsListener->restartGame();
 		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
 	}
 
 	void QspLib::executeAction(int32 pos)
 	{
-		this->jsListener->executeAction((int)pos);
+		jsListener->executeAction((int)pos);
 	}
 
 	void QspLib::selectObject(int32 pos)
 	{
-		this->jsListener->selectObject((int)pos);
+		jsListener->selectObject((int)pos);
 	}
 
 	void QspLib::loadGame()
 	{
-		this->jsListener->loadGame();
+		jsListener->loadGame();
 	}
 
 	void QspLib::saveGame()
 	{
-		this->jsListener->saveGame();
+		jsListener->saveGame();
 	}
 
 	void QspLib::saveSlotSelected(int32 index, int32 mode)
 	{
-		this->jsListener->saveSlotSelected((int)index, (int)mode);
+		jsListener->saveSlotSelected((int)index, (int)mode);
 	}
 
 	void QspLib::msgResult()
 	{
-		this->jsListener->msgResult();
+		jsListener->msgResult();
 	}
 
 	void QspLib::errorResult()
 	{
-		this->jsListener->errorResult();
+		jsListener->errorResult();
 	}
 
 	void QspLib::userMenuResult(int32 pos)
 	{
-		this->jsListener->userMenuResult((int)pos);
+		jsListener->userMenuResult((int)pos);
 	}
 
 	void QspLib::inputResult(Platform::String ^ text)
@@ -188,7 +190,7 @@ namespace QspLibWinRT
 
 	void QspLib::setMute(Platform::Boolean flag)
 	{
-		this->jsListener->setMute((bool)flag);
+		jsListener->setMute((bool)flag);
 	}
 
 	void QspLib::setInputString(Platform::String ^ text)
@@ -199,11 +201,16 @@ namespace QspLibWinRT
 
 	void QspLib::runInputString()
 	{
-		this->jsListener->runInputString();
+		jsListener->runInputString();
 	}
 
 	void QspLib::runDefaultGame()
 	{
-		this->jsListener->runDefaultGame();
+		jsListener->runDefaultGame();
+	}
+
+	void QspLib::execLink(Platform::String^ text)
+	{
+		jsListener->execLink(stringConverter->convertUwpToStd(text));
 	}
 }

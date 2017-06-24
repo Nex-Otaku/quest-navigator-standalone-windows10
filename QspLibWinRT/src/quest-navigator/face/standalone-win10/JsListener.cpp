@@ -143,4 +143,11 @@ namespace QuestNavigator
 		// Запускаем игру по умолчанию.
 		this->app->runNewGame("");
 	}
+
+	void JsListener::execLink(string text)
+	{
+		// Контекст UI
+		// Выполняем код из ссылки "EXEC:".
+		app->executeCode(text);
+	}
 }

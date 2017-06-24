@@ -167,6 +167,15 @@ namespace QuestNavigator
 		//}
 	}
 
+	void App::executeCode(string qspCode)
+	{
+		//Контекст UI
+		if (!gameIsRunning) {
+			return;
+		}
+		eventManager->executeCode(qspCode);
+	}
+
 	SaveSlotsDto App::getSaveSlots(bool open)
 	{
 		//Контекст UI
