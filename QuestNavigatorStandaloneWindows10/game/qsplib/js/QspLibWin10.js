@@ -12,10 +12,6 @@ var QspLib = null;
 
 $(function () {
     // При загрузке документа, запускаем приложение.
-    //console.log('onDocumentReady();');
-    //$('#debug').append('onDocumentReady();<br>');
-    //log('');
-    //log('onDocumentReady();');
     onDocumentReady();
 });
 
@@ -28,32 +24,29 @@ function onDocumentReady() {
 	if (QspLib !== null) {
         throw "onDocumentReady must be called only once!";
 	}
-    //log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
 
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
     var uwpJsExecutor = QspLib.getUwpJsExecutor();
 
-    uwpJsExecutor.oncallsetgroupedcontentevent = callSetGroupedContentCallbackHandler;
+    uwpJsExecutor.oncallsetgroupedcontentevent = setGroupedContentCallbackHandler;
+    uwpJsExecutor.oncallshowsaveslotsdialogevent = showSaveSlotsDialogCallbackHandler;
+    uwpJsExecutor.oncallmsgevent = msgCallbackHandler;
+    uwpJsExecutor.oncallerrorevent = errorCallbackHandler;
+    uwpJsExecutor.oncallmenuevent = menuCallbackHandler;
+    uwpJsExecutor.oncallinputevent = inputCallbackHandler;
+    uwpJsExecutor.oncallviewevent = viewCallbackHandler;
+    uwpJsExecutor.oncallsetinputstringevent = setInputStringCallbackHandler;
 
-    //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
-    // primeFoundEvent is a user-defined event in nativeObject
-    // It passes the results back to this thread as they are produced
-    // and the event handler that we define here immediately displays them.
-    //uwpJsExecutor.showDebugMessageEvent += debugCallbackHandler;
-    //onprimefoundevent
     uwpJsExecutor.onshowdebugmessageevent = debugCallbackHandler;
 
     QspLib.callDebugMessage();
-
-    //setTimeout(function () {
 
     // Обрабатываем нажатие ссылок с кодом "EXEC:"
     $(document).on('click', 'a', interceptExecLink);
 
 
 	// Запускаем API.
-    //log('qspInitApi();');
 	qspInitApi();
 	// Самодельный диалог alert, 
 	// так как в Awesomium стандартные диалоги не работают.
@@ -64,9 +57,6 @@ function onDocumentReady() {
 	qspIsDesktop = true;
 	// Сообщаем API, что нам стал известен тип устройства.
     qspSetDevice();
-
-
-    //}, 4000);
 }
 
 function debug(str) {
@@ -76,25 +66,58 @@ function debug(str) {
 function qspLibOnInitApi() {
 	setTimeout( function() { // Delay for Mozilla
 		// Запуск игры по завершению инициализации API.
-        //log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
 }
+
+// ***   Колбеки   ***************************************************
 
 function debugCallbackHandler(params) {
     var message = params.target.toString();
     log('debug: ' + message);
 }
 
-function callSetGroupedContentCallbackHandler(groupedContent) {
+function setGroupedContentCallbackHandler(groupedContent) {
     var jsGroupedContent = JSON.parse(groupedContent.target.toString());
-
-    //var jsName = name.target.toString();
-    //var jsArg = arg.target.toString();
-    //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
-    //log('received: ' + groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
 }
+
+function showSaveSlotsDialogCallbackHandler(saveSlots) {
+    var jsSaveSlots = JSON.parse(saveSlots.target.toString());
+    qspShowSaveSlotsDialog(jsSaveSlots);
+}
+
+function msgCallbackHandler(text) {
+    var jsText = text.target.toString();
+    qspMsg(jsText);
+}
+
+function errorCallbackHandler(error) {
+    var jsError = JSON.parse(error.target.toString());
+    qspError(jsError);
+}
+
+function menuCallbackHandler(menu) {
+    var jsMenu = JSON.parse(menu.target.toString());
+    qspMenu(jsMenu);
+}
+
+function inputCallbackHandler(text) {
+    var jsText = text.target.toString();
+    qspInput(jsText);
+}
+
+function viewCallbackHandler(path) {
+    var jsPath = path.target.toString();
+    qspView(jsPath);
+}
+
+function setInputStringCallbackHandler(text) {
+    var jsText = text.target.toString();
+    qspSetInputString(jsText);
+}
+
+// *******************************************************************
 
 function interceptExecLink(event) {
     var link = $(this).attr('href');

@@ -35,81 +35,67 @@ namespace QuestNavigator
 	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
 	{
 		// Контекст UI
-		//jsCallApiFromUi("qspShowSaveSlotsDialog", slotsDto);
-
-		jsCallDebug("qspShowSaveSlotsDialog stub");
+		//jsCallDebug("qspShowSaveSlotsDialog stub");
+		string jsonSaveSlotsDto = jsonSerializer->serializeSaveSlots(slotsDto);
+		Platform::String^ pSaveSlots = stringConverter->convertStdToUwp(jsonSaveSlotsDto);
+		uwpJsExecutor->jsCallShowSaveSlotsDialog(pSaveSlots);
 	}
 
 	void JsExecutor::qspSetGroupedContent(GroupedContentDto content)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspSetGroupedContent", content);
-		//jsCallDebug("qspSetGroupedContent");
-
-		//JsonObject^ jsonObject = ref new JsonObject();
-
-		//jsonObject->Insert()
-
-
 		string jsonGroupedContentDto = jsonSerializer->serializeGroupedContent(content);
-
 		Platform::String^ pGroupedContent = stringConverter->convertStdToUwp(jsonGroupedContentDto);
-
 		uwpJsExecutor->jsCallSetGroupedContent(pGroupedContent);
-
-
-		//MemoryStream stream = new MemoryStream();
-		//DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(Student));
-		//jsonSer.WriteObject(stream, objStudent);
-		//stream.Position = 0;
-		//StreamReader sr = new StreamReader(stream);
-		//lblSerilaize.Text = sr.ReadToEnd();
-
-		//string jsonContent = (new Windows::Data::Json::JsonObject())->
-		//jsCallApi("qspSetGroupedContent", content);
-		//jsCallApi("qspSetGroupedContent", jsonGroupedContentDto);
 	}
 
 	void JsExecutor::qspMsg(string text)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspMsg", text);
-		jsCallDebug("qspMsg stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspMsg stub");
+		Platform::String^ pText = stringConverter->convertStdToUwp(text);
+		uwpJsExecutor->jsCallMsg(pText);
 	}
 
 	void JsExecutor::qspError(ErrorDto error)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspError", error);
-		jsCallDebug("qspError stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspError stub");
+		string jsonErrorDto = jsonSerializer->serializeError(error);
+		Platform::String^ pError = stringConverter->convertStdToUwp(jsonErrorDto);
+		uwpJsExecutor->jsCallError(pError);
 	}
 
 	void JsExecutor::qspMenu(vector<MenuItemDto> menu)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspMenu", menu);
-		jsCallDebug("qspMenu stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspMenu stub");
+		string jsonMenuDto = jsonSerializer->serializeMenu(menu);
+		Platform::String^ pMenu = stringConverter->convertStdToUwp(jsonMenuDto);
+		uwpJsExecutor->jsCallMenu(pMenu);
 	}
 
 	void JsExecutor::qspInput(string text)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspInput", text);
-		jsCallDebug("qspInput stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspInput stub");
+		Platform::String^ pText = stringConverter->convertStdToUwp(text);
+		uwpJsExecutor->jsCallInput(pText);
 	}
 
 	void JsExecutor::qspView(string path)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspView", path);
-		jsCallDebug("qspView stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspView stub");
+		Platform::String^ pPath = stringConverter->convertStdToUwp(path);
+		uwpJsExecutor->jsCallView(pPath);
 	}
 
 	void JsExecutor::qspSetInputString(string text)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspSetInputString", text);
-		jsCallDebug("qspSetInputString stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspSetInputString stub");
+		Platform::String^ pText = stringConverter->convertStdToUwp(text);
+		uwpJsExecutor->jsCallSetInputString(pText);
 	}
 
 	// ********************************************************************
@@ -120,19 +106,11 @@ namespace QuestNavigator
 	// ********************************************************************
 	// ********************************************************************
 
-	//bool JsExecutor::jsCallApi(string name, string arg)
-	//{
-	//	Platform::String^ pName = stringConverter->convertStdToUwp(name);
-	//	Platform::String^ pArg = stringConverter->convertStdToUwp(arg);
-
-	//	return uwpJsExecutor->jsCallApi(pName, pArg);
-	//}
-
-	bool JsExecutor::jsCallDebug(string message)
+	void JsExecutor::jsCallDebug(string message)
 	{
 		// Контекст UI
 		Platform::String^ pMessage = stringConverter->convertStdToUwp(message);
 
-		return uwpJsExecutor->jsCallDebug(pMessage);
+		uwpJsExecutor->jsCallDebug(pMessage);
 	}
 }
