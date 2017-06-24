@@ -46,7 +46,7 @@ function onDocumentReady() {
 
     QspLib.callDebugMessage();
 
-    setTimeout(function () {
+    //setTimeout(function () {
 
 
 	// Запускаем API.
@@ -56,14 +56,14 @@ function onDocumentReady() {
 	// так как в Awesomium стандартные диалоги не работают.
 	// Короткий вариант будет работать только после полной инициализации.
 	// До этого, вызываем напрямую через QspLib.
-	window.alert = function(text) { QspLib.alert(text) };
+    window.alert = function (text) { QspLib.alert(text); };
 
 	qspIsDesktop = true;
 	// Сообщаем API, что нам стал известен тип устройства.
     qspSetDevice();
 
 
-    }, 4000);
+    //}, 4000);
 }
 
 function debug(str) {
