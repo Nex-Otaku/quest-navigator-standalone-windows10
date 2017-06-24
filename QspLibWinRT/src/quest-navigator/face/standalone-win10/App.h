@@ -27,6 +27,7 @@ namespace QuestNavigator
 		void runGame(string fileName);
 		void StopGame(bool restart);
 		void runNewGame(string contentPath);
+		void executeCode(string qspCode);
 
 		SaveSlotsDto getSaveSlots(bool open);
 
