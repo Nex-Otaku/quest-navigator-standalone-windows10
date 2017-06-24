@@ -23,7 +23,6 @@ namespace QuestNavigator {
 		);
 
 		string serializeGroupedContent(GroupedContentDto dto);
-		// STUB
 
 	private:
 		StringConverter* stringConverter;
