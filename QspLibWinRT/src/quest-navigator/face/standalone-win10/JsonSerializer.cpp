@@ -2,6 +2,11 @@
 #include "JsonSerializer.h"
 #include <string>
 #include "..\..\core\skin.h"
+#include "..\..\core\dto\SaveSlotsDto.h"
+#include "..\..\core\dto\GroupedContentDto.h"
+#include "..\..\core\dto\MenuItemDto.h"
+#include "..\..\core\dto\ErrorDto.h"
+#include "..\..\core\dto\SkinDto.h"
 
 using namespace std;
 using namespace Windows::Data::Json;
@@ -35,20 +40,27 @@ namespace QuestNavigator {
 
 		JsonArray^ acts = ref new JsonArray();
 		for (size_t i = 0; i < dto.acts.size(); i++) {
+			JsonObject^ act = ref new JsonObject();
+
 			// image
 			JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].image));
-			root->Insert("image", image);
+			act->Insert("image", image);
 
 			// desc
 			JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].desc));
-			root->Insert("desc", desc);
+			act->Insert("desc", desc);
+
+			acts->Append(act);
 		}
+		root->Insert("acts", acts);
 
 		JsonValue^ vars = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.vars));
 		root->Insert("vars", vars);
 
 		JsonArray^ objs = ref new JsonArray();
 		for (size_t i = 0; i < dto.objs.size(); i++) {
+			JsonObject^ obj = ref new JsonObject();
+
 			// image
 			JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.objs[i].image));
 			root->Insert("image", image);
@@ -60,10 +72,31 @@ namespace QuestNavigator {
 			// selected
 			JsonValue^ selected = JsonValue::CreateNumberValue(dto.objs[i].selected);
 			root->Insert("selected", selected);
+
+			objs->Append(obj);
 		}
+		root->Insert("objs", objs);
 
 		JsonValue^ js = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.js));
 		root->Insert("js", js);
+
+		Platform::String^ serialized = root->ToString();
+		return stringConverter->convertUwpToStd(serialized);
+	}
+
+	string JsonSerializer::serializeSaveSlots(SaveSlotsDto dto)
+	{
+		JsonObject^ root = ref new JsonObject();
+
+		int open = dto.open ? 1 : 0;
+		root->Insert("open", JsonValue::CreateNumberValue(open));
+
+		JsonArray^ slots = ref new JsonArray();
+		for (size_t i = 0; i < dto.slots.size(); i++) {
+			JsonValue^ slot = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.slots[i]));
+			slots->Append(slot);
+		}
+		root->Insert("slots", slots);
 
 		Platform::String^ serialized = root->ToString();
 		return stringConverter->convertUwpToStd(serialized);

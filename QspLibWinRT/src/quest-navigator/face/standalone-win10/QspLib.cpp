@@ -184,8 +184,7 @@ namespace QspLibWinRT
 
 	void QspLib::inputResult(Platform::String ^ text)
 	{
-		throw ref new Platform::NotImplementedException();
-		//this->jsListener->inputResult((string)text);
+		jsListener->inputResult(stringConverter->convertUwpToStd(text));
 	}
 
 	void QspLib::setMute(Platform::Boolean flag)
@@ -195,8 +194,7 @@ namespace QspLibWinRT
 
 	void QspLib::setInputString(Platform::String ^ text)
 	{
-		throw ref new Platform::NotImplementedException();
-		//this->jsListener->setInputString((string)text);
+		jsListener->setInputString(stringConverter->convertUwpToStd(text));
 	}
 
 	void QspLib::runInputString()

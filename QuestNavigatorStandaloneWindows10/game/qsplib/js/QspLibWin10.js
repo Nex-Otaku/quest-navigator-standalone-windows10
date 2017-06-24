@@ -35,6 +35,7 @@ function onDocumentReady() {
     var uwpJsExecutor = QspLib.getUwpJsExecutor();
 
     uwpJsExecutor.oncallsetgroupedcontentevent = callSetGroupedContentCallbackHandler;
+    uwpJsExecutor.oncallshowsaveslotsdialogevent = callShowSaveSlotsDialogCallbackHandler;
 
     //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
     // primeFoundEvent is a user-defined event in nativeObject
@@ -88,12 +89,12 @@ function debugCallbackHandler(params) {
 
 function callSetGroupedContentCallbackHandler(groupedContent) {
     var jsGroupedContent = JSON.parse(groupedContent.target.toString());
-
-    //var jsName = name.target.toString();
-    //var jsArg = arg.target.toString();
-    //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
-    //log('received: ' + groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
+}
+
+function callShowSaveSlotsDialogCallbackHandler(saveSlots) {
+    var jsSaveSlots = JSON.parse(saveSlots.target.toString());
+    qspShowSaveSlotsDialog(jsSaveSlots);
 }
 
 function interceptExecLink(event) {

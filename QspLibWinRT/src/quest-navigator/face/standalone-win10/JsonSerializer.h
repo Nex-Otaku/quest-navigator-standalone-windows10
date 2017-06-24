@@ -23,6 +23,7 @@ namespace QuestNavigator {
 		);
 
 		string serializeGroupedContent(GroupedContentDto dto);
+		string serializeSaveSlots(SaveSlotsDto dto);
 
 	private:
 		StringConverter* stringConverter;

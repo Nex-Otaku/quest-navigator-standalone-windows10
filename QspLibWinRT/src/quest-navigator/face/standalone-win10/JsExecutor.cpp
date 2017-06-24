@@ -35,39 +35,17 @@ namespace QuestNavigator
 	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
 	{
 		// Контекст UI
-		//jsCallApiFromUi("qspShowSaveSlotsDialog", slotsDto);
-
-		jsCallDebug("qspShowSaveSlotsDialog stub");
+		//jsCallDebug("qspShowSaveSlotsDialog stub");
+		string jsonSaveSlotsDto = jsonSerializer->serializeSaveSlots(slotsDto);
+		Platform::String^ pSaveSlots = stringConverter->convertStdToUwp(jsonSaveSlotsDto);
+		uwpJsExecutor->jsCallShowSaveSlotsDialog(pSaveSlots);
 	}
 
 	void JsExecutor::qspSetGroupedContent(GroupedContentDto content)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspSetGroupedContent", content);
-		//jsCallDebug("qspSetGroupedContent");
-
-		//JsonObject^ jsonObject = ref new JsonObject();
-
-		//jsonObject->Insert()
-
-
 		string jsonGroupedContentDto = jsonSerializer->serializeGroupedContent(content);
-
 		Platform::String^ pGroupedContent = stringConverter->convertStdToUwp(jsonGroupedContentDto);
-
 		uwpJsExecutor->jsCallSetGroupedContent(pGroupedContent);
-
-
-		//MemoryStream stream = new MemoryStream();
-		//DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(Student));
-		//jsonSer.WriteObject(stream, objStudent);
-		//stream.Position = 0;
-		//StreamReader sr = new StreamReader(stream);
-		//lblSerilaize.Text = sr.ReadToEnd();
-
-		//string jsonContent = (new Windows::Data::Json::JsonObject())->
-		//jsCallApi("qspSetGroupedContent", content);
-		//jsCallApi("qspSetGroupedContent", jsonGroupedContentDto);
 	}
 
 	void JsExecutor::qspMsg(string text)
