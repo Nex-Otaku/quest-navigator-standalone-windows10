@@ -14,6 +14,7 @@
 #include "..\..\core\dialogs.h"
 #include "..\..\core\dto\MenuItemDto.h"
 #include "Library.h"
+#include "Constants.h"
 
 namespace QuestNavigator
 {
@@ -273,21 +274,21 @@ namespace QuestNavigator
 	
 	void LibraryListener::PlayerInfo(QSP_CHAR* resource, QSP_CHAR* buffer, int maxLen)
 	{
-	//		//Контекст библиотеки
-	//		string resourceName = fromQsp(resource);
-	//		resourceName = toLower(resourceName);
-	//		string result = "";
-	//		if (resourceName == "platform") {
-	//			result = "Windows";
-	//		} else if (resourceName == "player") {
-	//			result = QN_APP_NAME;
-	//		} else if (resourceName == "player.version") {
-	//			result = QN_VERSION;
-	//		}
-	//
-	//		// Возвращаем результат в библиотеку
-	//		wstring wResult = widen(result);
-	//		wcsncpy(buffer, wResult.c_str(), maxLen);
+		//Контекст библиотеки
+		string resourceName = fromQsp(resource);
+		resourceName = toLower(resourceName);
+		string result = "";
+		if (resourceName == "platform") {
+			result = "Windows";
+		} else if (resourceName == "player") {
+			result = QN_APP_NAME;
+		} else if (resourceName == "player.version") {
+			result = QN_VERSION;
+		}
+	
+		// Возвращаем результат в библиотеку
+		wstring wResult = widen(result);
+		wcsncpy(buffer, wResult.c_str(), maxLen);
 	}
 
 	// Возвращаем количество миллисекунд, 

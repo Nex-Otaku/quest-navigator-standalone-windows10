@@ -8,21 +8,13 @@ namespace QspLibWinRT {
 	{
 	}
 
-	bool UwpJsExecutor::jsCallApiFromUi(Platform::String^ name, Platform::String^ message /* slotsDto */)
+	bool UwpJsExecutor::jsCallSetGroupedContent(Platform::String^ groupedContent)
 	{
-		auto window = Windows::UI::Core::CoreWindow::GetForCurrentThread();
-		Windows::UI::Core::CoreDispatcher^ m_dispatcher;
-		m_dispatcher = window->Dispatcher;
 
-		// Since this code is probably running on a worker
-		// thread, and we are passing the data back to the
-		// UI thread, we have to use a CoreDispatcher object.
-		m_dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-			ref new DispatchedHandler([this, message/* slotsDto */]()
+		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+			ref new DispatchedHandler([this, groupedContent]()
 		{
-			// Потом мы здесь передадим структуру для вызова слотов сохранения.
-			this->showSaveSlotsDialogEvent("testMessage");
-
+			this->callSetGroupedContentEvent(groupedContent);
 		}, Platform::CallbackContext::Any));
 
 		return true;

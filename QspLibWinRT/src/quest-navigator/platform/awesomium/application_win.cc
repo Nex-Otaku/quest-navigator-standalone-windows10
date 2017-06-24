@@ -2,7 +2,7 @@
 #include "view.h"
 //#include <Awesomium/WebCore.h>
 #include <string>
-#include "../../core/utils.h"
+#include "../../face/universal-awesomium-windows/utils.h"
 #include "../../core/configuration.h"
 #include "listener.h"
 

@@ -1,7 +1,7 @@
 #include "interceptor.h"
 #include <string>
 //#include <Awesomium/STLHelpers.h>
-#include "../../core/utils.h"
+#include "../../face/universal-awesomium-windows/utils.h"
 #include "listener.h"
 
 using namespace std;

@@ -1,7 +1,7 @@
 #include "files.h"
 #include <Windows.h>
 #include "configuration.h"
-#include "utils.h"
+//#include "utils.h"
 #include "dialogs.h"
 #include "encoding.h"
 #include "strings.h"
@@ -25,6 +25,9 @@ namespace QuestNavigator {
 		//wstring wUrl = szUrl;
 		//string url = narrow(wUrl);
 		//return url;
+
+		showError("getUrlFromFilePath not implemented");
+		return "";
 	}
 
 	// URL к содержимому
@@ -78,6 +81,7 @@ namespace QuestNavigator {
 		//return dir;
 
 		// STUB
+		showError("getPlayerDir not implemented");
 		return "";
 	}
 
@@ -148,6 +152,8 @@ namespace QuestNavigator {
 		//string absolute = narrow(wAbsolute);
 
 		//return absolute;
+		showError("relativePathToAbsolute not implemented");
+		return "";
 	}
 
 	// Приводим путь к каноничной форме.
@@ -166,6 +172,7 @@ namespace QuestNavigator {
 		//return result;
 
 		// STUB
+		showError("canonicalizePath not implemented");
 		return "";
 	}
 
@@ -215,6 +222,8 @@ namespace QuestNavigator {
 		//*bufferLength = totalBufferLength;
 		//// Не забываем освободить память вызовом "delete" после использования!
 		//return true;
+		showError("loadFileToBuffer not implemented");
+		return true;
 	}
 
 	// Создаём папки
@@ -227,6 +236,7 @@ namespace QuestNavigator {
 		//return res == ERROR_SUCCESS;
 
 		// STUB
+		showError("buildDirectoryPath not implemented");
 		return true;
 	}
 
@@ -256,6 +266,9 @@ namespace QuestNavigator {
 		//delete[] pszFrom;
 
 		//return (0 == nFileDeleteOprnRet) && (stSHFileOpStruct.fAnyOperationsAborted == FALSE);
+
+		showError("deleteDirectory not implemented");
+		return true;
 	}
 
 	// Возвращаем список файлов либо папок
@@ -359,6 +372,7 @@ namespace QuestNavigator {
 		//return true;
 
 		// STUB
+		showError("copyFile not implemented");
 		return true;
 	}
 

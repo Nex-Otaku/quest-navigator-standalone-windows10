@@ -1,8 +1,8 @@
 #include "utils.h"
-#include "..\face\standalone-win10\Constants.h"
-#include "files.h"
-#include "configuration.h"
-#include "dialogs.h"
+#include "..\..\face\standalone-win10\Constants.h"
+#include "..\..\core\files.h"
+#include "..\..\core\configuration.h"
+#include "..\..\core\dialogs.h"
 #ifdef _WIN32
 //#include <shlwapi.h>
 #include <Shlobj.h>

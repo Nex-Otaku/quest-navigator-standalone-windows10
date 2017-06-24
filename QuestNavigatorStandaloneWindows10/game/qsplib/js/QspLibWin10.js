@@ -14,8 +14,8 @@ $(function () {
     // При загрузке документа, запускаем приложение.
     //console.log('onDocumentReady();');
     //$('#debug').append('onDocumentReady();<br>');
-    log('');
-    log('onDocumentReady();');
+    //log('');
+    //log('onDocumentReady();');
     onDocumentReady();
 });
 
@@ -28,11 +28,14 @@ function onDocumentReady() {
 	if (QspLib !== null) {
         throw "onDocumentReady must be called only once!";
 	}
-    log('new QspLibWinRT.QspLib();');
+    //log('new QspLibWinRT.QspLib();');
     QspLib = new QspLibWinRT.QspLib();
 
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
     var uwpJsExecutor = QspLib.getUwpJsExecutor();
+
+    uwpJsExecutor.oncallsetgroupedcontentevent = callSetGroupedContentCallbackHandler;
+
     //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
     // primeFoundEvent is a user-defined event in nativeObject
     // It passes the results back to this thread as they are produced
@@ -43,24 +46,24 @@ function onDocumentReady() {
 
     QspLib.callDebugMessage();
 
-    setTimeout(function () {
+    //setTimeout(function () {
 
 
 	// Запускаем API.
-    log('qspInitApi();');
+    //log('qspInitApi();');
 	qspInitApi();
 	// Самодельный диалог alert, 
 	// так как в Awesomium стандартные диалоги не работают.
 	// Короткий вариант будет работать только после полной инициализации.
 	// До этого, вызываем напрямую через QspLib.
-	window.alert = function(text) { QspLib.alert(text) };
+    window.alert = function (text) { QspLib.alert(text); };
 
 	qspIsDesktop = true;
 	// Сообщаем API, что нам стал известен тип устройства.
     qspSetDevice();
 
 
-    }, 4000);
+    //}, 4000);
 }
 
 function debug(str) {
@@ -70,7 +73,7 @@ function debug(str) {
 function qspLibOnInitApi() {
 	setTimeout( function() { // Delay for Mozilla
 		// Запуск игры по завершению инициализации API.
-        log('QspLib.restartGame();');
+        //log('QspLib.restartGame();');
 		QspLib.restartGame();
 	}, 10);
 }
@@ -78,4 +81,14 @@ function qspLibOnInitApi() {
 function debugCallbackHandler(params) {
     var message = params.target.toString();
     log('debug: ' + message);
+}
+
+function callSetGroupedContentCallbackHandler(groupedContent) {
+    var jsGroupedContent = JSON.parse(groupedContent.target.toString());
+
+    //var jsName = name.target.toString();
+    //var jsArg = arg.target.toString();
+    //log('called api: [' + jsName + '] with args: [' + jsArg + ']');
+    //log('received: ' + groupedContent.target.toString());
+    qspSetGroupedContent(jsGroupedContent);
 }

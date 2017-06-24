@@ -1,6 +1,6 @@
 #include "gamestock.h"
 #include "../../core/configuration.h"
-#include "../../core/utils.h"
+#include "../../face/universal-awesomium-windows/utils.h"
 #include "../../core/files.h"
 #include "../../core/dialogs.h"
 #include "../../core/strings.h"

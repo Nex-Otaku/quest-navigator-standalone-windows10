@@ -1,5 +1,4 @@
 #include "configuration.h"
-#include "utils.h"
 #include "dialogs.h"
 
 namespace QuestNavigator {
@@ -93,7 +92,7 @@ namespace QuestNavigator {
 		lockConfigData();
 		result = _paramList[param].getString();
 		unlockConfigData();
-		showError("getString " + to_string((int)param));
+		//showError("getString " + to_string((int)param));
 		return result;
 	}
 	void Configuration::setString(eConfigParam param, string value)
@@ -108,7 +107,7 @@ namespace QuestNavigator {
 		lockConfigData();
 		result = _paramList[param].getInt();
 		unlockConfigData();
-		showError("getInt " + to_string((int)param));
+		//showError("getInt " + to_string((int)param));
 		return result;
 	}
 	void Configuration::setInt(eConfigParam param, int value)
@@ -123,7 +122,7 @@ namespace QuestNavigator {
 		lockConfigData();
 		result = _paramList[param].getBool();
 		unlockConfigData();
-		showError("getBool " + to_string((int)param));
+		//showError("getBool " + to_string((int)param));
 		return result;
 	}
 	void Configuration::setBool(eConfigParam param, bool value)

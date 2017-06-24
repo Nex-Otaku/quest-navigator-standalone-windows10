@@ -1,5 +1,5 @@
 #include "thread_sync.h"
-#include "dialogs.h"
+#include "..\..\core\dialogs.h"
 
 namespace QuestNavigator {
 	//// Ожидаем события

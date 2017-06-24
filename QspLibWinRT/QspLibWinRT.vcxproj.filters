@@ -237,9 +237,6 @@
     <ClCompile Include="src\quest-navigator\core\sound.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\utils.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc">
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClCompile>
@@ -297,9 +294,6 @@
     <ClCompile Include="src\quest-navigator\core\strings.cpp">
       <Filter>quest-navigator\core\completed</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\thread_sync.cpp">
-      <Filter>quest-navigator\core\drafted</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\windows10\UwpJsExecutor.cpp">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClCompile>
@@ -330,11 +324,20 @@
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadApi.cpp">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\encoding.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\awesomium\awesomium_encoding.cpp">
       <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\platform\awesomium\thread_sync.cpp">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\utils.cpp">
+      <Filter>quest-navigator\face\universal-awesomium-windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\core\encoding.cpp">
+      <Filter>quest-navigator\core\drafted</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -451,9 +454,6 @@
     <ClInclude Include="src\quest-navigator\core\sound.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\utils.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\awesomium\application.h">
       <Filter>quest-navigator\platform\awesomium</Filter>
     </ClInclude>
@@ -538,9 +538,6 @@
     <ClInclude Include="src\quest-navigator\core\strings.h">
       <Filter>quest-navigator\core\completed</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\thread_sync.h">
-      <Filter>quest-navigator\core\drafted</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\windows10\UwpJsExecutor.h">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
@@ -574,11 +571,20 @@
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadApi.h">
       <Filter>quest-navigator\platform\windows10</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\encoding.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\awesomium\awesomium_encoding.h">
       <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\platform\awesomium\thread_sync.h">
+      <Filter>quest-navigator\platform\awesomium</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\utils.h">
+      <Filter>quest-navigator\face\universal-awesomium-windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\core\encoding.h">
+      <Filter>quest-navigator\core\drafted</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h">
+      <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
