@@ -50,9 +50,10 @@ namespace QuestNavigator
 
 	void JsExecutor::qspMsg(string text)
 	{
-		//		// Контекст библиотеки
-		//		jsCallApiFromLib("qspMsg", text);
-		jsCallDebug("qspMsg stub");
+		// Контекст библиотеки
+		//jsCallDebug("qspMsg stub");
+		Platform::String^ pText = stringConverter->convertStdToUwp(text);
+		uwpJsExecutor->jsCallMsg(pText);
 	}
 
 	void JsExecutor::qspError(ErrorDto error)

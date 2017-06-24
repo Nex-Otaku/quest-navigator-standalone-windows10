@@ -34,8 +34,9 @@ function onDocumentReady() {
     // Привязываем колбеки для вызова яваскрипта из компонента WinRT.
     var uwpJsExecutor = QspLib.getUwpJsExecutor();
 
-    uwpJsExecutor.oncallsetgroupedcontentevent = callSetGroupedContentCallbackHandler;
-    uwpJsExecutor.oncallshowsaveslotsdialogevent = callShowSaveSlotsDialogCallbackHandler;
+    uwpJsExecutor.oncallsetgroupedcontentevent = setGroupedContentCallbackHandler;
+    uwpJsExecutor.oncallshowsaveslotsdialogevent = showSaveSlotsDialogCallbackHandler;
+    uwpJsExecutor.oncallmsgevent = msgCallbackHandler;
 
     //uwpJsExecutor.onprimefoundevent = debugCallbackHandler;
     // primeFoundEvent is a user-defined event in nativeObject
@@ -82,20 +83,29 @@ function qspLibOnInitApi() {
 	}, 10);
 }
 
+// ***   Колбеки   ***************************************************
+
 function debugCallbackHandler(params) {
     var message = params.target.toString();
     log('debug: ' + message);
 }
 
-function callSetGroupedContentCallbackHandler(groupedContent) {
+function setGroupedContentCallbackHandler(groupedContent) {
     var jsGroupedContent = JSON.parse(groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
 }
 
-function callShowSaveSlotsDialogCallbackHandler(saveSlots) {
+function showSaveSlotsDialogCallbackHandler(saveSlots) {
     var jsSaveSlots = JSON.parse(saveSlots.target.toString());
     qspShowSaveSlotsDialog(jsSaveSlots);
 }
+
+function msgCallbackHandler(text) {
+    var jsText = text.target.toString();
+    qspMsg(jsText);
+}
+
+// *******************************************************************
 
 function interceptExecLink(event) {
     var link = $(this).attr('href');

@@ -9,7 +9,8 @@ namespace QspLibWinRT
 {
 	// Делегаты для обработки событий в JS.
 	public delegate void CallSetGroupedContentHandler(Platform::String^ groupedContent);
-	public delegate void CallShowSaveSlotsDialog(Platform::String^ saveSlots);
+	public delegate void CallShowSaveSlotsDialogHandler(Platform::String^ saveSlots);
+	public delegate void CallMsgHandler(Platform::String^ text);
 
 	public delegate void ShowDebugMessageHandler(Platform::String^ testMessage);
 
@@ -21,6 +22,7 @@ namespace QspLibWinRT
 
 		bool jsCallSetGroupedContent(Platform::String^ groupedContent);
 		bool jsCallShowSaveSlotsDialog(Platform::String^ saveSlots);
+		bool jsCallMsg(Platform::String^ text);
 
 		// Для тестирования колбеков.
 		bool jsCallDebug(Platform::String^ message);
@@ -28,7 +30,8 @@ namespace QspLibWinRT
 		// Событие-делегат для запуска JS-кода из C++.
 		// В JS скрипте к этому событию привязывается обработчик.
 		event CallSetGroupedContentHandler^ callSetGroupedContentEvent;
-		event CallSetGroupedContentHandler^ callShowSaveSlotsDialogEvent;
+		event CallShowSaveSlotsDialogHandler^ callShowSaveSlotsDialogEvent;
+		event CallMsgHandler^ callMsgEvent;
 
 		event ShowDebugMessageHandler^ showDebugMessageEvent;
 

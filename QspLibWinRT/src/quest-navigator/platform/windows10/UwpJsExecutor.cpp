@@ -10,7 +10,7 @@ namespace QspLibWinRT {
 
 	bool UwpJsExecutor::jsCallSetGroupedContent(Platform::String^ groupedContent)
 	{
-		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
 			ref new DispatchedHandler([this, groupedContent]()
 		{
 			this->callSetGroupedContentEvent(groupedContent);
@@ -21,7 +21,7 @@ namespace QspLibWinRT {
 
 	bool UwpJsExecutor::jsCallShowSaveSlotsDialog(Platform::String^ saveSlots)
 	{
-		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
 			ref new DispatchedHandler([this, saveSlots]()
 		{
 			this->callShowSaveSlotsDialogEvent(saveSlots);
@@ -30,9 +30,20 @@ namespace QspLibWinRT {
 		return true;
 	}
 
+	bool UwpJsExecutor::jsCallMsg(Platform::String^ text)
+	{
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+			ref new DispatchedHandler([this, text]()
+		{
+			this->callMsgEvent(text);
+		}, Platform::CallbackContext::Any));
+
+		return true;
+	}
+
 	bool UwpJsExecutor::jsCallDebug(Platform::String^ message)
 	{
-		this->getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
+		getDispatcher()->RunAsync(CoreDispatcherPriority::Normal,
 			ref new DispatchedHandler([this, message]()
 		{
 			// Просто передаём тестовое сообщение.
