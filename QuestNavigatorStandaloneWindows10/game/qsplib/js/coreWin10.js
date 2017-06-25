@@ -1,6 +1,6 @@
 /* Included files list:
 
-    jQuery v1.8.2
+    jQuery v1.8.2 - вместо него отдельно подключен jQuery 3.2.1
     iScroll v4.2.4
 	"Fast Buttons" / Ghost Click Buster (cut to bones by Nex)
 	"Fast Click" (fastclick.js) from https://github.com/ftlabs/fastclick
