@@ -30,12 +30,12 @@ namespace QuestNavigator {
 		return "";
 	}
 
-	// URL к содержимому
-	string getContentUrl()
-	{
-		string contentPath = Configuration::getString(ecpSkinFilePath);
-		return getUrlFromFilePath(contentPath);
-	}
+	//// URL к содержимому
+	//string getContentUrl()
+	//{
+	//	string contentPath = Configuration::getString(ecpSkinFilePath);
+	//	return getUrlFromFilePath(contentPath);
+	//}
 
 	// Проверяем файл на существование и читаемость
 	bool fileExists(string path)

@@ -11,7 +11,7 @@ namespace QuestNavigator {
 	// Получаем URL из полного пути к файлу
 	string getUrlFromFilePath(string filePath);
 	// URL к содержимому
-	string getContentUrl();
+	//string getContentUrl();
 	// Проверяем файл на существование и читаемость
 	bool fileExists(string path);
 	// Проверяем папку на существование и читаемость
