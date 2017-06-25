@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "..\..\platform\windows10\StringConverter.h"
+#include "..\..\platform\windows10\ApplicationPathReader.h"
 
 using namespace std;
 
@@ -13,14 +13,12 @@ namespace QuestNavigator
 		GameFileManager();
 		~GameFileManager();
 
-		void inject(StringConverter* stringConverter);
+		void inject(ApplicationPathReader* applicationPathReader);
 
 		// Путь к файлу игры по умолчанию для standalone-приложения.
 		string getDefaultGameFilePath();
 
 	private:
-		StringConverter* stringConverter;
-
-		string getApplicationFolderPath();
+		ApplicationPathReader* applicationPathReader;
 	};
 }

@@ -244,7 +244,7 @@ namespace QuestNavigator
 			
 			// Билиотека возвращает абсолютный путь к файлу.
 			// Но для отображения в HTML нам требуется относительный.
-			// STUB
+			fileName = instance()->pathConverter->convertAbsolutePathToRelative(fileName);
 		}
 	
 		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку

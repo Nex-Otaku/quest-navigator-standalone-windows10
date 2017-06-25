@@ -62,6 +62,8 @@ namespace QspLibWinRT
 		JsonSerializer* jsonSerializer = new JsonSerializer();
 		// Создаём объект для конвертации путей.
 		PathConverter* pathConverter = new PathConverter();
+		// Создаём объект для чтения пути приложения.
+		ApplicationPathReader* applicationPathReader = new ApplicationPathReader();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -105,8 +107,9 @@ namespace QspLibWinRT
 		);
 		threadManager->inject(threadApi);
 		configurationBuilder->inject(gameFileManager);
-		gameFileManager->inject(stringConverter);
+		gameFileManager->inject(applicationPathReader);
 		jsonSerializer->inject(stringConverter);
+		pathConverter->inject(applicationPathReader);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

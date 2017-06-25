@@ -340,6 +340,7 @@
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\PathConverter.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ApplicationPathReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -588,5 +589,6 @@
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ApplicationPathReader.h" />
   </ItemGroup>
 </Project>

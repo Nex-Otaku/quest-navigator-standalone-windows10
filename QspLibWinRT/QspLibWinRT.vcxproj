@@ -283,6 +283,7 @@
     <ClInclude Include="src\quest-navigator\platform\awesomium\method_dispatcher.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\view.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ApplicationPathReader.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\BeginThread.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\StringConverter.h" />
@@ -485,6 +486,7 @@
     <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ApplicationPathReader.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\BeginThread.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\StringConverter.cpp" />
