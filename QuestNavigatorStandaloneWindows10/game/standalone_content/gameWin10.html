@@ -7,37 +7,30 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link type="text/css" href="../standalone_content/skins/lewis.css" rel="stylesheet" />
+    <link type="text/css" href="../standalone_content/skins/atlant.css" rel="stylesheet" />
     <!-- iPad/iPhone specific css below, add after your main css >
     <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
     -->
     <!--script type="text/javascript" src="../qsplib/js/core.js"></!--script-->
+
+    <!-- core.js -->
     <script type="text/javascript" src="../qsplib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../qsplib/js/iscroll.js"></script>
+    <!-- core.js -->
+
     <script type="text/javascript" src="../qsplib/js/coreWin10.js"></script>
     <script type="text/javascript" src="../qsplib/js/QspLibWin10.js"></script>
     <script type="text/javascript" src="../qsplib/js/api.js"></script>
     <script type="text/javascript" src="../standalone_content/skins/js/game.js"></script>
-    <script type="text/javascript">
-        /*
-        никакой inline-javascript не работает в приложении Windows 10.
-        что-то там с настройками безопасности.
-
-        А нам, в принципе, и не надо.
-
-        $(document).ready(function () {
-            qspInitApi();
-        });
-        */
-    </script>
 </head>
 <body>
-    <div id="debug" style="position: fixed; width:100%; height: 100%; left: 0; top: 0; overflow:scroll">## DEBUG ##</div>
+    <!--<div id="debug" style="position: fixed; width:100%; height: 100%; left: 0; top: 0; overflow:scroll">## DEBUG ##<div> -->
     <div id="qsp-back-image"></div>
     <!-- Описание основное и дополнительное, действия, инвентарь -->
     <div id="qsp-wrapper-main">
         <div id="qsp-scroller-main">
-            <div id="qsp-dialog-view-image-container"></div>
+            <div id="qsp-view"></div>
             <div id="qsp-main">
                 <!--Загрузка игры...-->
             </div>
@@ -46,26 +39,25 @@
             </div>
         </div>
     </div>
-    <div id="qsp-user1">
-        <a id="qsp-user-system" class="qsp-skin-button" onclick="javascript:qspShowSystemMenu();">
-            <img src="../standalone_content/skins/gfx/button_sys-83x46.png" data-pressed="../standalone_content/skins/gfx/button_sys_pressed-83x46.png">
-        </a>
-        <a id="qsp-user-music" class="qsp-skin-button" onclick="javascript:skinToggleMusic();">
-            <img src="../standalone_content/skins/gfx/button_music_on-83x46.png" data-pressed="../standalone_content/skins/gfx/button_music_on_pressed-83x46.png">
-        </a>
-        <a id="qsp-user-inv" class="qsp-skin-button" onclick="javascript:skinShowInv();">
-            <img src="../standalone_content/skins/gfx/button_inv-83x46.png" data-pressed="../standalone_content/skins/gfx/button_inv_pressed-83x46.png">
-        </a>
-    </div>
-    <div id="qsp-user2">
-        <div class="qsp-skin-overlay"></div>
-    </div>
     <div id="qsp-wrapper-objs">
-        <div id="qsp-scroller-objs">
-            <div id="qsp-background-wrapper-inv">
-                <div id="qsp-inv">
-                </div>
-            </div>
+        <div id="qsp-inv-background-center"></div><div id="qsp-inv-background-left"></div><div id="qsp-inv-background-right"></div>
+        <div id="qsp-inv">
+        </div>
+    </div>
+    <div id="qsp-user1">99</div>
+    <div id="qsp-user2">Bla-bla-bla</div>
+    <div id="qsp-user3">
+        <div id="qsp-user3-background-center"></div><div id="qsp-user3-background-left"></div><div id="qsp-user3-background-right"></div>
+        <div id="qsp-user3-content">
+            <a id="qsp-user-system" class="qsp-button" onclick="javascript:qspShowSystemMenu();">
+                <img src="../standalone_content/skins/gfx/button_sys-34x34.png" data-pressed="../standalone_content/skins/gfx/button_sys_pressed-34x34.png">
+            </a>
+            <a id="qsp-user-music" class="qsp-button" onclick="javascript:skinToggleMusic();">
+                <img src="../standalone_content/skins/gfx/button_music_on-34x34.png" data-pressed="../standalone_content/skins/gfx/button_music_on_pressed-34x34.png">
+            </a>
+            <a id="qsp-user-inv" class="qsp-button" onclick="javascript:skinToggleInv();">
+                <img src="../standalone_content/skins/gfx/button_inv-43x43.png" data-pressed="../standalone_content/skins/gfx/button_inv_pressed-43x43.png">
+            </a>
         </div>
     </div>
     <div id="qsp-wrapper-vars">
@@ -74,8 +66,6 @@
     </div>
 
     <div id="qsp-system-menu-button"></div>
-
-
     <!-- Диалоги -->
     <!-- Отрисовываются поверх всего, поэтому идут последними -->
     <div id="qsp-dialog-msg">
