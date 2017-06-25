@@ -28,13 +28,15 @@ namespace QuestNavigator
 		JsExecutor* jsExecutor,
 		Timer* timer,
 		EventManager* eventManager,
-		Library* library
+		Library* library,
+		PathConverter* pathConverter
 	)
 	{
 		this->jsExecutor = jsExecutor;
 		this->timer = timer;
 		this->eventManager = eventManager;
 		this->library = library;
+		this->pathConverter = pathConverter;
 	}
 
 	LibraryListener::LibraryListener()
@@ -153,7 +155,15 @@ namespace QuestNavigator
 			jsExecBuffer = "";
 			bJsCmdPrepared = true;
 		}
-	
+
+		// Заполняем флаги.
+		groupedContent.skinPrepared = bSkinPrepared;
+		groupedContent.mainDescPrepared = bMainDescPrepared;
+		groupedContent.actsPrepared = bActsPrepared;
+		groupedContent.objsPrepared = bObjsPrepared;
+		groupedContent.varsDescPrepared = bVarsDescPrepared;
+		groupedContent.jsCmdPrepared = bJsCmdPrepared;
+
 		// Передаем собранные данные в яваскрипт
 		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
 			bJsCmdPrepared)
@@ -223,7 +233,7 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		string fileName = getRightPath(fromQsp(file));
-	
+
 		// Проверяем читаемость файла.
 		// Если файл не существует или не читается, выходим.
 		if (fileName.length() > 0) {
@@ -231,6 +241,10 @@ namespace QuestNavigator
 				showError("Оператор VIEW. Не найден файл: " + fileName);
 				return;
 			}
+			
+			// Билиотека возвращает абсолютный путь к файлу.
+			// Но для отображения в HTML нам требуется относительный.
+			// STUB
 		}
 	
 		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку

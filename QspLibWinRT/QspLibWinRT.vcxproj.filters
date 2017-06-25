@@ -339,6 +339,7 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PathConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -586,5 +587,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
   </ItemGroup>
 </Project>

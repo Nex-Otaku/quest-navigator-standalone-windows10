@@ -29,56 +29,68 @@ namespace QuestNavigator {
 	{
 		JsonObject^ root = ref new JsonObject();
 
-		JsonObject^ skin = getSkinObject(dto.skin);
-		root->Insert("skin", skin);
-
-		JsonValue^ main = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.main));
-		root->Insert("main", main);
-
-		JsonValue^ scrollmain = JsonValue::CreateNumberValue(dto.scrollmain);
-		root->Insert("scrollmain", scrollmain);
-
-		JsonArray^ acts = ref new JsonArray();
-		for (size_t i = 0; i < dto.acts.size(); i++) {
-			JsonObject^ act = ref new JsonObject();
-
-			// image
-			JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].image));
-			act->Insert("image", image);
-
-			// desc
-			JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].desc));
-			act->Insert("desc", desc);
-
-			acts->Append(act);
+		if (dto.skinPrepared) {
+			JsonObject^ skin = getSkinObject(dto.skin);
+			root->Insert("skin", skin);
 		}
-		root->Insert("acts", acts);
 
-		JsonValue^ vars = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.vars));
-		root->Insert("vars", vars);
+		if (dto.mainDescPrepared) {
+			JsonValue^ main = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.main));
+			root->Insert("main", main);
 
-		JsonArray^ objs = ref new JsonArray();
-		for (size_t i = 0; i < dto.objs.size(); i++) {
-			JsonObject^ obj = ref new JsonObject();
-
-			// image
-			JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.objs[i].image));
-			root->Insert("image", image);
-
-			// desc
-			JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.objs[i].desc));
-			root->Insert("desc", desc);
-
-			// selected
-			JsonValue^ selected = JsonValue::CreateNumberValue(dto.objs[i].selected);
-			root->Insert("selected", selected);
-
-			objs->Append(obj);
+			JsonValue^ scrollmain = JsonValue::CreateNumberValue(dto.scrollmain);
+			root->Insert("scrollmain", scrollmain);
 		}
-		root->Insert("objs", objs);
 
-		JsonValue^ js = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.js));
-		root->Insert("js", js);
+		if (dto.actsPrepared) {
+			JsonArray^ acts = ref new JsonArray();
+			for (size_t i = 0; i < dto.acts.size(); i++) {
+				JsonObject^ act = ref new JsonObject();
+
+				// image
+				JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].image));
+				act->Insert("image", image);
+
+				// desc
+				JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.acts[i].desc));
+				act->Insert("desc", desc);
+
+				acts->Append(act);
+			}
+			root->Insert("acts", acts);
+		}
+
+		if (dto.varsDescPrepared) {
+			JsonValue^ vars = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.vars));
+			root->Insert("vars", vars);
+		}
+
+		if (dto.objsPrepared) {
+			JsonArray^ objs = ref new JsonArray();
+			for (size_t i = 0; i < dto.objs.size(); i++) {
+				JsonObject^ obj = ref new JsonObject();
+
+				// image
+				JsonValue^ image = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.objs[i].image));
+				root->Insert("image", image);
+
+				// desc
+				JsonValue^ desc = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.objs[i].desc));
+				root->Insert("desc", desc);
+
+				// selected
+				JsonValue^ selected = JsonValue::CreateNumberValue(dto.objs[i].selected);
+				root->Insert("selected", selected);
+
+				objs->Append(obj);
+			}
+			root->Insert("objs", objs);
+		}
+
+		if (dto.jsCmdPrepared) {
+			JsonValue^ js = JsonValue::CreateStringValue(stringConverter->convertStdToUwp(dto.js));
+			root->Insert("js", js);
+		}
 
 		Platform::String^ serialized = root->ToString();
 		return stringConverter->convertUwpToStd(serialized);

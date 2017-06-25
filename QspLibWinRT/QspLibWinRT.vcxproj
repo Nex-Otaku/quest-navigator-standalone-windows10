@@ -256,6 +256,7 @@
     <ClInclude Include="src\quest-navigator\core\events.h" />
     <ClInclude Include="src\quest-navigator\core\files.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\thread_sync.h" />
     <ClInclude Include="src\quest-navigator\core\midi.h" />
     <ClInclude Include="src\quest-navigator\core\skin.h" />
@@ -464,6 +465,7 @@
     <ClCompile Include="src\quest-navigator\core\sound.cpp" />
     <ClCompile Include="src\quest-navigator\core\strings.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PathConverter.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\thread_sync.cpp" />
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\utils.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp" />

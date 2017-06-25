@@ -13,6 +13,7 @@
 #include "..\..\platform\windows10\ThreadApi.h"
 #include "GameFileManager.h"
 #include "JsonSerializer.h"
+#include "PathConverter.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -59,6 +60,8 @@ namespace QspLibWinRT
 		GameFileManager* gameFileManager = new GameFileManager();
 		// Создаём объект для сериализации DTO в строки JSON.
 		JsonSerializer* jsonSerializer = new JsonSerializer();
+		// Создаём объект для конвертации путей.
+		PathConverter* pathConverter = new PathConverter();
 
 		// Делаем инъекцию зависимостей.
 		this->jsListener->inject(
@@ -88,7 +91,8 @@ namespace QspLibWinRT
 			jsExecutor,
 			timer,
 			eventManager,
-			library
+			library,
+			pathConverter
 		);
 		jsExecutor->inject(
 			uwpJsExecutor, 
