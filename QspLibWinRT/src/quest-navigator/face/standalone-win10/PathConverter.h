@@ -14,7 +14,8 @@ namespace QuestNavigator {
 
 		void inject(ApplicationPathReader* applicationPathReader);
 
-		string convertAbsolutePathToRelative(string path);
+		string absolutePathToRelativeUrl(string path);
+		string absolutePathToRelativePath(string path);
 
 	private:
 		ApplicationPathReader* applicationPathReader;
