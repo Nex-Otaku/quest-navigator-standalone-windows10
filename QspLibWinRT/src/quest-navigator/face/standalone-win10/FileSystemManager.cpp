@@ -39,17 +39,25 @@ namespace QuestNavigator {
 		//return true;
 
 		unsigned int pos = 0;
+
+		// Пропускаем букву диска, если есть.
+		pos = path.find_first_of(':', pos + 1);
+		pos = pos == string::npos ? 0 : pos + 1;
+
 		do
 		{
 			pos = path.find_first_of("\\/", pos + 1);
-			if (dirExists(path)) {
+			string currentDir = pos == string::npos ? path : path.substr(0, pos);
+			if (dirExists(currentDir)) {
 				continue;
 			}
-			if (!fileSystemApi->createDirectory(path.substr(0, pos))) {
-				return false;
+			showError("createDirectory: " + currentDir);
+			if (!fileSystemApi->createDirectory(currentDir)) {
+				//return false;
 			}
-		} while (pos != std::string::npos);
+		} while (pos != string::npos);
 
-		return true;
+//		return true;
+		return dirExists(path);
 	}
 }
