@@ -14,7 +14,7 @@ namespace QuestNavigator {
 
 		void inject(FileSystemApi* fileSystemApi);
 
-		// Создаём папки
+		// РЎРѕР·РґР°С‘Рј РїР°РїРєРё
 		bool buildDirectoryPath(string path);
 
 	private:

@@ -387,6 +387,7 @@ namespace QuestNavigator
 	
 	void LibraryListener::OpenGameStatus(QSP_CHAR* file)
 	{
+		showError("LibraryListener::OpenGameStatus");
 		//Контекст библиотеки
 		if (file != 0) {
 			// Библиотека возвращает абсолютный путь к файлу сохранения,
@@ -408,6 +409,7 @@ namespace QuestNavigator
 	
 	void LibraryListener::SaveGameStatus(QSP_CHAR* file)
 	{
+		showError("LibraryListener::OpenGameStatus");
 		//Контекст библиотеки
 		if (file != 0) {
 			// Библиотека возвращает абсолютный путь к файлу сохранения,

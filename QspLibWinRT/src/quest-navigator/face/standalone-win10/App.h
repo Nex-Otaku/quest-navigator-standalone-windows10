@@ -29,8 +29,6 @@ namespace QuestNavigator
 		void runNewGame(string contentPath);
 		void executeCode(string qspCode);
 
-		SaveSlotsDto getSaveSlots(bool open);
-
 	private:
 		EventManager* eventManager;
 		Library* library;

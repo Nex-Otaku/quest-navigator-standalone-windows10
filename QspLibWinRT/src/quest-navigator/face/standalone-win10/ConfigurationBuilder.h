@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameFileManager.h"
+#include "..\..\platform\windows10\StoragePathReader.h"
 
 namespace QuestNavigator
 {
@@ -11,7 +12,8 @@ namespace QuestNavigator
 		~ConfigurationBuilder();
 
 		void inject(
-			GameFileManager* gameFileManager
+			GameFileManager* gameFileManager,
+			StoragePathReader* storagePathReader
 		);
 
 		// Устанавливаем конфигурацию плеера при старте
@@ -19,6 +21,7 @@ namespace QuestNavigator
 
 	private:
 		GameFileManager* gameFileManager;
+		StoragePathReader* storagePathReader;
 
 		// Загружаем настройки игры из файла config.xml
 		bool loadGameConfig();

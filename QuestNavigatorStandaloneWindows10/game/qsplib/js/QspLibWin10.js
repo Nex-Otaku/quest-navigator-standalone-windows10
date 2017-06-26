@@ -10,7 +10,7 @@ var qspLibMode = "WINDOWS10";       // "AIR", "PHONEGAP", "AWESOMIUM" - уста
 
 var QspLib = null;
 
-var debugMode = false;
+var debugMode = true;
 
 $(function () {
     // При загрузке документа, запускаем приложение.
@@ -84,7 +84,7 @@ function debugCallbackHandler(params) {
 function setGroupedContentCallbackHandler(groupedContent) {
     var jsGroupedContent = JSON.parse(groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
-    log('debug: ' + groupedContent.target.toString());
+    //log('debug: ' + groupedContent.target.toString());
 }
 
 function showSaveSlotsDialogCallbackHandler(saveSlots) {

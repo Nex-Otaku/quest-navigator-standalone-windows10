@@ -344,6 +344,7 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\SaveFileManager.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\FileSystemManager.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\FileSystemApi.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\StoragePathReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -596,5 +597,6 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\SaveFileManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\FileSystemApi.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\StoragePathReader.h" />
   </ItemGroup>
 </Project>

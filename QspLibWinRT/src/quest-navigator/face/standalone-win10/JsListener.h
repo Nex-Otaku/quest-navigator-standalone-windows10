@@ -20,7 +20,8 @@ namespace QuestNavigator
 			EventManager* eventManager, 
 			App* app,
 			Timer* timer,
-			JsExecutor* jsExecutor
+			JsExecutor* jsExecutor,
+			SaveFileManager* saveFileManager
 		);
 
 		void restartGame();
@@ -45,5 +46,6 @@ namespace QuestNavigator
 		App* app;
 		Timer* timer;
 		JsExecutor* jsExecutor;
+		SaveFileManager* saveFileManager;
 	};
 }

@@ -21,9 +21,9 @@ namespace QuestNavigator {
 		this->applicationPathReader = applicationPathReader;
 	}
 
-	// Преобразовываем абсолютный путь в относительный URL.
-	// Исходный вид: "D:\QuestNavigator\game\standalone_content\skins\gfx\my-image.png"
-	// Нужно получить: "../standalone_content/skins/gfx/my-image.png"
+	// РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј Р°Р±СЃРѕР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ РІ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ URL.
+	// РСЃС…РѕРґРЅС‹Р№ РІРёРґ: "D:\QuestNavigator\game\standalone_content\skins\gfx\my-image.png"
+	// РќСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ: "../standalone_content/skins/gfx/my-image.png"
 	string PathConverter::absolutePathToRelativeUrl(string path)
 	{
 		// "D:\QuestNavigator"
@@ -31,7 +31,7 @@ namespace QuestNavigator {
 		// "D:\QuestNavigator\game\"
 		string gamePath = rootAppPath + "\\game\\";
 		if (!startsWith(path, gamePath)) {
-			showError("Не удалось преобразовать путь к файлу.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ.");
 			return path;
 		}
 
@@ -45,9 +45,9 @@ namespace QuestNavigator {
 		return relativePath;
 	}
 
-	// Преобразовываем абсолютный путь в относительный.
-	// Исходный вид: "D:\QuestNavigator\game\standalone_content\saves\1.sav"
-	// Нужно получить: "saves\1.sav"
+	// РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј Р°Р±СЃРѕР»СЋС‚РЅС‹Р№ РїСѓС‚СЊ РІ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№.
+	// РСЃС…РѕРґРЅС‹Р№ РІРёРґ: "D:\QuestNavigator\game\standalone_content\saves\1.sav"
+	// РќСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ: "saves\1.sav"
 	string PathConverter::absolutePathToRelativePath(string path)
 	{
 		// "D:\QuestNavigator"
@@ -55,7 +55,7 @@ namespace QuestNavigator {
 		// "D:\QuestNavigator\game\standalone_content"
 		string contentPath = rootAppPath + "\\game\\standalone_content\\";
 		if (!startsWith(path, contentPath)) {
-			showError("Не удалось преобразовать путь к файлу.");
+			showError("РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ.");
 			return path;
 		}
 

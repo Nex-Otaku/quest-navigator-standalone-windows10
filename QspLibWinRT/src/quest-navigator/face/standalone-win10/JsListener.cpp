@@ -2,6 +2,7 @@
 #include "JsListener.h"
 #include "..\..\core\configuration.h"
 #include "..\..\core\dto\SaveSlotsDto.h"
+#include "..\..\core\dialogs.h"
 
 namespace QuestNavigator
 {
@@ -18,13 +19,15 @@ namespace QuestNavigator
 		EventManager* eventManager, 
 		App* app,
 		Timer* timer,
-		JsExecutor* jsExecutor
+		JsExecutor* jsExecutor,
+		SaveFileManager* saveFileManager
 	)
 	{
 		this->eventManager = eventManager;
 		this->app = app;
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
+		this->saveFileManager = saveFileManager;
 	}
 
 	// Обращение к API плеера из яваскрипта.
@@ -51,30 +54,33 @@ namespace QuestNavigator
 
 	void JsListener::loadGame()
 	{
+		showError("JsListener::loadGame");
 		// Контекст UI
 
 		// Останавливаем таймер
 		this->timer->stopTimer();
 
 		// Загружаем список файлов и отдаем в яваскрипт
-		SaveSlotsDto dto = this->app->getSaveSlots(true);
+		SaveSlotsDto dto = saveFileManager->getSaveSlots(true);
 		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveGame()
 	{
+		showError("JsListener::saveGame");
 		// Контекст UI
 
 		// Останавливаем таймер
 		this->timer->stopTimer();
 
 		// Загружаем список файлов и отдаем в яваскрипт
-		SaveSlotsDto dto = this->app->getSaveSlots(false);
+		SaveSlotsDto dto = saveFileManager->getSaveSlots(false);
 		this->jsExecutor->qspShowSaveSlotsDialog(dto);
 	}
 
 	void JsListener::saveSlotSelected(int index, int mode)
 	{
+		showError("JsListener::saveSlotSelected");
 		// Контекст UI
 
 		// Если номер слота "-1", 

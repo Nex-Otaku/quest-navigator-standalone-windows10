@@ -17,6 +17,8 @@
 #include "..\..\platform\windows10\FileSystemApi.h"
 #include "FileSystemManager.h"
 #include "SaveFileManager.h"
+#include "..\..\platform\windows10\ApplicationPathReader.h"
+#include "..\..\platform\windows10\StoragePathReader.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -73,13 +75,16 @@ namespace QspLibWinRT
 		FileSystemManager* fileSystemManager = new FileSystemManager();
 		// Создаём объект для управления сейвами.
 		SaveFileManager* saveFileManager = new SaveFileManager();
+		// Создаём объект для чтения пути к локальному хранилищу - в хранилище мы записываем сейвы.
+		StoragePathReader* storagePathReader = new StoragePathReader();
 
 		// Делаем инъекцию зависимостей.
 		jsListener->inject(
 			eventManager,
 			app,
 			timer,
-			jsExecutor
+			jsExecutor,
+			saveFileManager
 		);
 		app->inject(
 			eventManager,
@@ -117,7 +122,10 @@ namespace QspLibWinRT
 			stringConverter
 		);
 		threadManager->inject(threadApi);
-		configurationBuilder->inject(gameFileManager);
+		configurationBuilder->inject(
+			gameFileManager,
+			storagePathReader
+		);
 		gameFileManager->inject(applicationPathReader);
 		jsonSerializer->inject(stringConverter);
 		pathConverter->inject(applicationPathReader);
@@ -126,6 +134,8 @@ namespace QspLibWinRT
 			fileSystemManager
 		);
 		fileSystemManager->inject(fileSystemApi);
+		applicationPathReader->inject(stringConverter);
+		storagePathReader->inject(stringConverter);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

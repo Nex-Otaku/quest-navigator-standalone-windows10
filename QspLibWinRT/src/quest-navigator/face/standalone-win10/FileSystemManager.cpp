@@ -21,7 +21,7 @@ namespace QuestNavigator {
 		this->fileSystemApi = fileSystemApi;
 	}
 
-	// Создаём папки
+	// РЎРѕР·РґР°С‘Рј РїР°РїРєРё
 	bool FileSystemManager::buildDirectoryPath(string path)
 	{
 		//if (dirExists(path)) {

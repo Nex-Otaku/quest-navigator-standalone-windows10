@@ -15,7 +15,7 @@ namespace QuestNavigator
 
 		void inject(ApplicationPathReader* applicationPathReader);
 
-		// Путь к файлу игры по умолчанию для standalone-приложения.
+		// РџСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РёРіСЂС‹ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ standalone-РїСЂРёР»РѕР¶РµРЅРёСЏ.
 		string getDefaultGameFilePath();
 
 	private:

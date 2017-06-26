@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "SaveFileManager.h"
 #include <string>
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
@@ -30,9 +30,11 @@ namespace QuestNavigator {
 
 	bool SaveFileManager::readSaveFile(string relativePath, bool refresh)
 	{
+		showError("SaveFileManager::readSaveFile");
+
 		string saveFile = getFullSavePath(relativePath);
 		if (!fileExists(saveFile)) {
-			showError("ÕÂ Ì‡È‰ÂÌ Ù‡ÈÎ ÒÓı‡ÌÂÌËˇ");
+			showError("–ù–µ –Ω–∞–π–¥–µ–Ω —Ñ–∞–π–ª —Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏—è");
 			return false;
 		}
 		QSP_BOOL isRefresh = refresh ? QSP_TRUE : QSP_FALSE;
@@ -43,15 +45,47 @@ namespace QuestNavigator {
 
 	bool SaveFileManager::writeSaveFile(string relativePath)
 	{
+		showError("SaveFileManager::writeSaveFile");
 		string saveDir = Configuration::getString(ecpSaveDir);
 		if (!dirExists(saveDir) && !fileSystemManager->buildDirectoryPath(saveDir)) {
-			showError("ÕÂ Û‰‡ÎÓÒ¸ ÒÓÁ‰‡Ú¸ Ô‡ÔÍÛ ‰Îˇ ÒÓı‡ÌÂÌËˇ: " + saveDir);
+			showError("–ù–µ —É–¥–∞–ª–æ—Å—å —Å–æ–∑–¥–∞—Ç—å –ø–∞–ø–∫—É –¥–ª—è —Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏—è: " + saveDir);
 			return false;
 		}
 		string saveFile = getFullSavePath(relativePath);
 		QSP_BOOL res = QSPSaveGame(widen(saveFile).c_str(), QSP_FALSE);
 		library->CheckQspResult(res, "QSPSaveGame");
 		return res == QSP_TRUE;
+	}
+
+	SaveSlotsDto SaveFileManager::getSaveSlots(bool open)
+	{
+		//–ö–æ–Ω—Ç–µ–∫—Å—Ç UI
+		SaveSlotsDto dto;
+		vector<string> slots;
+
+		showError("SaveFileManager::getSaveSlots");
+
+		int maxSlots = Configuration::getInt(ecpSaveSlotMax);
+		for (int i = 0; i < maxSlots; i++)
+		{
+			string title;
+			string slotname = to_string(i + 1) + ".sav";
+			string slotpath = getFullSavePath(slotname);
+			showError("SaveFileManager::getSaveSlots slotpath: " + slotpath);
+			if (fileExists(slotpath)) {
+				title = to_string(i + 1);
+			}
+			else {
+				title = "-empty-";
+			}
+
+			slots.push_back(title);
+		}
+
+		dto.open = open;
+		dto.slots = slots;
+
+		return dto;
 	}
 
 	string SaveFileManager::getFullSavePath(string relativePath)

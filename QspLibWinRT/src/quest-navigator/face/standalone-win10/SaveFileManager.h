@@ -7,8 +7,8 @@
 using namespace std;
 
 namespace QuestNavigator {
-	// Объявляем класс, чтобы избежать циклической зависимости.
-	// Класс будет определён позже в соответствующем заголовочном файле.
+	// РћР±СЉСЏРІР»СЏРµРј РєР»Р°СЃСЃ, С‡С‚РѕР±С‹ РёР·Р±РµР¶Р°С‚СЊ С†РёРєР»РёС‡РµСЃРєРѕР№ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё.
+	// РљР»Р°СЃСЃ Р±СѓРґРµС‚ РѕРїСЂРµРґРµР»С‘РЅ РїРѕР·Р¶Рµ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРј Р·Р°РіРѕР»РѕРІРѕС‡РЅРѕРј С„Р°Р№Р»Рµ.
 	class Library;
 
 	class SaveFileManager
@@ -24,6 +24,7 @@ namespace QuestNavigator {
 
 		bool readSaveFile(string relativePath, bool refresh);
 		bool writeSaveFile(string relativePath);
+		SaveSlotsDto getSaveSlots(bool open);
 
 	private:
 		Library* library;

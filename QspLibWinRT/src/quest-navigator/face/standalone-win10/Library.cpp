@@ -275,6 +275,7 @@ namespace QuestNavigator
 					break;
 				case evLoadSlotSelected:
 					{
+						showError("Library evLoadSlotSelected");
 						SharedDataDto dto = library->eventManager->getSharedData(evLoadSlotSelected);
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
@@ -301,6 +302,7 @@ namespace QuestNavigator
 					break;
 				case evSaveSlotSelected:
 					{
+						showError("Library evSaveSlotSelected");
 						SharedDataDto dto = library->eventManager->getSharedData(evSaveSlotSelected);
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
