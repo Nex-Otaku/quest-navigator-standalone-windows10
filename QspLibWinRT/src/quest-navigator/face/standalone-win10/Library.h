@@ -9,6 +9,10 @@
 
 namespace QuestNavigator
 {
+	// Объявляем класс, чтобы избежать циклической зависимости.
+	// Класс будет определён позже в соответствующем заголовочном файле.
+	class SaveFileManager;
+
 	class Library
 	{
 	public:

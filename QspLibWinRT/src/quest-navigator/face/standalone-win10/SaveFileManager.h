@@ -7,6 +7,10 @@
 using namespace std;
 
 namespace QuestNavigator {
+	// ќбъ€вл€ем класс, чтобы избежать циклической зависимости.
+	//  ласс будет определЄн позже в соответствующем заголовочном файле.
+	class Library;
+
 	class SaveFileManager
 	{
 	public:

@@ -29,13 +29,15 @@ namespace QuestNavigator
 		EventManager* eventManager,
 		Timer* timer,
 		JsExecutor* jsExecutor,
-		ThreadManager* threadManager
+		ThreadManager* threadManager,
+		SaveFileManager* saveFileManager
 	)
 	{
 		this->eventManager = eventManager;
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
 		this->threadManager = threadManager;
+		this->saveFileManager = saveFileManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
