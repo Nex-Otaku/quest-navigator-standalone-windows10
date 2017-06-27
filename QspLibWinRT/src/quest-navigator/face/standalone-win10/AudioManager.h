@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include "PathConverter.h"
 #include "PlaybackListener.h"
+#include "..\..\platform\windows10\StringConverter.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -23,8 +23,8 @@ namespace QuestNavigator {
 		~AudioManager();
 
 		void inject(
-			PathConverter* pathConverter,
-			PlaybackListener^ playbackListener
+			PlaybackListener^ playbackListener,
+			StringConverter* stringConverter
 		);
 
 		bool init();
@@ -37,8 +37,8 @@ namespace QuestNavigator {
 
 		void OnSourceChanged(MediaPlayer^, Platform::Object^);
 	private:
-		PathConverter* pathConverter;
 		PlaybackListener^ playbackListener;
+		StringConverter* stringConverter;
 
 
 		MediaPlayer^ player;

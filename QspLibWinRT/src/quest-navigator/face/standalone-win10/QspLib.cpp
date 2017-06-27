@@ -147,8 +147,8 @@ namespace QspLibWinRT
 		applicationPathReader->inject(stringConverter);
 		storagePathReader->inject(stringConverter);
 		audioManager->inject(
-			pathConverter,
-			playbackListener
+			playbackListener,
+			stringConverter
 		);
 
 		// Сохраняем публичное свойство 

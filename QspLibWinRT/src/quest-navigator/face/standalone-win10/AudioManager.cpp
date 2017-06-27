@@ -3,6 +3,7 @@
 #include <string>
 #include "..\..\core\dialogs.h"
 #include "PlaybackListener.h"
+#include "..\..\core\strings.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -19,12 +20,12 @@ namespace QuestNavigator {
 	}
 
 	void AudioManager::inject(
-		PathConverter* pathConverter,
-		PlaybackListener^ playbackListener
+		PlaybackListener^ playbackListener,
+		StringConverter* stringConverter
 	)
 	{
-		this->pathConverter = pathConverter;
 		this->playbackListener = playbackListener;
+		this->stringConverter = stringConverter;
 	}
 
 	bool AudioManager::init()
@@ -68,21 +69,10 @@ namespace QuestNavigator {
 
 	void AudioManager::play(string file, int volume)
 	{
-		// STUB
 		showError("AudioManager::play: [" + file + "] with volume " + std::to_string(volume));
-		//MediaPlayer^ player = ref new MediaPlayer();
 
 		player = ref new MediaPlayer();
 
-		//Windows::Media::Playback::
-		//player->SourceChanged += ref new Windows::Foundation::EventHandler<
-		//	Windows::UI::Core::SourceChangedEventArgs^>(
-		//		this, &AudioManager::OnSourceChanged);
-		//}
-		//Windows::Media::Playback::MediaPlayerDataReceivedEventArgs
-		//Windows::Media::Playback::MediaPlayerSourceChangedEventArgs
-		
-		
 		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
 			playbackListener, &PlaybackListener::OnSourceChanged);
 
@@ -101,14 +91,10 @@ namespace QuestNavigator {
 
 
 		player->Source = MediaSource::CreateFromUri(ref new Uri(
-			//"ms-appx:///Assets/example_video.mkv"
-			"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
-			//"ms-appx:///../standalone_content/music/EpicLoop.mp3" ???
-			//"ms-appx-web:///../standalone_content/music/EpicLoop.mp3" ???
-			//"ms-appx-web:///game/standalone_content/music/EpicLoop.mp3"
-			//"ms-appx-web:///standalone_content/music/EpicLoop.mp3"
-			// "../standalone_content/music/EpicLoop.mp3" - вешает плеер
-			//"../standalone_content/music/EpicLoop.mp3"
+			//"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
+			stringConverter->convertStdToUwp(
+				getUriFromFileName("music/EpicLoop.mp3")
+			)
 		));
 		player->Play();
 	}
@@ -145,7 +131,6 @@ namespace QuestNavigator {
 
 	string AudioManager::getUriFromFileName(string file)
 	{
-
-		return string();
+		return "ms-appx:///game/standalone_content/" + backslashToSlash(file);
 	}
 }
