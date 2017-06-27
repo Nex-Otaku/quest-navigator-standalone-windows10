@@ -345,6 +345,7 @@
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\midi.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -598,5 +599,6 @@
     <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\midi.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h" />
   </ItemGroup>
 </Project>

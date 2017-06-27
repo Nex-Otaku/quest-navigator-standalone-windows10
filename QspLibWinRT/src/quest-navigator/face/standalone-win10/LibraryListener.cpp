@@ -15,6 +15,7 @@
 #include "..\..\core\dto\MenuItemDto.h"
 #include "Library.h"
 #include "Constants.h"
+#include "AudioManager.h"
 
 namespace QuestNavigator
 {
@@ -30,7 +31,8 @@ namespace QuestNavigator
 		EventManager* eventManager,
 		Library* library,
 		PathConverter* pathConverter,
-		SaveFileManager* saveFileManager
+		SaveFileManager* saveFileManager,
+		AudioManager* audioManager
 	)
 	{
 		this->jsExecutor = jsExecutor;
@@ -39,6 +41,7 @@ namespace QuestNavigator
 		this->library = library;
 		this->pathConverter = pathConverter;
 		this->saveFileManager = saveFileManager;
+		this->audioManager = audioManager;
 	}
 
 	LibraryListener::LibraryListener()

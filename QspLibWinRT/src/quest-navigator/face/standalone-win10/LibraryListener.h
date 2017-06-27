@@ -8,6 +8,7 @@
 #include "Library.h"
 #include "PathConverter.h"
 #include "SaveFileManager.h"
+#include "AudioManager.h"
 
 namespace QuestNavigator
 {
@@ -25,7 +26,8 @@ namespace QuestNavigator
 			EventManager* eventManager,
 			Library* library,
 			PathConverter* pathConverter,
-			SaveFileManager* saveFileManager
+			SaveFileManager* saveFileManager,
+			AudioManager* audioManager
 		);
 
 		// ********************************************************************
@@ -87,5 +89,6 @@ namespace QuestNavigator
 		Library* library;
 		PathConverter* pathConverter;
 		SaveFileManager* saveFileManager;
+		AudioManager* audioManager;
 	};
 }

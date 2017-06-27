@@ -13,6 +13,7 @@
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
 #include "..\..\platform\windows10\ThreadEmulation.h"
+#include "AudioManager.h"
 
 namespace QuestNavigator
 {
@@ -30,7 +31,8 @@ namespace QuestNavigator
 		Timer* timer,
 		JsExecutor* jsExecutor,
 		ThreadManager* threadManager,
-		SaveFileManager* saveFileManager
+		SaveFileManager* saveFileManager,
+		AudioManager* audioManager
 	)
 	{
 		this->eventManager = eventManager;
@@ -38,6 +40,7 @@ namespace QuestNavigator
 		this->jsExecutor = jsExecutor;
 		this->threadManager = threadManager;
 		this->saveFileManager = saveFileManager;
+		this->audioManager = audioManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
