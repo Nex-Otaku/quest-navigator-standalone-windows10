@@ -54,7 +54,6 @@ namespace QuestNavigator
 
 	void JsListener::loadGame()
 	{
-		showError("JsListener::loadGame");
 		// Контекст UI
 
 		// Останавливаем таймер
@@ -67,7 +66,6 @@ namespace QuestNavigator
 
 	void JsListener::saveGame()
 	{
-		showError("JsListener::saveGame");
 		// Контекст UI
 
 		// Останавливаем таймер
@@ -80,7 +78,6 @@ namespace QuestNavigator
 
 	void JsListener::saveSlotSelected(int index, int mode)
 	{
-		showError("JsListener::saveSlotSelected");
 		// Контекст UI
 
 		// Если номер слота "-1", 

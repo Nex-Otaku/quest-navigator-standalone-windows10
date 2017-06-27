@@ -30,8 +30,6 @@ namespace QuestNavigator {
 
 	bool SaveFileManager::readSaveFile(string relativePath, bool refresh)
 	{
-		showError("SaveFileManager::readSaveFile");
-
 		string saveFile = getFullSavePath(relativePath);
 		if (!fileExists(saveFile)) {
 			showError("Не найден файл сохранения");
@@ -45,7 +43,6 @@ namespace QuestNavigator {
 
 	bool SaveFileManager::writeSaveFile(string relativePath)
 	{
-		showError("SaveFileManager::writeSaveFile");
 		string saveDir = Configuration::getString(ecpSaveDir);
 		if (!fileSystemManager->directoryExists(saveDir) && !fileSystemManager->buildDirectoryPath(saveDir)) {
 			showError("Не удалось создать папку для сохранения: " + saveDir);
@@ -63,15 +60,12 @@ namespace QuestNavigator {
 		SaveSlotsDto dto;
 		vector<string> slots;
 
-		showError("SaveFileManager::getSaveSlots");
-
 		int maxSlots = Configuration::getInt(ecpSaveSlotMax);
 		for (int i = 0; i < maxSlots; i++)
 		{
 			string title;
 			string slotname = to_string(i + 1) + ".sav";
 			string slotpath = getFullSavePath(slotname);
-			showError("SaveFileManager::getSaveSlots slotpath: " + slotpath);
 			if (fileExists(slotpath)) {
 				title = to_string(i + 1);
 			}

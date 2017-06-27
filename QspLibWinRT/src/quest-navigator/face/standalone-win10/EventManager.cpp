@@ -78,8 +78,6 @@ namespace QuestNavigator
 
 	void EventManager::saveSlotSelected(int index)
 	{
-		showError("EventManager::saveSlotSelected");
-
 		// Контекст UI
 		if (!checkForSingleEvent(evLibIsReady)) {
 			return;

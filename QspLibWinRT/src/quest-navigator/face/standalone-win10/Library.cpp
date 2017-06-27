@@ -70,7 +70,6 @@ namespace QuestNavigator
 			//exit(eecFailToBeginLibThread);
 			return;
 		}
-		showError("StartLibThread: success, libThread created");
 	}
 
 	// Остановка потока библиотеки. Вызывается только раз при завершении программы.
@@ -275,25 +274,16 @@ namespace QuestNavigator
 					break;
 				case evLoadSlotSelected:
 					{
-						showError("Library evLoadSlotSelected");
 						SharedDataDto dto = library->eventManager->getSharedData(evLoadSlotSelected);
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
 	
-						//string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
 						string path = to_string(index) + ".sav";
-						//if (!fileExists(path)) {
-						//	showError("Library::libThreadFunc Не найден файл сохранения");
-						//	break;
-						//}
 	
 						// Выключаем музыку
 						LibraryListener::CloseFile(NULL);
 	
 						// Загружаем сохранение
-						//QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
-						//library->CheckQspResult(res, "QSPOpenSavedGame");
-
 						library->saveFileManager->readSaveFile(path, true);
 	
 						// Запускаем таймер
@@ -302,29 +292,14 @@ namespace QuestNavigator
 					break;
 				case evSaveSlotSelected:
 					{
-						showError("Library evSaveSlotSelected");
 						SharedDataDto dto = library->eventManager->getSharedData(evSaveSlotSelected);
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
 
-						// STUB
-
-						//string saveDir = Configuration::getString(ecpSaveDir);
-						//string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
 						string path = to_string(index) + ".sav";
 
+						// Записываем сохранение.
 						library->saveFileManager->writeSaveFile(path);
-	
-						//string saveDir = Configuration::getString(ecpSaveDir);
-						//if (!dirExists(saveDir) && !library->fileSystemManager->buildDirectoryPath(saveDir)) {
-						//	showError("Library::libThreadFunc Не удалось создать папку для сохранения: " + saveDir);
-						//	break;
-						//}
-	
-						//string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
-	
-						//QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
-						//library->CheckQspResult(res, "QSPSaveGame");
 	
 						library->timer->startTimer();
 					}
