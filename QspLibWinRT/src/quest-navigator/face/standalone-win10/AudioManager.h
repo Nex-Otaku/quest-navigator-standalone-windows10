@@ -2,6 +2,7 @@
 
 #include <string>
 #include "PathConverter.h"
+#include "PlaybackListener.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -21,7 +22,10 @@ namespace QuestNavigator {
 		AudioManager();
 		~AudioManager();
 
-		void inject(PathConverter* pathConverter);
+		void inject(
+			PathConverter* pathConverter,
+			PlaybackListener^ playbackListener
+		);
 
 		bool init();
 		void deinit();
@@ -34,6 +38,7 @@ namespace QuestNavigator {
 		void OnSourceChanged(MediaPlayer^, Platform::Object^);
 	private:
 		PathConverter* pathConverter;
+		PlaybackListener^ playbackListener;
 
 
 		vector<ContainerMusic> vecMusic;

@@ -20,6 +20,7 @@
 #include "..\..\platform\windows10\ApplicationPathReader.h"
 #include "..\..\platform\windows10\StoragePathReader.h"
 #include "AudioManager.h"
+#include "PlaybackListener.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -80,6 +81,8 @@ namespace QspLibWinRT
 		StoragePathReader* storagePathReader = new StoragePathReader();
 		// Создаём объект для воспроизведения звуковых файлов.
 		AudioManager* audioManager = new AudioManager();
+		// Создаём объект для прослушивания событий воспроизведения.
+		PlaybackListener^ playbackListener = ref new PlaybackListener();
 
 		// Делаем инъекцию зависимостей.
 		jsListener->inject(
@@ -143,6 +146,10 @@ namespace QspLibWinRT
 		);
 		applicationPathReader->inject(stringConverter);
 		storagePathReader->inject(stringConverter);
+		audioManager->inject(
+			pathConverter,
+			playbackListener
+		);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрипте

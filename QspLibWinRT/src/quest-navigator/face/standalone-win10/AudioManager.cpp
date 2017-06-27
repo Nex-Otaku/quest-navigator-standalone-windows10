@@ -2,6 +2,7 @@
 #include "AudioManager.h"
 #include <string>
 #include "..\..\core\dialogs.h"
+#include "PlaybackListener.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -17,9 +18,13 @@ namespace QuestNavigator {
 	{
 	}
 
-	void AudioManager::inject(PathConverter* pathConverter)
+	void AudioManager::inject(
+		PathConverter* pathConverter,
+		PlaybackListener^ playbackListener
+	)
 	{
 		this->pathConverter = pathConverter;
+		this->playbackListener = playbackListener;
 	}
 
 	bool AudioManager::init()
