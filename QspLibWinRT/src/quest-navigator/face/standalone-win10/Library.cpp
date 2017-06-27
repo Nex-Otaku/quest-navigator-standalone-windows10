@@ -134,9 +134,9 @@ namespace QuestNavigator
 		bool bShutdown = false;
 	
 		// Запускаем движок Audiere для проигрывания звуковых файлов
-		//if (!SoundManager::init()) {
-		//	bShutdown = true;
-		//}
+		if (!library->audioManager->init()) {
+			bShutdown = true;
+		}
 	
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
@@ -333,7 +333,7 @@ namespace QuestNavigator
 	
 		// Останавливаем звуковой движок
 		library->audioManager->closeAll();
-		//SoundManager::deinit();
+		library->audioManager->deinit();
 	
 		// Завершаем работу библиотеки
 		QSPDeInit();
