@@ -81,8 +81,13 @@ namespace QuestNavigator {
 		//Windows::Media::Playback::MediaPlayerSourceChangedEventArgs
 		
 		
-		//player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-		//		this, &AudioManager::OnSourceChanged);
+		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				playbackListener, &PlaybackListener::OnSourceChanged);
+
+		//MediaEnded
+		//	MediaFailed
+		//	MediaOpened
+		//	VolumeChanged
 
 
 
