@@ -47,7 +47,7 @@ namespace QuestNavigator {
 	{
 		showError("SaveFileManager::writeSaveFile");
 		string saveDir = Configuration::getString(ecpSaveDir);
-		if (!dirExists(saveDir) && !fileSystemManager->buildDirectoryPath(saveDir)) {
+		if (!fileSystemManager->directoryExists(saveDir) && !fileSystemManager->buildDirectoryPath(saveDir)) {
 			showError("Не удалось создать папку для сохранения: " + saveDir);
 			return false;
 		}

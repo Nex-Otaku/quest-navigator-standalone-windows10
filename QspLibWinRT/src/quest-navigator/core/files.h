@@ -14,8 +14,9 @@ namespace QuestNavigator {
 	//string getContentUrl();
 	// Проверяем файл на существование и читаемость
 	bool fileExists(string path);
-	// Проверяем папку на существование и читаемость
-	bool dirExists(string path);
+	//// Проверяем папку на существование и читаемость
+	// !!! Перенесено в FileSystemManager
+	//bool dirExists(string path);
 	// Получаем путь к папке плеера
 	string getPlayerDir();
 	//// Преобразовываем путь к файлу сохранения

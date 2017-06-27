@@ -45,13 +45,14 @@ namespace QuestNavigator {
 			!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 	}
 
-	// Проверяем папку на существование и читаемость
-	bool dirExists(string path)
-	{
-		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
-		return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
-			(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-	}
+	//// Проверяем папку на существование и читаемость
+	// !!! Перенесено в FileSystemManager
+	//bool dirExists(string path)
+	//{
+	//	DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
+	//	return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
+	//		(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+	//}
 
 	// Получаем путь к папке плеера
 	string getPlayerDir()

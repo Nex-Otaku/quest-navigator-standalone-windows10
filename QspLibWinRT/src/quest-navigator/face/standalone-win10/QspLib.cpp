@@ -14,7 +14,7 @@
 #include "GameFileManager.h"
 #include "JsonSerializer.h"
 #include "PathConverter.h"
-#include "..\..\platform\windows10\FileSystemApi.h"
+#include "..\..\platform\windows10\FileSystemApiWin32.h"
 #include "FileSystemManager.h"
 #include "SaveFileManager.h"
 #include "..\..\platform\windows10\ApplicationPathReader.h"
@@ -69,8 +69,8 @@ namespace QspLibWinRT
 		PathConverter* pathConverter = new PathConverter();
 		// Создаём объект для чтения пути приложения.
 		ApplicationPathReader* applicationPathReader = new ApplicationPathReader();
-		// Создаём объект для платформенной обёртки функций файловой системы.
-		FileSystemApi* fileSystemApi = new FileSystemApi();
+		// Создаём объект для платформенной обёртки функций файловой системы для Windows32 API.
+		FileSystemApiWin32* fileSystemApiWin32 = new FileSystemApiWin32();
 		// Создаём объект для управления файловой системой.
 		FileSystemManager* fileSystemManager = new FileSystemManager();
 		// Создаём объект для управления сейвами.
@@ -133,7 +133,9 @@ namespace QspLibWinRT
 			library,
 			fileSystemManager
 		);
-		fileSystemManager->inject(fileSystemApi);
+		fileSystemManager->inject(
+			fileSystemApiWin32
+		);
 		applicationPathReader->inject(stringConverter);
 		storagePathReader->inject(stringConverter);
 
