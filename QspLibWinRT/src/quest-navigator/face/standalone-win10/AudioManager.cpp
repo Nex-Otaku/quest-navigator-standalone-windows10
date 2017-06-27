@@ -70,7 +70,9 @@ namespace QuestNavigator {
 	{
 		// STUB
 		showError("AudioManager::play: [" + file + "] with volume " + std::to_string(volume));
-		MediaPlayer^ player = ref new MediaPlayer();
+		//MediaPlayer^ player = ref new MediaPlayer();
+
+		player = ref new MediaPlayer();
 
 		//Windows::Media::Playback::
 		//player->SourceChanged += ref new Windows::Foundation::EventHandler<
@@ -101,7 +103,12 @@ namespace QuestNavigator {
 		player->Source = MediaSource::CreateFromUri(ref new Uri(
 			//"ms-appx:///Assets/example_video.mkv"
 			"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
-			//"ms-appx:///../standalone_content/music/EpicLoop.mp3"
+			//"ms-appx:///../standalone_content/music/EpicLoop.mp3" ???
+			//"ms-appx-web:///../standalone_content/music/EpicLoop.mp3" ???
+			//"ms-appx-web:///game/standalone_content/music/EpicLoop.mp3"
+			//"ms-appx-web:///standalone_content/music/EpicLoop.mp3"
+			// "../standalone_content/music/EpicLoop.mp3" - вешает плеер
+			//"../standalone_content/music/EpicLoop.mp3"
 		));
 		player->Play();
 	}

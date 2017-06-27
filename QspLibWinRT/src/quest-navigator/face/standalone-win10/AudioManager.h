@@ -41,6 +41,8 @@ namespace QuestNavigator {
 		PlaybackListener^ playbackListener;
 
 
+		MediaPlayer^ player;
+
 		vector<ContainerMusic> vecMusic;
 		bool muted;
 		bool cacheEnabled;
