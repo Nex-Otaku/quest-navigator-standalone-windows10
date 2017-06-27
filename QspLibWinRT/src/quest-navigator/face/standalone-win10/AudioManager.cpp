@@ -74,8 +74,12 @@ namespace QuestNavigator {
 		//}
 		//Windows::Media::Playback::MediaPlayerDataReceivedEventArgs
 		//Windows::Media::Playback::MediaPlayerSourceChangedEventArgs
-		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				this, &AudioManager::OnSourceChanged);
+		
+		
+		//player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+		//		this, &AudioManager::OnSourceChanged);
+
+
 
 		player->Source = MediaSource::CreateFromUri(ref new Uri(
 			//"ms-appx:///Assets/example_video.mkv"
