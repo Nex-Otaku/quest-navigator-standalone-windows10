@@ -217,14 +217,13 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		string fileName = fromQsp(file);
-		//SoundManager::play(fileName, volume);
+		instance()->audioManager->play(fileName, volume);
 	}
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
 	{
 		//Контекст библиотеки
-		//bool isPlaying = SoundManager::isPlaying(fromQsp(file));
-		bool isPlaying = false;
+		bool isPlaying = instance()->audioManager->isPlaying(fromQsp(file));
 		return isPlaying ? QSP_TRUE : QSP_FALSE;
 	}
 	
@@ -232,7 +231,11 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		bool closeAll = file == NULL;
-		//SoundManager::close(closeAll, fromQsp(file));
+		if (closeAll) {
+			instance()->audioManager->closeAll();
+		} else {
+			instance()->audioManager->close(fromQsp(file));
+		}
 	}
 	
 	void LibraryListener::ShowPicture(QSP_CHAR* file)

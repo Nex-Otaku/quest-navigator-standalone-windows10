@@ -272,7 +272,7 @@ namespace QuestNavigator
 						// Включение / выключение звука
 						SharedDataDto dto = library->eventManager->getSharedData(evMute);
 						bool flag = dto.flag;
-						//SoundManager::mute(flag);
+						library->audioManager->mute(flag);
 					}
 					break;
 				case evLoadSlotSelected:
@@ -332,7 +332,7 @@ namespace QuestNavigator
 		}
 	
 		// Останавливаем звуковой движок
-		//SoundManager::close(true, "");
+		library->audioManager->closeAll();
 		//SoundManager::deinit();
 	
 		// Завершаем работу библиотеки
