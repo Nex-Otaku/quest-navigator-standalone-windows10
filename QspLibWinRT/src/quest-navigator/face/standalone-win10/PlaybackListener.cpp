@@ -11,7 +11,26 @@ namespace QuestNavigator {
 
 	void PlaybackListener::OnSourceChanged(MediaPlayer^ player, Platform::Object^ object)
 	{
-		//throw ref new Platform::NotImplementedException();
 		showError("OnSourceChanged");
+	}
+	
+	void PlaybackListener::OnMediaEnded(MediaPlayer^ player, Platform::Object^ object)
+	{
+		showError("OnMediaEnded");
+	}
+	
+	void PlaybackListener::OnMediaFailed(MediaPlayer^ player, MediaPlayerFailedEventArgs^ args)
+	{
+		showError("OnMediaFailed");
+	}
+	
+	void PlaybackListener::OnMediaOpened(MediaPlayer^ player, Platform::Object^ object)
+	{
+		showError("OnMediaOpened");
+	}
+	
+	void PlaybackListener::OnVolumeChanged(MediaPlayer^ player, Platform::Object^ object)
+	{
+		showError("OnVolumeChanged");
 	}
 }

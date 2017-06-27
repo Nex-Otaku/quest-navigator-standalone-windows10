@@ -82,18 +82,26 @@ namespace QuestNavigator {
 		
 		
 		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				playbackListener, &PlaybackListener::OnSourceChanged);
+			playbackListener, &PlaybackListener::OnSourceChanged);
 
-		//MediaEnded
-		//	MediaFailed
-		//	MediaOpened
-		//	VolumeChanged
+		player->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnMediaEnded);
+
+		player->MediaFailed += ref new TypedEventHandler<MediaPlayer^, Windows::Media::Playback::MediaPlayerFailedEventArgs^>(
+			playbackListener, &PlaybackListener::OnMediaFailed);
+
+		player->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnMediaOpened);
+
+		player->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnVolumeChanged);
 
 
 
 		player->Source = MediaSource::CreateFromUri(ref new Uri(
 			//"ms-appx:///Assets/example_video.mkv"
 			"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
+			//"ms-appx:///../standalone_content/music/EpicLoop.mp3"
 		));
 		player->Play();
 	}
