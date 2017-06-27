@@ -11,15 +11,17 @@ namespace QuestNavigator {
 	// Получаем URL из полного пути к файлу
 	string getUrlFromFilePath(string filePath);
 	// URL к содержимому
-	string getContentUrl();
+	//string getContentUrl();
 	// Проверяем файл на существование и читаемость
 	bool fileExists(string path);
-	// Проверяем папку на существование и читаемость
-	bool dirExists(string path);
+	//// Проверяем папку на существование и читаемость
+	// !!! Перенесено в FileSystemManager
+	//bool dirExists(string path);
 	// Получаем путь к папке плеера
 	string getPlayerDir();
-	// Преобразовываем путь к файлу сохранения
-	string getRealSaveFile(string file);
+	//// Преобразовываем путь к файлу сохранения
+	// Перенесено в SaveFileManager
+	//string getRealSaveFile(string file);
 	// Меняем слэши в пути к файлу в зависимости от системы
 	string getRightPath(string path);
 	// Преобразовываем относительный путь в абсолютный
@@ -28,8 +30,9 @@ namespace QuestNavigator {
 	string canonicalizePath(string path);
 	// Загружаем файл в память
 	bool loadFileToBuffer(string path, void** bufferPtr, int* bufferLength);
-	// Создаём папки
-	bool buildDirectoryPath(string path);
+	//// Создаём папки
+	// !!! Перенесено в FileSystemManager
+	//bool buildDirectoryPath(string path);
 	// Удаляем папку и всё её содержимое.
 	bool deleteDirectory(string path);
 	// Возвращаем список файлов
@@ -38,9 +41,9 @@ namespace QuestNavigator {
 	bool getFoldersList(string directory, vector<string>& list);
 	// Копируем файл
 	bool copyFile(string from, string to);
-	// Копируем дерево файлов
-	bool copyFileTree(string from, string to);
-	bool copyFileTree(string from, string to, string mask);
+	//// Копируем дерево файлов
+	//bool copyFileTree(string from, string to);
+	//bool copyFileTree(string from, string to, string mask);
 	// Ищем первый файл "*.qsp" в папке.
 	bool findGameFile(string dir, string &gameFileName);
 }

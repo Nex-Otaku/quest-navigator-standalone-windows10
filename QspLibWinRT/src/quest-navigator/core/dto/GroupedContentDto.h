@@ -28,5 +28,12 @@ namespace QuestNavigator
 		string vars;
 		vector<obj> objs;
 		string js;
+
+		bool skinPrepared;
+		bool mainDescPrepared;
+		bool actsPrepared;
+		bool objsPrepared;
+		bool varsDescPrepared;
+		bool jsCmdPrepared;
 	};
 }

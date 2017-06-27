@@ -10,6 +10,8 @@ var qspLibMode = "WINDOWS10";       // "AIR", "PHONEGAP", "AWESOMIUM" - уста
 
 var QspLib = null;
 
+var debugMode = false;
+
 $(function () {
     // При загрузке документа, запускаем приложение.
     onDocumentReady();
@@ -17,7 +19,9 @@ $(function () {
 
 function log(text)
 {
-    $('#debug').append(text + '<br>');
+    if (debugMode) {
+        $('#debug').append(text + '<br>');
+    }
 }
 
 function onDocumentReady() {
@@ -80,6 +84,7 @@ function debugCallbackHandler(params) {
 function setGroupedContentCallbackHandler(groupedContent) {
     var jsGroupedContent = JSON.parse(groupedContent.target.toString());
     qspSetGroupedContent(jsGroupedContent);
+    //log('debug: ' + groupedContent.target.toString());
 }
 
 function showSaveSlotsDialogCallbackHandler(saveSlots) {
@@ -120,11 +125,14 @@ function setInputStringCallbackHandler(text) {
 // *******************************************************************
 
 function interceptExecLink(event) {
-    var link = $(this).attr('href');
-    if (link.toUpperCase().startsWith('EXEC:')) {
-        event.preventDefault();
-        var code = link.substr(5);
-        QspLib.execLink(code);
-        return false;
+    var anchor = $(this).closest('a');
+    if (anchor.length > 0) {
+        var link = anchor.attr('href');
+        if ((typeof link != 'undefined') && (link.toUpperCase().startsWith('EXEC:'))) {
+            event.preventDefault();
+            var code = link.substr(5);
+            QspLib.execLink(code);
+            return false;
+        }
     }
 }

@@ -5,9 +5,14 @@
 #include "Timer.h"
 #include "JsExecutor.h"
 #include "..\..\platform\windows10\ThreadManager.h"
+#include "SaveFileManager.h"
 
 namespace QuestNavigator
 {
+	// Объявляем класс, чтобы избежать циклической зависимости.
+	// Класс будет определён позже в соответствующем заголовочном файле.
+	class SaveFileManager;
+
 	class Library
 	{
 	public:
@@ -18,7 +23,8 @@ namespace QuestNavigator
 			EventManager* eventManager,
 			Timer* timer,
 			JsExecutor* jsExecutor,
-			ThreadManager* threadManager
+			ThreadManager* threadManager,
+			SaveFileManager* saveFileManager
 		);
 
 		// ********************************************************************
@@ -38,6 +44,7 @@ namespace QuestNavigator
 		Timer* timer;
 		JsExecutor* jsExecutor;
 		ThreadManager* threadManager;
+		SaveFileManager* saveFileManager;
 
 		HANDLE libThread;
 

@@ -6,6 +6,8 @@
 #include "EventManager.h"
 #include "..\..\core\dto\MenuItemDto.h"
 #include "Library.h"
+#include "PathConverter.h"
+#include "SaveFileManager.h"
 
 namespace QuestNavigator
 {
@@ -21,7 +23,9 @@ namespace QuestNavigator
 			JsExecutor* jsExecutor,
 			Timer* timer,
 			EventManager* eventManager,
-			Library* library
+			Library* library,
+			PathConverter* pathConverter,
+			SaveFileManager* saveFileManager
 		);
 
 		// ********************************************************************
@@ -81,5 +85,7 @@ namespace QuestNavigator
 		Timer* timer;
 		EventManager* eventManager;
 		Library* library;
+		PathConverter* pathConverter;
+		SaveFileManager* saveFileManager;
 	};
 }

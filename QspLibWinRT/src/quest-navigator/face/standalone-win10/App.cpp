@@ -175,29 +175,4 @@ namespace QuestNavigator
 		}
 		eventManager->executeCode(qspCode);
 	}
-
-	SaveSlotsDto App::getSaveSlots(bool open)
-	{
-		//Контекст UI
-		SaveSlotsDto dto;
-		vector<string> slots;
-
-		int maxSlots = Configuration::getInt(ecpSaveSlotMax);
-		for (int i = 0; i < maxSlots; i++)
-		{
-			string title;
-			string slotname = to_string(i + 1) + ".sav";
-			string slotpath = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + slotname);
-			if (fileExists(slotpath))
-				title = to_string(i + 1);
-			else
-				title = "-empty-";
-			slots.push_back(title);
-		}
-
-		dto.open = open;
-		dto.slots = slots;
-
-		return dto;
-	}
 }

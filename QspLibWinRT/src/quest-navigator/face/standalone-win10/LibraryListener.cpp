@@ -28,13 +28,17 @@ namespace QuestNavigator
 		JsExecutor* jsExecutor,
 		Timer* timer,
 		EventManager* eventManager,
-		Library* library
+		Library* library,
+		PathConverter* pathConverter,
+		SaveFileManager* saveFileManager
 	)
 	{
 		this->jsExecutor = jsExecutor;
 		this->timer = timer;
 		this->eventManager = eventManager;
 		this->library = library;
+		this->pathConverter = pathConverter;
+		this->saveFileManager = saveFileManager;
 	}
 
 	LibraryListener::LibraryListener()
@@ -153,7 +157,15 @@ namespace QuestNavigator
 			jsExecBuffer = "";
 			bJsCmdPrepared = true;
 		}
-	
+
+		// Заполняем флаги.
+		groupedContent.skinPrepared = bSkinPrepared;
+		groupedContent.mainDescPrepared = bMainDescPrepared;
+		groupedContent.actsPrepared = bActsPrepared;
+		groupedContent.objsPrepared = bObjsPrepared;
+		groupedContent.varsDescPrepared = bVarsDescPrepared;
+		groupedContent.jsCmdPrepared = bJsCmdPrepared;
+
 		// Передаем собранные данные в яваскрипт
 		if (bSkinPrepared || bMainDescPrepared || bActsPrepared || bObjsPrepared || bVarsDescPrepared ||
 			bJsCmdPrepared)
@@ -223,7 +235,7 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		string fileName = getRightPath(fromQsp(file));
-	
+
 		// Проверяем читаемость файла.
 		// Если файл не существует или не читается, выходим.
 		if (fileName.length() > 0) {
@@ -231,6 +243,10 @@ namespace QuestNavigator
 				showError("Оператор VIEW. Не найден файл: " + fileName);
 				return;
 			}
+			
+			// Билиотека возвращает абсолютный путь к файлу.
+			// Но для отображения в HTML нам требуется относительный URL.
+			fileName = instance()->pathConverter->absolutePathToRelativeUrl(fileName);
 		}
 	
 		// "Пустое" имя файла тоже имеет значение - так мы скрываем картинку
@@ -383,11 +399,8 @@ namespace QuestNavigator
 			// Нас это не устраивает, 
 			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
 			// Поэтому мы меняем путь, заданный библиотекой, на свой.
-			string saveFile = getRealSaveFile(fromQsp(file));
-			if (fileExists(saveFile)) {
-				QSP_BOOL res = QSPOpenSavedGame(widen(saveFile).c_str(), QSP_FALSE);
-				instance()->library->CheckQspResult(res, "QSPOpenSavedGame");
-			}
+			string relativePath = instance()->pathConverter->absolutePathToRelativePath(fromQsp(file));
+			instance()->saveFileManager->readSaveFile(relativePath, false);
 		} else {
 			jsExecBuffer = jsExecBuffer + ";qspLoadGame();";
 		}
@@ -397,11 +410,6 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		if (file != 0) {
-			string saveDir = Configuration::getString(ecpSaveDir);
-			if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-				showError("Не удалось создать папку для сохранения: " + saveDir);
-				return;
-			}
 			// Библиотека возвращает абсолютный путь к файлу сохранения,
 			// вычисляемый по пути к файлу игры.
 			// Таким образом, если игра запущена из пути "D:\CoolGame\game.qsp",
@@ -412,9 +420,8 @@ namespace QuestNavigator
 			// Нас это не устраивает, 
 			// нам нужно, чтобы сейвы хранились в отдельном безопасном месте.
 			// Поэтому мы меняем путь, заданный библиотекой, на свой.
-			string saveFile = getRealSaveFile(fromQsp(file));
-			QSP_BOOL res = QSPSaveGame(widen(saveFile).c_str(), QSP_FALSE);
-			instance()->library->CheckQspResult(res, "QSPSaveGame");
+			string relativePath = instance()->pathConverter->absolutePathToRelativePath(fromQsp(file));
+			instance()->saveFileManager->writeSaveFile(relativePath);
 		} else {
 			jsExecBuffer = jsExecBuffer + ";qspSaveGame();";
 		}

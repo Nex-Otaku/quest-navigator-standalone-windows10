@@ -339,6 +339,12 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PathConverter.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ApplicationPathReader.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\SaveFileManager.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\FileSystemManager.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\StoragePathReader.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -586,5 +592,11 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h">
       <Filter>quest-navigator\face\standalone-win10</Filter>
     </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ApplicationPathReader.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\SaveFileManager.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\StoragePathReader.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.h" />
   </ItemGroup>
 </Project>

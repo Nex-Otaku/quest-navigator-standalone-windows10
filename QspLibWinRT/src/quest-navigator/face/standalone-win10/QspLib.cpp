@@ -13,6 +13,12 @@
 #include "..\..\platform\windows10\ThreadApi.h"
 #include "GameFileManager.h"
 #include "JsonSerializer.h"
+#include "PathConverter.h"
+#include "..\..\platform\windows10\FileSystemApiWin32.h"
+#include "FileSystemManager.h"
+#include "SaveFileManager.h"
+#include "..\..\platform\windows10\ApplicationPathReader.h"
+#include "..\..\platform\windows10\StoragePathReader.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -59,13 +65,26 @@ namespace QspLibWinRT
 		GameFileManager* gameFileManager = new GameFileManager();
 		// Создаём объект для сериализации DTO в строки JSON.
 		JsonSerializer* jsonSerializer = new JsonSerializer();
+		// Создаём объект для конвертации путей.
+		PathConverter* pathConverter = new PathConverter();
+		// Создаём объект для чтения пути приложения.
+		ApplicationPathReader* applicationPathReader = new ApplicationPathReader();
+		// Создаём объект для платформенной обёртки функций файловой системы для Windows32 API.
+		FileSystemApiWin32* fileSystemApiWin32 = new FileSystemApiWin32();
+		// Создаём объект для управления файловой системой.
+		FileSystemManager* fileSystemManager = new FileSystemManager();
+		// Создаём объект для управления сейвами.
+		SaveFileManager* saveFileManager = new SaveFileManager();
+		// Создаём объект для чтения пути к локальному хранилищу - в хранилище мы записываем сейвы.
+		StoragePathReader* storagePathReader = new StoragePathReader();
 
 		// Делаем инъекцию зависимостей.
-		this->jsListener->inject(
+		jsListener->inject(
 			eventManager,
 			app,
 			timer,
-			jsExecutor
+			jsExecutor,
+			saveFileManager
 		);
 		app->inject(
 			eventManager,
@@ -76,7 +95,8 @@ namespace QspLibWinRT
 			eventManager,
 			timer,
 			jsExecutor,
-			threadManager
+			threadManager,
+			saveFileManager
 		);
 		eventManager->inject(
 			timer, 
@@ -88,7 +108,9 @@ namespace QspLibWinRT
 			jsExecutor,
 			timer,
 			eventManager,
-			library
+			library,
+			pathConverter,
+			saveFileManager
 		);
 		jsExecutor->inject(
 			uwpJsExecutor, 
@@ -100,9 +122,22 @@ namespace QspLibWinRT
 			stringConverter
 		);
 		threadManager->inject(threadApi);
-		configurationBuilder->inject(gameFileManager);
-		gameFileManager->inject(stringConverter);
+		configurationBuilder->inject(
+			gameFileManager,
+			storagePathReader
+		);
+		gameFileManager->inject(applicationPathReader);
 		jsonSerializer->inject(stringConverter);
+		pathConverter->inject(applicationPathReader);
+		saveFileManager->inject(
+			library,
+			fileSystemManager
+		);
+		fileSystemManager->inject(
+			fileSystemApiWin32
+		);
+		applicationPathReader->inject(stringConverter);
+		storagePathReader->inject(stringConverter);
 
 		// Сохраняем публичное свойство 
 		// для последующей привязки колбеков в яваскрпите

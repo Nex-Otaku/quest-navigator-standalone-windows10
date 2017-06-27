@@ -34,8 +34,9 @@ namespace QuestNavigator
 
 	void JsExecutor::qspShowSaveSlotsDialog(SaveSlotsDto slotsDto)
 	{
+		//showError("EventManager::saveSlotSelected");
 		// Контекст UI
-		//jsCallDebug("qspShowSaveSlotsDialog stub");
+		jsCallDebug("qspShowSaveSlotsDialog stub");
 		string jsonSaveSlotsDto = jsonSerializer->serializeSaveSlots(slotsDto);
 		Platform::String^ pSaveSlots = stringConverter->convertStdToUwp(jsonSaveSlotsDto);
 		uwpJsExecutor->jsCallShowSaveSlotsDialog(pSaveSlots);

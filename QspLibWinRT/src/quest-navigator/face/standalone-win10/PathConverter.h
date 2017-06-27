@@ -5,18 +5,17 @@
 
 using namespace std;
 
-namespace QuestNavigator
-{
-	class GameFileManager
+namespace QuestNavigator {
+	class PathConverter
 	{
 	public:
-		GameFileManager();
-		~GameFileManager();
+		PathConverter();
+		~PathConverter();
 
 		void inject(ApplicationPathReader* applicationPathReader);
 
-		// Путь к файлу игры по умолчанию для standalone-приложения.
-		string getDefaultGameFilePath();
+		string absolutePathToRelativeUrl(string path);
+		string absolutePathToRelativePath(string path);
 
 	private:
 		ApplicationPathReader* applicationPathReader;

@@ -255,7 +255,10 @@
     <ClInclude Include="src\quest-navigator\core\encoding.h" />
     <ClInclude Include="src\quest-navigator\core\events.h" />
     <ClInclude Include="src\quest-navigator\core\files.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\SaveFileManager.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\thread_sync.h" />
     <ClInclude Include="src\quest-navigator\core\midi.h" />
     <ClInclude Include="src\quest-navigator\core\skin.h" />
@@ -282,8 +285,11 @@
     <ClInclude Include="src\quest-navigator\platform\awesomium\method_dispatcher.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\view.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\view_win.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\ApplicationPathReader.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\BeginThread.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.h" />
+    <ClInclude Include="src\quest-navigator\platform\windows10\StoragePathReader.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\StringConverter.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadApi.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\ThreadEmulation.h" />
@@ -463,7 +469,10 @@
     <ClCompile Include="src\quest-navigator\core\skin.cpp" />
     <ClCompile Include="src\quest-navigator\core\sound.cpp" />
     <ClCompile Include="src\quest-navigator\core\strings.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\FileSystemManager.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PathConverter.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\SaveFileManager.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\thread_sync.cpp" />
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\utils.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\App.cpp" />
@@ -483,8 +492,11 @@
     <ClCompile Include="src\quest-navigator\platform\awesomium\listener.cpp" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\method_dispatcher.cc" />
     <ClCompile Include="src\quest-navigator\platform\awesomium\view_win.cc" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\ApplicationPathReader.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\BeginThread.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ErrorDebugReporter.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.cpp" />
+    <ClCompile Include="src\quest-navigator\platform\windows10\StoragePathReader.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\StringConverter.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadApi.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\ThreadEmulation.cpp" />

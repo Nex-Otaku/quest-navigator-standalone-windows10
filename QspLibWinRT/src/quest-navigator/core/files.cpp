@@ -30,12 +30,12 @@ namespace QuestNavigator {
 		return "";
 	}
 
-	// URL к содержимому
-	string getContentUrl()
-	{
-		string contentPath = Configuration::getString(ecpSkinFilePath);
-		return getUrlFromFilePath(contentPath);
-	}
+	//// URL к содержимому
+	//string getContentUrl()
+	//{
+	//	string contentPath = Configuration::getString(ecpSkinFilePath);
+	//	return getUrlFromFilePath(contentPath);
+	//}
 
 	// Проверяем файл на существование и читаемость
 	bool fileExists(string path)
@@ -45,13 +45,14 @@ namespace QuestNavigator {
 			!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 	}
 
-	// Проверяем папку на существование и читаемость
-	bool dirExists(string path)
-	{
-		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
-		return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
-			(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-	}
+	//// Проверяем папку на существование и читаемость
+	// !!! Перенесено в FileSystemManager
+	//bool dirExists(string path)
+	//{
+	//	DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
+	//	return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
+	//		(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+	//}
 
 	// Получаем путь к папке плеера
 	string getPlayerDir()
@@ -85,25 +86,26 @@ namespace QuestNavigator {
 		return "";
 	}
 
-	// Преобразовываем путь к файлу сохранения.
-	string getRealSaveFile(string file)
-	{
-		// "D:\MySaveDirForCoolGame"
-		string saveDir = Configuration::getString(ecpSaveDir);
-		// "D:\CoolGame\saves\save1.sav"
-		string originalSaveFilePath = getRightPath(file);
-		// "D:\CoolGame\game.qsp"
-		string gameFilePath = getRightPath(Configuration::getString(ecpGameFilePath));
-		// "game.qsp"
-		string gameFileName = Configuration::getString(ecpGameFileName);
-		// "D:\CoolGame\"
-		string gameDir = gameFilePath.substr(0, gameFilePath.length() - gameFileName.length());
-		// "saves\save1.sav"
-		string relativeSavePath = originalSaveFilePath.substr(gameDir.length());
-		// "D:\MySaveDirForCoolGame\saves\save1.sav"
-		string saveFile = getRightPath(saveDir + PATH_DELIMITER + relativeSavePath);
-		return saveFile;
-	}
+	//// Преобразовываем путь к файлу сохранения.
+	//// !!! Перенесено в SaveFileManager
+	//string getRealSaveFile(string file)
+	//{
+	//	// "D:\MySaveDirForCoolGame"
+	//	string saveDir = Configuration::getString(ecpSaveDir);
+	//	// "D:\CoolGame\saves\save1.sav"
+	//	string originalSaveFilePath = getRightPath(file);
+	//	// "D:\CoolGame\game.qsp"
+	//	string gameFilePath = getRightPath(Configuration::getString(ecpGameFilePath));
+	//	// "game.qsp"
+	//	string gameFileName = Configuration::getString(ecpGameFileName);
+	//	// "D:\CoolGame\"
+	//	string gameDir = gameFilePath.substr(0, gameFilePath.length() - gameFileName.length());
+	//	// "saves\save1.sav"
+	//	string relativeSavePath = originalSaveFilePath.substr(gameDir.length());
+	//	// "D:\MySaveDirForCoolGame\saves\save1.sav"
+	//	string saveFile = getRightPath(saveDir + PATH_DELIMITER + relativeSavePath);
+	//	return saveFile;
+	//}
 
 	// Меняем слэши в пути к файлу в зависимости от системы
 	string getRightPath(string path)
@@ -226,19 +228,20 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Создаём папки
-	bool buildDirectoryPath(string path)
-	{
-		//if (dirExists(path))
-		//	return true;
-		//wstring wPath = widen(path);
-		//int res = SHCreateDirectoryEx(NULL, wPath.c_str(), NULL);
-		//return res == ERROR_SUCCESS;
+	//// Создаём папки
+	// Перенесено в FileSystemManager
+	//bool buildDirectoryPath(string path)
+	//{
+	//	//if (dirExists(path))
+	//	//	return true;
+	//	//wstring wPath = widen(path);
+	//	//int res = SHCreateDirectoryEx(NULL, wPath.c_str(), NULL);
+	//	//return res == ERROR_SUCCESS;
 
-		// STUB
-		showError("buildDirectoryPath not implemented");
-		return true;
-	}
+	//	// STUB
+	//	showError("buildDirectoryPath not implemented");
+	//	return true;
+	//}
 
 	// Удаляем папку со всем содержимым.
 	bool deleteDirectory(string path)
@@ -376,50 +379,50 @@ namespace QuestNavigator {
 		return true;
 	}
 
-	// Копируем дерево файлов
-	bool copyFileTree(string from, string to)
-	{
-		return copyFileTree(from, to, "*.*");
-	}
-	bool copyFileTree(string from, string to, string mask)
-	{
-		if (from == to) {
-			showError("Нельзя копировать папку в саму себя: \"" + to + "\"");
-			return false;
-		}
-		// Если папка назначения не существует, создаём.
-		if (!buildDirectoryPath(to)) {
-			showError("Не удалось создать папку \"" + to + "\"");
-			return false;
-		}
-		// Выясняем, какие файлы находятся в папке.
-		vector<string> vecFiles;
-		if (!getFilesList(from, mask, vecFiles))
-			return false;
-		// Копируем все найденные файлы.
-		for (int i = 0; i < (int)vecFiles.size(); i++) {
-			string source = from + PATH_DELIMITER + vecFiles[i];
-			string dest = to + PATH_DELIMITER + vecFiles[i];
-			if (!copyFile(source, dest)) {
-				showError("Не удалось скопировать файл из \"" + source +
-					"\" в \"" + dest + "\".");
-				return false;
-			}
-		}
-		// Получаем список вложенных папок.
-		vector<string> vecFolders;
-		if (!getFoldersList(from, vecFolders))
-			return false;
-		// Проходим по всем вложенным папкам.
-		for (int i = 0; i < (int)vecFolders.size(); i++) {
-			// Для каждой вложенной папки рекурсивно вызываем функцию копирования.
-			string source = from + PATH_DELIMITER + vecFolders[i];
-			string dest = to + PATH_DELIMITER + vecFolders[i];
-			if (!copyFileTree(source, dest, mask))
-				return false;
-		}
-		return true;
-	}
+	//// Копируем дерево файлов
+	//bool copyFileTree(string from, string to)
+	//{
+	//	return copyFileTree(from, to, "*.*");
+	//}
+	//bool copyFileTree(string from, string to, string mask)
+	//{
+	//	if (from == to) {
+	//		showError("Нельзя копировать папку в саму себя: \"" + to + "\"");
+	//		return false;
+	//	}
+	//	// Если папка назначения не существует, создаём.
+	//	if (!buildDirectoryPath(to)) {
+	//		showError("Не удалось создать папку \"" + to + "\"");
+	//		return false;
+	//	}
+	//	// Выясняем, какие файлы находятся в папке.
+	//	vector<string> vecFiles;
+	//	if (!getFilesList(from, mask, vecFiles))
+	//		return false;
+	//	// Копируем все найденные файлы.
+	//	for (int i = 0; i < (int)vecFiles.size(); i++) {
+	//		string source = from + PATH_DELIMITER + vecFiles[i];
+	//		string dest = to + PATH_DELIMITER + vecFiles[i];
+	//		if (!copyFile(source, dest)) {
+	//			showError("Не удалось скопировать файл из \"" + source +
+	//				"\" в \"" + dest + "\".");
+	//			return false;
+	//		}
+	//	}
+	//	// Получаем список вложенных папок.
+	//	vector<string> vecFolders;
+	//	if (!getFoldersList(from, vecFolders))
+	//		return false;
+	//	// Проходим по всем вложенным папкам.
+	//	for (int i = 0; i < (int)vecFolders.size(); i++) {
+	//		// Для каждой вложенной папки рекурсивно вызываем функцию копирования.
+	//		string source = from + PATH_DELIMITER + vecFolders[i];
+	//		string dest = to + PATH_DELIMITER + vecFolders[i];
+	//		if (!copyFileTree(source, dest, mask))
+	//			return false;
+	//	}
+	//	return true;
+	//}
 
 	// Ищем первый файл "*.qsp" в папке.
 	bool findGameFile(string dir, string &gameFileName) {

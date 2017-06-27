@@ -29,13 +29,15 @@ namespace QuestNavigator
 		EventManager* eventManager,
 		Timer* timer,
 		JsExecutor* jsExecutor,
-		ThreadManager* threadManager
+		ThreadManager* threadManager,
+		SaveFileManager* saveFileManager
 	)
 	{
 		this->eventManager = eventManager;
 		this->timer = timer;
 		this->jsExecutor = jsExecutor;
 		this->threadManager = threadManager;
+		this->saveFileManager = saveFileManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
@@ -68,7 +70,6 @@ namespace QuestNavigator
 			//exit(eecFailToBeginLibThread);
 			return;
 		}
-		showError("StartLibThread: success, libThread created");
 	}
 
 	// Остановка потока библиотеки. Вызывается только раз при завершении программы.
@@ -277,18 +278,13 @@ namespace QuestNavigator
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
 	
-						string path = getRightPath(Configuration::getString(ecpSaveDir) + PATH_DELIMITER + to_string(index) + ".sav");
-						if (!fileExists(path)) {
-							showError("Library::libThreadFunc Не найден файл сохранения");
-							break;
-						}
+						string path = to_string(index) + ".sav";
 	
 						// Выключаем музыку
 						LibraryListener::CloseFile(NULL);
 	
 						// Загружаем сохранение
-						QSP_BOOL res = QSPOpenSavedGame(widen(path).c_str(), QSP_TRUE);
-						library->CheckQspResult(res, "QSPOpenSavedGame");
+						library->saveFileManager->readSaveFile(path, true);
 	
 						// Запускаем таймер
 						library->timer->startTimer();
@@ -299,17 +295,11 @@ namespace QuestNavigator
 						SharedDataDto dto = library->eventManager->getSharedData(evSaveSlotSelected);
 						int index = dto.num;
 						LibraryListener::resetJsExecBuffer();
-	
-						string saveDir = Configuration::getString(ecpSaveDir);
-						if (!dirExists(saveDir) && !buildDirectoryPath(saveDir)) {
-							showError("Library::libThreadFunc Не удалось создать папку для сохранения: " + saveDir);
-							break;
-						}
-	
-						string path = getRightPath(saveDir + PATH_DELIMITER + to_string(index) + ".sav");
-	
-						QSP_BOOL res = QSPSaveGame(widen(path).c_str(), QSP_FALSE);
-						library->CheckQspResult(res, "QSPSaveGame");
+
+						string path = to_string(index) + ".sav";
+
+						// Записываем сохранение.
+						library->saveFileManager->writeSaveFile(path);
 	
 						library->timer->startTimer();
 					}

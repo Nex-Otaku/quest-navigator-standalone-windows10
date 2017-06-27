@@ -14,9 +14,13 @@ namespace QuestNavigator
 	{
 	}
 
-	void ConfigurationBuilder::inject(GameFileManager * gameFileManager)
+	void ConfigurationBuilder::inject(
+		GameFileManager* gameFileManager,
+		StoragePathReader* storagePathReader
+	)
 	{
 		this->gameFileManager = gameFileManager;
+		this->storagePathReader = storagePathReader;
 	}
 
 	bool ConfigurationBuilder::build()
@@ -204,8 +208,11 @@ namespace QuestNavigator
 		// Считаем уникальный хэш игры.
 		string gameHash = "";/* md5(gameFilePath); */
 
-		//// Папка для сохранений
-		//saveDir = "";
+		// Папка для сохранений
+		// Путь к папке данных для приложения.
+		string storagePath = storagePathReader->getStorageFolderPath();
+		saveDir = storagePath + PATH_DELIMITER + "saves";
+
 		//// Путь к пользовательской папке "Мои документы"
 		//WCHAR wszPath[MAX_PATH];
 		//HRESULT hr = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, SHGFP_TYPE_CURRENT, wszPath);
