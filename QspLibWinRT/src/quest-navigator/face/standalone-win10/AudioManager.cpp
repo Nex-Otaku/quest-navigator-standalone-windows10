@@ -4,6 +4,7 @@
 #include "..\..\core\dialogs.h"
 #include "PlaybackListener.h"
 #include "..\..\core\strings.h"
+#include "..\..\core\configuration.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -12,6 +13,11 @@ using namespace Windows::Foundation;
 
 namespace QuestNavigator {
 	AudioManager::AudioManager()
+		: vecMusic(),
+		muted(false),
+		cacheEnabled(false),
+		initedCritical(false),
+		csMusicData()
 	{
 	}
 
@@ -31,16 +37,16 @@ namespace QuestNavigator {
 	bool AudioManager::init()
 	{
 		showError("AudioManager::init");
-		//// Загружаем настройки
-		//cacheEnabled = Configuration::getBool(ecpSoundCacheEnabled);
-		//// Инициализируем структуру критической секции
-		//try {
-		//	InitializeCriticalSection(&csMusicData);
-		//} catch (...) {
-		//	showError("Не удалось проинициализировать структуру критической секции.");
-		//	return false;
-		//}
-		//initedCritical = true;
+		// Загружаем настройки
+		cacheEnabled = Configuration::getBool(ecpSoundCacheEnabled);
+		// Инициализируем структуру критической секции
+		try {
+			InitializeCriticalSection(&csMusicData);
+		} catch (...) {
+			showError("Не удалось проинициализировать структуру критической секции.");
+			return false;
+		}
+		initedCritical = true;
 		//// Запускаем звуковую библиотеку
 		//audioDevice = OpenDevice();
 		//if (!audioDevice) {
@@ -51,9 +57,6 @@ namespace QuestNavigator {
 		//// Устанавливаем колбэк
 		//StopCallbackPtr cbHolder = new AudiereStopCallbackHolder();
 		//audioDevice->registerCallback(cbHolder.get());
-		//return true;
-	
-		// STUB
 		return true;
 	}
 	
@@ -61,10 +64,10 @@ namespace QuestNavigator {
 	{
 		showError("AudioManager::deinit");
 		// Высвобождаем структуру критической секции
-		//if (initedCritical) {
-		//	DeleteCriticalSection(&csMusicData);
-		//	initedCritical = false;
-		//}
+		if (initedCritical) {
+			DeleteCriticalSection(&csMusicData);
+			initedCritical = false;
+		}
 	}
 
 	void AudioManager::play(string file, int volume)
@@ -124,10 +127,29 @@ namespace QuestNavigator {
 		showError("AudioManager::mute");
 	}
 
-	void AudioManager::OnSourceChanged(MediaPlayer^ player, Platform::Object^ object)
+	// *********************************************************
+	//      Синхронизация потоков
+	// *********************************************************
+
+	// Входим в критическую секцию
+	void AudioManager::lockMusicData()
 	{
-		// STUB
+		try {
+			EnterCriticalSection(&csMusicData);
+		} catch (...) {
+			showError("Не удалось войти в критическую секцию.");
+		}
 	}
+	
+	// Выходим из критической секции
+	void AudioManager::unlockMusicData()
+	{
+		LeaveCriticalSection(&csMusicData);
+	}
+
+	// *********************************************************
+	//      Прочее
+	// *********************************************************
 
 	string AudioManager::getUriFromFileName(string file)
 	{
