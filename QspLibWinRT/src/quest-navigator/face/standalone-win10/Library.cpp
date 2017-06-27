@@ -4,7 +4,7 @@
 #include <process.h>
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "..\..\core\skin.h"
-#include "..\..\core\sound.h"
+//#include "..\..\core\sound.h"
 #include "..\..\core\events.h"
 #include "..\..\core\encoding.h"
 #include "LibraryListener.h"
@@ -131,9 +131,9 @@ namespace QuestNavigator
 		bool bShutdown = false;
 	
 		// Запускаем движок Audiere для проигрывания звуковых файлов
-		if (!SoundManager::init()) {
-			bShutdown = true;
-		}
+		//if (!SoundManager::init()) {
+		//	bShutdown = true;
+		//}
 	
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
@@ -269,7 +269,7 @@ namespace QuestNavigator
 						// Включение / выключение звука
 						SharedDataDto dto = library->eventManager->getSharedData(evMute);
 						bool flag = dto.flag;
-						SoundManager::mute(flag);
+						//SoundManager::mute(flag);
 					}
 					break;
 				case evLoadSlotSelected:
@@ -329,8 +329,8 @@ namespace QuestNavigator
 		}
 	
 		// Останавливаем звуковой движок
-		SoundManager::close(true, "");
-		SoundManager::deinit();
+		//SoundManager::close(true, "");
+		//SoundManager::deinit();
 	
 		// Завершаем работу библиотеки
 		QSPDeInit();

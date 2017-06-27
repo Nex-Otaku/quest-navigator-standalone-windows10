@@ -8,7 +8,7 @@
 #include "..\..\core\dto\GroupedContentDto.h"
 #include "..\..\core\files.h"
 #include "JsExecutor.h"
-#include "..\..\core\sound.h"
+//#include "..\..\core\sound.h"
 #include "Timer.h"
 #include "EventManager.h"
 #include "..\..\core\dialogs.h"
@@ -214,13 +214,14 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		string fileName = fromQsp(file);
-		SoundManager::play(fileName, volume);
+		//SoundManager::play(fileName, volume);
 	}
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
 	{
 		//Контекст библиотеки
-		bool isPlaying = SoundManager::isPlaying(fromQsp(file));
+		//bool isPlaying = SoundManager::isPlaying(fromQsp(file));
+		bool isPlaying = false;
 		return isPlaying ? QSP_TRUE : QSP_FALSE;
 	}
 	
@@ -228,7 +229,7 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		bool closeAll = file == NULL;
-		SoundManager::close(closeAll, fromQsp(file));
+		//SoundManager::close(closeAll, fromQsp(file));
 	}
 	
 	void LibraryListener::ShowPicture(QSP_CHAR* file)
