@@ -346,6 +346,7 @@
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\face\standalone-win10\AudioManager.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PlaybackListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -600,5 +601,6 @@
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\AudioManager.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PlaybackListener.h" />
   </ItemGroup>
 </Project>

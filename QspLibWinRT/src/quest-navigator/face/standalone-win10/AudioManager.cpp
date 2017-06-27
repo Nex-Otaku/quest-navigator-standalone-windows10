@@ -5,6 +5,8 @@
 
 using namespace std;
 using namespace Windows::Media::Playback;
+using namespace Windows::Media::Core;
+using namespace Windows::Foundation;
 
 namespace QuestNavigator {
 	AudioManager::AudioManager()
@@ -13,6 +15,11 @@ namespace QuestNavigator {
 
 	AudioManager::~AudioManager()
 	{
+	}
+
+	void AudioManager::inject(PathConverter* pathConverter)
+	{
+		this->pathConverter = pathConverter;
 	}
 
 	bool AudioManager::init()
@@ -58,7 +65,23 @@ namespace QuestNavigator {
 	{
 		// STUB
 		showError("AudioManager::play: [" + file + "] with volume " + std::to_string(volume));
-		//MediaPlayer^ player = ref new MediaPlayer();
+		MediaPlayer^ player = ref new MediaPlayer();
+
+		//Windows::Media::Playback::
+		//player->SourceChanged += ref new Windows::Foundation::EventHandler<
+		//	Windows::UI::Core::SourceChangedEventArgs^>(
+		//		this, &AudioManager::OnSourceChanged);
+		//}
+		//Windows::Media::Playback::MediaPlayerDataReceivedEventArgs
+		//Windows::Media::Playback::MediaPlayerSourceChangedEventArgs
+		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				this, &AudioManager::OnSourceChanged);
+
+		player->Source = MediaSource::CreateFromUri(ref new Uri(
+			//"ms-appx:///Assets/example_video.mkv"
+			"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
+		));
+		player->Play();
 	}
 
 	bool AudioManager::isPlaying(string file)
@@ -84,5 +107,16 @@ namespace QuestNavigator {
 	{
 		// STUB
 		showError("AudioManager::mute");
+	}
+
+	void AudioManager::OnSourceChanged(MediaPlayer^ player, Platform::Object^ object)
+	{
+		// STUB
+	}
+
+	string AudioManager::getUriFromFileName(string file)
+	{
+
+		return string();
 	}
 }

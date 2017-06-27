@@ -1,10 +1,14 @@
 #pragma once
 
 #include <string>
+#include "PathConverter.h"
 
 using namespace std;
+using namespace Windows::Media::Playback;
 
 namespace QuestNavigator {
+	//public delegate void OnSourceChanged();
+
 	class AudioManager
 	{
 		struct ContainerMusic {
@@ -17,6 +21,8 @@ namespace QuestNavigator {
 		AudioManager();
 		~AudioManager();
 
+		void inject(PathConverter* pathConverter);
+
 		bool init();
 		void deinit();
 		void play(string file, int volume);
@@ -25,7 +31,11 @@ namespace QuestNavigator {
 		void close(string file);
 		void mute(bool toBeMuted);
 
+		void OnSourceChanged(MediaPlayer^, Platform::Object^);
 	private:
+		PathConverter* pathConverter;
+
+
 		vector<ContainerMusic> vecMusic;
 		bool muted;
 		bool cacheEnabled;
@@ -41,5 +51,9 @@ namespace QuestNavigator {
 		void lockMusicData();
 		// Выходим из критической секции
 		void unlockMusicData();
+
+
+
+		string getUriFromFileName(string file);
 	};
 }

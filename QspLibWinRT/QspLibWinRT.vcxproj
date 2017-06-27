@@ -259,6 +259,7 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PlaybackListener.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\SaveFileManager.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\thread_sync.h" />
     <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\midi.h" />
@@ -467,6 +468,7 @@
     <ClCompile Include="src\quest-navigator\core\dialogs.cpp" />
     <ClCompile Include="src\quest-navigator\core\encoding.cpp" />
     <ClCompile Include="src\quest-navigator\core\files.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PlaybackListener.cpp" />
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\midi.cpp" />
     <ClCompile Include="src\quest-navigator\core\skin.cpp" />
     <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\sound.cpp" />
