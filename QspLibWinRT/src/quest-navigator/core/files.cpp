@@ -37,13 +37,14 @@ namespace QuestNavigator {
 	//	return getUrlFromFilePath(contentPath);
 	//}
 
-	// Проверяем файл на существование и читаемость
-	bool fileExists(string path)
-	{
-		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
-		return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
-			!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-	}
+	//// Проверяем файл на существование и читаемость
+	// !!! Перенесено в FileSystemManager
+	//bool fileExists(string path)
+	//{
+	//	DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
+	//	return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
+	//		!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+	//}
 
 	//// Проверяем папку на существование и читаемость
 	// !!! Перенесено в FileSystemManager

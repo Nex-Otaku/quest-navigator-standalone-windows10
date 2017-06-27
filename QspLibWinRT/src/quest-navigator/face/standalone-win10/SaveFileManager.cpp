@@ -31,7 +31,7 @@ namespace QuestNavigator {
 	bool SaveFileManager::readSaveFile(string relativePath, bool refresh)
 	{
 		string saveFile = getFullSavePath(relativePath);
-		if (!fileExists(saveFile)) {
+		if (!fileSystemManager->fileExists(saveFile)) {
 			showError("Не найден файл сохранения");
 			return false;
 		}
@@ -66,7 +66,7 @@ namespace QuestNavigator {
 			string title;
 			string slotname = to_string(i + 1) + ".sav";
 			string slotpath = getFullSavePath(slotname);
-			if (fileExists(slotpath)) {
+			if (fileSystemManager->fileExists(slotpath)) {
 				title = to_string(i + 1);
 			}
 			else {

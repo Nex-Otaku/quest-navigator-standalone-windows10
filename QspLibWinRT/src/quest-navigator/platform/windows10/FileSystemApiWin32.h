@@ -15,5 +15,7 @@ namespace QuestNavigator {
 		bool createDirectory(string path);
 		// Проверяем папку на существование.
 		bool directoryExists(string path);
+		// Проверяем файл на существование и читаемость
+		bool fileExists(string path);
 	};
 }

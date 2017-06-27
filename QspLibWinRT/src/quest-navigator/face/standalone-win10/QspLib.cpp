@@ -118,7 +118,8 @@ namespace QspLibWinRT
 			library,
 			pathConverter,
 			saveFileManager,
-			audioManager
+			audioManager,
+			fileSystemManager
 		);
 		jsExecutor->inject(
 			uwpJsExecutor, 
@@ -148,7 +149,8 @@ namespace QspLibWinRT
 		storagePathReader->inject(stringConverter);
 		audioManager->inject(
 			playbackListener,
-			stringConverter
+			stringConverter,
+			fileSystemManager
 		);
 
 		// Сохраняем публичное свойство 

@@ -5,6 +5,7 @@
 #include "PlaybackListener.h"
 #include "..\..\core\strings.h"
 #include "..\..\core\configuration.h"
+#include "..\..\core\files.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -27,11 +28,13 @@ namespace QuestNavigator {
 
 	void AudioManager::inject(
 		PlaybackListener^ playbackListener,
-		StringConverter* stringConverter
+		StringConverter* stringConverter,
+		FileSystemManager* fileSystemManager
 	)
 	{
 		this->playbackListener = playbackListener;
 		this->stringConverter = stringConverter;
+		this->fileSystemManager = fileSystemManager;
 	}
 
 	bool AudioManager::init()
@@ -74,32 +77,138 @@ namespace QuestNavigator {
 	{
 		showError("AudioManager::play: [" + file + "] with volume " + std::to_string(volume));
 
-		player = ref new MediaPlayer();
 
-		player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-			playbackListener, &PlaybackListener::OnSourceChanged);
+		if (file.length() == 0) {
+			showError("Не задано имя звукового файла");
+			return;
+		}
+		
+		// Проверяем, проигрывается ли уже этот файл.
+		// Если проигрывается, ничего не делаем.
+		// Если файл закэширован, функция перезапустит его и вернёт true,
+		// опять же ничего делать не требуется.
+		//if (checkPlayingFileSetVolume(file, true, volume))
+		//	return;
+		// !!! Сделать кеширование !
+		// Нужно, чтобы список плееров не разрастался бесконечно.
+		
+		string fullPath = getRightPath(file);
+		// Проверяем существование и читаемость
+		if (!fileSystemManager->fileExists(fullPath)) {
+			showError("Не удалось открыть звуковой файл: " + file);
+			return;
+		}
+		
+		if (endsWith(file, ".mid")) {
+			//lockMusicData();
+			//// Очищаем список от других файлов MIDI.
+			//// Допускается прогигрывать не более одного MIDI-файла одновременно.
+			//// Мы найдём лишь один файл, поэтому достаточно прогнать цикл по вектору всего один раз.
+			//for (int i = 0; i < (int)vecMusic.size(); i++)
+			//{
+			//	ContainerMusic& container = vecMusic[i];
+			//	if (container.isMidi) {
+			//		vecMusic.erase(vecMusic.begin() + i);
+			//		break;
+			//	}
+			//}
+		
+			//// Добавляем файл в список.
+			//MidiService::play(file, volume);
+			//ContainerMusic container;
+			//container.isMidi = true;
+			//container.name = file;
+			//container.volume = volume;
+			//vecMusic.push_back(container);
+			//unlockMusicData();
+		} else {
+			//// Читаем файл в память
+			//void* buffer = NULL;
+			//int bufferLength = 0;
+			//if (!loadFileToBuffer(fullPath, &buffer, &bufferLength)) {
+			//	showError("Не удалось прочесть звуковой файл: " + file);
+			//	return;
+			//}
+		
+			//// Создаём объект файла на основе блока памяти
+			//FilePtr fp = CreateMemoryFile((const void*)buffer, bufferLength);
+			//// Содержимое буфера скопировано, он нам больше не нужен, высвобождаем память.
+			//delete buffer;
+			//if (!fp) {
+			//	showError("Не удалось разместить в памяти звуковой файл: " + file);
+			//	return;
+			//}
+			//OutputStreamPtr sound = OpenSound(audioDevice, fp);
+			//if (!sound)
+			//{
+			//	showError("Неизвестный формат звукового файла: " + file);
+			//	return;
+			//}
 
-		player->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-			playbackListener, &PlaybackListener::OnMediaEnded);
 
-		player->MediaFailed += ref new TypedEventHandler<MediaPlayer^, Windows::Media::Playback::MediaPlayerFailedEventArgs^>(
-			playbackListener, &PlaybackListener::OnMediaFailed);
+			MediaPlayer^ sound = ref new MediaPlayer();
+			sound->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				playbackListener, &PlaybackListener::OnSourceChanged);
+			sound->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				playbackListener, &PlaybackListener::OnMediaEnded);
+			sound->MediaFailed += ref new TypedEventHandler<MediaPlayer^, Windows::Media::Playback::MediaPlayerFailedEventArgs^>(
+				playbackListener, &PlaybackListener::OnMediaFailed);
+			sound->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				playbackListener, &PlaybackListener::OnMediaOpened);
+			sound->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+				playbackListener, &PlaybackListener::OnVolumeChanged);
+			sound->Source = MediaSource::CreateFromUri(ref new Uri(
+				//"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
+				//getUriFromFileName("music/EpicLoop.mp3")
+				stringConverter->convertStdToUwp(
+					getUriFromFileName(file)
+				)
+			));
+			//showError("try to play: " + getUriFromFileName(file));
+			
+			// Добавляем файл в список
+			lockMusicData();
+			float realVolume = 0;// getRealVolume(volume);
+			//sound->setVolume(realVolume);
+			//sound->play();
+			sound->Play();
+			ContainerMusic container;
+			container.isMidi = false;
+			container.name = file;
+			container.volume = volume;
+			container.sound = sound;
+			vecMusic.push_back(container);
+			unlockMusicData();
+		}
 
-		player->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-			playbackListener, &PlaybackListener::OnMediaOpened);
-
-		player->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-			playbackListener, &PlaybackListener::OnVolumeChanged);
 
 
 
-		player->Source = MediaSource::CreateFromUri(ref new Uri(
-			//"ms-appx:///game/standalone_content/music/EpicLoop.mp3"
-			stringConverter->convertStdToUwp(
-				getUriFromFileName("music/EpicLoop.mp3")
-			)
-		));
-		player->Play();
+		//player = ref new MediaPlayer();
+
+		//player->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+		//	playbackListener, &PlaybackListener::OnSourceChanged);
+
+		//player->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+		//	playbackListener, &PlaybackListener::OnMediaEnded);
+
+		//player->MediaFailed += ref new TypedEventHandler<MediaPlayer^, Windows::Media::Playback::MediaPlayerFailedEventArgs^>(
+		//	playbackListener, &PlaybackListener::OnMediaFailed);
+
+		//player->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+		//	playbackListener, &PlaybackListener::OnMediaOpened);
+
+		//player->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+		//	playbackListener, &PlaybackListener::OnVolumeChanged);
+
+
+
+		//player->Source = MediaSource::CreateFromUri(ref new Uri(
+		//	stringConverter->convertStdToUwp(
+		//		getUriFromFileName("music/EpicLoop.mp3")
+		//	)
+		//));
+		//player->Play();
 	}
 
 	bool AudioManager::isPlaying(string file)
@@ -153,6 +262,7 @@ namespace QuestNavigator {
 
 	string AudioManager::getUriFromFileName(string file)
 	{
+		// !!! Абсолютный переделать в относительный!
 		return "ms-appx:///game/standalone_content/" + backslashToSlash(file);
 	}
 }

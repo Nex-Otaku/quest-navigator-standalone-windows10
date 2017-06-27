@@ -3,6 +3,7 @@
 #include <string>
 #include "PlaybackListener.h"
 #include "..\..\platform\windows10\StringConverter.h"
+#include "FileSystemManager.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
@@ -17,6 +18,7 @@ namespace QuestNavigator {
 			int volume;
 			bool isMidi;
 			//OutputStreamPtr sound;
+			MediaPlayer^ sound;
 		};
 	public:
 		AudioManager();
@@ -24,7 +26,8 @@ namespace QuestNavigator {
 
 		void inject(
 			PlaybackListener^ playbackListener,
-			StringConverter* stringConverter
+			StringConverter* stringConverter,
+			FileSystemManager* fileSystemManager
 		);
 
 		bool init();
@@ -35,11 +38,10 @@ namespace QuestNavigator {
 		void close(string file);
 		void mute(bool toBeMuted);
 
-		void OnSourceChanged(MediaPlayer^, Platform::Object^);
 	private:
 		PlaybackListener^ playbackListener;
 		StringConverter* stringConverter;
-
+		FileSystemManager* fileSystemManager;
 
 		MediaPlayer^ player;
 
@@ -47,8 +49,8 @@ namespace QuestNavigator {
 		bool muted;
 		bool cacheEnabled;
 		
-		bool checkPlayingFileSetVolume(string file, bool setVolume, int volume);
-		float getRealVolume(int volume);
+		//bool checkPlayingFileSetVolume(string file, bool setVolume, int volume);
+		//float getRealVolume(int volume);
 		
 		// Синхронизация потоков
 		bool initedCritical;

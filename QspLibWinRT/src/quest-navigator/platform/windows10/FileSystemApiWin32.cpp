@@ -32,4 +32,12 @@ namespace QuestNavigator {
 		return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
 			(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 	}
+
+	// Проверяем файл на существование и читаемость
+	bool FileSystemApiWin32::fileExists(string path)
+	{
+		DWORD dwAttrib = GetFileAttributes(widen(path).c_str());
+		return ((dwAttrib != INVALID_FILE_ATTRIBUTES) &&
+			!(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+	}
 }

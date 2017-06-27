@@ -16,6 +16,7 @@
 #include "Library.h"
 #include "Constants.h"
 #include "AudioManager.h"
+#include "FileSystemManager.h"
 
 namespace QuestNavigator
 {
@@ -32,7 +33,8 @@ namespace QuestNavigator
 		Library* library,
 		PathConverter* pathConverter,
 		SaveFileManager* saveFileManager,
-		AudioManager* audioManager
+		AudioManager* audioManager,
+		FileSystemManager* fileSystemManager
 	)
 	{
 		this->jsExecutor = jsExecutor;
@@ -42,6 +44,7 @@ namespace QuestNavigator
 		this->pathConverter = pathConverter;
 		this->saveFileManager = saveFileManager;
 		this->audioManager = audioManager;
+		this->fileSystemManager = fileSystemManager;
 	}
 
 	LibraryListener::LibraryListener()
@@ -246,7 +249,7 @@ namespace QuestNavigator
 		// Проверяем читаемость файла.
 		// Если файл не существует или не читается, выходим.
 		if (fileName.length() > 0) {
-			if (!fileExists(fileName)) {
+			if (!instance()->fileSystemManager->fileExists(fileName)) {
 				showError("Оператор VIEW. Не найден файл: " + fileName);
 				return;
 			}
