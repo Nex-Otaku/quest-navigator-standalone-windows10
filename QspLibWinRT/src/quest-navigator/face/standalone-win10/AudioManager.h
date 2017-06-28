@@ -15,8 +15,6 @@ namespace QuestNavigator {
 		struct ContainerMusic {
 			string name; // ѕуть к файлу - такой, как задан в игре
 			int volume;
-			bool isMidi;
-			//OutputStreamPtr sound;
 			MediaPlayer^ sound;
 		};
 	public:
@@ -43,8 +41,6 @@ namespace QuestNavigator {
 		StringConverter* stringConverter;
 		FileSystemManager* fileSystemManager;
 		PathConverter* pathConverter;
-
-		MediaPlayer^ player;
 
 		vector<ContainerMusic> vecMusic;
 		bool muted;

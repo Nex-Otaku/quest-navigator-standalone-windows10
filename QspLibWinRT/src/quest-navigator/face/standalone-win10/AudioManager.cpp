@@ -87,26 +87,17 @@ namespace QuestNavigator {
 			ContainerMusic& it = vecMusic[i];
 			if (it.name == file)
 			{
-				if (it.isMidi) {
-					//foundPlaying = MidiService::isPlaying(it.name);
-					//if (foundPlaying)
-					//{
-					//	it.volume = volume;
-					//	MidiService::setVolume(volume);
-					//}
-				} else {
-					foundPlaying = cacheEnabled || isPlayingState(it.sound->PlaybackSession->PlaybackState);
-					if (foundPlaying) {
-						it.volume = volume;
-						it.sound->Volume = getRealVolume(volume);
+				foundPlaying = cacheEnabled || isPlayingState(it.sound->PlaybackSession->PlaybackState);
+				if (foundPlaying) {
+					it.volume = volume;
+					it.sound->Volume = getRealVolume(volume);
 
-						// Если файл уже не проигрывается, но остался в кэше,
-						// запускаем проигрывание.
-						// Трек по завершению был отмотан на начало,
-						// поэтому просто вызываем play().
-						if (cacheEnabled && !isPlayingState(it.sound->PlaybackSession->PlaybackState)) {
-							it.sound->Play();
-						}
+					// Если файл уже не проигрывается, но остался в кэше,
+					// запускаем проигрывание.
+					// Трек по завершению был отмотан на начало,
+					// поэтому просто вызываем play().
+					if (cacheEnabled && !isPlayingState(it.sound->PlaybackSession->PlaybackState)) {
+						it.sound->Play();
 					}
 				}
 				break;
@@ -124,58 +115,35 @@ namespace QuestNavigator {
 			return;
 		}
 		
-		if (endsWith(file, ".mid")) {
-			//lockMusicData();
-			//// Очищаем список от других файлов MIDI.
-			//// Допускается прогигрывать не более одного MIDI-файла одновременно.
-			//// Мы найдём лишь один файл, поэтому достаточно прогнать цикл по вектору всего один раз.
-			//for (int i = 0; i < (int)vecMusic.size(); i++)
-			//{
-			//	ContainerMusic& container = vecMusic[i];
-			//	if (container.isMidi) {
-			//		vecMusic.erase(vecMusic.begin() + i);
-			//		break;
-			//	}
-			//}
-		
-			//// Добавляем файл в список.
-			//MidiService::play(file, volume);
-			//ContainerMusic container;
-			//container.isMidi = true;
-			//container.name = file;
-			//container.volume = volume;
-			//vecMusic.push_back(container);
-			//unlockMusicData();
-		} else {
-			MediaPlayer^ sound = ref new MediaPlayer();
-			sound->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				playbackListener, &PlaybackListener::OnSourceChanged);
-			sound->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				playbackListener, &PlaybackListener::OnMediaEnded);
-			sound->MediaFailed += ref new TypedEventHandler<MediaPlayer^, MediaPlayerFailedEventArgs^>(
-				playbackListener, &PlaybackListener::OnMediaFailed);
-			sound->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				playbackListener, &PlaybackListener::OnMediaOpened);
-			sound->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
-				playbackListener, &PlaybackListener::OnVolumeChanged);
-			sound->Source = MediaSource::CreateFromUri(ref new Uri(
-				stringConverter->convertStdToUwp(
-					pathConverter->absolutePathToUri(file)
-				)
-			));
+		// Список поддерживаемых форматов: 
+		// https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/supported-codecs
+		MediaPlayer^ sound = ref new MediaPlayer();
+		sound->SourceChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnSourceChanged);
+		sound->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnMediaEnded);
+		sound->MediaFailed += ref new TypedEventHandler<MediaPlayer^, MediaPlayerFailedEventArgs^>(
+			playbackListener, &PlaybackListener::OnMediaFailed);
+		sound->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnMediaOpened);
+		sound->VolumeChanged += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
+			playbackListener, &PlaybackListener::OnVolumeChanged);
+		sound->Source = MediaSource::CreateFromUri(ref new Uri(
+			stringConverter->convertStdToUwp(
+				pathConverter->absolutePathToUri(file)
+			)
+		));
 			
-			// Добавляем файл в список
-			lockMusicData();
-			sound->Volume = getRealVolume(volume);
-			sound->Play();
-			ContainerMusic container;
-			container.isMidi = false;
-			container.name = file;
-			container.volume = volume;
-			container.sound = sound;
-			vecMusic.push_back(container);
-			unlockMusicData();
-		}
+		// Добавляем файл в список
+		lockMusicData();
+		sound->Volume = getRealVolume(volume);
+		sound->Play();
+		ContainerMusic container;
+		container.name = file;
+		container.volume = volume;
+		container.sound = sound;
+		vecMusic.push_back(container);
+		unlockMusicData();
 	}
 
 	bool AudioManager::isPlaying(string file)
@@ -193,16 +161,12 @@ namespace QuestNavigator {
 			ContainerMusic& it = vecMusic[i];
 			if (it.name == file)
 			{
-				if (it.isMidi) {
-					// foundPlaying = MidiService::isPlaying(it.name);
+				if (cacheEnabled) {
+					// Цикл состояний:
+					// Opening -> Buffering -> Playing -> Paused
+					foundPlaying = isPlayingState(it.sound->PlaybackSession->PlaybackState);
 				} else {
-					if (cacheEnabled) {
-						// Цикл состояний:
-						// Opening -> Buffering -> Playing -> Paused
-						foundPlaying = isPlayingState(it.sound->PlaybackSession->PlaybackState);
-					} else {
-						foundPlaying = true;
-					}
+					foundPlaying = true;
 				}
 				break;
 			}
@@ -218,22 +182,18 @@ namespace QuestNavigator {
 		for (int i = 0; i < (int)vecMusic.size(); i++)
 		{
 			ContainerMusic& container = vecMusic[i];
-			if (container.isMidi) {
-				//MidiService::close(closeAll, file);
+			if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
+				container.sound->Pause();
+			}
+			if (cacheEnabled) {
+				// Устанавливаем трек на начало
+				TimeSpan position;
+				position.Duration = 0;
+				container.sound->PlaybackSession->Position = position;
 			} else {
-				if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
-					container.sound->Pause();
-				}
-				if (cacheEnabled) {
-					// Устанавливаем трек на начало
-					TimeSpan position;
-					position.Duration = 0;
-					container.sound->PlaybackSession->Position = position;
-				} else {
-					// Высвобождаем память
-					delete container.sound;
-					container.sound = nullptr;
-				}
+				// Высвобождаем память
+				delete container.sound;
+				container.sound = nullptr;
 			}
 		}
 		if (!cacheEnabled) {
@@ -256,29 +216,23 @@ namespace QuestNavigator {
 			if (container.name != file) {
 				continue;
 			}
-			if (container.isMidi) {
-				//MidiService::close(closeAll, file);
-				//vecMusic.erase(vecMusic.begin() + i);
-				//break;
-			} else {
-				if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
-					container.sound->Pause();
-				}
-				if (cacheEnabled) {
-					// Устанавливаем трек на начало
-					TimeSpan position;
-					position.Duration = 0;
-					container.sound->PlaybackSession->Position = position;
-				} else {
-					// Высвобождаем память
-					delete container.sound;
-					container.sound = nullptr;
-				}
-				if (!cacheEnabled) {
-					vecMusic.erase(vecMusic.begin() + i);
-				}
-				break;
+			if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
+				container.sound->Pause();
 			}
+			if (cacheEnabled) {
+				// Устанавливаем трек на начало
+				TimeSpan position;
+				position.Duration = 0;
+				container.sound->PlaybackSession->Position = position;
+			} else {
+				// Высвобождаем память
+				delete container.sound;
+				container.sound = nullptr;
+			}
+			if (!cacheEnabled) {
+				vecMusic.erase(vecMusic.begin() + i);
+			}
+			break;
 		}
 		unlockMusicData();
 	}
@@ -291,12 +245,7 @@ namespace QuestNavigator {
 		for (int i = 0; i < (int)vecMusic.size(); i++)
 		{
 			ContainerMusic& container = vecMusic[i];
-			if (container.isMidi) {
-				//MidiService::mute(toBeMuted);
-				//MidiService::setVolume(container.volume);
-			} else {
-				container.sound->Volume = getRealVolume(container.volume);
-			}
+			container.sound->Volume = getRealVolume(container.volume);
 		}
 		unlockMusicData();
 	}
