@@ -291,8 +291,23 @@ namespace QuestNavigator {
 
 	void AudioManager::mute(bool toBeMuted)
 	{
-		// STUB
 		showError("AudioManager::mute");
+		lockMusicData();
+		muted = toBeMuted;
+		for (int i = 0; i < (int)vecMusic.size(); i++)
+		{
+			ContainerMusic& container = vecMusic[i];
+			if (container.isMidi) {
+				//MidiService::mute(toBeMuted);
+				//MidiService::setVolume(container.volume);
+			} else {
+				// STUB
+				// Сделать установку громкости!
+				//float realVolume = getRealVolume(container.volume);
+				//container.sound->setVolume(realVolume);
+			}
+		}
+		unlockMusicData();
 	}
 
 	// *********************************************************
