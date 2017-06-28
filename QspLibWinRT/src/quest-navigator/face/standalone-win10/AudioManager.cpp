@@ -79,13 +79,48 @@ namespace QuestNavigator {
 		}
 		
 		// Проверяем, проигрывается ли уже этот файл.
-		// Если проигрывается, ничего не делаем.
-		// Если файл закэширован, функция перезапустит его и вернёт true,
-		// опять же ничего делать не требуется.
-		//if (checkPlayingFileSetVolume(file, true, volume))
-		//	return;
-		// !!! Сделать кеширование !
+		// Если проигрывается, устанавливаем громкость.
+		// Если файл не проигрывается и закэширован, перезапускаем его.
 		// Нужно, чтобы список плееров не разрастался бесконечно.
+		bool foundPlaying = false;
+		lockMusicData();
+		for (int i = 0; i < (int)vecMusic.size(); i++)
+		{
+			ContainerMusic& it = vecMusic[i];
+			if (it.name == file)
+			{
+				if (it.isMidi) {
+					//foundPlaying = MidiService::isPlaying(it.name);
+					//if (foundPlaying)
+					//{
+					//	it.volume = volume;
+					//	MidiService::setVolume(volume);
+					//}
+				} else {
+					foundPlaying = cacheEnabled || isPlayingState(it.sound->PlaybackSession->PlaybackState);
+					if (foundPlaying) {
+						// STUB
+						// Сделать установку громкости!
+						//it.volume = volume;
+						//float realVolume = getRealVolume(volume);
+						//it.sound->setVolume(realVolume);
+
+						// Если файл уже не проигрывается, но остался в кэше,
+						// запускаем проигрывание.
+						// Трек по завершению был отмотан на начало,
+						// поэтому просто вызываем play().
+						if (cacheEnabled && !isPlayingState(it.sound->PlaybackSession->PlaybackState)) {
+							it.sound->Play();
+						}
+					}
+				}
+				break;
+			}
+		}
+		unlockMusicData();
+		if (foundPlaying) {
+			return;
+		}
 		
 		string fullPath = getRightPath(file);
 		// Проверяем существование и читаемость
@@ -136,6 +171,8 @@ namespace QuestNavigator {
 			
 			// Добавляем файл в список
 			lockMusicData();
+			// STUB
+			// Сделать установку громкости!
 			float realVolume = 0;// getRealVolume(volume);
 			//sound->setVolume(realVolume);
 			sound->Play();
@@ -170,10 +207,7 @@ namespace QuestNavigator {
 					if (cacheEnabled) {
 						// Цикл состояний:
 						// Opening -> Buffering -> Playing -> Paused
-						MediaPlaybackState state = it.sound->PlaybackSession->PlaybackState;
-						foundPlaying = (state == MediaPlaybackState::Opening)
-							|| (state == MediaPlaybackState::Buffering)
-							|| (state == MediaPlaybackState::Playing);
+						foundPlaying = isPlayingState(it.sound->PlaybackSession->PlaybackState);
 					} else {
 						foundPlaying = true;
 					}
@@ -189,14 +223,74 @@ namespace QuestNavigator {
 
 	void AudioManager::closeAll()
 	{
-		// STUB
 		showError("AudioManager::closeAll");
+		lockMusicData();
+		for (int i = 0; i < (int)vecMusic.size(); i++)
+		{
+			ContainerMusic& container = vecMusic[i];
+			if (container.isMidi) {
+				//MidiService::close(closeAll, file);
+			} else {
+				if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
+					container.sound->Pause();
+				}
+				if (cacheEnabled) {
+					// Устанавливаем трек на начало
+					TimeSpan position;
+					position.Duration = 0;
+					container.sound->PlaybackSession->Position = position;
+				} else {
+					// Высвобождаем память
+					delete container.sound;
+					container.sound = nullptr;
+				}
+			}
+		}
+		if (!cacheEnabled) {
+			vecMusic.clear();
+		}
+		unlockMusicData();
 	}
 
 	void AudioManager::close(string file)
 	{
-		// STUB
 		showError("AudioManager::close: [" + file + "]");
+		if ((int)file.length() == 0) {
+			return;
+		}
+			
+		lockMusicData();
+		for (int i = 0; i < (int)vecMusic.size(); i++)
+		{
+			ContainerMusic& container = vecMusic[i];
+			if (container.name != file) {
+				continue;
+			}
+			if (container.isMidi) {
+				//MidiService::close(closeAll, file);
+				//vecMusic.erase(vecMusic.begin() + i);
+				//break;
+			} else {
+				if (isPlayingState(container.sound->PlaybackSession->PlaybackState)) {
+					container.sound->Pause();
+				}
+				if (cacheEnabled) {
+					// Устанавливаем трек на начало
+					TimeSpan position;
+					position.Duration = 0;
+					container.sound->PlaybackSession->Position = position;
+				} else {
+					// Высвобождаем память
+					delete container.sound;
+					container.sound = nullptr;
+				}
+				if (!cacheEnabled) {
+					vecMusic.erase(vecMusic.begin() + i);
+				}
+				break;
+			}
+		}
+		unlockMusicData();
 	}
 
 	void AudioManager::mute(bool toBeMuted)
@@ -223,5 +317,15 @@ namespace QuestNavigator {
 	void AudioManager::unlockMusicData()
 	{
 		LeaveCriticalSection(&csMusicData);
+	}
+
+	// Проверка на проигрывание.
+	bool AudioManager::isPlayingState(MediaPlaybackState state)
+	{
+		// Цикл состояний:
+		// Opening -> Buffering -> Playing -> Paused
+		return (state == MediaPlaybackState::Opening)
+			|| (state == MediaPlaybackState::Buffering)
+			|| (state == MediaPlaybackState::Playing);
 	}
 }

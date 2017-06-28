@@ -61,5 +61,8 @@ namespace QuestNavigator {
 		void lockMusicData();
 		// Выходим из критической секции
 		void unlockMusicData();
+
+		// Проверка на проигрывание.
+		bool isPlayingState(MediaPlaybackState state);
 	};
 }
