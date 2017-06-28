@@ -122,7 +122,7 @@ namespace QuestNavigator {
 				playbackListener, &PlaybackListener::OnSourceChanged);
 			sound->MediaEnded += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
 				playbackListener, &PlaybackListener::OnMediaEnded);
-			sound->MediaFailed += ref new TypedEventHandler<MediaPlayer^, Windows::Media::Playback::MediaPlayerFailedEventArgs^>(
+			sound->MediaFailed += ref new TypedEventHandler<MediaPlayer^, MediaPlayerFailedEventArgs^>(
 				playbackListener, &PlaybackListener::OnMediaFailed);
 			sound->MediaOpened += ref new TypedEventHandler<MediaPlayer^, Platform::Object^>(
 				playbackListener, &PlaybackListener::OnMediaOpened);
@@ -151,8 +151,39 @@ namespace QuestNavigator {
 
 	bool AudioManager::isPlaying(string file)
 	{
-		// STUB
 		showError("AudioManager::isPlaying: [" + file + "]");
+
+		if (file.length() == 0) {
+			return false;
+		}
+			
+		bool foundPlaying = false;
+		lockMusicData();
+		for (int i = 0; i < (int)vecMusic.size(); i++)
+		{
+			ContainerMusic& it = vecMusic[i];
+			if (it.name == file)
+			{
+				if (it.isMidi) {
+					// foundPlaying = MidiService::isPlaying(it.name);
+				} else {
+					if (cacheEnabled) {
+						// Цикл состояний:
+						// Opening -> Buffering -> Playing -> Paused
+						MediaPlaybackState state = it.sound->PlaybackSession->PlaybackState;
+						foundPlaying = (state == MediaPlaybackState::Opening)
+							|| (state == MediaPlaybackState::Buffering)
+							|| (state == MediaPlaybackState::Playing);
+					} else {
+						foundPlaying = true;
+					}
+				}
+				break;
+			}
+		}
+		unlockMusicData();
+		return foundPlaying;
+
 		return true;
 	}
 
