@@ -16,6 +16,7 @@ namespace QuestNavigator {
 
 		string absolutePathToRelativeUrl(string path);
 		string absolutePathToRelativePath(string path);
+		string absolutePathToUri(string path);
 
 	private:
 		ApplicationPathReader* applicationPathReader;

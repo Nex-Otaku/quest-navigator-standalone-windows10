@@ -4,13 +4,12 @@
 #include "PlaybackListener.h"
 #include "..\..\platform\windows10\StringConverter.h"
 #include "FileSystemManager.h"
+#include "PathConverter.h"
 
 using namespace std;
 using namespace Windows::Media::Playback;
 
 namespace QuestNavigator {
-	//public delegate void OnSourceChanged();
-
 	class AudioManager
 	{
 		struct ContainerMusic {
@@ -27,7 +26,8 @@ namespace QuestNavigator {
 		void inject(
 			PlaybackListener^ playbackListener,
 			StringConverter* stringConverter,
-			FileSystemManager* fileSystemManager
+			FileSystemManager* fileSystemManager,
+			PathConverter* pathConverter
 		);
 
 		bool init();
@@ -42,6 +42,7 @@ namespace QuestNavigator {
 		PlaybackListener^ playbackListener;
 		StringConverter* stringConverter;
 		FileSystemManager* fileSystemManager;
+		PathConverter* pathConverter;
 
 		MediaPlayer^ player;
 
@@ -60,9 +61,5 @@ namespace QuestNavigator {
 		void lockMusicData();
 		// Выходим из критической секции
 		void unlockMusicData();
-
-
-
-		string getUriFromFileName(string file);
 	};
 }
