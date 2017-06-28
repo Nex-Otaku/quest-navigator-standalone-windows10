@@ -50,7 +50,6 @@ namespace QuestNavigator {
 		bool muted;
 		bool cacheEnabled;
 		
-		//bool checkPlayingFileSetVolume(string file, bool setVolume, int volume);
 		//float getRealVolume(int volume);
 		
 		// Синхронизация потоков

@@ -71,8 +71,6 @@ namespace QuestNavigator {
 	void AudioManager::play(string file, int volume)
 	{
 		showError("AudioManager::play: [" + file + "] with volume " + std::to_string(volume));
-
-
 		if (file.length() == 0) {
 			showError("Не задано имя звукового файла");
 			return;
@@ -217,8 +215,6 @@ namespace QuestNavigator {
 		}
 		unlockMusicData();
 		return foundPlaying;
-
-		return true;
 	}
 
 	void AudioManager::closeAll()
