@@ -50,8 +50,6 @@ namespace QuestNavigator {
 		bool muted;
 		bool cacheEnabled;
 		
-		//float getRealVolume(int volume);
-		
 		// Синхронизация потоков
 		bool initedCritical;
 		// Структура для критических секций
@@ -63,5 +61,7 @@ namespace QuestNavigator {
 
 		// Проверка на проигрывание.
 		bool isPlayingState(MediaPlaybackState state);
+		// Перевод громкости из int в double.
+		double getRealVolume(int volume);
 	};
 }

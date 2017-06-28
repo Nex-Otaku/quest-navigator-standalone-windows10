@@ -97,11 +97,8 @@ namespace QuestNavigator {
 				} else {
 					foundPlaying = cacheEnabled || isPlayingState(it.sound->PlaybackSession->PlaybackState);
 					if (foundPlaying) {
-						// STUB
-						// Сделать установку громкости!
-						//it.volume = volume;
-						//float realVolume = getRealVolume(volume);
-						//it.sound->setVolume(realVolume);
+						it.volume = volume;
+						it.sound->Volume = getRealVolume(volume);
 
 						// Если файл уже не проигрывается, но остался в кэше,
 						// запускаем проигрывание.
@@ -169,10 +166,7 @@ namespace QuestNavigator {
 			
 			// Добавляем файл в список
 			lockMusicData();
-			// STUB
-			// Сделать установку громкости!
-			float realVolume = 0;// getRealVolume(volume);
-			//sound->setVolume(realVolume);
+			sound->Volume = getRealVolume(volume);
 			sound->Play();
 			ContainerMusic container;
 			container.isMidi = false;
@@ -301,10 +295,7 @@ namespace QuestNavigator {
 				//MidiService::mute(toBeMuted);
 				//MidiService::setVolume(container.volume);
 			} else {
-				// STUB
-				// Сделать установку громкости!
-				//float realVolume = getRealVolume(container.volume);
-				//container.sound->setVolume(realVolume);
+				container.sound->Volume = getRealVolume(container.volume);
 			}
 		}
 		unlockMusicData();
@@ -338,5 +329,17 @@ namespace QuestNavigator {
 		return (state == MediaPlaybackState::Opening)
 			|| (state == MediaPlaybackState::Buffering)
 			|| (state == MediaPlaybackState::Playing);
+	}
+	
+	double AudioManager::getRealVolume(int volume)
+	{
+		double result = 0;
+		if (!muted) {
+			result = ((double)volume) / 100;
+		} else {
+			result = 0;
+		}
+			
+		return result;
 	}
 }
