@@ -133,7 +133,8 @@ namespace QspLibWinRT
 		threadManager->inject(threadApi);
 		configurationBuilder->inject(
 			gameFileManager,
-			storagePathReader
+			storagePathReader,
+			fileSystemManager
 		);
 		gameFileManager->inject(applicationPathReader);
 		jsonSerializer->inject(stringConverter);
