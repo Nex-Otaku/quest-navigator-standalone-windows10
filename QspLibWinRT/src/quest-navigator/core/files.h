@@ -13,7 +13,8 @@ namespace QuestNavigator {
 	// URL к содержимому
 	//string getContentUrl();
 	// Проверяем файл на существование и читаемость
-	bool fileExists(string path);
+	// !!! Перенесено в FileSystemManager
+	//bool fileExists(string path);
 	//// Проверяем папку на существование и читаемость
 	// !!! Перенесено в FileSystemManager
 	//bool dirExists(string path);

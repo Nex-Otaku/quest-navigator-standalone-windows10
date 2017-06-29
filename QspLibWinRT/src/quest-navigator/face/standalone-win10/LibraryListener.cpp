@@ -8,13 +8,15 @@
 #include "..\..\core\dto\GroupedContentDto.h"
 #include "..\..\core\files.h"
 #include "JsExecutor.h"
-#include "..\..\core\sound.h"
+//#include "..\..\core\sound.h"
 #include "Timer.h"
 #include "EventManager.h"
 #include "..\..\core\dialogs.h"
 #include "..\..\core\dto\MenuItemDto.h"
 #include "Library.h"
 #include "Constants.h"
+#include "AudioManager.h"
+#include "FileSystemManager.h"
 
 namespace QuestNavigator
 {
@@ -30,7 +32,9 @@ namespace QuestNavigator
 		EventManager* eventManager,
 		Library* library,
 		PathConverter* pathConverter,
-		SaveFileManager* saveFileManager
+		SaveFileManager* saveFileManager,
+		AudioManager* audioManager,
+		FileSystemManager* fileSystemManager
 	)
 	{
 		this->jsExecutor = jsExecutor;
@@ -39,6 +43,8 @@ namespace QuestNavigator
 		this->library = library;
 		this->pathConverter = pathConverter;
 		this->saveFileManager = saveFileManager;
+		this->audioManager = audioManager;
+		this->fileSystemManager = fileSystemManager;
 	}
 
 	LibraryListener::LibraryListener()
@@ -214,13 +220,13 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		string fileName = fromQsp(file);
-		SoundManager::play(fileName, volume);
+		instance()->audioManager->play(fileName, volume);
 	}
 	
 	QSP_BOOL LibraryListener::IsPlayingFile(QSP_CHAR* file)
 	{
 		//Контекст библиотеки
-		bool isPlaying = SoundManager::isPlaying(fromQsp(file));
+		bool isPlaying = instance()->audioManager->isPlaying(fromQsp(file));
 		return isPlaying ? QSP_TRUE : QSP_FALSE;
 	}
 	
@@ -228,7 +234,11 @@ namespace QuestNavigator
 	{
 		//Контекст библиотеки
 		bool closeAll = file == NULL;
-		SoundManager::close(closeAll, fromQsp(file));
+		if (closeAll) {
+			instance()->audioManager->closeAll();
+		} else {
+			instance()->audioManager->close(fromQsp(file));
+		}
 	}
 	
 	void LibraryListener::ShowPicture(QSP_CHAR* file)
@@ -239,7 +249,7 @@ namespace QuestNavigator
 		// Проверяем читаемость файла.
 		// Если файл не существует или не читается, выходим.
 		if (fileName.length() > 0) {
-			if (!fileExists(fileName)) {
+			if (!instance()->fileSystemManager->fileExists(fileName)) {
 				showError("Оператор VIEW. Не найден файл: " + fileName);
 				return;
 			}

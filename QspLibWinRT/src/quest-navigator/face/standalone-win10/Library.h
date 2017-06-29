@@ -6,6 +6,7 @@
 #include "JsExecutor.h"
 #include "..\..\platform\windows10\ThreadManager.h"
 #include "SaveFileManager.h"
+#include "AudioManager.h"
 
 namespace QuestNavigator
 {
@@ -24,7 +25,8 @@ namespace QuestNavigator
 			Timer* timer,
 			JsExecutor* jsExecutor,
 			ThreadManager* threadManager,
-			SaveFileManager* saveFileManager
+			SaveFileManager* saveFileManager,
+			AudioManager* audioManager
 		);
 
 		// ********************************************************************
@@ -45,6 +47,7 @@ namespace QuestNavigator
 		JsExecutor* jsExecutor;
 		ThreadManager* threadManager;
 		SaveFileManager* saveFileManager;
+		AudioManager* audioManager;
 
 		HANDLE libThread;
 

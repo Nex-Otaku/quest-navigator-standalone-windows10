@@ -65,4 +65,28 @@ namespace QuestNavigator {
 
 		return relativePath;
 	}
+
+	// Преобразовываем абсолютный путь в URI.
+	// Исходный вид: "D:\QuestNavigator\game\standalone_content\music\1.mp3"
+	// Нужно получить: "ms-appx:///game/standalone_content/music/music/1.mp3"
+	string PathConverter::absolutePathToUri(string path)
+	{
+		// "D:\QuestNavigator"
+		string rootAppPath = applicationPathReader->getApplicationFolderPath();
+		// "D:\QuestNavigator\"
+		string gamePath = rootAppPath + "\\";
+		if (!startsWith(path, gamePath)) {
+			showError("Не удалось преобразовать путь к файлу.");
+			return path;
+		}
+
+		size_t length = gamePath.size();
+		// "game\standalone_content\music\1.mp3"
+		string tail = path.substr(length);
+
+		// "ms-appx:///game/standalone_content/music/1.mp3"
+		string relativePath = "ms-appx:///" + backslashToSlash(tail);
+
+		return relativePath;
+	}
 }

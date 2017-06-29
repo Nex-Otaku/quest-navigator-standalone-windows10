@@ -3,6 +3,9 @@
 #include "ConfigurationBuilder.h"
 #include "..\..\core\configuration.h"
 #include "..\..\core\files.h"
+#include "..\..\core\dialogs.h"
+
+#define LOAD_XML_ATTRIB(name, configLine) if (valid) { valid = Configuration::loadXmlAttrib(root, name, configLine); }
 
 namespace QuestNavigator
 {
@@ -16,11 +19,13 @@ namespace QuestNavigator
 
 	void ConfigurationBuilder::inject(
 		GameFileManager* gameFileManager,
-		StoragePathReader* storagePathReader
+		StoragePathReader* storagePathReader,
+		FileSystemManager* fileSystemManager
 	)
 	{
 		this->gameFileManager = gameFileManager;
 		this->storagePathReader = storagePathReader;
+		this->fileSystemManager = fileSystemManager;
 	}
 
 	bool ConfigurationBuilder::build()
@@ -291,61 +296,61 @@ namespace QuestNavigator
 		Configuration::setString(ecpSkinName, "");
 		Configuration::setBool(ecpGameIsStandalone, false);
 
-		//string configFilePath = Configuration::getString(ecpConfigFilePath);
-		//// Если файл не найден, то всё в порядке,
-		//// просто оставляем дефолтные настройки.
-		//if (!fileExists(configFilePath))
-		//	return true;
+		string configFilePath = Configuration::getString(ecpConfigFilePath);
+		// Если файл не найден, то всё в порядке,
+		// просто оставляем дефолтные настройки.
+		if (!fileSystemManager->fileExists(configFilePath))
+			return true;
 
-		//TiXmlDocument doc;
-		//// Читаем файл в память
-		//void* buffer = NULL;
-		//int bufferLength = 0;
-		//if (!loadFileToBuffer(configFilePath, &buffer, &bufferLength)) {
-		//	showError("Не удалось прочесть файл \"" + configFilePath + "\".");
-		//	return false;
-		//}
-		//// Разбираем XML
-		//doc.Parse((const char*)buffer, 0, TIXML_ENCODING_UTF8);
-		//delete buffer;
-		//if (doc.Error())
-		//{
-		//	showError("Не удалось загрузить XML-структуру из файла \"" + configFilePath + "\".");
-		//	return false;
-		//}
-		//TiXmlElement* root = doc.FirstChildElement();
-		//if (root == NULL)
-		//{
-		//	showError("Не найден корневой элемент конфигурационного файла \"" + configFilePath + "\".");
-		//	return false;
-		//}
+		TiXmlDocument doc;
+		// Читаем файл в память
+		void* buffer = NULL;
+		int bufferLength = 0;
+		if (!loadFileToBuffer(configFilePath, &buffer, &bufferLength)) {
+			showError("Не удалось прочесть файл \"" + configFilePath + "\".");
+			return false;
+		}
+		// Разбираем XML
+		doc.Parse((const char*)buffer, 0, TIXML_ENCODING_UTF8);
+		delete buffer;
+		if (doc.Error())
+		{
+			showError("Не удалось загрузить XML-структуру из файла \"" + configFilePath + "\".");
+			return false;
+		}
+		TiXmlElement* root = doc.FirstChildElement();
+		if (root == NULL)
+		{
+			showError("Не найден корневой элемент конфигурационного файла \"" + configFilePath + "\".");
+			return false;
+		}
 
-		//bool valid = true;
-		//LOAD_XML_ATTRIB("width", ecpGameWidth);
-		//LOAD_XML_ATTRIB("height", ecpGameHeight);
-		//LOAD_XML_ATTRIB("minWidth", ecpGameMinWidth);
-		//LOAD_XML_ATTRIB("minHeight", ecpGameMinHeight);
-		//LOAD_XML_ATTRIB("maxWidth", ecpGameMaxWidth);
-		//LOAD_XML_ATTRIB("maxHeight", ecpGameMaxHeight);
-		//LOAD_XML_ATTRIB("title", ecpGameTitle);
-		//LOAD_XML_ATTRIB("resizeable", ecpGameResizeable);
-		//LOAD_XML_ATTRIB("fullscreenAvailable", ecpGameFullscreenAvailable);
-		//LOAD_XML_ATTRIB("startFullscreen", ecpGameStartFullscreen);
-		//LOAD_XML_ATTRIB("skinName", ecpSkinName);
-		//LOAD_XML_ATTRIB("standalone", ecpGameIsStandalone);
-		//if (!valid) {
-		//	return false;
-		//}
+		bool valid = true;
+		LOAD_XML_ATTRIB("width", ecpGameWidth);
+		LOAD_XML_ATTRIB("height", ecpGameHeight);
+		LOAD_XML_ATTRIB("minWidth", ecpGameMinWidth);
+		LOAD_XML_ATTRIB("minHeight", ecpGameMinHeight);
+		LOAD_XML_ATTRIB("maxWidth", ecpGameMaxWidth);
+		LOAD_XML_ATTRIB("maxHeight", ecpGameMaxHeight);
+		LOAD_XML_ATTRIB("title", ecpGameTitle);
+		LOAD_XML_ATTRIB("resizeable", ecpGameResizeable);
+		LOAD_XML_ATTRIB("fullscreenAvailable", ecpGameFullscreenAvailable);
+		LOAD_XML_ATTRIB("startFullscreen", ecpGameStartFullscreen);
+		LOAD_XML_ATTRIB("skinName", ecpSkinName);
+		LOAD_XML_ATTRIB("standalone", ecpGameIsStandalone);
+		if (!valid) {
+			return false;
+		}
 
-		//// Обрабатываем настройки игры
-		//if (Configuration::getBool(ecpGameFullscreenAvailable) &&
-		//	Configuration::getBool(ecpGameStartFullscreen)) {
-		//	Configuration::setBool(ecpIsFullscreen, true);
-		//}
-		//string gameTitle = Configuration::getString(ecpGameTitle);
-		//if (gameTitle != "") {
-		//	Configuration::setString(ecpWindowTitle, gameTitle);
-		//}
+		// Обрабатываем настройки игры
+		if (Configuration::getBool(ecpGameFullscreenAvailable) &&
+			Configuration::getBool(ecpGameStartFullscreen)) {
+			Configuration::setBool(ecpIsFullscreen, true);
+		}
+		string gameTitle = Configuration::getString(ecpGameTitle);
+		if (gameTitle != "") {
+			Configuration::setString(ecpWindowTitle, gameTitle);
+		}
 
 		return true;
 	}

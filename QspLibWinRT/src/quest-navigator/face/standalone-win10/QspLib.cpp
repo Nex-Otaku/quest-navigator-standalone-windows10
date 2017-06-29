@@ -19,6 +19,8 @@
 #include "SaveFileManager.h"
 #include "..\..\platform\windows10\ApplicationPathReader.h"
 #include "..\..\platform\windows10\StoragePathReader.h"
+#include "AudioManager.h"
+#include "PlaybackListener.h"
 
 using namespace QuestNavigator;
 using namespace QspLibWinRT;
@@ -77,6 +79,10 @@ namespace QspLibWinRT
 		SaveFileManager* saveFileManager = new SaveFileManager();
 		// Создаём объект для чтения пути к локальному хранилищу - в хранилище мы записываем сейвы.
 		StoragePathReader* storagePathReader = new StoragePathReader();
+		// Создаём объект для воспроизведения звуковых файлов.
+		AudioManager* audioManager = new AudioManager();
+		// Создаём объект для прослушивания событий воспроизведения.
+		PlaybackListener^ playbackListener = ref new PlaybackListener();
 
 		// Делаем инъекцию зависимостей.
 		jsListener->inject(
@@ -96,7 +102,8 @@ namespace QspLibWinRT
 			timer,
 			jsExecutor,
 			threadManager,
-			saveFileManager
+			saveFileManager,
+			audioManager
 		);
 		eventManager->inject(
 			timer, 
@@ -110,7 +117,9 @@ namespace QspLibWinRT
 			eventManager,
 			library,
 			pathConverter,
-			saveFileManager
+			saveFileManager,
+			audioManager,
+			fileSystemManager
 		);
 		jsExecutor->inject(
 			uwpJsExecutor, 
@@ -124,7 +133,8 @@ namespace QspLibWinRT
 		threadManager->inject(threadApi);
 		configurationBuilder->inject(
 			gameFileManager,
-			storagePathReader
+			storagePathReader,
+			fileSystemManager
 		);
 		gameFileManager->inject(applicationPathReader);
 		jsonSerializer->inject(stringConverter);
@@ -138,9 +148,15 @@ namespace QspLibWinRT
 		);
 		applicationPathReader->inject(stringConverter);
 		storagePathReader->inject(stringConverter);
+		audioManager->inject(
+			playbackListener,
+			stringConverter,
+			fileSystemManager,
+			pathConverter
+		);
 
 		// Сохраняем публичное свойство 
-		// для последующей привязки колбеков в яваскрпите
+		// для последующей привязки колбеков в яваскрипте
 		// через объект UwpJsExecutor.
 		this->uwpJsExecutor = uwpJsExecutor;
 		// Сохраняем указатель на конвертер строк.

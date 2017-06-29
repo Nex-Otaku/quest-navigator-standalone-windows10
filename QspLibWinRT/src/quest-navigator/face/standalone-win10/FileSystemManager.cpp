@@ -53,4 +53,9 @@ namespace QuestNavigator {
 	{
 		return fileSystemApiWin32->directoryExists(path);
 	}
+	
+	bool FileSystemManager::fileExists(string path)
+	{
+		return fileSystemApiWin32->fileExists(path);
+	}
 }

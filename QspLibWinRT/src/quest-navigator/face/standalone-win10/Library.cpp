@@ -4,7 +4,7 @@
 #include <process.h>
 #include "..\..\..\deps\qsp\bindings\default\qsp_default.h"
 #include "..\..\core\skin.h"
-#include "..\..\core\sound.h"
+//#include "..\..\core\sound.h"
 #include "..\..\core\events.h"
 #include "..\..\core\encoding.h"
 #include "LibraryListener.h"
@@ -13,6 +13,7 @@
 #include "..\..\core\dto\ErrorDto.h"
 #include "Constants.h"
 #include "..\..\platform\windows10\ThreadEmulation.h"
+#include "AudioManager.h"
 
 namespace QuestNavigator
 {
@@ -30,7 +31,8 @@ namespace QuestNavigator
 		Timer* timer,
 		JsExecutor* jsExecutor,
 		ThreadManager* threadManager,
-		SaveFileManager* saveFileManager
+		SaveFileManager* saveFileManager,
+		AudioManager* audioManager
 	)
 	{
 		this->eventManager = eventManager;
@@ -38,6 +40,7 @@ namespace QuestNavigator
 		this->jsExecutor = jsExecutor;
 		this->threadManager = threadManager;
 		this->saveFileManager = saveFileManager;
+		this->audioManager = audioManager;
 	}
 
 	// Запуск потока библиотеки. Вызывается только раз при старте программы.
@@ -131,7 +134,7 @@ namespace QuestNavigator
 		bool bShutdown = false;
 	
 		// Запускаем движок Audiere для проигрывания звуковых файлов
-		if (!SoundManager::init()) {
+		if (!library->audioManager->init()) {
 			bShutdown = true;
 		}
 	
@@ -269,7 +272,7 @@ namespace QuestNavigator
 						// Включение / выключение звука
 						SharedDataDto dto = library->eventManager->getSharedData(evMute);
 						bool flag = dto.flag;
-						SoundManager::mute(flag);
+						library->audioManager->mute(flag);
 					}
 					break;
 				case evLoadSlotSelected:
@@ -329,8 +332,8 @@ namespace QuestNavigator
 		}
 	
 		// Останавливаем звуковой движок
-		SoundManager::close(true, "");
-		SoundManager::deinit();
+		library->audioManager->closeAll();
+		library->audioManager->deinit();
 	
 		// Завершаем работу библиотеки
 		QSPDeInit();

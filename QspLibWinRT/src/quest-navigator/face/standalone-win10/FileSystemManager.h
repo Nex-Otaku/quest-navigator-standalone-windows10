@@ -20,6 +20,8 @@ namespace QuestNavigator {
 		bool buildDirectoryPath(string path);
 		// Проверяем папку на существование.
 		bool directoryExists(string path);
+		// Проверяем файл на существование и читаемость
+		bool fileExists(string path);
 
 	private:
 		FileSystemApiWin32* fileSystemApiWin32;

@@ -228,13 +228,7 @@
     <ClCompile Include="src\quest-navigator\app\universal\gamestock.cpp">
       <Filter>quest-navigator\app\universal</Filter>
     </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\midi.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\quest-navigator\core\skin.cpp">
-      <Filter>quest-navigator\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quest-navigator\core\sound.cpp">
       <Filter>quest-navigator\core</Filter>
     </ClCompile>
     <ClCompile Include="src\quest-navigator\platform\awesomium\application_win.cc">
@@ -345,6 +339,14 @@
     <ClCompile Include="src\quest-navigator\face\standalone-win10\FileSystemManager.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\StoragePathReader.cpp" />
     <ClCompile Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.cpp" />
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\sound.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\midi.cpp">
+      <Filter>quest-navigator\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\AudioManager.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PlaybackListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -451,13 +453,7 @@
     <ClInclude Include="src\quest-navigator\app\universal\gamestock.h">
       <Filter>quest-navigator\app\universal</Filter>
     </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\midi.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\quest-navigator\core\skin.h">
-      <Filter>quest-navigator\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\quest-navigator\core\sound.h">
       <Filter>quest-navigator\core</Filter>
     </ClInclude>
     <ClInclude Include="src\quest-navigator\platform\awesomium\application.h">
@@ -598,5 +594,13 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\StoragePathReader.h" />
     <ClInclude Include="src\quest-navigator\platform\windows10\FileSystemApiWin32.h" />
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\sound.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\midi.h">
+      <Filter>quest-navigator\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\AudioManager.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PlaybackListener.h" />
   </ItemGroup>
 </Project>

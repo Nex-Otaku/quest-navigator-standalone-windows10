@@ -10,7 +10,7 @@ var qspLibMode = "WINDOWS10";       // "AIR", "PHONEGAP", "AWESOMIUM" - уста
 
 var QspLib = null;
 
-var debugMode = false;
+var debugMode = true;
 
 $(function () {
     // При загрузке документа, запускаем приложение.

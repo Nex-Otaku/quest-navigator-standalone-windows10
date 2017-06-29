@@ -206,6 +206,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\AudioManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Hello.h" />
     <ClInclude Include="src\deps\qsp\actions.h" />
@@ -258,11 +259,12 @@
     <ClInclude Include="src\quest-navigator\face\standalone-win10\FileSystemManager.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\JsonSerializer.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\PathConverter.h" />
+    <ClInclude Include="src\quest-navigator\face\standalone-win10\PlaybackListener.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\SaveFileManager.h" />
     <ClInclude Include="src\quest-navigator\platform\awesomium\thread_sync.h" />
-    <ClInclude Include="src\quest-navigator\core\midi.h" />
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\midi.h" />
     <ClInclude Include="src\quest-navigator\core\skin.h" />
-    <ClInclude Include="src\quest-navigator\core\sound.h" />
+    <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\sound.h" />
     <ClInclude Include="src\quest-navigator\core\strings.h" />
     <ClInclude Include="src\quest-navigator\face\universal-awesomium-windows\utils.h" />
     <ClInclude Include="src\quest-navigator\face\standalone-win10\App.h" />
@@ -297,6 +299,7 @@
     <ClInclude Include="src\quest-navigator\platform\windows10\UwpJsExecutor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\AudioManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -465,9 +468,10 @@
     <ClCompile Include="src\quest-navigator\core\dialogs.cpp" />
     <ClCompile Include="src\quest-navigator\core\encoding.cpp" />
     <ClCompile Include="src\quest-navigator\core\files.cpp" />
-    <ClCompile Include="src\quest-navigator\core\midi.cpp" />
+    <ClCompile Include="src\quest-navigator\face\standalone-win10\PlaybackListener.cpp" />
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\midi.cpp" />
     <ClCompile Include="src\quest-navigator\core\skin.cpp" />
-    <ClCompile Include="src\quest-navigator\core\sound.cpp" />
+    <ClCompile Include="src\quest-navigator\face\universal-awesomium-windows\sound.cpp" />
     <ClCompile Include="src\quest-navigator\core\strings.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\FileSystemManager.cpp" />
     <ClCompile Include="src\quest-navigator\face\standalone-win10\JsonSerializer.cpp" />
