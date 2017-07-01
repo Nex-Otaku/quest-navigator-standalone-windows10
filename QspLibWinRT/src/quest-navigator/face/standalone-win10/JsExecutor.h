@@ -36,13 +36,9 @@ namespace QuestNavigator
 		// ********************************************************************
 		
 		// В потоке Ui
-		//		void processLibJsCall();
-		//		bool onWebDeviceReady();
 		void qspShowSaveSlotsDialog(SaveSlotsDto slotsDto);
-		//		void qspFillLocalGamesList(JSArray games);
 
 		// В потоке библиотеки
-		//		static void jsCallApiFromLib(string name, JSValue arg);
 		void qspSetGroupedContent(GroupedContentDto content);
 		void qspMsg(string text);
 		void qspError(ErrorDto error);
@@ -50,6 +46,9 @@ namespace QuestNavigator
 		void qspInput(string text);
 		void qspView(string path);
 		void qspSetInputString(string text);
+
+		// Поток библиотеки запущен и готов к обработке команд.
+		void qspLibraryInited();
 
 	private:
 		UwpJsExecutor^ uwpJsExecutor;

@@ -60,10 +60,7 @@ namespace QuestNavigator
 		this->eventManager->initEvents();
 		this->eventManager->initSharedData();
 
-		//libThread = (HANDLE)_beginthread(NULL, 0, &Library::libThreadFunc, this, 0, NULL);
 		LPTHREAD_START_ROUTINE pLibThreadFunc = &Library::libThreadFunc;
-		//libThread = (HANDLE)UwpCustomBeginThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
-		//libThread = (HANDLE)ThreadEmulation::CreateThread(NULL, 0, pLibThreadFunc, this, 0, NULL);
 		libThread = threadManager->CreateThread(pLibThreadFunc, this);
 		if (libThread == NULL) {
 			showError("Не получилось создать поток интерпретатора.");
@@ -137,19 +134,35 @@ namespace QuestNavigator
 		if (!library->audioManager->init()) {
 			bShutdown = true;
 		}
+
+		bool isFirstRun = true;
 	
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
-			//showError("library->eventManager->libIsReady();");
+			showError("library->eventManager->libIsReady();");
 			bool libIsReadyIsPosted = library->eventManager->setLibIsReady();
 			if (!libIsReadyIsPosted) {
 				showError("Library::libThreadFunc Не удалось сообщить о готовности библиотеки.");
 				break;
 			}
-			//showError("Library thread called libIsReady");
+			showError("Library thread called libIsReady");
+
+			// Запуск при первом старте происходит так.
+			// 1. В яваскрипте создаётся объект компонента WinRT, вызывается QspLib.init();
+			// 2. Полностью отрабатывается инициализация приложения в компоненте WinRT,
+			//    создаётся поток библиотеки. Работа потока UI завершается.
+			// 3. Стартует поток библиотеки. Выполняется до события LibIsReady.
+			// 4. Поток библиотеки вызывает колбек яваскрипта, 
+			//    чтобы сообщить о готовности библиотеки к запуску игры.
+			if (isFirstRun) {
+				isFirstRun = false;
+				library->jsExecutor->qspLibraryInited();
+			}
+
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();
+			showError("Library waited for event");
 			if (!library->eventManager->isValidEvent(res)) {
 				showError("Library::libThreadFunc Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;

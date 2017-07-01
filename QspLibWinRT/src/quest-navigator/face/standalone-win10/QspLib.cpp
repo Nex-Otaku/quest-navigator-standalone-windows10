@@ -161,11 +161,16 @@ namespace QspLibWinRT
 		this->uwpJsExecutor = uwpJsExecutor;
 		// Сохраняем указатель на конвертер строк.
 		this->stringConverter = stringConverter;
+		// Сохраняем указатель на объект приложения.
+		this->app = app;
+	}
 
+	void QspLib::init()
+	{
 		// Запускаем приложение.
-		this->uwpJsExecutor->jsCallDebug("app->init(); start");
+		uwpJsExecutor->jsCallDebug("app->init(); start");
 		app->init();
-		this->uwpJsExecutor->jsCallDebug("app->init(); finish");
+		uwpJsExecutor->jsCallDebug("app->init(); finish");
 	}
 
 	UwpJsExecutor^ QspLib::getUwpJsExecutor()

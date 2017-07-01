@@ -377,7 +377,6 @@ namespace QuestNavigator
 			eventList[i] = getEventHandle(syncEvents[i]);
 		}
 		
-		//DWORD res = WaitForMultipleObjects((DWORD)3, eventList, FALSE, INFINITE, FALSE);
 		DWORD res = threadManager->waitForMultiple((DWORD)3, eventList);
 		if ((res < WAIT_OBJECT_0) || (res > (WAIT_OBJECT_0 + 3 - 1))) {
 			showError("EventManager::waitForSingleLib: Не удалось дождаться единичного события синхронизации библиотеки.");

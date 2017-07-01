@@ -12,6 +12,8 @@ namespace QspLibWinRT
 	public:
 		QspLib();
 
+		void init();
+
 		void restartGame();
 		void executeAction(int32 pos);
 		void selectObject(int32 pos);
@@ -35,6 +37,7 @@ namespace QspLibWinRT
 		// Объект для привязки колбеков.
 		UwpJsExecutor^ getUwpJsExecutor();
 	private:
+		App* app;
 		JsListener* jsListener;
 		UwpJsExecutor^ uwpJsExecutor;
 		StringConverter* stringConverter;
