@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Hello.cpp" />
     <ClCompile Include="src\deps\tinyxml\tinystr.cpp">
       <Filter>tinyxml</Filter>
     </ClCompile>
@@ -350,7 +349,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Hello.h" />
     <ClInclude Include="src\deps\tinyxml\tinystr.h">
       <Filter>tinyxml</Filter>
     </ClInclude>
