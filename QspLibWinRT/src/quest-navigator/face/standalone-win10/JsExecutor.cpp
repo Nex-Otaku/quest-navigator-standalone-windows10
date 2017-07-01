@@ -99,6 +99,12 @@ namespace QuestNavigator
 		uwpJsExecutor->jsCallSetInputString(pText);
 	}
 
+	void JsExecutor::qspLibraryInited()
+	{
+		// Контекст библиотеки
+		uwpJsExecutor->jsCallLibraryInited();
+	}
+
 	// ********************************************************************
 	// ********************************************************************
 	// ********************************************************************

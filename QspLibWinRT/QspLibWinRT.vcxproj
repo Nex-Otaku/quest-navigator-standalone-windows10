@@ -208,7 +208,6 @@
   <ItemGroup>
     <ClInclude Include="src\quest-navigator\face\standalone-win10\AudioManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Hello.h" />
     <ClInclude Include="src\deps\qsp\actions.h" />
     <ClInclude Include="src\deps\qsp\bindings\android\android.h" />
     <ClInclude Include="src\deps\qsp\bindings\bindings_config.h" />
@@ -308,7 +307,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Hello.cpp" />
     <ClCompile Include="src\deps\qsp\actions.c">
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>
     </ClCompile>

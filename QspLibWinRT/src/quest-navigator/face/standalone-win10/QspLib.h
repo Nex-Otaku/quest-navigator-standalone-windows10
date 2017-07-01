@@ -5,12 +5,17 @@
 
 using namespace QuestNavigator;
 
+using namespace Windows::Foundation;
+
+
 namespace QspLibWinRT
 {
 	public ref class QspLib sealed
 	{
 	public:
 		QspLib();
+
+		void init();
 
 		void restartGame();
 		void executeAction(int32 pos);
@@ -35,71 +40,30 @@ namespace QspLibWinRT
 		// Объект для привязки колбеков.
 		UwpJsExecutor^ getUwpJsExecutor();
 	private:
+		App* app;
 		JsListener* jsListener;
 		UwpJsExecutor^ uwpJsExecutor;
 		StringConverter* stringConverter;
+
+		// Обработка вызовов API в фоновом потоке.
+
+		IAsyncAction^ initAsync();
+
+		IAsyncAction^ restartGameAsync();
+		IAsyncAction^ executeActionAsync(int32 pos);
+		IAsyncAction^ selectObjectAsync(int32 pos);
+		IAsyncAction^ loadGameAsync();
+		IAsyncAction^ saveGameAsync();
+		IAsyncAction^ saveSlotSelectedAsync(int32 index, int32 mode);
+		IAsyncAction^ msgResultAsync();
+		IAsyncAction^ errorResultAsync();
+		IAsyncAction^ userMenuResultAsync(int32 pos);
+		IAsyncAction^ inputResultAsync(Platform::String^ text);
+		IAsyncAction^ setMuteAsync(Platform::Boolean flag);
+		IAsyncAction^ setInputStringAsync(Platform::String^ text);
+		IAsyncAction^ runInputStringAsync();
+		IAsyncAction^ runDefaultGameAsync();
+
+		IAsyncAction^ execLinkAsync(Platform::String^ text);
 	};
 }
-
-//	class QnApplicationListener : public Application::Listener, public Awesomium::WebViewListener::Load {
-//		Application* app_;
-//		View* view_;
-//		DataSource* data_source_;
-//		MethodDispatcher method_dispatcher_;
-//		QnInterceptor resource_interceptor_;
-//
-//		bool programLoaded;
-//		bool jsLibObjectCreated;
-//
-//		// Хэндл мьютекса.
-//		HANDLE hInstanceMutex;
-//
-//	public:
-//		QnApplicationListener();
-//		virtual ~QnApplicationListener();
-//
-//		void Run();
-//
-//		// Inherited from Application::Listener
-//		virtual void OnLoaded();
-//		virtual void OnUpdate();
-//		virtual void OnShutdown();
-//
-//		// ********************************************************************
-//		// Inherited from WebViewListener::Load
-//		// ********************************************************************
-//		/// This event occurs when the page begins loading a frame.
-//		virtual void OnBeginLoadingFrame(Awesomium::WebView* caller,
-//			int64 frame_id,
-//			bool is_main_frame,
-//			const Awesomium::WebURL& url,
-//			bool is_error_page);
-//		/// This event occurs when a frame fails to load. See error_desc
-//		/// for additional information.
-//		virtual void OnFailLoadingFrame(Awesomium::WebView* caller,
-//			int64 frame_id,
-//			bool is_main_frame,
-//			const Awesomium::WebURL& url,
-//			int error_code,
-//			const Awesomium::WebString& error_desc);
-//		/// This event occurs when the page finishes loading a frame.
-//		/// The main frame always finishes loading last for a given page load.
-//		virtual void OnFinishLoadingFrame(Awesomium::WebView* caller,
-//			int64 frame_id,
-//			bool is_main_frame,
-//			const Awesomium::WebURL& url);
-//		/// This event occurs when the DOM has finished parsing and the
-//		/// window object is available for JavaScript execution.
-//		virtual void OnDocumentReady(Awesomium::WebView* caller,
-//			const Awesomium::WebURL& url);
-//		// ********************************************************************
-//
-//		bool BindMethods(WebView* web_view);
-//
-//
-//		// ********************************************************************
-//		// Вспомогательные обработчики для отладки
-//		// ********************************************************************
-//		void alert(WebView* caller, const JSArray& args);
-//
-//	};

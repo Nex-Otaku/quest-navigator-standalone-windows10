@@ -16,6 +16,7 @@ namespace QspLibWinRT
 	public delegate void CallInputHandler(Platform::String^ text);
 	public delegate void CallViewHandler(Platform::String^ path);
 	public delegate void CallSetInputStringHandler(Platform::String^ text);
+	public delegate void CallLibraryInitedHandler();
 
 	public delegate void ShowDebugMessageHandler(Platform::String^ testMessage);
 
@@ -33,6 +34,7 @@ namespace QspLibWinRT
 		void jsCallInput(Platform::String^ text);
 		void jsCallView(Platform::String^ path);
 		void jsCallSetInputString(Platform::String^ text);
+		void jsCallLibraryInited();
 
 		// Для тестирования колбеков.
 		void jsCallDebug(Platform::String^ message);
@@ -47,6 +49,7 @@ namespace QspLibWinRT
 		event CallInputHandler^ callInputEvent;
 		event CallViewHandler^ callViewEvent;
 		event CallInputHandler^ callSetInputStringEvent;
+		event CallLibraryInitedHandler^ callLibraryInitedEvent;
 
 		event ShowDebugMessageHandler^ showDebugMessageEvent;
 
