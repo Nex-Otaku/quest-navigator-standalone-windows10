@@ -21,9 +21,12 @@
 #include "..\..\platform\windows10\StoragePathReader.h"
 #include "AudioManager.h"
 #include "PlaybackListener.h"
+#include <ppltasks.h>
 
 using namespace QuestNavigator;
-using namespace QspLibWinRT;
+using namespace concurrency;
+using namespace Windows::Foundation;
+
 
 namespace QspLibWinRT
 {
@@ -193,9 +196,8 @@ namespace QspLibWinRT
 
 	void QspLib::restartGame()
 	{
-		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
-		jsListener->restartGame();
-		//this->uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
+		auto restartGameTask = create_task(RestartGameAsync());
+		restartGameTask.then([](void) {});
 	}
 
 	void QspLib::executeAction(int32 pos)
@@ -266,5 +268,15 @@ namespace QspLibWinRT
 	void QspLib::execLink(Platform::String^ text)
 	{
 		jsListener->execLink(stringConverter->convertUwpToStd(text));
+	}
+
+	IAsyncAction^ QspLib::RestartGameAsync()
+	{
+		return create_async([this]
+		{
+			//uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
+			jsListener->restartGame();
+			//uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
+		});
 	}
 }
