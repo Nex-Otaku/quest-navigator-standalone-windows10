@@ -187,12 +187,12 @@ namespace QspLibWinRT
 	}
 
 	// Колбэки из яваскрипта к функциям API плеера.
-
-	// По приведению типов int, bool, wchar_t
-	// см. таблицу
-	// https://docs.microsoft.com/en-us/cpp/cppcx/fundamental-types-c-cx
-	// По строкам и массивам см.
-	// https://docs.microsoft.com/en-us/cpp/cppcx/type-system-c-cx
+	
+	// Мы не можем блокировать поток UI и передать управление потоку библиотеки,
+	// поэтому все вызовы API выносим в асинхронные задачи, выполняющиеся в фоновом потоке.
+	// Если мы попытаемся выполнить вызовы напрямую из потока UI,
+	// случится дедлок - поток UI будет ожидать библиотеку, 
+	// а библиотека не сможет выполниться, пока не завершён вызов UI.
 
 	void QspLib::restartGame()
 	{
@@ -269,6 +269,14 @@ namespace QspLibWinRT
 	{
 		jsListener->execLink(stringConverter->convertUwpToStd(text));
 	}
+
+	// API
+
+	// По приведению типов int, bool, wchar_t
+	// см. таблицу
+	// https://docs.microsoft.com/en-us/cpp/cppcx/fundamental-types-c-cx
+	// По строкам и массивам см.
+	// https://docs.microsoft.com/en-us/cpp/cppcx/type-system-c-cx
 
 	IAsyncAction^ QspLib::RestartGameAsync()
 	{
