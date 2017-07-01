@@ -140,13 +140,13 @@ namespace QuestNavigator
 		// Обработка событий происходит в цикле
 		while (!bShutdown) {
 			// Сообщаем потоку UI, что библиотека готова к выполнению команд
-			showError("library->eventManager->libIsReady();");
+			//showError("library->eventManager->libIsReady();");
 			bool libIsReadyIsPosted = library->eventManager->setLibIsReady();
 			if (!libIsReadyIsPosted) {
 				showError("Library::libThreadFunc Не удалось сообщить о готовности библиотеки.");
 				break;
 			}
-			showError("Library thread called libIsReady");
+			//showError("Library thread called libIsReady");
 
 			// Запуск при первом старте происходит так.
 			// 1. В яваскрипте создаётся объект компонента WinRT, вызывается QspLib.init();
@@ -162,7 +162,7 @@ namespace QuestNavigator
 
 			// Ожидаем любое из событий синхронизации
 			DWORD res = library->eventManager->waitForAnyEvent();
-			showError("Library waited for event");
+			//showError("Library waited for event");
 			if (!library->eventManager->isValidEvent(res)) {
 				showError("Library::libThreadFunc Не удалось дождаться множественного события синхронизации библиотеки.");
 				bShutdown = true;
