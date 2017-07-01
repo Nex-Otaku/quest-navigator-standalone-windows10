@@ -47,24 +47,23 @@ namespace QspLibWinRT
 
 		// Обработка вызовов API в фоновом потоке.
 
-		//void init();
+		IAsyncAction^ initAsync();
 
-		//void restartGame();
-		//void executeAction(int32 pos);
-		//void selectObject(int32 pos);
-		//void loadGame();
-		//void saveGame();
-		//void saveSlotSelected(int32 index, int32 mode);
-		//void msgResult();
-		//void errorResult();
-		//void userMenuResult(int32 pos);
-		//void inputResult(Platform::String^ text);
-		//void setMute(Platform::Boolean flag);
-		//void setInputString(Platform::String^ text);
-		//void runInputString();
-		//void runDefaultGame();
+		IAsyncAction^ restartGameAsync();
+		IAsyncAction^ executeActionAsync(int32 pos);
+		IAsyncAction^ selectObjectAsync(int32 pos);
+		IAsyncAction^ loadGameAsync();
+		IAsyncAction^ saveGameAsync();
+		IAsyncAction^ saveSlotSelectedAsync(int32 index, int32 mode);
+		IAsyncAction^ msgResultAsync();
+		IAsyncAction^ errorResultAsync();
+		IAsyncAction^ userMenuResultAsync(int32 pos);
+		IAsyncAction^ inputResultAsync(Platform::String^ text);
+		IAsyncAction^ setMuteAsync(Platform::Boolean flag);
+		IAsyncAction^ setInputStringAsync(Platform::String^ text);
+		IAsyncAction^ runInputStringAsync();
+		IAsyncAction^ runDefaultGameAsync();
 
-		//void execLink(Platform::String^ text);
-		IAsyncAction^ RestartGameAsync();
+		IAsyncAction^ execLinkAsync(Platform::String^ text);
 	};
 }

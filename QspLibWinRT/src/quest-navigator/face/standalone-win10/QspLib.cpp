@@ -168,14 +168,6 @@ namespace QspLibWinRT
 		this->app = app;
 	}
 
-	void QspLib::init()
-	{
-		// Запускаем приложение.
-		uwpJsExecutor->jsCallDebug("app->init(); start");
-		app->init();
-		uwpJsExecutor->jsCallDebug("app->init(); finish");
-	}
-
 	UwpJsExecutor^ QspLib::getUwpJsExecutor()
 	{
 		return uwpJsExecutor;
@@ -194,80 +186,100 @@ namespace QspLibWinRT
 	// случится дедлок - поток UI будет ожидать библиотеку, 
 	// а библиотека не сможет выполниться, пока не завершён вызов UI.
 
+	void QspLib::init()
+	{
+		auto initTask = create_task(initAsync());
+		initTask.then([](void) {});
+	}
+
 	void QspLib::restartGame()
 	{
-		auto restartGameTask = create_task(RestartGameAsync());
+		auto restartGameTask = create_task(restartGameAsync());
 		restartGameTask.then([](void) {});
 	}
 
 	void QspLib::executeAction(int32 pos)
 	{
-		jsListener->executeAction((int)pos);
+		auto executeActionTask = create_task(executeActionAsync(pos));
+		executeActionTask.then([](void) {});
 	}
 
 	void QspLib::selectObject(int32 pos)
 	{
-		jsListener->selectObject((int)pos);
+		auto selectObjectTask = create_task(selectObjectAsync(pos));
+		selectObjectTask.then([](void) {});
 	}
 
 	void QspLib::loadGame()
 	{
-		jsListener->loadGame();
+		auto loadGameTask = create_task(loadGameAsync());
+		loadGameTask.then([](void) {});
 	}
 
 	void QspLib::saveGame()
 	{
-		jsListener->saveGame();
+		auto saveGameTask = create_task(saveGameAsync());
+		saveGameTask.then([](void) {});
 	}
 
 	void QspLib::saveSlotSelected(int32 index, int32 mode)
 	{
-		jsListener->saveSlotSelected((int)index, (int)mode);
+		auto saveSlotSelectedTask = create_task(saveSlotSelectedAsync(index, mode));
+		saveSlotSelectedTask.then([](void) {});
 	}
 
 	void QspLib::msgResult()
 	{
-		jsListener->msgResult();
+		auto msgResultTask = create_task(msgResultAsync());
+		msgResultTask.then([](void) {});
 	}
 
 	void QspLib::errorResult()
 	{
-		jsListener->errorResult();
+		auto errorResultTask = create_task(errorResultAsync());
+		errorResultTask.then([](void) {});
 	}
 
 	void QspLib::userMenuResult(int32 pos)
 	{
-		jsListener->userMenuResult((int)pos);
+		auto userMenuResultTask = create_task(userMenuResultAsync(pos));
+		userMenuResultTask.then([](void) {});
 	}
 
 	void QspLib::inputResult(Platform::String ^ text)
 	{
-		jsListener->inputResult(stringConverter->convertUwpToStd(text));
+		auto inputResultTask = create_task(inputResultAsync(text));
+		inputResultTask.then([](void) {});
 	}
 
 	void QspLib::setMute(Platform::Boolean flag)
 	{
-		jsListener->setMute((bool)flag);
+		auto setMuteTask = create_task(setMuteAsync(flag));
+		setMuteTask.then([](void) {});
 	}
 
 	void QspLib::setInputString(Platform::String ^ text)
 	{
-		jsListener->setInputString(stringConverter->convertUwpToStd(text));
+		auto setInputStringTask = create_task(setInputStringAsync(text));
+		setInputStringTask.then([](void) {});
 	}
 
 	void QspLib::runInputString()
 	{
-		jsListener->runInputString();
+		auto runInputStringTask = create_task(runInputStringAsync());
+		runInputStringTask.then([](void) {});
 	}
 
 	void QspLib::runDefaultGame()
 	{
-		jsListener->runDefaultGame();
+		auto runDefaultGameTask = create_task(runDefaultGameAsync());
+		runDefaultGameTask.then([](void) {});
 	}
 
 	void QspLib::execLink(Platform::String^ text)
 	{
-		jsListener->execLink(stringConverter->convertUwpToStd(text));
+		auto execLinkTask = create_task(execLinkAsync(text));
+		execLinkTask.then([](void) {});
 	}
 
 	// API
@@ -278,13 +290,136 @@ namespace QspLibWinRT
 	// По строкам и массивам см.
 	// https://docs.microsoft.com/en-us/cpp/cppcx/type-system-c-cx
 
-	IAsyncAction^ QspLib::RestartGameAsync()
+	IAsyncAction^ QspLib::initAsync()
+	{
+		return create_async([this]
+		{
+			// Запускаем приложение.
+			//uwpJsExecutor->jsCallDebug("app->init(); start");
+			app->init();
+			//uwpJsExecutor->jsCallDebug("app->init(); finish");
+		});
+	}
+
+	IAsyncAction^ QspLib::restartGameAsync()
 	{
 		return create_async([this]
 		{
 			//uwpJsExecutor->jsCallDebug("QspLib::restartGame() start");
 			jsListener->restartGame();
 			//uwpJsExecutor->jsCallDebug("QspLib::restartGame() finish");
+		});
+	}
+
+	IAsyncAction^ QspLib::executeActionAsync(int32 pos)
+	{
+		return create_async([this, pos]
+		{
+			jsListener->executeAction((int)pos);
+		});
+	}
+
+	IAsyncAction^ QspLib::selectObjectAsync(int32 pos)
+	{
+		return create_async([this, pos]
+		{
+			jsListener->selectObject((int)pos);
+		});
+	}
+
+	IAsyncAction^ QspLib::loadGameAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->loadGame();
+		});
+	}
+
+	IAsyncAction^ QspLib::saveGameAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->saveGame();
+		});
+	}
+
+	IAsyncAction^ QspLib::saveSlotSelectedAsync(int32 index, int32 mode)
+	{
+		return create_async([this, index, mode]
+		{
+			jsListener->saveSlotSelected((int)index, (int)mode);
+		});
+	}
+
+	IAsyncAction^ QspLib::msgResultAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->msgResult();
+		});
+	}
+
+	IAsyncAction^ QspLib::errorResultAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->errorResult();
+		});
+	}
+
+	IAsyncAction^ QspLib::userMenuResultAsync(int32 pos)
+	{
+		return create_async([this, pos]
+		{
+			jsListener->userMenuResult((int)pos);
+		});
+	}
+
+	IAsyncAction^ QspLib::inputResultAsync(Platform::String ^ text)
+	{
+		return create_async([this, text]
+		{
+			jsListener->inputResult(stringConverter->convertUwpToStd(text));
+		});
+	}
+
+	IAsyncAction^ QspLib::setMuteAsync(Platform::Boolean flag)
+	{
+		return create_async([this, flag]
+		{
+			jsListener->setMute((bool)flag);
+		});
+	}
+
+	IAsyncAction^ QspLib::setInputStringAsync(Platform::String ^ text)
+	{
+		return create_async([this, text]
+		{
+			jsListener->setInputString(stringConverter->convertUwpToStd(text));
+		});
+	}
+
+	IAsyncAction^ QspLib::runInputStringAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->runInputString();
+		});
+	}
+
+	IAsyncAction^ QspLib::runDefaultGameAsync()
+	{
+		return create_async([this]
+		{
+			jsListener->runDefaultGame();
+		});
+	}
+
+	IAsyncAction^ QspLib::execLinkAsync(Platform::String^ text)
+	{
+		return create_async([this, text]
+		{
+			jsListener->execLink(stringConverter->convertUwpToStd(text));
 		});
 	}
 }
